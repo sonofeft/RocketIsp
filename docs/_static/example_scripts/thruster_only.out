@@ -1,0 +1,59 @@
+==============================  Example 6K Thruster  ==============================
+---------------geometry-----------------------
+        Rthrt = 1.434 in (Dthrt=2.868 in)
+         Rinj = 2.268 in (Dinj=4.535 in)
+        Rexit = 8.484 in (Dexit=16.968 in)
+           At = 6.46108 in**2
+          eps = 35 
+    pcentBell = 80 %
+           CR = 2.5 injector area / throat area
+         Dinj = 4.535 in 
+         Ainj = 16.1527 in**2
+ cham_conv_deg= 30 deg convergent section half angle
+entrance_angle= 33.3937 deg nozzle initial expansion angle
+    exit_angle= 7.99726 deg nozzle exit angle
+        Lcham = 8.60457 in (set by user Lcham/Dt = 3) 
+    Lcham_cyl = 6.2004 in 
+   Lcham_conv = 2.40417 in 
+       Ltotal = 29.6537 in  (2 ft 5.654 in)
+         Lnoz = 21.0491 in  (1 ft 9.049 in)
+     RchmConv = 1 convergent section turn radius / throat radius
+    RupThroat = 1.5 upstream radius / throat radius
+   RdwnThroat = 1 downstream radius / throat radius
+    LchmOvrDt = 3 chamber length / throat diameter
+      LchmMin = 1 in, minimum allowed chamber length
+        Vcham = 126.463 in**3, approximate chamber volume
+---------------LOX/LH2 core stream-----------------------
+    FvacTotal = 6000.00 lbf
+     FvacCore = 6000.00 lbf
+   MRthruster = 6 
+       MRcore = 6 
+           Pc = 500 psia
+=====> IspDel = 433.66 sec, ___DELIVERED VACUUM ISP___
+   IspDelCore = 433.66 sec
+       IspODF = 423.77 sec
+       IspODK = 444.57 sec (fracKin=0.859657)
+       IspODE = 447.97 sec
+===> cstarERE = 7440.2 ft/sec, measured cstar = cstarERE / CdThroat
+     cstarODE = 7515.4 ft/sec
+
+   CfVacIdeal = 1.91778 Ideal Vacuum Thrust Coefficient
+     CfVacDel = 1.85727 Delivered Vacuum Thrust Coefficient
+     CfAmbDel = 1.85727 Delivered Ambient  Thrust Coefficient
+
+============ Thruster Efficiencies ============
+              0.96807 Overall Isp Efficiency
+------------  0.97785 Nozzle Efficiency ------------
+        Div = 0.99237 (simple fit eps=35, %bell=80) Divergence Efficiency of Nozzle
+        Kin = 0.99242 (MLP fit) Kinetic Efficiency of Nozzle
+         BL = 0.99290 (MLP fit) Boundary Layer Efficiency of Nozzle
+         TP = 1.00000 (default) Two Phase Efficiency of Nozzle
+------------  0.99000 (constant) Energy Release Efficiency ------------
+
+     CdThroat = 0.990388 (MLP fit) throat flow coefficient
+      wdotTot = 13.8357 lbm/sec (O/F = 6)
+       wdotOx = 11.8591 lbm/sec
+       wdotFl = 1.97652 lbm/sec
+        TcODE = 6129.2 degR
+        MWchm = 13.3538 g/gmole
+     gammaChm = 1.13551 

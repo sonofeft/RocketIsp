@@ -1,0 +1,55 @@
+==============================  Rocket Thruster  ==============================
+---------------geometry-----------------------
+        Rthrt = 1.000 in (Dthrt=2.000 in)
+         Rinj = 1.581 in (Dinj=3.162 in)
+        Rexit = 4.472 in (Dexit=8.944 in)
+           At = 3.14159 in**2
+          eps = 20 
+    pcentBell = 80 %
+           CR = 2.5 injector area / throat area
+         Dinj = 3.16228 in 
+         Ainj = 7.85398 in**2
+ cham_conv_deg= 30 deg convergent section half angle
+entrance_angle= 31.515 deg nozzle initial expansion angle
+    exit_angle= 8.83776 deg nozzle exit angle
+        Lcham = 6 in (set by user Lcham/Dt = 3) 
+    Lcham_cyl = 4.32357 in 
+   Lcham_conv = 1.67643 in 
+       Ltotal = 16.3666 in  (1 ft 4.367 in)
+         Lnoz = 10.3666 in 
+     RchmConv = 1 convergent section turn radius / throat radius
+    RupThroat = 1.5 upstream radius / throat radius
+   RdwnThroat = 1 downstream radius / throat radius
+    LchmOvrDt = 3 chamber length / throat diameter
+      LchmMin = 1 in, minimum allowed chamber length
+        Vcham = 42.8774 in**3, approximate chamber volume
+---------------N2O4/MMH core stream-----------------------
+    FvacTotal = 2754.91 lbf
+     FvacCore = 2754.91 lbf
+   MRthruster = 1.9 
+       MRcore = 1.9 
+           Pc = 500 psia
+=====> IspDel = 309.81 sec, ___DELIVERED VACUUM ISP___
+   IspDelCore = 309.81 sec
+       IspODF = 311.72 sec
+       IspODK = 322.47 sec (fracKin=0.757721)
+       IspODE = 325.91 sec
+===> cstarERE = 5628.4 ft/sec, measured cstar = cstarERE / CdThroat
+     cstarODE = 5743.3 ft/sec
+
+   CfVacIdeal = 1.82576 Ideal Vacuum Thrust Coefficient
+     CfVacDel = 1.75383 Delivered Vacuum Thrust Coefficient
+     CfAmbDel = 1.75383 Delivered Ambient  Thrust Coefficient
+
+============ Thruster Efficiencies ============
+              0.95060 Overall Isp Efficiency
+------------  0.97000 (constant) Nozzle Efficiency ------------
+------------  0.98000 (constant) Energy Release Efficiency ------------
+
+     CdThroat = 0.990314 (MLP fit) throat flow coefficient
+      wdotTot = 8.89229 lbm/sec (O/F = 1.9)
+       wdotOx = 5.82599 lbm/sec
+       wdotFl = 3.06631 lbm/sec
+        TcODE = 5879.0 degR
+        MWchm = 21.7248 g/gmole
+     gammaChm = 1.14849 

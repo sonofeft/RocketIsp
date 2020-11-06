@@ -1,0 +1,55 @@
+TITLE 
+TITLE Adiabatic, Spline Contour Wall, O/C/N/H REACTION SET, REVISED 10/01/2002
+DATA                                                                            
+ $DATA                                                                          
+  NZONES = 1, ODE = 1, ODK = 1, TDK = 0, BLM = 0, SHOCK = 0, IRPEAT = 0,
+  ECRAT = 2.5, NASUB = 0, ASUB = 2.5,
+  NASUP = 1, ASUP = 20,
+  IWALL = 4, ITYPE = 0,
+  RSI = 10, RI = 1.0000, RWTU = 1.0000, RWTD = 1.0000,
+  THETAI = 31.4434, THETA = 31.4434, THE = 10.8477,
+   RS(2) =   1.46411,  1.77112,   2.0679,  2.35442,  2.63071, 
+             2.89674,  3.15253,  3.39808,  3.63338,  3.85844, 
+             4.07325,  4.27782,  4.47214, 
+   ZS(2) =   1.06661,  1.64695,  2.26268,  2.91381,  3.60032, 
+             4.32223,  5.07953,  5.87222,   6.7003,  7.56378, 
+             8.46264,   9.3969,  10.3666, 
+   NWS =    14,
+ $END
+REACTANTS
+O 2.                                           100.    -3102.0L  90.   O
+H 2.0                                          100.    -2154.0L  20.27 F 0.071
+
+NAMELISTS                                                                       
+ $ODE                                                                           
+  RKT = T, PSIA = T, P = 100,                                          
+  OF = T, OFSKED=6,
+ $END
+REACTIONS  HO    SEA, SEPT 12,1984     K=AT**(-N)*EXP(-1000B/RT)
+H + H = H2      ,M1, A = 6.4E17, N = 1.0, B = 0.0, (AR) BAULCH 72 (A) 30U
+H + OH = H2O    ,M2, A = 8.4E21, N = 2.0, B = 0.0, (AR) BAULCH 72 (A) 10U
+O + O = O2      ,M3, A = 1.9E13, N = 0.0, B =-1.79,(AR) BAULCH 76 (A) 10U
+O + H = OH      ,M7, A =3.62E18, N = 1.0, B = 0.0, (AR) JENSEN 78 (B) 30U
+END TBR REAX
+O2 + H = O + OH    , A = 2.2E14, N = 0.0, B =16.8,   BAULCH 72 (A) 1.5U
+H2 + O = H + OH    , A = 1.8E10, N = -1., B = 8.9,   BAULCH 72 (A) 1.5U
+H2 + OH = H2O + H  , A = 2.2E13, N = 0.0, B =5.15,   BAULCH 72 (A) 2U
+OH + OH = H2O + O  , A = 6.3E12, N = 0.0, B =1.09,   BAULCH 72 (A) 3U
+LAST REAX
+THIRD BODY REAX RATE RATIOS
+M1 = 25*H,4*H2,10*H2O,25*O,25*OH,1.5*O2,
+M2 = 12.5*H,5*H2,17*H2O,12.5*O,12.5*OH,6*O2,
+M3 = 12.5*H,5*H2,5*H2O,12.5*O,12.5*OH,11*O2,
+M7 = 12.5*H,5*H2,5*H2O,12.5*O,12.5*OH,5*O2,
+LAST CARD
+
+ $ODK
+  JPRNT = 1, SCRPRT=2,
+  EP = 1000, HMIN=0.0001, DEL=0.00001, HI=0.001, HMAX=0.010001,
+ $END
+ $TRANS
+  MP = 250,
+ $END
+ $MOC
+  NC = 1,
+ $END

@@ -1,0 +1,19 @@
+TITLE 
+TITLE Simple ODE run to get Chamber Conditions
+DATA 
+ $DATA
+  NZONES = 1, ODE = 1, ODK = 0, TDK = 0, BLM = 0, SHOCK = 0, IRPEAT = 0,
+  ECRAT = 2.5, NASUB = 0, ASUB = 2.5,
+  NASUP = 1, 
+  ASUP = 100,
+ $END
+
+REACTANTS
+O 2.                                           100.    -3102.0L  90.   O
+H 2.0                                          100.    -2154.0L  20.27 F 0.071
+
+NAMELISTS                                                                       
+ $ODE
+  RKT = T, PSIA = T, P = 100,
+  OF = T, OFSKED=6,
+ $END

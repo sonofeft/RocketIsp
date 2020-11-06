@@ -1,0 +1,263 @@
+
+
+
+ ************************************************************************************************************************
+                    TWO  DIMENSIONAL  KINETIC  PROGRAM (TDK), TDK'04 VERSION, November 2004
+
+                    SOFTWARE AND ENGINEERING ASSOCIATES, INC.
+                    1802 N. Carson Street, Suite 200, Carson City Nevada 89701
+                    (775) 882 1966 (V)
+                    (775) 882 1827 (F)
+                    EMAIL: stu@seainc.com
+ ************************************************************************************************************************
+1
+ SOFTWARE AND ENGINEERING ASSOCIATES,INC ( S.E.A.,INC)reserves the right to make changes in 
+ specifications and other information contained in this computer code without prior notice.
+
+
+ Although due care has been taken to present accurate information, S.E.A.Inc.
+ DISCLAIMS ALL WARRANTIES WITH RESPECT TO THE CONTENTS OF THIS COMPUTER CODE (INCLUDING WITHOUT LIMITATION
+ WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE) EITHER EXPRESSED OR
+ IMPLIED.  S.E.A. Inc. SHALL NOT BE LIABLE FOR DAMAGES RESULTING FROM ANY ERROR CONTAINED HEREIN, INCLUDING,
+ BUT NOT LIMITED TO, FOR ANY SPECIAL, INCIDENTAL OR CONSEQUENTIAL DAMAGES ARISING OUT OF, OR IN CONNECTION
+ WITH, THE USE OF THIS DOCUMENT OR THE TDK'04(TM) COMPUTER PROGRAM
+
+
+ This software product and its documentation set are copyrighted and all rights are reserved by S.E.A.Inc.
+ Usage of this product is only allowed under the terms set forth in the Software License Agreement.
+ Any reproduction or distribution of this document, in whole or in part, without the prior written
+ consent of S.E.A.Inc. is prohibited.
+
+
+                   RESTRICTED RIGHTS NOTICE
+
+ * If this software is furnished to a U.S. Department of Defense agency, the following applies:
+
+                    RESTRICTED RIGHTS LEGEND
+
+ "Use, duplication, or disclosure by the Government is subject to restrictions as set forth in subdivision (b)
+ (3) (ii) of the Rights in Technical Data and Computer Software clause at DOD FAR SUP 52.227-7013.
+ S.E.A.Inc., 1802 N. Carson Street, Suite 200, Carson City, Nevada  89701 USA." 
+
+
+ * If this software is furnished to the National Aeronautics and Space Administration, the following applies:
+
+                    RESTRICTED RIGHTS LEGEND
+
+ This computer software is submitted with "restricted rights".  Use, duplication or disclosure is subject to
+ the restrictions as set forth in NASA FAR SUP 18-52.227-79 (April 1985) "Commercial Computer Software-Restricted
+ Rights, (April 1985)." 
+   S.E.A.Inc., 1802 N. Carson Street, Suite 200,    Carson City, Nevada  89701.
+
+ If the contract contains the Clause at 18-52.227-74 "Rights in Data General" then the "Alternate III"
+ clause applies.
+                    COPYRIGHT-C 1988,1992,1994,1995,1996,1997-2002 S.E.A.Inc.
+                                   ALL RIGHTS RESERVED
+           ********************************************************************************
+
+            THIS VERSION OF TDK'04(TM) IS THE PROPRIETARY PROPERTY OF SOFTWARE AND ENGINEERING ASSOCIATES, INC.
+            THIS CODE MAY NOT BE DISTRIBUTED OR COPIED WITHOUT WRITTEN PERMISSION OF SEA,INC.
+           ********************************************************************************
+1
+ TITLE
+ TITLE Simple ODE run to get Chamber Conditions
+ DATA
+  $DATA
+   NZONES = 1, ODE = 1, ODK = 0, TDK = 0, BLM = 0, SHOCK = 0, IRPEAT = 0,
+   ECRAT = 2.5, NASUB = 0, ASUB = 2.5,
+   NASUP = 1,
+   ASUP = 100,
+  $END
+  
+ REACTANTS
+ O 2.                                           100.    -3102.0L  90.   O
+ H 2.0                                          100.    -2154.0L  20.27 F 0.071
+  
+ NAMELISTS
+  $ODE
+   RKT = T, PSIA = T, P = 100,
+   OF = T, OFSKED=6,
+  $END
+0TITLE                                                                           
+0TITLE Simple ODE run to get Chamber Conditions                                  
+0DATA                                                                            
+      $DATA
+       NZONES = 1, ODE = 1, ODK = 0, TDK = 0, BLM = 0, SHOCK = 0, IRPEAT = 0,
+       ECRAT = 2.5, NASUB = 0, ASUB = 2.5,
+       NASUP = 1,
+       ASUP = 100,
+      $END
+
+
+      Element data read from file: .\ELEMENTS.DAT                                                                    Number of Elements = 112
+
+
+      Transport data read from file: .\TRPROP.DAT                                                                                  Number of Species = 212  Number of Omega entries =  80
+
+1
+
+
+ ************************************************************************************************************************
+
+                    CALCULATE ODE AREA RATIO AND PRESSURE SCHEDULES FOR ZONE  1
+
+ ************************************************************************************************************************
+                                                                         
+ REACTANTS                                                               
+ O   2.0000      0.0000      0.0000      0.0000      0.0000  100.000000      -3102.00  L    90.000  O    0.00000
+ H   2.0000      0.0000      0.0000      0.0000      0.0000  100.000000      -2154.00  L    20.270  F    0.07100
+ NAMELISTS                                                               
+      $ODE
+       RKT = T, PSIA = T, P = 100,
+       OF = T, OFSKED=6,
+      $END
+0SPECIES BEING CONSIDERED IN THIS SYSTEM  
+     J 3/77  H                J 9/78  HO2              J 3/77  H2               J 3/79  H2O              L 6/80  H2O2        
+     J 3/77  O                J 6/77  OH               J 3/77  O2          
+0OF =   6.000000
+                          EFFECTIVE FUEL          EFFECTIVE OXIDANT            MIXTURE
+ ENTHALPY                     HPP(2)                   HPP(1)                   HSUB0
+ (KG-MOL)(DEG K)/KG      -0.53803524E+03          -0.48814711E+02          -0.11870336E+03
+0KG-ATOMS/KG                 B0P(I,2)                 B0P(I,1)                  B0(I)
+        O                 0.00000000E+00           0.62502344E-01           0.53573438E-01
+        H                 0.99209302E+00           0.00000000E+00           0.14172757E+00
+
+ ENTHALPY IN BTU/LBM :
+     FROM REACTANTS :       -424.3194
+     FROM DELH( )   :          0.0000
+     FROM DELH1( )             0.0000
+     TOTAL          :       -424.3194
+1                                                       ZONE =  1
+                        THEORETICAL ROCKET PERFORMANCE ASSUMING EQUILIBRIUM COMPOSITION DURING EXPANSION
+
+0PC =   100.0 PSIA
+                                                                             WT FRACTION  ENTHALPY  STATE   TEMP    DENSITY
+          CHEMICAL FORMULA                                                   (SEE NOTE)    CAL/MOL          DEG K    G/CC
+ OXIDANT O  2.00000                                                            1.00000    -3102.000    L     90.00   0.0000
+ FUEL    H  2.00000                                                            1.00000    -2154.000    L     20.27   0.0710
+0O/F=6.0000E+00  PERCENT FUEL=1.4286E+01  EQUIVALENCE RATIO=1.3227E+00  STOIC MIXTURE RATIO=7.9364E+00  DENSITY=0.0000E+00
+0                CHAMBER   THROAT     EXIT
+ PC/P             1.0000   1.7255  1433.84
+ P, PSIA           100.0    57.96   0.0697
+ T, DEG R           5801     5535     2121
+ H, BTU/LB        -424.3   -889.9  -4602.3
+ S, BTU/(LB)(R)   4.6036   4.6036   4.6036
+ DEN (LBM/FT3)  2.10E-02 1.30E-02 4.32E-05
+ 
+ M, MOL WT        13.095   13.275   14.112
+ (DLV/DLP)T     -1.04049 -1.03351 -1.00000
+ (DLV/DLT)P       1.7707   1.6683   1.0000
+ CP,BTU/(LB)(R)   3.1224   2.8832   0.6857
+ CP GAS(SF)       0.8792   0.8724   0.6857
+ GAMMA GAS(SF)    1.2084   1.2070   1.2583
+ GAMMA (S)        1.1259   1.1247   1.2582
+ SON VEL,FT/SEC   4979.8   4828.5   3066.2
+ MU,LBF-S/FT2   1.89E-06 1.84E-06 8.57E-07
+ K,LBF/S-DEGR   7.04E-02 6.73E-02 2.50E-02
+ PRANDTL NO      0.59155  0.59554  0.58826
+ MACH NUMBER      0.0000   1.0000   4.7171
+ 
+ AE/AT                     1.0000  100.000
+ CSTAR, FT/SEC               7408     7408
+ CF  VAC                    1.231    2.022
+ CF                         0.652    1.953
+ IVAC,LBF-S/LBM            283.51   465.60
+ I, LBF-SEC/LBM            150.07   449.55
+ MOL WT(MIX)      13.095   13.275   14.112
+ 
+ MOLE FRACTIONS
+
+ H              0.056849 0.049037 0.000001
+ HO2            0.000031 0.000018 0.000000
+ H2             0.249203 0.245633 0.243994
+ H2O            0.621935 0.647292 0.756005
+ H2O2           0.000003 0.000002 0.000000
+ O              0.007652 0.005576 0.000000
+ OH             0.056763 0.046583 0.000000
+ O2             0.007564 0.005859 0.000000
+
+ MASS FRACTIONS
+
+
+ H              0.004376 0.003723 0.000000
+ HO2            0.000077 0.000045 0.000000
+ H2             0.038364 0.037301 0.034856
+ H2O            0.855621 0.878405 0.965144
+ H2O2           0.000008 0.000005 0.000000
+ O              0.009349 0.006720 0.000000
+ OH             0.073722 0.059679 0.000000
+ O2             0.018483 0.014123 0.000000
+0ADDITIONAL PRODUCTS WHICH WERE CONSIDERED BUT WHOSE MOLE FRACTIONS WERE LESS THAN .0000005 FOR ALL ASSIGNED CONDITIONS
+
+ NOTE
+        WEIGHT FRACTION OF FUEL IN TOTAL FUELS AND OF OXIDANT IN TOTAL OXIDANTS
+        (SF) STANDS FOR (SHIFTING FROZEN)
+1
+0                         FROZEN TRANSPORT PROPERTIES CALCULATED FROM EQUILIBRIUM CONCENTRATIONS
+
+     STATION                   MU                  K                   PR
+                           (LBF-SEC/FT**2)    (LBF/SEC-DEG R)
+     CHAMBER             1.89398043E-06      7.04248837E-02      5.91554272E-01
+     THROAT              1.83577893E-06      6.72776756E-02      5.95537952E-01
+     EXIT                8.56748314E-07      2.49816520E-02      5.88257073E-01
+0   VISCOSITY EXPONENT (OMEGA) FOR THE FORM MU=MUREF*(T/TREF)**OMEGA IS     0.79413
+    MUREF FOR INPUT TO BLM=   6.13111651E-05 LBM/(FT-SEC)
+0          SPECIES CONSIDERED IN TRANSPORT PROPERTIES CALCULATIONS
+          H                   H2                  H2O                 H2O2        
+          O                   OH                  O2          
+1                                                       ZONE =  1
+                          THEORETICAL ROCKET PERFORMANCE ASSUMING FROZEN COMPOSITION DURING EXPANSION
+
+0PC =   100.0 PSIA
+                                                                             WT FRACTION  ENTHALPY  STATE   TEMP    DENSITY
+          CHEMICAL FORMULA                                                   (SEE NOTE)    CAL/MOL          DEG K    G/CC
+ OXIDANT O  2.00000                                                            1.00000    -3102.000    L     90.00   0.0000
+ FUEL    H  2.00000                                                            1.00000    -2154.000    L     20.27   0.0710
+0O/F=6.0000E+00  PERCENT FUEL=1.4286E+01  EQUIVALENCE RATIO=1.3227E+00  STOIC MIXTURE RATIO=7.9364E+00  DENSITY=0.0000E+00
+0                CHAMBER   THROAT     EXIT
+ PC/P             1.0000   1.7795  2081.02
+ P, PSIA           100.0    56.20   0.0481
+ T, DEG R           5801     5248     1220
+ H, BTU/LB        -424.3   -906.9  -3991.2
+ S, BTU/(LB)(R)   4.6036   4.6036   4.6036
+ DEN (LBM/FT3)  2.10E-02 1.31E-02 4.81E-05
+ 
+ M, MOL WT        13.095   13.095   13.095
+ CP,BTU/(LB)(R)   0.8792   0.8652   0.6158
+ GAMMA (S)        1.2084   1.2125   1.3268
+ SON VEL,FT/SEC   5159.2   4915.4   2479.2
+ MACH NUMBER      0.0000   1.0000   5.3905
+ 
+ AE/AT                     1.0000  100.000
+ CSTAR, FT/SEC               7214     7214
+ CF  VAC                    1.243    1.901
+ CF                         0.681    1.853
+ IVAC,LBF-S/LBM            278.77   426.14
+ I, LBF-SEC/LBM            152.78   415.37
+ 
+ MOLE FRACTIONS
+
+ H            0.056849       HO2          0.000031       H2           0.249203       H2O          0.621935
+ H2O2         0.000003       O            0.007652       OH           0.056763       O2           0.007564
+
+ MASS FRACTIONS
+
+
+ H            0.004376       HO2          0.000077       H2           0.038364       H2O          0.855621
+ H2O2         0.000008       O            0.009349       OH           0.073722       O2           0.018483
+0ADDITIONAL PRODUCTS WHICH WERE CONSIDERED BUT WHOSE MOLE FRACTIONS WERE LESS THAN .0000005 FOR ALL ASSIGNED CONDITIONS
+
+ NOTE
+        WEIGHT FRACTION OF FUEL IN TOTAL FUELS AND OF OXIDANT IN TOTAL OXIDANTS
+1
+
+
+ ************************************************************************************************************************
+
+                    CALCULATE ODE AREA RATIO AND PRESSURE SCHEDULES FOR ZONE  1
+
+ ************************************************************************************************************************
+ *** EOF ENCOUNTERED IN READING ODE REACTANTS DATA ***
+ DATA FOR ODE/ODK SAVED ON UNIT 15
+
+          *********CPU(SEC) =             0.1 **********
