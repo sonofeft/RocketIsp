@@ -18,4 +18,4 @@ install:
     - "pip install rocketisp>=0.1.5"
     
 script:
-    - py.test  --ignore=examples
+    - py.test 
