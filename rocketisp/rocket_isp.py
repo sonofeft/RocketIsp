@@ -29,7 +29,8 @@ here = os.path.abspath(os.path.dirname(__file__))
 __author__ = 'Charlie Taylor'
 __copyright__ = 'Copyright (c) 2020 Charlie Taylor'
 __license__ = 'GPL-3'
-exec( open(os.path.join( here,'_version.py' )).read() )  # creates local __version__ variable
+#exec( open(os.path.join( here,'_version.py' )).read() )  # creates local __version__ variable
+from rocketisp._version import __version__
 __email__ = "cet@appliedpython.com"
 __status__ = "4 - Beta" # "3 - Alpha", "4 - Beta", "5 - Production/Stable"
 

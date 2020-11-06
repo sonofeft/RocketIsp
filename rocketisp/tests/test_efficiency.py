@@ -47,12 +47,6 @@ for more assert options
 import sys, os
 import imp
 
-here = os.path.abspath(os.path.dirname(__file__)) # Needed for py.test
-up_one = os.path.split( here )[0]  # Needed to find modelps development version
-if here not in sys.path[:2]:
-    sys.path.insert(0, here)
-if up_one not in sys.path[:2]:
-    sys.path.insert(0, up_one)
 
 from rocketisp.efficiencies import Efficiencies
 import rocketisp.efficiencies
