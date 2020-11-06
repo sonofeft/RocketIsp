@@ -74,7 +74,8 @@ class MyTest(unittest.TestCase):
         
         try:
             #runpy = imp.load_source('__main__', os.path.join(up_one, 'efficiency', 'effBL_NASA_SP8120.py') )
-            runpy = imp.load_source('__main__',  rocketisp.efficiency.effBL_NASA_SP8120.__file__)
+            if 'TRAVIS' not in os.environ:
+                runpy = imp.load_source('__main__',  rocketisp.efficiency.effBL_NASA_SP8120.__file__)
 
             
         except:
@@ -89,7 +90,8 @@ class MyTest(unittest.TestCase):
         
         try:
             #runpy = imp.load_source('__main__', os.path.join(up_one, 'efficiency', 'calc_noz_kinetics.py') )
-            runpy = imp.load_source('__main__',  rocketisp.efficiency.calc_noz_kinetics.__file__)
+            if 'TRAVIS' not in os.environ:
+                runpy = imp.load_source('__main__',  rocketisp.efficiency.calc_noz_kinetics.__file__)
         except:
             raise Exception('ERROR... failed in __main__ routine')
         finally:
@@ -102,7 +104,8 @@ class MyTest(unittest.TestCase):
         
         try:
             #runpy = imp.load_source('__main__', os.path.join(up_one, 'efficiency', 'eff_divergence.py') )
-            runpy = imp.load_source('__main__',  rocketisp.efficiency.eff_divergence.__file__)
+            if 'TRAVIS' not in os.environ:
+                runpy = imp.load_source('__main__',  rocketisp.efficiency.eff_divergence.__file__)
         except:
             raise Exception('ERROR... failed in __main__ routine')
         finally:
@@ -115,7 +118,8 @@ class MyTest(unittest.TestCase):
         
         try:
             #runpy = imp.load_source('__main__', os.path.join(up_one, 'efficiency', 'eff_pulsing.py') )
-            runpy = imp.load_source('__main__',  rocketisp.efficiency.eff_pulsing.__file__)
+            if 'TRAVIS' not in os.environ:
+                runpy = imp.load_source('__main__',  rocketisp.efficiency.eff_pulsing.__file__)
         except:
             raise Exception('ERROR... failed in __main__ routine')
         finally:
@@ -135,7 +139,8 @@ class MyTest(unittest.TestCase):
         
         try:
             #runpy = imp.load_source('__main__', os.path.join(up_one, 'efficiency', 'get_elements.py') )
-            runpy = imp.load_source('__main__',  rocketisp.efficiency.get_elements.__file__)
+            if 'TRAVIS' not in os.environ:
+                runpy = imp.load_source('__main__',  rocketisp.efficiency.get_elements.__file__)
         except:
             raise Exception('ERROR... failed in __main__ routine')
         finally:
@@ -148,7 +153,8 @@ class MyTest(unittest.TestCase):
         
         try:
             #runpy = imp.load_source('__main__', os.path.join(up_one, 'nozzle', 'huzel_data.py') )
-            runpy = imp.load_source('__main__',  rocketisp.nozzle.huzel_data.__file__)
+            if 'TRAVIS' not in os.environ:
+                runpy = imp.load_source('__main__',  rocketisp.nozzle.huzel_data.__file__)
         except:
             raise Exception('ERROR... failed in __main__ routine')
         finally:
@@ -161,7 +167,8 @@ class MyTest(unittest.TestCase):
         
         try:
             #runpy = imp.load_source('__main__', os.path.join(up_one, 'nozzle', 'six_opt_parab.py') )
-            runpy = imp.load_source('__main__',  rocketisp.nozzle.six_opt_parab.__file__)
+            if 'TRAVIS' not in os.environ:
+                runpy = imp.load_source('__main__',  rocketisp.nozzle.six_opt_parab.__file__)
         except:
             raise Exception('ERROR... failed in __main__ routine')
         finally:

@@ -101,7 +101,8 @@ class MyTest(unittest.TestCase):
         
         try:
             #runpy = imp.load_source('__main__', os.path.join(up_one, 'rocket_isp.py') )
-            runpy = imp.load_source('__main__',  rocketisp.rocket_isp.__file__)
+            if 'TRAVIS' not in os.environ:
+                runpy = imp.load_source('__main__',  rocketisp.rocket_isp.__file__)
         except:
             raise Exception('ERROR... failed in __main__ routine')
         finally:

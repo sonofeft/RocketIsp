@@ -14,7 +14,6 @@ before_install:
 
 env: 
     - FC=gfortran
-    - TRAVIS_ALLOW_FAILURE=true
 
     
 script:
