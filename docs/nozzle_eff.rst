@@ -310,7 +310,7 @@ The figure below shows this kinetics efficiency impact on MR for a small, low pr
 Kinetics Groups
 ~~~~~~~~~~~~~~~
 
-Chemical kinetics are usually analysed based on the element components in the combustion products.
+Chemical kinetics are usually analyzed based on the element components in the combustion products.
 For example a LOX/LH2 engine is in group **HO** because is only has Hydrogen and Oxygen.
 A LOX/CH4 engine is in group **CHO** for Carbon, Hydrogen and Oxygen.
 The table below shows common group names and some propellant combinations belonging to them.

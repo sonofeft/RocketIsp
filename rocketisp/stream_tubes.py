@@ -1,6 +1,13 @@
 from math import pi
-from rocketcea.cea_obj import CEA_Obj
-from rocketcea.separated_Cf import sepNozzleCf
+import os
+
+if os.environ.get('READTHEDOCS',False):
+    from rocketcea.cea_obj import CEA_Obj
+    from rocketcea.separated_Cf import sepNozzleCf
+else:
+    from rocketisp.mock.cea_obj import CEA_Obj
+    from rocketisp.mock.separated_Cf import sepNozzleCf
+
 from rocketisp.efficiency.calc_noz_kinetics import calc_IspODK
 from rocketisp.efficiencies import Efficiencies
 from rocketisp.geometry import Geometry

@@ -61,7 +61,7 @@ In 1953, Rupe published the paper
 `The Liquid-Phase Mixing of a Pair of Impinging Streams <https://apps.dtic.mil/sti/citations/AD0028860>`_
 that measured the effectiveness of mixing in a pair of impinging streams.
 The mixing factor, :math:`E_m`, was evaluated experimentally on the basis of local mixture ratios
-at different radial angle and distance from the impingment element.
+at different radial angle and distance from the impingement element.
 
 
 In this original paper, :math:`E_m` ranged from 0 to 100 as described by the equation below.

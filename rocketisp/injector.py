@@ -1,5 +1,5 @@
 from math import pi, sqrt, atan
-from rocketcea.cea_obj import CEA_Obj
+
 from rocketprops.rocket_prop import get_prop
 from rocketprops.unit_conv_data import get_value # for any units conversions
 from rocketisp.efficiency.calc_noz_kinetics import calc_IspODK

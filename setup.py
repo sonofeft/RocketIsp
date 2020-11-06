@@ -21,6 +21,7 @@ from setuptools import setup, find_packages
 # To use a consistent encoding
 from codecs import open
 from os import path
+import os
 
 here = path.abspath(path.dirname(__file__))
 
@@ -29,8 +30,13 @@ with open(path.join(here, 'README.rst'), encoding='utf-8') as f:
     long_description = f.read()
 
 # Place install_requires into the text file "requirements.txt"
-with open(path.join(here, 'requirements.txt'), encoding='utf-8') as f2:
-    requires = f2.read().strip().splitlines()
+#             automodule doc builds fail on ReadTheDocs when installing RocketCEA
+if os.environ.get('READTHEDOCS',False):
+    with open(path.join(here, 'requirements.txt'), encoding='utf-8') as f2:
+        requires = f2.read().strip().splitlines()
+else:
+    with open(path.join(here, 'requirements_readthedocs.txt'), encoding='utf-8') as f2:
+        requires = f2.read().strip().splitlines()
 
 target_file = path.join( here, 'rocketisp','_version.py')
 exec( open( target_file ).read() )  # creates local __version__ variable

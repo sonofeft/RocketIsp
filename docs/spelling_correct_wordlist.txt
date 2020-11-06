@@ -1,4 +1,9 @@
 nosetests
+Priem
+Heidmann
+Lgen
+ODF
+fracKin
 Techsystems
 timeOfDay
 monte

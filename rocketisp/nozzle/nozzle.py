@@ -1,5 +1,5 @@
 from math import *
-from rocketcea.biprop_utils.InterpProp_scipy import InterpProp
+from rocketisp.InterpProp_scipy import InterpProp
 from rocketisp.nozzle.six_opt_parab import getOptEntranceExitAngles
 from rocketisp.nozzle.huzel_data import getHuzelEntranceExitAngles
 

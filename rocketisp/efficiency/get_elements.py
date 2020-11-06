@@ -1,6 +1,10 @@
+import os
 
-from rocketcea.input_cards import oxCards, fuelCards, propCards
-
+if os.environ.get('READTHEDOCS',False):
+    from rocketcea.input_cards import oxCards, fuelCards, propCards
+else:
+    from rocketisp.mock.input_cards import oxCards, fuelCards, propCards
+    
 good_set = set( ['F', 'C', 'O', 'N', 'CL', 'H', 'P', 'AL','B'] )
 
 def get_elements( prop_name ):
