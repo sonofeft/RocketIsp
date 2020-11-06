@@ -57,6 +57,7 @@ if up_one not in sys.path[:2]:
 from rocketisp.geometry import Geometry
 from rocketisp.efficiencies import Efficiencies
 from rocketisp.stream_tubes import CoreStream
+import rocketisp.stream_tubes
 
 class MyTest(unittest.TestCase):
 
@@ -113,7 +114,8 @@ class MyTest(unittest.TestCase):
         sys.argv.append('suppress_show')
         
         try:
-            runpy = imp.load_source('__main__', os.path.join(up_one, 'stream_tubes.py') )
+            #runpy = imp.load_source('__main__', os.path.join(up_one, 'stream_tubes.py') )
+            runpy = imp.load_source('__main__',  rocketisp.stream_tubes.__file__)
         except:
             raise Exception('ERROR... failed in __main__ routine')
         finally:

@@ -55,6 +55,7 @@ if up_one not in sys.path[:2]:
     sys.path.insert(0, up_one)
 
 from rocketisp.efficiencies import Efficiencies
+import rocketisp.efficiencies
 
 class MyTest(unittest.TestCase):
 
@@ -77,7 +78,8 @@ class MyTest(unittest.TestCase):
         sys.argv.append('suppress_show')
         
         try:
-            runpy = imp.load_source('__main__', os.path.join(up_one, 'efficiencies.py') )
+            #runpy = imp.load_source('__main__', os.path.join(up_one, 'efficiencies.py') )
+            runpy = imp.load_source('__main__', rocketisp.efficiencies.__file__ )
         except:
             raise Exception('ERROR... failed in __main__ routine')
         finally:

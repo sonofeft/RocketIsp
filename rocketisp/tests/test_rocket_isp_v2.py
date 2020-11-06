@@ -58,7 +58,7 @@ from rocketisp.rocket_isp import RocketThruster
 from rocketisp.geometry import Geometry
 from rocketisp.stream_tubes import CoreStream
 from rocketisp.efficiencies import Efficiencies
-
+import rocketisp.rocket_isp
 
 class MyTest(unittest.TestCase):
 
@@ -100,7 +100,8 @@ class MyTest(unittest.TestCase):
         sys.argv.append('suppress_show')
         
         try:
-            runpy = imp.load_source('__main__', os.path.join(up_one, 'rocket_isp.py') )
+            #runpy = imp.load_source('__main__', os.path.join(up_one, 'rocket_isp.py') )
+            runpy = imp.load_source('__main__',  rocketisp.rocket_isp.__file__)
         except:
             raise Exception('ERROR... failed in __main__ routine')
         finally:
