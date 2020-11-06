@@ -30,6 +30,7 @@ entrance_angle= 33.3937 deg nozzle initial expansion angle
        MRcore = 6 
            Pc = 500 psia
 =====> IspDel = 433.66 sec, ___DELIVERED VACUUM ISP___
+       IspAmb = 433.66 sec, (Pamb=0.0000) (Pexit=1.32379 psia)
    IspDelCore = 433.66 sec
        IspODF = 423.77 sec
        IspODK = 444.57 sec (fracKin=0.859657)

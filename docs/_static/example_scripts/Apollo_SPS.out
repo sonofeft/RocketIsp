@@ -1,67 +1,70 @@
 ==============================  Apollo SPS  ==============================
 ---------------geometry-----------------------
-        Rthrt = 6.000 in (Dthrt=12.000 in)
-         Rinj = 9.487 in (Dinj=18.974 in)
-        Rexit = 47.435 in (Dexit=94.871 in)
-           At = 113.103 in**2
+        Rthrt = 6.006 in (Dthrt=12.011 in)
+         Rinj = 9.496 in (Dinj=18.992 in)
+        Rexit = 47.479 in (Dexit=94.958 in)
+           At = 113.312 in**2
           eps = 62.5 
-    pcentBell = 75 %
+    pcentBell = 72.3 %
            CR = 2.5 injector area / throat area
-         Dinj = 18.9742 in  (1 ft 6.974 in)
-         Ainj = 282.759 in**2
+         Dinj = 18.9916 in  (1 ft 6.992 in)
+         Ainj = 283.279 in**2
  cham_conv_deg= 30 deg convergent section half angle
-entrance_angle= 36.1566 deg nozzle initial expansion angle
-    exit_angle= 8.72931 deg nozzle exit angle
-        Lcham = 37.201 in (set by user Lcham/Dt = 3.1)  (3 ft 1.201 in)
-    Lcham_cyl = 27.1421 in  (2 ft 3.142 in)
-   Lcham_conv = 10.0589 in 
-       Ltotal = 153.18 in  (12 ft 9.180 in)
-         Lnoz = 115.979 in  (9 ft 7.979 in)
+entrance_angle= 36.7855 deg nozzle initial expansion angle
+    exit_angle= 9.33502 deg nozzle exit angle
+        Lcham = 37.2352 in (set by user Lcham/Dt = 3.1)  (3 ft 1.235 in)
+    Lcham_cyl = 27.1671 in  (2 ft 3.167 in)
+   Lcham_conv = 10.0681 in 
+       Ltotal = 149.142 in  (12 ft 5.142 in)
+         Lnoz = 111.907 in  (9 ft 3.907 in)
      RchmConv = 1 convergent section turn radius / throat radius
     RupThroat = 1.5 upstream radius / throat radius
    RdwnThroat = 1 downstream radius / throat radius
     LchmOvrDt = 3.1 chamber length / throat diameter
       LchmMin = 2 in, minimum allowed chamber length
-        Vcham = 9601.59 in**3, approximate chamber volume
+        Vcham = 9628.11 in**3, approximate chamber volume
 ---------------N2O4/A50 core stream-----------------------
     FvacTotal = 20500.00 lbf
-     FvacCore = 17477.74 lbf
-  FvacBarrier = 3022.26 lbf
+     FvacCore = 17477.57 lbf
+  FvacBarrier = 3022.43 lbf
    MRthruster = 1.44 
        MRcore = 1.6 
     MRbarrier = 0.84156 
            Pc = 100 psia
-=====> IspDel = 315.96 sec, ___DELIVERED VACUUM ISP___
-   IspDelCore = 320.40 sec
+=====> IspDel = 315.38 sec, ___DELIVERED VACUUM ISP___
+       IspAmb = 315.38 sec, (Pamb=0.0000) (Pexit=0.104031 psia)
+   IspDelCore = 319.80 sec
        IspODF = 320.49 sec
-       IspODK = 332.42 sec (fracKin=0.64697)
+       IspODK = 332.39 sec (fracKin=0.645865)
        IspODE = 338.92 sec
 ===> cstarERE = 5596.2 ft/sec, measured cstar = cstarERE / CdThroat
      cstarODE = 5710.4 ft/sec
 
    CfVacIdeal = 1.90957 Ideal Vacuum Thrust Coefficient
-     CfVacDel = 1.81250 Delivered Vacuum Thrust Coefficient
-     CfAmbDel = 1.81250 Delivered Ambient  Thrust Coefficient
+     CfVacDel = 1.80917 Delivered Vacuum Thrust Coefficient
+     CfAmbDel = 1.80917 Delivered Ambient  Thrust Coefficient
 
 ============ Thruster Efficiencies ============
-              0.94534 Overall Isp Efficiency
-------------  0.96463 Nozzle Efficiency ------------
-        Div = 0.99041 (simple fit eps=62.5, %bell=75) Divergence Efficiency of Nozzle
-        Kin = 0.98081 (MLP fit) Kinetic Efficiency of Nozzle
-         BL = 0.99304 (MLP fit) Boundary Layer Efficiency of Nozzle
+              0.93055 Overall Isp Efficiency
+------------  0.96285 Nozzle Efficiency ------------
+        Div = 0.98851 (simple fit eps=62.5, %bell=72.3) Divergence Efficiency of Nozzle
+        Kin = 0.98075 (MLP fit) Kinetic Efficiency of Nozzle
+         BL = 0.99316 (MLP fit) Boundary Layer Efficiency of Nozzle
          TP = 1.00000 (default) Two Phase Efficiency of Nozzle
 ------------  0.98000 (constant) Energy Release Efficiency ------------
 
-     CdThroat = 0.990303 (MLP fit) throat flow coefficient
-      wdotTot = 64.8808 lbm/sec (O/F = 1.44)
-  wdotTotCore = 54.5506 lbm/sec (O/F = 1.6)
-  wdotTotBarr = 10.3303 lbm/sec (O/F = 0.84156)
-  wdotOxTotal = 38.2903 lbm/sec
-   wdotOxCore = 33.5696 lbm/sec
-   wdotOxBarr = 4.72074 lbm/sec
-  wdotFlTotal = 26.5905 lbm/sec
-   wdotFlCore = 20.981 lbm/sec
-   wdotFlBarr = 5.60951 lbm/sec
+------------  0.98618 Fuel Film Cooling ------------
+
+     CdThroat = 0.990304 (MLP fit) throat flow coefficient
+      wdotTot = 65.0003 lbm/sec (O/F = 1.44)
+  wdotTotCore = 54.651 lbm/sec (O/F = 1.6)
+  wdotTotBarr = 10.3493 lbm/sec (O/F = 0.84156)
+  wdotOxTotal = 38.3608 lbm/sec
+   wdotOxCore = 33.6314 lbm/sec
+   wdotOxBarr = 4.72943 lbm/sec
+  wdotFlTotal = 26.6395 lbm/sec
+   wdotFlCore = 21.0196 lbm/sec
+   wdotFlBarr = 5.61984 lbm/sec
         TcODE = 5488.6 degR
         MWchm = 20.5498 g/gmole
      gammaChm = 1.14477 
@@ -72,9 +75,9 @@ entrance_angle= 36.1566 deg nozzle initial expansion angle
        Twall = 2416.0 degR (TcBarrier=4028.8 degR)
    effnessFC = 0.339774
 WentrOvWcool = 2.88494
-    IspDel_b = 292.56 sec delivered vacuum barrier Isp
+    IspDel_b = 292.04 sec delivered vacuum barrier Isp
     IspODF_b = 297.18 sec
-    IspODK_b = 297.47 sec (fracKin=0.0356302)
+    IspODK_b = 297.47 sec (fracKin=0.035754)
     IspODE_b = 305.44 sec
   cstarERE_b = 5333.3 ft/sec
   cstarODE_b = 5333.3 ft/sec

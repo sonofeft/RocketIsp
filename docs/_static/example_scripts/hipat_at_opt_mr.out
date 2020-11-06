@@ -1,8 +1,10 @@
 ============ Thruster Efficiencies ============
-              0.92595 Overall Isp Efficiency
+              0.89892 Overall Isp Efficiency
 ------------  0.93530 Nozzle Efficiency ------------
         Div = 0.99403 (simple fit eps=375, %bell=80) Divergence Efficiency of Nozzle
         Kin = 0.95697 (MLP fit) Kinetic Efficiency of Nozzle
          BL = 0.98324 (MLP fit) Boundary Layer Efficiency of Nozzle
          TP = 1.00000 (default) Two Phase Efficiency of Nozzle
 ------------  0.99000 (constant) Energy Release Efficiency ------------
+
+------------  0.97081 Fuel Film Cooling ------------

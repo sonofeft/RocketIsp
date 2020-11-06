@@ -57,7 +57,7 @@ class Efficiencies:
         self.effD['Pulse'] = Efficiency('Pulse', 1.0, 'Pulsing Efficiency of Thruster', 'default')
         
         self.nozzleL = ['Div','Kin','BL','TP']
-        self.chamberL = ['Mix','Em','Vap','HL','FFC']
+        self.chamberL = ['Mix','Em','Vap','HL']
         self.toplevelL = ['Isp','IspPulsing']
 
         # consolidated efficiencies (product of selected individual efficiencies)
@@ -118,12 +118,12 @@ class Efficiencies:
                 effERE = eere.value
             else:
                 effERE = 1.0
-                for name in self.chamberL: #  ['Mix','Em','Vap','HL','FFC']
+                for name in self.chamberL: #  ['Mix','Em','Vap','HL']
                     e = self.effD[name]
                     effERE *= e.value
                 self.effD['ERE'].set_value( effERE, '' )
             
-            self.effD['Isp'].set_value( effERE * effNoz, '' )
+            self.effD['Isp'].set_value( effERE * effNoz * self.effD['FFC'].value, '' )
         
         if not self.effD['IspPulsing'].is_const:
             self.effD['IspPulsing'].set_value( self.effD['Isp'].value * self.effD['Pulse'].value, 
@@ -173,6 +173,12 @@ class Efficiencies:
                 for name in self.chamberL:
                     e = self.effD[name]
                     print(' %10s ='%name, '%.5f'%e.value, '(%s)'%e.value_src, e.desc)
+            
+        # Fuel Film Cooling
+        e = self.effD['FFC']
+        if e.value < 1.0:
+            print()
+            print('%s  %.5f'%('-'*12,e.value), 'Fuel Film Cooling %s'%('-'*12,)  )
         
         # Pulsing
         e = self.effD['Pulse']

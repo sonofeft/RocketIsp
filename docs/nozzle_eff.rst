@@ -380,13 +380,14 @@ and
 `TDK at Sierra Engineering & Software, Inc. <http://sierraengineering.com/TDK/tdk.html>`_
 
 The charts below show typical results from a **TDK**
-chemical kinetics calculation. The charts demonstrate the shifting species concentrations for a
+chemical kinetics calculation. The charts demonstrate the shifting species mass fractions for a
 LOX/LH2 thruster as a function of area ratio.
 
 Notice how the mass fractions move from the frozen value towards the equilibrium value
 and how large throats shift further than small throats.
 
-Notice also that reaction rates near the throat are much higher than at the nozzle exit.
+Notice also that reaction rates near the throat are much higher than at the nozzle exit
+(due to higher temperature and pressure near the throat).
 
 .. raw:: html
 
@@ -420,7 +421,7 @@ fracKin
 ~~~~~~~
 
 In the AIAA paper `Nozzle Performance Predictions Using the TDK 97 Code <http://docshare01.docshare.tips/files/24936/249361716.pdf>`_
-by Stuart Dunn and Douglas Coats or
+by Stuart Dunn and Douglas Coats and
 the publication, `Liquid Rocket Thrust Chambers <https://arc.aiaa.org/doi/book/10.2514/4.866760>`_
 Chapter 17, *Assessment of Thrust Chamber Performance*, the authors
 define the two most common ways to express kinetics loss.
@@ -592,4 +593,4 @@ to be used for all propellant combinations that are members of the group.
 
 .. note::
 
-    Molecules listed in the table above refer to mass fractions of those molecules.
+    Molecules listed in the table above refer to the mass fraction of those molecules.

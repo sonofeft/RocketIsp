@@ -29,7 +29,7 @@ See the diagram below the parameter definitions for the physical location of the
 
 .. note::
 
-    Note that most of the parameters are dimensionless, such that if the throat radius (Rthrt) is changed,
+    Note that many of the parameters are dimensionless, such that if the throat radius (Rthrt) is changed,
     the rest of the geometry will scale appropriately.
 
 .. code-block:: python

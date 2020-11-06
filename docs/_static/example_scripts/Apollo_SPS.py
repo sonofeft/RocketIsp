@@ -9,7 +9,7 @@ from rocketisp.efficiencies import Efficiencies
 # create basic Geometry.
 # Use "place-holder" of 1 inch for throat radius... correct later with "scale_Rt_to_Thrust"
 geomObj = Geometry(Rthrt=1,
-                   CR=2.5, eps=62.5,  pcentBell=75,
+                   CR=2.5, eps=62.5,  pcentBell=72.3,
                    RupThroat=1.5, RdwnThroat=1.0, RchmConv=1.0, cham_conv_deg=30,
                    LchmOvrDt=3.10, LchmMin=2.0, LchamberInp=None)
 

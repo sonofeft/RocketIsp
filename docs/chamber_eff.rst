@@ -54,12 +54,18 @@ defined as the total number of elements divided by the injector face area::
         Ainj = injector face area (in**2)
         elemDens = element density (elements / in**2)
 
+.. note::
+
+    While high element density is very good for mixing efficiency, it should be noted that
+    there are manufacturing and combustion stability limits on how high element density can be.
+
 Rupe :math:`E_m`
 ~~~~~~~~~~~~~~~~
 
 In 1953, Rupe published the paper
 `The Liquid-Phase Mixing of a Pair of Impinging Streams <https://apps.dtic.mil/sti/citations/AD0028860>`_
-that measured the effectiveness of mixing in a pair of impinging streams.
+that measured the effectiveness of mixing in a pair of impinging streams
+and defined the mixing factor, :math:`E_m`.
 The mixing factor, :math:`E_m`, was evaluated experimentally on the basis of local mixture ratios
 at different radial angle and distance from the impingement element.
 
@@ -169,7 +175,7 @@ In python code...
 Fuel Film Cooling
 -----------------
 
-Estimating the performance loss due to fuel film cooling (FFC) boils down to estimating the amount of 
+Estimating the performance loss due to fuel film cooling (FFC) reduces down to estimating the amount of 
 core stream tube combustion gas that is entrained into the barrier stream tube.
 
 The model for calculating the entrained core gases, 
@@ -200,5 +206,7 @@ tank mixture ratio can shift dramatically from the steady state MR if a lot of t
 
 The chart reflects some historical data where a **pulse_quality** of 0 is fairly poor and a
 **pulse_quality** of 1 is fairly good.
+In all cases, the shorter the pulse, the more loss in :math:`Isp_{del}`.
+
 
 .. image:: ./_static/pulse_eff_range.png

@@ -24,32 +24,41 @@ entrance_angle= 31.515 deg nozzle initial expansion angle
       LchmMin = 1 in, minimum allowed chamber length
         Vcham = 42.8774 in**3, approximate chamber volume
 ---------------N2O4/MMH core stream-----------------------
-    FvacTotal = 2754.07 lbf
-     FvacCore = 2754.07 lbf
+    FvacTotal = 2765.92 lbf
+     FvacCore = 2765.92 lbf
    MRthruster = 1.9 
        MRcore = 1.9 
            Pc = 500 psia
-=====> IspDel = 309.81 sec, ___DELIVERED VACUUM ISP___
-   IspDelCore = 309.81 sec
+=====> IspDel = 317.49 sec, ___DELIVERED VACUUM ISP___
+       IspAmb = 317.49 sec, (Pamb=0.0000) (Pexit=2.4378 psia)
+   IspDelCore = 317.49 sec
        IspODF = 311.72 sec
        IspODK = 322.47 sec (fracKin=0.757721)
        IspODE = 325.91 sec
-===> cstarERE = 5628.4 ft/sec, measured cstar = cstarERE / CdThroat
+===> cstarERE = 5743.3 ft/sec, measured cstar = cstarERE / CdThroat
      cstarODE = 5743.3 ft/sec
 
    CfVacIdeal = 1.82576 Ideal Vacuum Thrust Coefficient
-     CfVacDel = 1.75330 Delivered Vacuum Thrust Coefficient
-     CfAmbDel = 1.75330 Delivered Ambient  Thrust Coefficient
+     CfVacDel = 1.76084 Delivered Vacuum Thrust Coefficient
+     CfAmbDel = 1.76084 Delivered Ambient  Thrust Coefficient
 
 ============ Thruster Efficiencies ============
-              0.95060 Overall Isp Efficiency
-------------  0.97000 (constant) Nozzle Efficiency ------------
-------------  0.98000 (constant) Energy Release Efficiency ------------
+              0.97417 Overall Isp Efficiency
+------------  0.97417 Nozzle Efficiency ------------
+        Div = 0.99100 (simple fit eps=20, %bell=80) Divergence Efficiency of Nozzle
+        Kin = 0.98945 (MLP fit) Kinetic Efficiency of Nozzle
+         BL = 0.99350 (MLP fit) Boundary Layer Efficiency of Nozzle
+         TP = 1.00000 (default) Two Phase Efficiency of Nozzle
+------------  1.00000 Energy Release Efficiency ------------
+        Mix = 1.00000 (default) Inter-Element Mixing Efficiency of Injector
+         Em = 1.00000 (default) Intra-Element Mixing Efficiency of Injector
+        Vap = 1.00000 (default) Vaporization Efficiency of Injector
+         HL = 1.00000 (default) Heat Loss Efficiency of Chamber
 
      CdThroat = 0.990012 (MLP fit) throat flow coefficient
-      wdotTot = 8.88958 lbm/sec (O/F = 1.9)
-       wdotOx = 5.82421 lbm/sec
-       wdotFl = 3.06537 lbm/sec
+      wdotTot = 8.71179 lbm/sec (O/F = 1.9)
+       wdotOx = 5.70772 lbm/sec
+       wdotFl = 3.00406 lbm/sec
         TcODE = 5879.0 degR
         MWchm = 21.7248 g/gmole
      gammaChm = 1.14849 

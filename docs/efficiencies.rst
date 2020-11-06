@@ -41,8 +41,8 @@ Thruster mass flow rate is then given by the following equation.
 
     \Large{\dot m = \frac {P_c \cdot A_t \cdot C_d}  {C^*_{del}} }
 
-Note that as :math:`\large{C^*_{del}}` gets smaller due to lower Cstar Efficiency, :math:`\large{\eta_{C^*}}`,
-that flow rate :math:`\large{\dot m}` get larger.
+Note that as :math:`\large{C^*_{del}}` gets smaller :math:`\large{\dot m}` gets larger.
+Thus when Cstar Efficiency, :math:`\large{\eta_{C^*}}` gets smaller,  :math:`\large{\dot m}` gets larger.
 
 :math:`\large{C^*_{del}}`  and  :math:`\large{\dot m}` are **inversely** proportional.
 
@@ -269,7 +269,7 @@ that is modified by the above efficiencies.
     
 If thruster on/off pulsing is involved, then the steady state Isp equation may be further modified as shown below.
 Note also that pulsing usually changes the overall thruster mixture ratio due to different leads or lags of the
-fuel and oxidizer being fed into the thruster.
+fuel and oxidizer being fed into the thruster, as well as any dribble volume differences between fuel and oxidizer.
 
 .. math:: 
     \Large{Isp_{del} = Isp_{del}SS * \eta_{Pulse}}

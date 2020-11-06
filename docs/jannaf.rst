@@ -36,7 +36,8 @@ a rigorous model and a simplified model.
 Rigorous Model
 --------------
 
-The rigorous model is intended for the detailed analysis of an engine that is preparing for a production design.
+The rigorous model is intended for the detailed analysis of an engine that is preparing for a 
+hardware production design; either test or flight hardware.
 
 The rigorous model requires many more resources and much more technical expertise than
 can be presented here. 
@@ -160,7 +161,7 @@ is the measured :math:`c^*` efficiency (:math:`\eta_{c^*}`) of the thrust chambe
 :math:`c^*` efficiency is used to back out energy release efficiency , then the effect of the nozzle discharge
 coefficient :math:`C_D` must be taken into account.
 
-In other words, for a perfect injector: :math:`\Large{\eta_{c^*} = 1 / C_D}`
+In other words, for a perfect injector: :math:`\Large{\eta_{c^*_{PI}} = 1 / C_D}`
 
 For a real injector: :math:`\Large{\eta_{c^*} = \eta_{ERE} / C_D}`
 
