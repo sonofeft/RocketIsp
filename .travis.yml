@@ -10,11 +10,10 @@ before_install:
     - "sudo pip install rocketcea"
     - "sudo pip install scipy"
     - "sudo pip install rocketprops"
+    - "sudo pip install rocketisp"
 
 env: FC=gfortran
 
-install:
-    - "sudo pip install rocketisp"
     
 script:
     - py.test
