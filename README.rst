@@ -12,7 +12,7 @@
 
     This is a place-holder for the 1st release.
 
-**Rocketisp** Calculates Delivered Isp For Liquid Rocket Thrust Chambers.
+**Rocketisp** Calculates Delivered Specific Impulse (Isp) For Liquid Rocket Thrust Chambers.
 
 
 See the Code at: `<https://github.com/sonofeft/RocketIsp>`_
