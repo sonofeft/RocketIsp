@@ -12,7 +12,9 @@ before_install:
     - "pip install rocketprops"
     - "pip install --upgrade rocketisp"
 
-env: FC=gfortran
+env: 
+    - FC=gfortran
+    - TRAVIS_ALLOW_FAILURE=true
 
     
 script:
