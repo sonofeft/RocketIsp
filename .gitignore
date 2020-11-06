@@ -29,6 +29,9 @@ wheels/
 .installed.cfg
 *.egg
 
+rocketisp/backup/
+backup/
+
 # PyInstaller
 #  Usually these files are written by a python script from a template
 #  before PyInstaller builds the exe, so as to inject date/other infos into it.
@@ -104,6 +107,6 @@ ENV/
 
 # mypy
 .mypy_cache/
-rocketcea/tests/__pycache__/test_misc.cpython-37.pyc
+
 *.pyc
 install_w_py38.txt

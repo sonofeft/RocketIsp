@@ -8,9 +8,8 @@
 
 .. image:: https://img.shields.io/pypi/l/RocketIsp.svg
 
-.. note::
 
-    This is a place-holder for the 1st release.
+**RocketIsp** is in the early stages of development... should be updated soon.
 
 **Rocketisp** Calculates Delivered Specific Impulse (Isp) For Liquid Rocket Thrust Chambers.
 
@@ -28,3 +27,4 @@ specific impulse (Isp) for liquid rocket thrust chambers.
 
 Note that **RocketIsp** gets propellant properties from the companion project `RocketProps <https://rocketprops.readthedocs.io/en/latest/>`_
 and ideal Isp performance from the companion project  `RocketCEA <https://rocketcea.readthedocs.io/en/latest/>`_ .
+
