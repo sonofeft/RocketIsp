@@ -1,6 +1,6 @@
 import os
 
-if os.environ.get('READTHEDOCS',False):
+if 'READTHEDOCS' not in os.environ:
     from rocketcea.input_cards import oxCards, fuelCards, propCards
 else:
     from rocketisp.mock.input_cards import oxCards, fuelCards, propCards

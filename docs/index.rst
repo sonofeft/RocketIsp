@@ -4,10 +4,13 @@
    contain the root `toctree` directive.
 
 .. include:: ../README.rst
-   
 
 RocketIsp
 =========
+
+.. note::
+
+   RocketIsp is in the early stages of development... should stabilize soon.
 
 Contents:
 

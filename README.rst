@@ -9,7 +9,7 @@
 .. image:: https://img.shields.io/pypi/l/RocketIsp.svg
 
 
-**RocketIsp** is in the early stages of development... should be updated soon.
+RocketIsp is in the early stages of development... should stabilize soon.
 
 **Rocketisp** Calculates Delivered Specific Impulse (Isp) For Liquid Rocket Thrust Chambers.
 

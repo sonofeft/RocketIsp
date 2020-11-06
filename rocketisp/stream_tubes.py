@@ -1,7 +1,7 @@
 from math import pi
 import os
 
-if os.environ.get('READTHEDOCS',False):
+if 'READTHEDOCS' not in os.environ:
     from rocketcea.cea_obj import CEA_Obj
     from rocketcea.separated_Cf import sepNozzleCf
 else:

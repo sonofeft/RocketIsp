@@ -31,7 +31,7 @@ with open(path.join(here, 'README.rst'), encoding='utf-8') as f:
 
 # Place install_requires into the text file "requirements.txt"
 #             automodule doc builds fail on ReadTheDocs when installing RocketCEA
-if os.environ.get('READTHEDOCS',False):
+if 'READTHEDOCS' not in os.environ:
     with open(path.join(here, 'requirements.txt'), encoding='utf-8') as f2:
         requires = f2.read().strip().splitlines()
 else:
