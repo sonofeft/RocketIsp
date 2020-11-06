@@ -10,7 +10,7 @@ before_install:
     - "pip install rocketcea"
     - "pip install scipy"
     - "pip install rocketprops"
-    - "pip install rocketisp>=0.1.4"
+    - "pip install rocketisp>=0.1.5"
 
 env: 
     - FC=gfortran
