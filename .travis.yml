@@ -6,11 +6,11 @@ before_install:
     - "sudo apt-get update"
     - "sudo apt-get install gfortran"
     - "sudo pip install --upgrade pip"
-    - "sudo pip install numpy"
-    - "sudo pip install rocketcea"
-    - "sudo pip install scipy"
-    - "sudo pip install rocketprops"
-    - "sudo pip install rocketisp"
+    - "pip install numpy"
+    - "pip install rocketcea"
+    - "pip install scipy"
+    - "pip install rocketprops"
+    - "pip install rocketisp"
 
 env: FC=gfortran
 
