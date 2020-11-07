@@ -9,6 +9,7 @@ GitHub Log
 
 * Nov 6, 2020
     - (by: sonofeft)
+        - version 0.1.7, added method set_mr_to_max_ispdel
         - version 0.1.6, doc and example cleanup
         - Update pytest.ini
         - Update .travis.yml

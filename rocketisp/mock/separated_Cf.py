@@ -1,3 +1,7 @@
+"""
+ReadTheDocs needs to build sphinx docs, but has trouble installing RocketCEA.
+This mocks the nozzle separation functions.
+"""
 
 
 def ambientCf(gam=1.25, epsTot=20.0, Pc=200.0, Pamb=14.7):

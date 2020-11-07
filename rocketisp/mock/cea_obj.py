@@ -2,7 +2,10 @@
 
 
 class CEA_Obj(object):
-
+"""
+ReadTheDocs needs to build sphinx docs, but has trouble installing RocketCEA.
+This mocks the CEA_Obj.
+"""
     def __init__(self, propName='', oxName='', fuelName='', fac_CR=None,
         useFastLookup=0, # depricated
         makeOutput=0, make_debug_prints=False):

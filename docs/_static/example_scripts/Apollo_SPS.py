@@ -16,11 +16,19 @@ geomObj = Geometry(Rthrt=1,
 effObj = Efficiencies()
 effObj.set_const('ERE', 0.98) # don't know injector details so set effERE=0.98
 
-# It's an ablative chamber, so some FFC (fuel film cooling) is required... guess about 10%
-core = CoreStream( geomObj=geomObj, effObj=effObj, pcentFFC=10.0,
+# It's an ablative chamber, so some FFC (fuel film cooling) is required... guess about 15%
+core = CoreStream( geomObj=geomObj, effObj=effObj, pcentFFC=15.0,
                    oxName='N2O4', fuelName='A50',  MRcore=1.6, Pc=100 )
 
 R = RocketThruster(name='Apollo SPS',coreObj=core)
 
+# scale geometry to give 20,500 lbf of thrust for current conditions
 R.scale_Rt_to_Thrust( 20500 , Pamb=0.0  )
+
+# figure out best mixture ratio to run the engine.
+R.set_mr_to_max_ispdel()
+
+# re-scale geometry to give 20,500 lbf of thrust after MR change
+R.scale_Rt_to_Thrust( 20500 , Pamb=0.0  )
+
 R.summ_print()

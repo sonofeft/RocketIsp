@@ -27,11 +27,13 @@ It also served as a retrorocket to perform the deorbit burn for Earth orbital Ap
 
 Based on the 
 `Apollo BlockII SPS Engine Testing <https://www.semanticscholar.org/paper/BLOCK-II-AJ10-137-APOLLO-SERVICE-MODULE-ENGINE-AT-DeFord-McIlveen/c970eff6d329ba0a9d686f7f28feb6b2dc012e71>`_,
-the performance of the engine was 314 sec at 100 psia chamber pressure.
+the performance of the engine was about 314 sec at 100 psia chamber pressure.
 
-With an initial guess of 10% for fuel film cooling, 
-the **RocketIsp** model below predicts a delivered Isp of 315.38 seconds.
-Changing the guess of 10% FFC to 12% FFC results in 314 seconds exactly.
+With a guess of 15% for fuel film cooling, 
+the **RocketIsp** model below predicts a delivered Isp of 314 seconds.
+
+Note that the operating core mixture ratio was calculated based on maximizing the delivered Isp
+by using the method *set_mr_to_max_ispdel*.
 
 .. image:: ./_static/AJ10-137_SPS_Engine.jpg
     :width: 49%

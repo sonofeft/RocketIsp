@@ -1,3 +1,7 @@
+"""
+ReadTheDocs needs to build sphinx docs, but has trouble installing RocketCEA.
+This mocks the ox and fuel CEA input cards.
+"""
 
 #  ==== Use convention of ending with (G) for gaseous propellants, O2(G), CH4(G), etc.
 #  NOTE !!!!! xxx(G) will be Changed to Gxxx <========= !!!!!!!!

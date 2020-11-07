@@ -44,13 +44,14 @@ from rocketisp.efficiency.eff_divergence import eff_div
 from rocketisp.efficiency.effBL_NASA_SP8120 import eff_bl_NASA, regen_corrected_bl
 
 from rocketisp.efficiency.calc_full_pcentLossBL import calc_pcentLossBL
-
 from rocketisp.efficiency.calc_noz_kinetics import calc_IspODK
 
 #from rocketisp.nozzle.cd_throat import get_Cd
 from rocketisp.nozzle.calc_full_Cd import calc_Cd
-
 from rocketisp.stream_tubes import CoreStream
+from rocketisp.efficiencies import Efficiencies
+from rocketisp.goldSearch import search_max
+
 
 AVAIL_EFF_MODEL_D   = {} # index=eff name, value=list of recognized model names
 AVAIL_EFF_MODEL_D['Pulse'] = ['rough estimate']
@@ -146,6 +147,30 @@ class RocketThruster(object):
         
                 
         self.calc_all_eff()
+    
+    def set_mr_to_max_ispdel(self):
+        """
+        Iterate on MRcore to find the peak Isp
+        """
+        # get MR for equivalence ratio = 1
+        MRstart = self.coreObj.ceaObj.getMRforER( ERr=1.0 )
+        
+        MRlo = MRstart / 3.0
+        MRhi = MRstart * 3.0
+        
+        def get_ispdel( MR ):
+            self.coreObj.reset_attr('MRcore', MR, re_evaluate=True)
+            self.calc_all_eff()
+            return self.coreObj.IspDel
+            
+        MRcore_opt, IspMax  = search_max(get_ispdel, MRlo, MRhi, tol=0.01)
+        #print('MRcore_opt=%g, IspMax=%g sec'%(MRcore_opt, IspMax) )
+        # use MRcore_opt to reset everything
+        self.coreObj.reset_attr('MRcore', MRcore_opt, re_evaluate=True)
+        self.calc_all_eff()
+        
+        return MRcore_opt
+
     
     def scale_Rt_to_Thrust(self, ThrustLbf=500.0, Pamb=0.0, use_scipy=False):
         """
