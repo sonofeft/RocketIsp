@@ -9,6 +9,7 @@ __pycache__
 *$py.class
 *.FCStd
 *.xlsx
+_DOC_URLS.TXT
 
 # Distribution / packaging
 .Python
