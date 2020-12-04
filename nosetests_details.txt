@@ -1,0 +1,722 @@
+________tk_nosy UNITTEST RUN# 1_________
+
+{Item #1} test__main__, 
+============ Thruster Efficiencies ============
+              0.80100 Overall Isp Efficiency
+------------  0.90000 Nozzle Efficiency ------------
+        Div = 0.90000 (constant) Divergence Efficiency of Nozzle
+        Kin = 1.00000 (default) Kinetic Efficiency of Nozzle
+         BL = 1.00000 (default) Boundary Layer Efficiency of Nozzle
+         TP = 1.00000 (default) Two Phase Efficiency of Nozzle
+------------  0.89000 Energy Release Efficiency ------------
+        Mix = 0.89000 (constant) Inter-Element Mixing Efficiency of Injector
+         Em = 1.00000 (default) Intra-Element Mixing Efficiency of Injector
+        Vap = 1.00000 (default) Vaporization Efficiency of Injector
+         HL = 1.00000 (default) Heat Loss Efficiency of Chamber
+
+E("Mix") = 0.89
+==================================================================
+============ Thruster Efficiencies ============
+              0.79299 Overall Isp Efficiency
+              0.78506 Pulsing Isp Efficiency (user input)
+------------  0.90000 Nozzle Efficiency ------------
+        Div = 0.90000 (constant) Divergence Efficiency of Nozzle
+        Kin = 1.00000 (default) Kinetic Efficiency of Nozzle
+         BL = 1.00000 (default) Boundary Layer Efficiency of Nozzle
+         TP = 1.00000 (default) Two Phase Efficiency of Nozzle
+------------  0.88110 Energy Release Efficiency ------------
+        Mix = 0.89000 (constant) Inter-Element Mixing Efficiency of Injector
+         Em = 0.99000 (user input) Intra-Element Mixing Efficiency of Injector
+        Vap = 1.00000 (default) Vaporization Efficiency of Injector
+         HL = 1.00000 (default) Heat Loss Efficiency of Chamber
+
+------------  0.99000 Pulsing Efficiency ------------
+      Pulse = 0.99000 (user input) Pulsing Efficiency of Thruster
+
+Div|0.9|Divergence Efficiency of Nozzle|constant|True
+Kin|1.0|Kinetic Efficiency of Nozzle|default|False
+BL|1.0|Boundary Layer Efficiency of Nozzle|default|False
+TP|1.0|Two Phase Efficiency of Nozzle|default|False
+Mix|0.89|Inter-Element Mixing Efficiency of Injector|constant|True
+Em|0.99|Intra-Element Mixing Efficiency of Injector|user input|False
+Vap|1.0|Vaporization Efficiency of Injector|default|False
+HL|1.0|Heat Loss Efficiency of Chamber|default|False
+FFC|1.0|Fuel Film Cooling Efficiency of Chamber|default|False
+Pulse|0.99|Pulsing Efficiency of Thruster|user input|False
+ERE|0.8811|Energy Release Efficiency of Chamber||False
+Noz|0.9|Nozzle Efficiency||False
+Isp|0.79299|Overall Isp Efficiency||False
+IspPulsing|0.7850600999999999|Pulsing Isp Efficiency|user input|False
+==================================================================
+============ Thruster Efficiencies ============
+              1.00000 Overall Isp Efficiency
+------------  1.00000 Nozzle Efficiency ------------
+        Div = 1.00000 (default) Divergence Efficiency of Nozzle
+        Kin = 1.00000 (default) Kinetic Efficiency of Nozzle
+         BL = 1.00000 (default) Boundary Layer Efficiency of Nozzle
+         TP = 1.00000 (default) Two Phase Efficiency of Nozzle
+------------  1.00000 Energy Release Efficiency ------------
+        Mix = 1.00000 (default) Inter-Element Mixing Efficiency of Injector
+         Em = 1.00000 (default) Intra-Element Mixing Efficiency of Injector
+        Vap = 1.00000 (default) Vaporization Efficiency of Injector
+         HL = 1.00000 (default) Heat Loss Efficiency of Chamber
+
+cccccccccccccccccccccccccccccccccccc
+None
+
+{Item #2} test__main__, 
+---------------geometry-----------------------
+        Rthrt = 1.500 in (Dthrt=3.000 in)
+         Rinj = 2.372 in (Dinj=4.743 in)
+        Rexit = 6.708 in (Dexit=13.416 in)
+           At = 7.06858 in**2
+          eps = 20
+    pcentBell = 92.6055 % calculated from Lnoz=18 in
+           CR = 2.5 injector area / throat area
+         Dinj = 4.74342 in
+         Ainj = 17.6715 in**2
+ cham_conv_deg= 30 deg convergent section half angle
+entrance_angle= 29.6214 deg nozzle initial expansion angle
+    exit_angle= 6.0045 deg nozzle exit angle
+        Lcham = 9.3 in (set by user Lcham/Dt = 3.1)
+    Lcham_cyl = 6.78535 in
+   Lcham_conv = 2.51465 in
+       Ltotal = 27.3 in  (2 ft 3.300 in)
+         Lnoz = 18 in set by user with LnozInp  (1 ft 6.000 in)
+     RchmConv = 1 convergent section turn radius / throat radius
+    RupThroat = 1.5 upstream radius / throat radius
+   RdwnThroat = 1 downstream radius / throat radius
+    LchmOvrDt = 3.1 chamber length / throat diameter
+      LchmMin = 2 in, minimum allowed chamber length
+        Vcham = 150.013 in**3, approximate chamber volume
+
+{Item #3} test_limit_chamber_length, 
+---------------geometry-----------------------
+        Rthrt = 5.153 in (Dthrt=10.305 in)
+         Rinj = 8.925 in (Dinj=17.849 in)
+        Rexit = 45.361 in (Dexit=90.723 in)
+           At = 83.4103 in**2
+          eps = 77.5
+    pcentBell = 80.6341 % calculated from Lnoz=121 in
+           CR = 3 injector area / throat area
+         Dinj = 17.8495 in  (1 ft 5.849 in)
+         Ainj = 250.231 in**2
+ cham_conv_deg= 25.42 deg convergent section half angle
+entrance_angle= 35.677 deg nozzle initial expansion angle
+    exit_angle= 7.49979 deg nozzle exit angle
+        Lcham = 100 in (user minimum allowed Lcham)  (8 ft 4.000 in)
+    Lcham_cyl = 88.8799 in  (7 ft 4.880 in)
+   Lcham_conv = 11.1201 in
+       Ltotal = 221 in  (18 ft 5.000 in)
+         Lnoz = 121 in set by user with LnozInp  (10 ft 1.000 in)
+     RchmConv = 1.73921 convergent section turn radius / throat radius
+    RupThroat = 1 upstream radius / throat radius
+   RdwnThroat = 0.392 downstream radius / throat radius
+    LchmOvrDt = 1.2421 chamber length / throat diameter
+      LchmMin = 100 in, minimum allowed chamber length
+        Vcham = 24012.7 in**3, approximate chamber volume
+
+{Item #4} test__main__, 
+---------------geometry-----------------------
+        Rthrt = 2.934 in (Dthrt=5.868 in)
+         Rinj = 4.639 in (Dinj=9.278 in)
+        Rexit = 35.934 in (Dexit=71.868 in)
+           At = 27.0439 in**2
+          eps = 150
+    pcentBell = 80 %
+           CR = 2.5 injector area / throat area
+         Dinj = 9.27812 in
+         Ainj = 67.6099 in**2
+ cham_conv_deg= 30 deg convergent section half angle
+entrance_angle= 37.5678 deg nozzle initial expansion angle
+    exit_angle= 7.66028 deg nozzle exit angle
+        Lcham = 16 in (user input)  (1 ft 4.000 in)
+    Lcham_cyl = 11.0813 in
+   Lcham_conv = 4.91866 in
+       Ltotal = 114.526 in  (9 ft 6.526 in)
+         Lnoz = 98.5262 in   (8 ft 2.526 in)
+     RchmConv = 1 convergent section turn radius / throat radius
+    RupThroat = 1.5 upstream radius / throat radius
+   RdwnThroat = 1 downstream radius / throat radius
+    LchmOvrDt = 2.72665 chamber length / throat diameter
+      LchmMin = 2 in, minimum allowed chamber length
+        Vcham = 974.506 in**3, approximate chamber volume
+
+---------------N2O4/MMH core stream-----------------------
+    FvacTotal = 7981.98 lbf
+     FvacCore = 7018.89 lbf
+  FvacBarrier = 963.09 lbf
+   MRthruster = 1.591
+       MRcore = 1.85
+    MRbarrier = 0.656859
+           Pc = 150 psia
+=====> IspDel = 342.91 sec, ___DELIVERED VACUUM ISP___
+       IspAmb = 342.91 sec, (Pamb=0.0000) (Pexit=0.052135 psia)
+   IspDelCore = 350.14 sec
+       IspODF = 327.28 sec
+       IspODK = 350.14 sec (fracKin=1)
+       IspODE = 350.14 sec
+===> cstarERE = 5699.0 ft/sec, measured cstar = cstarERE / CdThroat
+     cstarODE = 5699.0 ft/sec
+
+   CfVacIdeal = 1.97675 Ideal Vacuum Thrust Coefficient
+     CfVacDel = 1.96766 Delivered Vacuum Thrust Coefficient
+     CfAmbDel = 1.96766 Delivered Ambient  Thrust Coefficient
+
+============ Thruster Efficiencies ============
+              0.97935 Overall Isp Efficiency
+------------  1.00000 Nozzle Efficiency ------------
+        Div = 1.00000 (default) Divergence Efficiency of Nozzle
+        Kin = 1.00000 (default) Kinetic Efficiency of Nozzle
+         BL = 1.00000 (default) Boundary Layer Efficiency of Nozzle
+         TP = 1.00000 (default) Two Phase Efficiency of Nozzle
+------------  1.00000 Energy Release Efficiency ------------
+        Mix = 0.99618 (mixAngle=1.24 deg) Inter-Element Mixing Efficiency of Injector
+         Em = 0.98448 (Rupe Em=0.8) Intra-Element Mixing Efficiency of Injector
+        Vap = 0.99926 (gen vaporized length) Vaporization Efficiency of Injector
+         HL = 1.00000 (default) Heat Loss Efficiency of Chamber
+
+------------  0.97935 Fuel Film Cooling ------------
+        FFC = 0.97935 (barrier calc) Fuel Film Cooling Efficiency of Chamber
+
+
+     CdThroat = 0.995 (default) throat flow coefficient
+      wdotTot = 23.2769 lbm/sec (O/F = 1.591)
+  wdotTotCore = 20.0458 lbm/sec (O/F = 1.85)
+  wdotTotBarr = 3.2311 lbm/sec (O/F = 0.656859)
+  wdotOxTotal = 14.2931 lbm/sec
+   wdotOxCore = 13.0122 lbm/sec
+   wdotOxBarr = 1.28097 lbm/sec
+  wdotFlTotal = 8.98374 lbm/sec
+   wdotFlCore = 7.0336 lbm/sec
+   wdotFlBarr = 1.95014 lbm/sec
+        TcODE = 5651.4 degR
+        MWchm = 21.3103 g/gmole
+     gammaChm = 1.14132
+---------------N2O4/MMH barrier stream-----------------------
+WARNING... CEA failed frozen Isp for MR=0.656859
+           Estimated IspODF_b = 278.608 sec
+----------------------------------------------------------
+    pcentFFC = 14 %
+   MRbarrier = 0.656859
+      MRwall = 0.238769
+    Twallgas = 2166.9 degR (TcBarrier=3019.1 degR)
+   effnessFC = 0.513817
+WentrOvWcool = 1.56901
+    IspDel_b = 298.07 sec delivered vacuum barrier Isp
+    IspODF_b = 278.61 sec
+    IspODK_b = 298.07 sec (fracKin=1)
+    IspODE_b = 298.07 sec
+  cstarERE_b = 4835.3 ft/sec
+  cstarODE_b = 4835.3 ft/sec
+
+
+---------------N2O4/MMH injector-----------------------
+NOTE: number of elements set by  elem_density
+    Element Density = 7 elem/in**2
+-------------------------------------------------------
+           Tox = 530 degR, temperature of oxidizer
+         Tfuel = 530 degR, temperature of fuel
+        elemEm = 0.8 Rupe factor of injector
+       fdPinjOx = 0.3 (dpOx=45.0 psia)
+     fdPinjFuel = 0.3 (dpFuel=45.0 psia)
+    OxOrfPerEl = 1
+  FuelOrfPerEl = 1
+   lolFuelElem = True
+    desFreqInp = 2000 Hz
+       CdOxOrf = 0.75
+     CdFuelOrf = 0.75
+    dropCorrOx = 0.33
+  dropCorrFuel = 0.33
+       DorfMin = 0.008 in
+  LfanOvDorfOx = 20
+LfanOvDorfFuel = 20
+
+          sgOx = 1.43889 g/ml
+       dHvapOx = 177.517 BTU/lbm
+        surfOx = 0.000148327 lbf/in
+        viscOx = 0.000277718 poise
+       MolWtOx = 92.011 g/gmole
+
+        sgFuel = 0.878919 g/ml
+     dHvapFuel = 376.358 BTU/lbm
+      surfFuel = 0.000195141 lbf/in
+      viscFuel = 0.000553427 poise
+     MolWtFuel = 46.0724 g/gmole
+
+          dpOx = 45 psid
+        dpFuel = 45 psid
+ cham des_freq = 3357 Hz (NOTE: 3T = 6038 Hz)
+     Nelements = 473 (set by elem_density)
+      NFuelOrf = 473
+        NOxOrf = 473
+      elemDens = 7 elem/in**2
+         velOx = 68.1321 ft/sec
+       velFuel = 87.1748 ft/sec
+        AfloOx = 0.448405 in**2
+      AfloFuel = 0.360611 in**2
+        DorfOx = 0.0347 in
+      DorfFuel = 0.0312 in
+        ---
+       rDropOx = 0.454497 mil, median ox droplet radius
+     rDropFuel = 0.586653 mil, median fuel droplet radius
+ chamShapeFact = 0.677485
+   genVapLenOx = 196.522
+ genVapLenFuel = 65.8514
+     fracVapOx = 0.999905
+   fracVapFuel = 0.997487
+         mrVap = 1.85449 vaporized mixture ratio
+        ---
+        tResid = 1.29817 ms, residual time in chamber
+         tauOx = 0.849878 ms, oxidizer lag time (tau/tResid=0.654676)
+       tauFuel = 0.595665 ms, fuel lag time (tau/tResid=0.458851)
+  fdPinjOxReqd = 0.145799 required oxidizer dP/Pc
+fdPinjFuelReqd = 0.107605 required fuel dP/Pc
+
+ cham sonicVel = 3491.37 ft/sec
+    --- Acoustic Modes in Chamber ---
+            1L = 1309 Hz
+     80% of 1T = 2117 Hz no damping required here
+            1T = 2646 Hz
+    =====> DESIGN = 3357 Hz <== DESIGN IS HERE
+            2T = 4390 Hz
+     80% of 1R = 4406 Hz baffles-only work here
+     80% of 3T = 4830 Hz cavities-only work here
+            1R = 5507 Hz
+            3T = 6038 Hz baffles + cavities OR multi-tuned cavities
+            3T = 6038 Hz <== MAX FREQUENCY... KEEP Hz HERE OR BELOW
+            4T = 7643 Hz
+          1T1R = 7663 Hz
+          2T1R = 9638 Hz
+            2R = 10083 Hz
+          3T1R = 11520 Hz
+          1T2R = 12255 Hz
+
+{Item #5} test_main_calc_noz_kinetics, 
+module_by_idD = {}
+
+IspODK =  315.21118771810467
+
+IspODK =  315.21118771810467    fracKin= 0.690805784550044
+
+module_by_idD = {469470480: <module 'calc_CHNO_fracKin' from 'D:\\2020_py_proj\\RocketIsp\\rocketisp\\efficiency\\fracKinODK\\calc_CHNO_fracKin.py'>}
+
+{Item #6} test_main_eff_divergence, 
+eff_div_eles(eps=25.0, pcBell=80.0) = 0.9879525787192942
+eff_div_eles(eps=10.0, pcBell=80.0) = 0.9847948181766719
+WARNING... Divergence Efficiency %Bell Range is 60% to 120%, 55 was input
+    ...Looking up Divergence Efficiency Values for %Bell = 60
+eff_div( eps=25.0, pcBell=55.0) = 0.9714082707639412
+eff_div_cone_eps_bell( eps=25.0, pcBell=80.0, Rd=1.0) = 0.9738082767966942
+
+{Item #7} test_main_get_elements, 
+N2O4/A50 CHNO   ox list= ['O', 'N']   fuel list= ['C', 'H', 'N']
+            N2O4/CH4 CHNO   ox list= ['O', 'N']   fuel list= ['C', 'H']
+           N2O4/C2H6 CHNO   ox list= ['O', 'N']   fuel list= ['C', 'H']
+        N2O4/Ethanol CHNO   ox list= ['O', 'N']   fuel list= ['C', 'O', 'H']
+       N2O4/Methanol CHNO   ox list= ['O', 'N']   fuel list= ['C', 'O', 'H']
+            N2O4/MMH CHNO   ox list= ['O', 'N']   fuel list= ['C', 'N', 'H']
+           N2O4/MHF3 CHNO   ox list= ['O', 'N']   fuel list= ['C', 'N', 'H']
+           N2O4/N2H4  HNO   ox list= ['O', 'N']   fuel list= ['N', 'H']
+            N2O4/NH3  HNO   ox list= ['O', 'N']   fuel list= ['N', 'H']
+            N2O4/LH2  HNO   ox list= ['O', 'N']   fuel list= ['H']
+        N2O4/Propane CHNO   ox list= ['O', 'N']   fuel list= ['C', 'H']
+           N2O4/UDMH CHNO   ox list= ['O', 'N']   fuel list= ['C', 'H', 'N']
+            N2O4/RP1 CHNO   ox list= ['O', 'N']   fuel list= ['C', 'H']
+             LOX/A50 CHNO   ox list= ['O']   fuel list= ['C', 'H', 'N']
+             LOX/CH4  CHO   ox list= ['O']   fuel list= ['C', 'H']
+            LOX/C2H6  CHO   ox list= ['O']   fuel list= ['C', 'H']
+         LOX/Ethanol  CHO   ox list= ['O']   fuel list= ['C', 'O', 'H']
+        LOX/Methanol  CHO   ox list= ['O']   fuel list= ['C', 'O', 'H']
+             LOX/MMH CHNO   ox list= ['O']   fuel list= ['C', 'N', 'H']
+            LOX/MHF3 CHNO   ox list= ['O']   fuel list= ['C', 'N', 'H']
+            LOX/N2H4  HNO   ox list= ['O']   fuel list= ['N', 'H']
+             LOX/NH3  HNO   ox list= ['O']   fuel list= ['N', 'H']
+             LOX/LH2   HO   ox list= ['O']   fuel list= ['H']
+         LOX/Propane  CHO   ox list= ['O']   fuel list= ['C', 'H']
+            LOX/UDMH CHNO   ox list= ['O']   fuel list= ['C', 'H', 'N']
+             LOX/RP1  CHO   ox list= ['O']   fuel list= ['C', 'H']
+           MON10/A50 CHNO   ox list= ['N', 'O']   fuel list= ['C', 'H', 'N']
+           MON10/CH4 CHNO   ox list= ['N', 'O']   fuel list= ['C', 'H']
+          MON10/C2H6 CHNO   ox list= ['N', 'O']   fuel list= ['C', 'H']
+       MON10/Ethanol CHNO   ox list= ['N', 'O']   fuel list= ['C', 'O', 'H']
+      MON10/Methanol CHNO   ox list= ['N', 'O']   fuel list= ['C', 'O', 'H']
+           MON10/MMH CHNO   ox list= ['N', 'O']   fuel list= ['C', 'N', 'H']
+          MON10/MHF3 CHNO   ox list= ['N', 'O']   fuel list= ['C', 'N', 'H']
+          MON10/N2H4  HNO   ox list= ['N', 'O']   fuel list= ['N', 'H']
+           MON10/NH3  HNO   ox list= ['N', 'O']   fuel list= ['N', 'H']
+           MON10/LH2  HNO   ox list= ['N', 'O']   fuel list= ['H']
+       MON10/Propane CHNO   ox list= ['N', 'O']   fuel list= ['C', 'H']
+          MON10/UDMH CHNO   ox list= ['N', 'O']   fuel list= ['C', 'H', 'N']
+           MON10/RP1 CHNO   ox list= ['N', 'O']   fuel list= ['C', 'H']
+           MON25/A50 CHNO   ox list= ['N', 'O']   fuel list= ['C', 'H', 'N']
+           MON25/CH4 CHNO   ox list= ['N', 'O']   fuel list= ['C', 'H']
+          MON25/C2H6 CHNO   ox list= ['N', 'O']   fuel list= ['C', 'H']
+       MON25/Ethanol CHNO   ox list= ['N', 'O']   fuel list= ['C', 'O', 'H']
+      MON25/Methanol CHNO   ox list= ['N', 'O']   fuel list= ['C', 'O', 'H']
+           MON25/MMH CHNO   ox list= ['N', 'O']   fuel list= ['C', 'N', 'H']
+          MON25/MHF3 CHNO   ox list= ['N', 'O']   fuel list= ['C', 'N', 'H']
+          MON25/N2H4  HNO   ox list= ['N', 'O']   fuel list= ['N', 'H']
+           MON25/NH3  HNO   ox list= ['N', 'O']   fuel list= ['N', 'H']
+           MON25/LH2  HNO   ox list= ['N', 'O']   fuel list= ['H']
+       MON25/Propane CHNO   ox list= ['N', 'O']   fuel list= ['C', 'H']
+          MON25/UDMH CHNO   ox list= ['N', 'O']   fuel list= ['C', 'H', 'N']
+           MON25/RP1 CHNO   ox list= ['N', 'O']   fuel list= ['C', 'H']
+           MON30/A50 CHNO   ox list= ['N', 'O']   fuel list= ['C', 'H', 'N']
+           MON30/CH4 CHNO   ox list= ['N', 'O']   fuel list= ['C', 'H']
+          MON30/C2H6 CHNO   ox list= ['N', 'O']   fuel list= ['C', 'H']
+       MON30/Ethanol CHNO   ox list= ['N', 'O']   fuel list= ['C', 'O', 'H']
+      MON30/Methanol CHNO   ox list= ['N', 'O']   fuel list= ['C', 'O', 'H']
+           MON30/MMH CHNO   ox list= ['N', 'O']   fuel list= ['C', 'N', 'H']
+          MON30/MHF3 CHNO   ox list= ['N', 'O']   fuel list= ['C', 'N', 'H']
+          MON30/N2H4  HNO   ox list= ['N', 'O']   fuel list= ['N', 'H']
+           MON30/NH3  HNO   ox list= ['N', 'O']   fuel list= ['N', 'H']
+           MON30/LH2  HNO   ox list= ['N', 'O']   fuel list= ['H']
+       MON30/Propane CHNO   ox list= ['N', 'O']   fuel list= ['C', 'H']
+          MON30/UDMH CHNO   ox list= ['N', 'O']   fuel list= ['C', 'H', 'N']
+           MON30/RP1 CHNO   ox list= ['N', 'O']   fuel list= ['C', 'H']
+             N2O/A50 CHNO   ox list= ['O', 'N']   fuel list= ['C', 'H', 'N']
+             N2O/CH4 CHNO   ox list= ['O', 'N']   fuel list= ['C', 'H']
+            N2O/C2H6 CHNO   ox list= ['O', 'N']   fuel list= ['C', 'H']
+         N2O/Ethanol CHNO   ox list= ['O', 'N']   fuel list= ['C', 'O', 'H']
+        N2O/Methanol CHNO   ox list= ['O', 'N']   fuel list= ['C', 'O', 'H']
+             N2O/MMH CHNO   ox list= ['O', 'N']   fuel list= ['C', 'N', 'H']
+            N2O/MHF3 CHNO   ox list= ['O', 'N']   fuel list= ['C', 'N', 'H']
+            N2O/N2H4  HNO   ox list= ['O', 'N']   fuel list= ['N', 'H']
+             N2O/NH3  HNO   ox list= ['O', 'N']   fuel list= ['N', 'H']
+             N2O/LH2  HNO   ox list= ['O', 'N']   fuel list= ['H']
+         N2O/Propane CHNO   ox list= ['O', 'N']   fuel list= ['C', 'H']
+            N2O/UDMH CHNO   ox list= ['O', 'N']   fuel list= ['C', 'H', 'N']
+             N2O/RP1 CHNO   ox list= ['O', 'N']   fuel list= ['C', 'H']
+           IRFNA/A50 CFHNO   ox list= ['F', 'O', 'N', 'H']   fuel list= ['C', 'H', 'N']
+           IRFNA/CH4 CFHNO   ox list= ['F', 'O', 'N', 'H']   fuel list= ['C', 'H']
+          IRFNA/C2H6 CFHNO   ox list= ['F', 'O', 'N', 'H']   fuel list= ['C', 'H']
+       IRFNA/Ethanol CFHNO   ox list= ['F', 'O', 'N', 'H']   fuel list= ['C', 'O', 'H']
+      IRFNA/Methanol CFHNO   ox list= ['F', 'O', 'N', 'H']   fuel list= ['C', 'O', 'H']
+           IRFNA/MMH CFHNO   ox list= ['F', 'O', 'N', 'H']   fuel list= ['C', 'N', 'H']
+          IRFNA/MHF3 CFHNO   ox list= ['F', 'O', 'N', 'H']   fuel list= ['C', 'N', 'H']
+          IRFNA/N2H4 FHNO   ox list= ['F', 'O', 'N', 'H']   fuel list= ['N', 'H']
+           IRFNA/NH3 FHNO   ox list= ['F', 'O', 'N', 'H']   fuel list= ['N', 'H']
+           IRFNA/LH2 FHNO   ox list= ['F', 'O', 'N', 'H']   fuel list= ['H']
+       IRFNA/Propane CFHNO   ox list= ['F', 'O', 'N', 'H']   fuel list= ['C', 'H']
+          IRFNA/UDMH CFHNO   ox list= ['F', 'O', 'N', 'H']   fuel list= ['C', 'H', 'N']
+           IRFNA/RP1 CFHNO   ox list= ['F', 'O', 'N', 'H']   fuel list= ['C', 'H']
+            CLF5/A50 CCLFHN   ox list= ['F', 'CL']   fuel list= ['C', 'H', 'N']
+            CLF5/CH4 CCLFH   ox list= ['F', 'CL']   fuel list= ['C', 'H']
+           CLF5/C2H6 CCLFH   ox list= ['F', 'CL']   fuel list= ['C', 'H']
+        CLF5/Ethanol CCLFHO   ox list= ['F', 'CL']   fuel list= ['C', 'O', 'H']
+       CLF5/Methanol CCLFHO   ox list= ['F', 'CL']   fuel list= ['C', 'O', 'H']
+            CLF5/MMH CCLFHN   ox list= ['F', 'CL']   fuel list= ['C', 'N', 'H']
+           CLF5/MHF3 CCLFHN   ox list= ['F', 'CL']   fuel list= ['C', 'N', 'H']
+           CLF5/N2H4 CLFHN   ox list= ['F', 'CL']   fuel list= ['N', 'H']
+            CLF5/NH3 CLFHN   ox list= ['F', 'CL']   fuel list= ['N', 'H']
+            CLF5/LH2 CLFH   ox list= ['F', 'CL']   fuel list= ['H']
+        CLF5/Propane CCLFH   ox list= ['F', 'CL']   fuel list= ['C', 'H']
+           CLF5/UDMH CCLFHN   ox list= ['F', 'CL']   fuel list= ['C', 'H', 'N']
+            CLF5/RP1 CCLFH   ox list= ['F', 'CL']   fuel list= ['C', 'H']
+              F2/A50 CFHN   ox list= ['F']   fuel list= ['C', 'H', 'N']
+              F2/CH4  CFH   ox list= ['F']   fuel list= ['C', 'H']
+             F2/C2H6  CFH   ox list= ['F']   fuel list= ['C', 'H']
+          F2/Ethanol CFHO   ox list= ['F']   fuel list= ['C', 'O', 'H']
+         F2/Methanol CFHO   ox list= ['F']   fuel list= ['C', 'O', 'H']
+              F2/MMH CFHN   ox list= ['F']   fuel list= ['C', 'N', 'H']
+             F2/MHF3 CFHN   ox list= ['F']   fuel list= ['C', 'N', 'H']
+             F2/N2H4  FHN   ox list= ['F']   fuel list= ['N', 'H']
+              F2/NH3  FHN   ox list= ['F']   fuel list= ['N', 'H']
+              F2/LH2   FH   ox list= ['F']   fuel list= ['H']
+          F2/Propane  CFH   ox list= ['F']   fuel list= ['C', 'H']
+             F2/UDMH CFHN   ox list= ['F']   fuel list= ['C', 'H', 'N']
+              F2/RP1  CFH   ox list= ['F']   fuel list= ['C', 'H']
+group_set = {'CHNO', 'HNO', 'CCLFHO', 'CFH', 'FHN', 'CFHN', 'CFHNO', 'HO', 'CHO', 'FH', 'FHNO', 'CCLFHN', 'CLFHN', 'CFHO', 'CCLFH', 'CLFH'}
+get_ox_fuel_pair_in_group( "HO" ) = ('LOX', 'LH2')
+
+{Item #8} test_main_huzel_data, 
+eps=    10 pcentBell=    70  Entrance Angle= 28.0820  Exit Angle= 14.1606
+eps=    20 pcentBell=    80  Entrance Angle= 28.9497  Exit Angle=  9.1332
+eps=    40 pcentBell=    90  Entrance Angle= 29.9539  Exit Angle=  6.6694
+WARNING... Huzel Area Ratio Range is 5 to 50, 60 was input
+    ...Looking up Huzel Values for Area Ratio = 50
+eps=    60 pcentBell=   100  Entrance Angle= 29.3846  Exit Angle=  4.6887
+WARNING... Huzel Area Ratio Range is 5 to 50, 80 was input
+    ...Looking up Huzel Values for Area Ratio = 50
+WARNING... Huzel %Bell Range is 60% to 100%, 110 was input
+    ...Looking up Huzel Values for %Bell = 100
+eps=    80 pcentBell=   110  Entrance Angle= 29.3846  Exit Angle=  4.6887
+[5.0, 10.0, 15.0, 20.0, 25.0, 30.0, 35.0, 40.0, 45.0, 50.0]
+[22.5, 25.3, 27.4, 28.9, 30.0, 30.8, 31.3, 31.6, 31.9, 32.2]
+[13.6, 11.0, 9.8, 9.1, 8.7, 8.4, 8.2, 8.1, 7.9, 7.8]
+
+{Item #9} test__main__, 
+==============================  Sample Thruster  ==============================
+---------------geometry-----------------------
+        Rthrt = 2.934 in (Dthrt=5.868 in)
+         Rinj = 4.639 in (Dinj=9.278 in)
+        Rexit = 35.934 in (Dexit=71.868 in)
+           At = 27.0439 in**2
+          eps = 150
+    pcentBell = 80 %
+           CR = 2.5 injector area / throat area
+         Dinj = 9.27812 in
+         Ainj = 67.6099 in**2
+ cham_conv_deg= 30 deg convergent section half angle
+entrance_angle= 37.5678 deg nozzle initial expansion angle
+    exit_angle= 7.66028 deg nozzle exit angle
+        Lcham = 16 in (user input)  (1 ft 4.000 in)
+    Lcham_cyl = 11.0813 in
+   Lcham_conv = 4.91866 in
+       Ltotal = 114.526 in  (9 ft 6.526 in)
+         Lnoz = 98.5262 in   (8 ft 2.526 in)
+     RchmConv = 1 convergent section turn radius / throat radius
+    RupThroat = 1.5 upstream radius / throat radius
+   RdwnThroat = 1 downstream radius / throat radius
+    LchmOvrDt = 2.72665 chamber length / throat diameter
+      LchmMin = 2 in, minimum allowed chamber length
+        Vcham = 974.506 in**3, approximate chamber volume
+
+---------------N2O4/MMH core stream-----------------------
+    FvacTotal = 7630.81 lbf
+     FvacCore = 6710.10 lbf
+  FvacBarrier = 920.71 lbf
+   MRthruster = 1.591
+       MRcore = 1.85
+    MRbarrier = 0.656859
+           Pc = 150 psia
+=====> IspDel = 327.83 sec, ___DELIVERED VACUUM ISP___
+       IspAmb = 327.83 sec, (Pamb=0.0000) (Pexit=0.052135 psia)
+   IspDelCore = 334.74 sec
+       IspODF = 327.28 sec
+       IspODK = 341.49 sec (fracKin=0.621333)
+       IspODE = 350.14 sec
+===> cstarERE = 5670.1 ft/sec, measured cstar = cstarERE / CdThroat
+     cstarODE = 5699.0 ft/sec
+
+   CfVacIdeal = 1.97675 Ideal Vacuum Thrust Coefficient
+     CfVacDel = 1.88109 Delivered Vacuum Thrust Coefficient
+     CfAmbDel = 1.88109 Delivered Ambient  Thrust Coefficient
+
+============ Thruster Efficiencies ============
+              0.93627 Overall Isp Efficiency
+------------  0.96087 Nozzle Efficiency ------------
+        Div = 0.99377 (simple fit eps=150, %bell=80) Divergence Efficiency of Nozzle
+        Kin = 0.97528 (MLP fit) Kinetic Efficiency of Nozzle
+         BL = 0.99140 (MLP fit) Boundary Layer Efficiency of Nozzle
+         TP = 1.00000 (default) Two Phase Efficiency of Nozzle
+------------  0.99493 Energy Release Efficiency ------------
+        Mix = 0.99861 (mixAngle=0.75 deg) Inter-Element Mixing Efficiency of Injector
+         Em = 0.99641 (Rupe elemEm=0.9) Intra-Element Mixing Efficiency of Injector
+        Vap = 0.99991 (gen vaporized length) Vaporization Efficiency of Injector
+         HL = 1.00000 (default) Heat Loss Efficiency of Chamber
+
+------------  0.97935 Fuel Film Cooling ------------
+        FFC = 0.97935 (barrier calc) Fuel Film Cooling Efficiency of Chamber
+
+
+     CdThroat = 0.989959 (MLP fit) throat flow coefficient
+      wdotTot = 23.2768 lbm/sec (O/F = 1.591)
+  wdotTotCore = 20.0457 lbm/sec (O/F = 1.85)
+  wdotTotBarr = 3.2311 lbm/sec (O/F = 0.656859)
+  wdotOxTotal = 14.2931 lbm/sec
+   wdotOxCore = 13.0121 lbm/sec
+   wdotOxBarr = 1.28096 lbm/sec
+  wdotFlTotal = 8.98373 lbm/sec
+   wdotFlCore = 7.03359 lbm/sec
+   wdotFlBarr = 1.95014 lbm/sec
+        TcODE = 5651.4 degR
+        MWchm = 21.3103 g/gmole
+     gammaChm = 1.14132
+---------------N2O4/MMH barrier stream-----------------------
+WARNING... CEA failed frozen Isp for MR=0.656859
+           Estimated IspODF_b = 278.608 sec
+----------------------------------------------------------
+    pcentFFC = 14 %
+   MRbarrier = 0.656859
+      MRwall = 0.238769
+    Twallgas = 2166.9 degR (TcBarrier=3019.1 degR)
+   effnessFC = 0.513817
+WentrOvWcool = 1.56901
+    IspDel_b = 284.95 sec delivered vacuum barrier Isp
+    IspODF_b = 278.61 sec
+    IspODK_b = 290.70 sec (fracKin=0.621333)
+    IspODE_b = 298.07 sec
+  cstarERE_b = 4810.8 ft/sec
+  cstarODE_b = 4835.3 ft/sec
+
+
+---------------N2O4/MMH injector-----------------------
+NOTE: number of elements set by  acoustics
+    Acoustic frequency set by Svn multiplier = 3.36096
+Fuel Orifice Meets Stability Requirement of >= 19.8 mil
+-------------------------------------------------------
+           Tox = 530 degR, temperature of oxidizer
+         Tfuel = 530 degR, temperature of fuel
+        elemEm = 0.9 Rupe factor of injector
+       fdPinjOx = 0.25 (dpOx=37.5 psia)
+     fdPinjFuel = 0.25 (dpFuel=37.5 psia)
+    OxOrfPerEl = 1
+  FuelOrfPerEl = 1
+   lolFuelElem = True
+    desFreqInp = 2000 Hz
+       CdOxOrf = 0.75
+     CdFuelOrf = 0.75
+    dropCorrOx = 0.33
+  dropCorrFuel = 0.33
+       DorfMin = 0.008 in
+  LfanOvDorfOx = 20
+LfanOvDorfFuel = 20
+
+          sgOx = 1.43889 g/ml
+       dHvapOx = 177.517 BTU/lbm
+        surfOx = 0.000148327 lbf/in
+        viscOx = 0.000277718 poise
+       MolWtOx = 92.011 g/gmole
+
+        sgFuel = 0.878919 g/ml
+     dHvapFuel = 376.358 BTU/lbm
+      surfFuel = 0.000195141 lbf/in
+      viscFuel = 0.000553427 poise
+     MolWtFuel = 46.0724 g/gmole
+
+          dpOx = 37.5 psid
+        dpFuel = 37.5 psid
+ cham des_freq = 4830 Hz (NOTE: 3T = 6038 Hz)
+DorfFlForHzLim = 0.0198 in, fuel orifice D for frequency in Hewitt Corr.
+      dOrifMin = 0.0198 in, min Dorifice allowed by stability & manufacturing
+     Nelements = 1287 (set by acoustics)
+      NFuelOrf = 1287
+        NOxOrf = 1287
+      elemDens = 19.0357 elem/in**2
+         velOx = 62.1958 ft/sec
+       velFuel = 79.5794 ft/sec
+        AfloOx = 0.491203 in**2
+      AfloFuel = 0.39503 in**2
+        DorfOx = 0.0220 in
+      DorfFuel = 0.0198 in
+        ---
+       rDropOx = 0.288382 mil, median ox droplet radius
+     rDropFuel = 0.372236 mil, median fuel droplet radius
+ chamShapeFact = 0.677485
+   genVapLenOx = 406.979
+ genVapLenFuel = 136.372
+     fracVapOx = 0.999991
+   fracVapFuel = 0.999705
+         mrVap = 1.85053 vaporized mixture ratio
+        ---
+        tResid = 1.29817 ms, residual time in chamber
+         tauOx = 0.590723 ms, oxidizer lag time (tau/tResid=0.455044)
+       tauFuel = 0.414027 ms, fuel lag time (tau/tResid=0.318932)
+  fdPinjOxReqd = 0.106812 required oxidizer dP/Pc
+fdPinjFuelReqd = 0.0771753 required fuel dP/Pc
+
+ cham sonicVel = 3491.37 ft/sec
+    --- Acoustic Modes in Chamber ---
+            1L = 1309 Hz
+     80% of 1T = 2117 Hz no damping required here
+            1T = 2646 Hz
+            2T = 4390 Hz
+     80% of 1R = 4406 Hz baffles-only work here
+    =====> DESIGN = 4830 Hz <== DESIGN IS HERE
+     80% of 3T = 4830 Hz cavities-only work here
+            1R = 5507 Hz
+            3T = 6038 Hz baffles + cavities OR multi-tuned cavities
+            3T = 6038 Hz <== MAX FREQUENCY... KEEP Hz HERE OR BELOW
+            4T = 7643 Hz
+          1T1R = 7663 Hz
+          2T1R = 9638 Hz
+            2R = 10083 Hz
+          3T1R = 11520 Hz
+          1T2R = 12255 Hz
+
+{Item #10} test__main__, 
+---------------geometry-----------------------
+        Rthrt = 2.934 in (Dthrt=5.868 in)
+         Rinj = 4.639 in (Dinj=9.278 in)
+        Rexit = 35.934 in (Dexit=71.868 in)
+           At = 27.0439 in**2
+          eps = 150
+    pcentBell = 80 %
+           CR = 2.5 injector area / throat area
+         Dinj = 9.27812 in
+         Ainj = 67.6099 in**2
+ cham_conv_deg= 30 deg convergent section half angle
+entrance_angle= 37.5678 deg nozzle initial expansion angle
+    exit_angle= 7.66028 deg nozzle exit angle
+        Lcham = 16 in (user input)  (1 ft 4.000 in)
+    Lcham_cyl = 11.0813 in
+   Lcham_conv = 4.91866 in
+       Ltotal = 114.526 in  (9 ft 6.526 in)
+         Lnoz = 98.5262 in   (8 ft 2.526 in)
+     RchmConv = 1 convergent section turn radius / throat radius
+    RupThroat = 1.5 upstream radius / throat radius
+   RdwnThroat = 1 downstream radius / throat radius
+    LchmOvrDt = 2.72665 chamber length / throat diameter
+      LchmMin = 2 in, minimum allowed chamber length
+        Vcham = 974.506 in**3, approximate chamber volume
+
+---------------N2O4/MMH core stream-----------------------
+    FvacTotal = 7583.14 lbf
+     FvacCore = 6668.18 lbf
+  FvacBarrier = 914.96 lbf
+   MRthruster = 1.591
+       MRcore = 1.85
+    MRbarrier = 0.656859
+           Pc = 150 psia
+=====> IspDel = 323.75 sec, ___DELIVERED VACUUM ISP___
+       IspAmb = 323.75 sec, (Pamb=0.0000) (Pexit=0.052135 psia)
+   IspDelCore = 330.58 sec
+       IspODF = 327.28 sec
+       IspODK = 341.39 sec (fracKin=0.617226)
+       IspODE = 350.14 sec
+===> cstarERE = 5663.5 ft/sec, measured cstar = cstarERE / CdThroat
+     cstarODE = 5699.0 ft/sec
+
+   CfVacIdeal = 1.97675 Ideal Vacuum Thrust Coefficient
+     CfVacDel = 1.86934 Delivered Vacuum Thrust Coefficient
+     CfAmbDel = 1.86934 Delivered Ambient  Thrust Coefficient
+
+============ Thruster Efficiencies ============
+              0.92463 Overall Isp Efficiency
+------------  0.95003 Nozzle Efficiency ------------
+        Div = 0.99477 (constant) Divergence Efficiency of Nozzle
+        Kin = 0.97501 (constant) Kinetic Efficiency of Nozzle
+         BL = 0.97950 (constant) Boundary Layer Efficiency of Nozzle
+         TP = 1.00000 (default) Two Phase Efficiency of Nozzle
+------------  0.99378 Energy Release Efficiency ------------
+        Mix = 0.99733 (constant) Inter-Element Mixing Efficiency of Injector
+         Em = 0.99644 (constant) Intra-Element Mixing Efficiency of Injector
+        Vap = 1.00000 (default) Vaporization Efficiency of Injector
+         HL = 1.00000 (default) Heat Loss Efficiency of Chamber
+
+------------  0.97935 Fuel Film Cooling ------------
+        FFC = 0.97935 (barrier calc) Fuel Film Cooling Efficiency of Chamber
+
+
+     CdThroat = 0.995 (default) throat flow coefficient
+      wdotTot = 23.4226 lbm/sec (O/F = 1.591)
+  wdotTotCore = 20.1713 lbm/sec (O/F = 1.85)
+  wdotTotBarr = 3.25133 lbm/sec (O/F = 0.656859)
+  wdotOxTotal = 14.3826 lbm/sec
+   wdotOxCore = 13.0936 lbm/sec
+   wdotOxBarr = 1.28899 lbm/sec
+  wdotFlTotal = 9.03998 lbm/sec
+   wdotFlCore = 7.07763 lbm/sec
+   wdotFlBarr = 1.96235 lbm/sec
+        TcODE = 5651.4 degR
+        MWchm = 21.3103 g/gmole
+     gammaChm = 1.14132
+---------------N2O4/MMH barrier stream-----------------------
+WARNING... CEA failed frozen Isp for MR=0.656859
+           Estimated IspODF_b = 278.608 sec
+----------------------------------------------------------
+    pcentFFC = 14 %
+   MRbarrier = 0.656859
+      MRwall = 0.238769
+    Twallgas = 2166.9 degR (TcBarrier=3019.1 degR)
+   effnessFC = 0.513817
+WentrOvWcool = 1.56901
+    IspDel_b = 281.41 sec delivered vacuum barrier Isp
+    IspODF_b = 278.61 sec
+    IspODK_b = 290.62 sec (fracKin=0.617226)
+    IspODE_b = 298.07 sec
+  cstarERE_b = 4805.3 ft/sec
+  cstarODE_b = 4835.3 ft/sec
+

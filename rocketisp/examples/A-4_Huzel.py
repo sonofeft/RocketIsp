@@ -58,7 +58,7 @@ core = CoreStream( geomObj, effObj, oxName=oxName, fuelName=fuelName,  MRcore=MR
              Pc=Pc, Pamb=14.7, CdThroat=1.0, 
              adjCstarODE=0.975554, adjIspIdeal=1.01214)
 
-inj = Injector(core, Tox=None, Tfuel=None, Em=0.8,
+inj = Injector(core, Tox=None, Tfuel=None, elemEm=0.8,
                fdPinjOx=0.2, fdPinjFuel=0.2, dpOxInp=dpOxInp, dpFuelInp=dpFuelInp,
                elemDensInp=None, NelementsInp=None,
                setNelementsBy='acoustics', # can be "acoustics", "density", "input"

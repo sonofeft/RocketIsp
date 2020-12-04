@@ -45,7 +45,7 @@ for ie,elemDensInp in enumerate(edensL):
                         MRcore=1.65, Pc=125 )
 
         I = Injector(C,
-                     Tox=None, Tfuel=None, Em=0.8,
+                     Tox=None, Tfuel=None, elemEm=0.8,
                      fdPinjOx=0.25, fdPinjFuel=0.25, dpOxInp=None, dpFuelInp=None,
                      setNelementsBy='elem_density', # can be "acoustics", "elem_density", "input"
                      elemDensInp=elemDensInp, NelementsInp=100,

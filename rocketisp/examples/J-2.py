@@ -1,5 +1,5 @@
 """
-model the SSME
+model the J-2
 """
 import sys
 import os
@@ -44,7 +44,8 @@ core = CoreStream( geomObj, effObj, oxName='LOX', fuelName='LH2',  MRcore=MRcore
                    Pc=Pc)
              
 
-R = RocketThruster(name='J-2',coreObj=core, injObj=None, pulse_sec=float('inf'), pulse_quality=0.8)
+R = RocketThruster(name='J-2',coreObj=core, injObj=None, 
+                   pulse_sec=float('inf'), pulse_quality=0.8)
              
 #R.scale_Rt_to_Thrust( Fvac , Pamb=0.0  , use_scipy=False )
 

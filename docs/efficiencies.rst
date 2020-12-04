@@ -350,5 +350,10 @@ This approach is further supported by the fact that in production engines,
 Using a constant 98% for effERE (:math:`\large{\eta_{ERE}}`) and calculating the nozzle losses will be a good
 first approximation for most liquid thrust chambers.
 
+.. note::
 
+    When optimizing thruster mixture ratio, a perfect injector can be a bad assumption.
+    
+    The  injector's ability to mix the propellants via :math:`E_m` can affect
+    :math:`MR_{opt}`, (:ref:`see Em impact on MRopt <ref_to_EmMRopt>`)
 

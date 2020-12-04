@@ -12,7 +12,7 @@ C = CoreStream( geomObj=G, effObj=Efficiencies(ERE=0.98, Noz=0.96515),  pcentFFC
                 oxName='N2O4', fuelName='A50',  MRcore=1.6, Pc=100, Pamb=0.0 )
 
 I = Injector(C,
-             Tox=None, Tfuel=None, Em=0.8,
+             Tox=None, Tfuel=None, elemEm=0.8,
              fdPinjOx=0.25, fdPinjFuel=0.25, dpOxInp=None, dpFuelInp=None,
              setNelementsBy='acoustics', # can be "acoustics", "elem_density", "input"
              elemDensInp=5, NelementsInp=100,

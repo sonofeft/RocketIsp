@@ -78,7 +78,7 @@ class MyTest(unittest.TestCase):
         
         C.reset_attr('Pc', 100)
         
-        self.assertAlmostEqual(C('IspDel'), 326.5939, places=2)
+        self.assertAlmostEqual(C('IspDel'), 325.64723, places=2)
         self.assertAlmostEqual(C('IspODE'), 338.9201, places=2)
         self.assertAlmostEqual(C('IspODF'), 320.4940, places=2)
     

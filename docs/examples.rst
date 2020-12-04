@@ -30,7 +30,7 @@ Based on the
 the performance of the engine was about 314 sec at 100 psia chamber pressure.
 
 With a guess of 15% for fuel film cooling, 
-the **RocketIsp** model below predicts a delivered Isp of 314 seconds.
+the **RocketIsp** model below predicts a delivered Isp of 313.2 seconds.
 
 Note that the operating core mixture ratio was calculated based on maximizing the delivered Isp
 by using the method *set_mr_to_max_ispdel*.

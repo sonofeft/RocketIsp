@@ -10,9 +10,13 @@ python copy_example_to_static.py effdiv_monte_Rthrt.py
 python copy_example_to_static.py plot_example_results.py
 python copy_example_to_static.py plot_odekf.py
 python copy_example_to_static.py plot_eff_mixing_angle.py
+python copy_example_to_static.py plot_effEm_Isp_impact.py
 
 rem ======= move to example_scripts area =============
 cd .\_static\example_scripts
+
+rem =================== Em impact on MRopt ====================
+python plot_effEm_Isp_impact.py > plot_effEm_Isp_impact.out
 
 rem ==================== thruster_only =======================
 python thruster_only.py > thruster_only.out

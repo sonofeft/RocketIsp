@@ -4,10 +4,28 @@ from rocketprops.rocket_prop import get_prop
 from rocketprops.unit_conv_data import get_value # for any units conversions
 from rocketisp.efficiency.calc_noz_kinetics import calc_IspODK
 from rocketisp.efficiency.eff_vaporization import calc_C1_C2, fracVaporized
+from rocketisp.model_summ import ModelSummary
+from rocketisp.parse_docstring import get_desc_and_units
 
 # acoustic mode multipliers
 modeSvnD = {'1T':1.8413,'2T':3.0543,'1R':3.8317,'3T':4.2012,'4T':5.3175,
     '1T1R':5.3313,'2T1R':6.7060,'2R':7.0156,'3T1R':8.0151,'1T2R':8.5263}
+
+        
+def temperature_clamp(value, name, min_value, max_value):
+    """Check to see if name is limited in range."""
+    if value < min_value+1:
+        new_val = min_value+1
+        s = 'WARNING... %s changed from %g to %g degR (MUST be >=%g and <=%g'%(name, value, new_val, min_value, max_value)
+        #print( s )
+        return new_val, s
+    if value > max_value-1:
+        new_val = max_value-1
+        s = 'WARNING... %s changed from %g to %g degR (MUST be >=%g and <=%g'%(name, value, new_val, min_value, max_value)
+        #print( s )
+        return new_val, s
+        
+    return value, ''
 
 
 class Injector:
@@ -19,11 +37,11 @@ class Injector:
     :param coreObj: CoreStream object 
     :param Tox: degR, temperature of oxidizer
     :param Tfuel: degR, temperature of fuel
-    :param Em: intra-element Rupe mixing factor
+    :param elemEm: intra-element Rupe mixing factor (0.7 below ave, 0.8 ave, 0.9 above ave)
     :param fdPinjOx: fraction of Pc used as oxidizer injector pressure drop
     :param fdPinjFuel: fraction of Pc used as fuel injector pressure drop
-    :param dpOxInp: input value of injector pressure drop for oxidizer (overrides fdPinjOx)
-    :param dpFuelInp: input value of injector pressure drop for fuel (overrides fdPinjFuel)
+    :param dpOxInp: psia,input value of injector pressure drop for oxidizer (overrides fdPinjOx)
+    :param dpFuelInp: psia,input value of injector pressure drop for fuel (overrides fdPinjFuel)
     :param setNelementsBy: flag determines how to calculate number of elements ( "acoustics", "elem_density", "input")
     :param elemDensInp: elem/in**2, input value for element density (setNelementsBy == "elem_density")
     :param NelementsInp: input value for number of elements (setNelementsBy == "input")
@@ -36,15 +54,15 @@ class Injector:
     
     :param CdOxOrf: flow coefficient of oxidizer orifices
     :param CdFuelOrf: flow coefficient of fuel orifices
-    :param dropCorrOx: oxidizer drop size multiplier
-    :param dropCorrFuel: fuel drop size multiplier
+    :param dropCorrOx: oxidizer drop size multiplier (showerhead=3.0, like-doublet=1.0, vortex=0.5, unlike-doublet=0.33)
+    :param dropCorrFuel: fuel drop size multiplier (showerhead=3.0, like-doublet=1.0, vortex=0.5, unlike-doublet=0.33)
     :param DorfMin: in, minimum orifice diameter (lower limit)
     :param LfanOvDorfOx: fan length / oxidizer orifice diameter
     :param LfanOvDorfFuel: fan length / fuel orifice diameter
     :type coreObj: CoreStream
-    :type Tox: float
-    :type Tfuel: float
-    :type Em: float
+    :type Tox: None or float
+    :type Tfuel: None or float
+    :type elemEm: float
     :type fdPinjOx: float
     :type fdPinjFuel: float
     :type dpOxInp: None or float
@@ -66,16 +84,46 @@ class Injector:
     :type LfanOvDorfOx: float
     :type LfanOvDorfFuel: float
     :return: Injector object
-    :rtype: Injector        
+    :rtype: Injector
+    
+    :ivar sgOx: g/ml, oxidizer density
+    :ivar dHvapOx: BTU/lbm, oxidizer heat of vaporization
+    :ivar surfOx: lbf/in, oxidizer surface tension
+    :ivar viscOx: poise, oxidizer viscosity
+    :ivar MolWtOx: g/gmole, oxidizer molecular weight
+    :ivar sgFuel: g/ml, fuel density
+    :ivar dHvapFuel: BTU/lbm, fuel heat of vaporization
+    :ivar surfFuel: lbf/in, fuel surface tension
+    :ivar viscFuel: poise, fuel viscosity
+    :ivar MolWtFuel: g/gmole,  fuel molecular weight
+    :ivar dpOx: psid, oxidizer injector pressure drop
+    :ivar dpFuel: psid, fuel injector pressure drop
+    
+    :ivar des_freq: Hz, chamber design acoustic frequency
+    :ivar DorfFlForHzLimit: in, fuel orifice Diameter for frequency in Hewitt Correlation
+
+    :ivar Nelements: number of elements on injector face
+    :ivar NFuelOrf: number of fuel orifices on injector face
+    :ivar NOxOrf: number of oxidizer orifices on injector face
+    :ivar elemDensCalc: elem/in**2, element density on injector face
+    :ivar NelemMakable: maximum number of makable elements giving correct flow rate (diam=DorfMin)
+        
+    :ivar velOx_fps: ft/s, velocity of injected oxidizer
+    :ivar velFuel_fps: ft/s, velocity of injected fuel
+    :ivar AfloOx: in**2, total flow area of oxidizer
+    :ivar AfloFuel: in**2, total flow area of fuel
+    :ivar DorfOx: in, oxidizer orifice diameter
+    :ivar DorfFuel: in, fuel orifice diameter
+    
     """
     
     def __init__(self, coreObj, # CoreStream object
-        Tox=None, Tfuel=None, Em=0.8,
+        Tox=None, Tfuel=None, elemEm=0.8,
         fdPinjOx=0.25, fdPinjFuel=0.25, dpOxInp=None, dpFuelInp=None,
         setNelementsBy='acoustics', # can be "acoustics", "elem_density", "input"
         elemDensInp=5, NelementsInp=100,
         OxOrfPerEl=1.0, FuelOrfPerEl=1.0, 
-        lolFuelElem=True, 
+        lolFuelElem=False, 
         setAcousticFreqBy='mode', # can be "mode" or "freq"
         desAcousMode='3T', desFreqInp=5000, 
         CdOxOrf=0.75, CdFuelOrf=0.75, dropCorrOx=0.33, dropCorrFuel=0.33,
@@ -88,23 +136,36 @@ class Injector:
         """
         self.coreObj        = coreObj
         self.geomObj        = coreObj.geomObj
-        self.ceaObj   = coreObj.ceaObj
         
         # build propellant  objects
-        self.oxProp = pObj = get_prop( self.coreObj.oxName )
-        self.fuelProp = pObj = get_prop( self.coreObj.fuelName )
+        self.oxProp   = get_prop( self.coreObj.oxName )
+        self.fuelProp = get_prop( self.coreObj.fuelName )
         
-        if Tox is None: Tox = min(530.0, self.oxProp.Tnbp)
+        self.TminOx,   self.TmaxOx   = self.oxProp.T_data_range()
+        self.TminFuel, self.TmaxFuel = self.fuelProp.T_data_range()
+        
+        self.Tox_warning = ''
+        self.Tfuel_warning = ''
+        
+        if Tox is None: 
+            Tox = min(530.0, self.oxProp.Tnbp)
+        else:
+            Tox, self.Tox_warning = temperature_clamp(Tox, 'Tox', self.TminOx,   self.TmaxOx)
         self.Tox            = Tox
-        if Tfuel is None: Tfuel = min(530.0, self.fuelProp.Tnbp)
+        
+        if Tfuel is None: 
+            Tfuel = min(530.0, self.fuelProp.Tnbp)
+        else:
+            Tfuel,self.Tfuel_warning = temperature_clamp(Tfuel, 'Tfuel', self.TminFuel,   self.TmaxFuel)
         self.Tfuel          = Tfuel
         
-        self.Em             = min(1.0, Em) # intra-element mixing parameter for injector
+        self.elemEm         = min(1.0, elemEm) # intra-element mixing parameter for injector
         self.fdPinjOx       = fdPinjOx
         self.fdPinjFuel     = fdPinjFuel
         self.dpOxInp        = dpOxInp
         self.dpFuelInp      = dpFuelInp
         self.setNelementsBy = setNelementsBy.lower() # just in case user screw up.
+        self.used_Nelem_criteria = self.setNelementsBy # assume for now that intention is satisfied
         
         self.elemDensInp    = elemDensInp
         self.NelementsInp   = NelementsInp
@@ -143,6 +204,7 @@ class Injector:
         self.viscOx = get_value( self.viscOx, 'poise', 'lbm/s/ft')
         
         self.MolWtOx = self.oxProp.MolWt
+        #print('sgOx=',self.sgOx)
         
         # get fuel propellant properties
         self.sgFuel = self.fuelProp.SG_compressed( Tfuel, self.coreObj.Pc )  # g/ml
@@ -152,6 +214,7 @@ class Injector:
         self.viscFuel = get_value( self.viscFuel, 'poise', 'lbm/s/ft')
         
         self.MolWtFuel = self.fuelProp.MolWt
+        #print('sgFuel=',self.sgFuel)
         
         # --------- start vaporization calcs --------
         self.rhoOx = rho = get_value( self.sgOx, 'SG', 'lbm/in**3' )
@@ -159,6 +222,9 @@ class Injector:
         
         self.calc_element_attr() # e.g. Nelements, injection velocities, elements diam, etc.
         #self.evaluate()
+        
+        # get input descriptions and units from doc string
+        self.inp_descD, self.inp_unitsD, self.is_inputD = get_desc_and_units( self.__doc__ )
         
     def __call__(self, name):
         return getattr(self, name ) # let it raise exception if no name attr.
@@ -179,7 +245,7 @@ class Injector:
         #if self.calc_effEm:
         if not effObj['Em'].is_const:
             effEm = self.calculate_effEm() # calc intra-element mixing efficiency
-            msg = 'Rupe Em=%g'%self.Em
+            msg = 'Rupe Em=%g'%self.elemEm
             effObj.set_value( 'Em', effEm, value_src=msg, re_evaluate=DOREVAL)
 
         # calc inter-element mixing efficiency
@@ -239,12 +305,12 @@ class Injector:
         self.mrVap = self.coreObj.MRcore * self.fracVapOx / self.fracVapFuel
         
         # get total vaporized propellant (ox + fuel)
-        self.fracVapTot = (self.fracVapOx*self.coreObj.wdotOx + self.fracVapFuel*self.coreObj.wdotFl) / \
-                          self.coreObj.wdotTot
+        self.fracVapTot = (self.fracVapOx*self.coreObj.wdotOx + self.fracVapFuel*self.coreObj.wdotFl_cInit) / \
+                          self.coreObj.wdotTot_cInit
         
         # calc vaporization efficiency (protect against excess fracVapTot)
         if self.fracVapTot < 1.0:
-            vapIsp = self.ceaObj.get_Isp( Pc=self.coreObj.Pc, MR=self.mrVap, eps=self.geomObj.eps)
+            vapIsp = self.coreObj.ceaObj.get_Isp( Pc=self.coreObj.Pc, MR=self.mrVap, eps=self.geomObj.eps)
             effVap = min(1.0, self.fracVapTot * vapIsp / self.coreObj.IspODE)
         else:
             effVap = 1.0
@@ -255,22 +321,22 @@ class Injector:
     def calculate_effEm(self):
         """calc intra-element mixing efficiency"""
         
-        if self.Em >= 1.0:
+        if self.elemEm >= 1.0:
             self.effEm = 1.0
             return 1.0
         
-        mrLow = self.coreObj.MRcore * self.Em
-        mrHi = self.coreObj.MRcore / self.Em
+        mrLow = self.coreObj.MRcore * self.elemEm
+        mrHi = self.coreObj.MRcore / self.elemEm
         
-        IspODK = calc_IspODK(self.ceaObj, Pc=self.coreObj.Pc, eps=self.geomObj.eps, Rthrt=self.geomObj.Rthrt, 
+        IspODK = calc_IspODK(self.coreObj.ceaObj, Pc=self.coreObj.Pc, eps=self.geomObj.eps, Rthrt=self.geomObj.Rthrt, 
                                     pcentBell=self.geomObj.pcentBell, MR=self.coreObj.MRcore)
         
-        odkLoIsp = calc_IspODK(self.ceaObj, Pc=self.coreObj.Pc, eps=self.geomObj.eps, Rthrt=self.geomObj.Rthrt, 
+        odkLoIsp = calc_IspODK(self.coreObj.ceaObj, Pc=self.coreObj.Pc, eps=self.geomObj.eps, Rthrt=self.geomObj.Rthrt, 
                                     pcentBell=self.geomObj.pcentBell, MR=mrLow)
-        odkHiIsp = calc_IspODK(self.ceaObj, Pc=self.coreObj.Pc, eps=self.geomObj.eps, Rthrt=self.geomObj.Rthrt, 
+        odkHiIsp = calc_IspODK(self.coreObj.ceaObj, Pc=self.coreObj.Pc, eps=self.geomObj.eps, Rthrt=self.geomObj.Rthrt, 
                                     pcentBell=self.geomObj.pcentBell, MR=mrHi)
                                   
-        xm1=(1.+mrLow)/(1.+self.Em)/(1.+self.coreObj.MRcore)
+        xm1=(1.+mrLow)/(1.+self.elemEm)/(1.+self.coreObj.MRcore)
         xm2=1.0-xm1
         effEm = (xm1*odkLoIsp + xm2*odkHiIsp) / IspODK
 
@@ -301,7 +367,7 @@ class Injector:
             self.fdPinjFuel = self.dpFuelInp / self.coreObj.Pc
         
         # calc chamber sonic velocity
-        aODE = self.ceaObj.get_SonicVelocities(Pc=self.coreObj.Pc, 
+        aODE = self.coreObj.ceaObj.get_SonicVelocities(Pc=self.coreObj.Pc, 
                                                        MR=self.coreObj.MRcore,
                                                        eps=self.geomObj.eps)[0]
         # estimate effective sonic velocity in chamber
@@ -309,6 +375,8 @@ class Injector:
         
         velFl_ips = sqrt( 24.0 * 32.174 * self.dpFuel / self.rhoFuel ) # in/sec
         
+        # start out assuming that used Nelement criteria will be the intended criteria
+        self.used_Nelem_criteria = self.setNelementsBy
         
         # calc number of elements and element density
         if self.setNelementsBy == 'input':
@@ -326,11 +394,10 @@ class Injector:
                 raise exception( 'setAcousticFreqBy = "%s", must be "mode" or "freq"'%self.setAcousticFreqBy )
                 
             self.DorfFlForHzLimit = self.strouhal_mult * velFl_ips / self.des_freq
-            self.dOrifMin = max(self.DorfMin, self.DorfFlForHzLimit)
             
-            wdotFlOrif = velFl_ips * self.rhoFuel * self.CdFuelOrf * self.dOrifMin**2 * pi / 4.0
+            wdotFlOrif = velFl_ips * self.rhoFuel * self.CdFuelOrf * self.DorfFlForHzLimit**2 * pi / 4.0
             
-            self.NFuelOrf = float(int( 0.5 + max(1.0, self.coreObj.wdotFl / wdotFlOrif)))
+            self.NFuelOrf = float(int( 0.5 + max(1.0, self.coreObj.wdotFl_cInit / wdotFlOrif)))
             self.Nelements = max(1.0, self.NFuelOrf / self.FuelOrfPerEl)
             self.NOxOrf = max( 1.0, self.Nelements * self.OxOrfPerEl)
             self.elemDensCalc = self.Nelements / self.geomObj.Ainj
@@ -342,19 +409,35 @@ class Injector:
             self.elemDensCalc = self.elemDensInp
         else:
             raise Exception('setNelementsBy="%s" must be "acoustics", "elem_density" or "input"'%self.setNelementsBy)
-        
+
         
         gcc = 32.174 * 12.0 * 2.0
         PIO4 = pi / 4.0
         self.velOx_ips = sqrt(gcc*self.dpOx/self.rhoOx)  # in/sec
         self.velFuel_ips = sqrt(gcc*self.dpFuel/self.rhoFuel) # in/sec
+        
         self.AfloOx = self.coreObj.wdotOx/(self.rhoOx*self.CdOxOrf*self.velOx_ips)
-        self.AfloFuel = self.coreObj.wdotFl/(self.rhoFuel*self.CdFuelOrf*self.velFuel_ips)
+        self.AfloFuel = self.coreObj.wdotFl_cInit/(self.rhoFuel*self.CdFuelOrf*self.velFuel_ips)
+        
+        NelemMaxFuel = self.AfloFuel / (self.DorfMin**2 * PIO4 * self.FuelOrfPerEl)
+        NelemMaxOx = self.AfloOx / (self.DorfMin**2 * PIO4 * self.OxOrfPerEl)
+        self.NelemMakable = max(1.0, min( int(NelemMaxFuel), int(NelemMaxOx) ))
+        
+        if self.Nelements > self.NelemMakable:
+            self.used_Nelem_criteria = 'DorfMin=%g'%self.DorfMin
+            self.Nelements = self.NelemMakable
+            self.NOxOrf    = self.Nelements * self.OxOrfPerEl
+            self.NFuelOrf  = self.Nelements * self.FuelOrfPerEl
+            self.elemDensCalc = self.Nelements / self.geomObj.Ainj
+            
+        
         self.DorfOx = sqrt(self.AfloOx/(PIO4*self.NOxOrf))
         self.DorfFuel = sqrt(self.AfloFuel/(PIO4*self.NFuelOrf))
+
         
         # calc (or recalc) des_freq based on actual fuel orifice
         self.des_freq = self.strouhal_mult * velFl_ips / self.DorfFuel
+        self._3T_freq = modeSvnD['3T'] * self.sonicVel / pi / (self.geomObj.Dinj/12.0)
 
         self.velOx_fps   = self.velOx_ips / 12.0  # convert from in/sec to ft/sec
         self.velFuel_fps = self.velFuel_ips / 12.0 # convert from in/sec to ft/sec
@@ -378,157 +461,186 @@ class Injector:
         self.fdPinjOxReqd = reqd_dPinjOvPc( self.tauOvResOx )
         self.fdPinjFuelReqd = reqd_dPinjOvPc( self.tauOvResFuel )
 
-        
+
     def summ_print(self, show_core_stream=True):
         """
         print to standard output, the current state of Injector instance.
         """
+        print( self.get_summ_str() )
+        
+        
+    def get_summ_str(self, show_core_stream=True, 
+                     alpha_ordered=True, numbered=False, add_trailer=True, 
+                     fillchar='.', max_banner=76, intro_str=''):
+        
+        """
+        return string of the current state of Injector instance.
+        """
+        
+        M = self.get_model_summ_obj()
         
         if show_core_stream:
-            self.coreObj.summ_print()
-            
-
-        # calc 3T and 1L for printout only
-        f3T = modeSvnD['3T'] * self.sonicVel / pi / (self.geomObj.Dinj/12.0)
-        freq1L = self.sonicVel * 12.0 / 2.0 / self.geomObj.Lcham
-            
-            
-        print('---------------%s/%s injector-----------------------'%(self.coreObj.oxName, self.coreObj.fuelName))
+            sc = self.coreObj.get_summ_str(numbered=numbered, 
+                                           add_trailer=add_trailer, fillchar=fillchar, 
+                                           max_banner=max_banner, intro_str=intro_str)
+        else:
+            sc = ''
         
-        print('NOTE: number of elements set by ', self.setNelementsBy)
-        if self.setNelementsBy == "acoustics":
-            if self.setAcousticFreqBy == "mode":
-                if self.desAcousMode in modeSvnD:
-                    msg = self.desAcousMode + ' where: Svn mult = %g'%self.desAcousMult
-                else:
-                    msg = 'Svn multiplier = %g'%self.desAcousMult
-            elif self.setAcousticFreqBy == "freq":
-                msg = 'freq=%g Hz'%self.desFreqInp
+        return sc + '\n' +\
+               M.summ_str(alpha_ordered=alpha_ordered, numbered=numbered, 
+                          add_trailer=add_trailer, fillchar=fillchar, 
+                          max_banner=max_banner, intro_str=intro_str)
+    
+    def get_html_str(self, show_core_stream=True, alpha_ordered=True, numbered=False, intro_str=''):
+        M = self.get_model_summ_obj()
+        
+        if show_core_stream:
+            sc = self.coreObj.html_table_str(numbered=numbered,  intro_str=intro_str)
+        else:
+            sc = ''
+        
+        return sc + '\n' +\
+               M.html_table_str( alpha_ordered=alpha_ordered, numbered=numbered, intro_str=intro_str)
+                
+    def get_model_summ_obj(self):
+        """
+        return ModelSummary object for current state of Injector instance.
+        """
+        
+        M = ModelSummary( '%s/%s Injector'%(self.coreObj.oxName, self.coreObj.fuelName) )
+        M.add_alt_units('psia', ['MPa','atm','bar'])
+        M.add_alt_units('psid', ['MPa','atm','bar'])
+        M.add_alt_units('lbf',   'N')
+        M.add_alt_units('lbm/s', 'kg/s')
+        M.add_alt_units('ft/s',  'm/s')
+        M.add_alt_units('sec',   ['N-sec/kg', 'km/sec'])
+        M.add_alt_units('degR',  ['degK','degC','degF'])
+        #M.add_alt_units('Hz',    'kHz')
+        M.add_alt_units('elem/in**2', 'elem/cm**2')
+        M.add_alt_units('in',    ['mil','mm'])
+        M.add_alt_units('mil',    ['micron','mm'])
+        
+        M.add_alt_units( 'g/ml', ['lbm/inch**3', 'lbm/ft**3'] )
+        M.add_alt_units( 'lbf/in', ['N/m', 'mN/m', 'dyne/cm'] )
+        M.add_alt_units('poise', ['cpoise', 'Pa*s', 'lbm/hr/ft'])
+        M.add_alt_units( 'BTU/lbm', ['cal/g',  'J/g'] )
+        M.add_alt_units('in**2', 'cm**2')
+        
+        category_setD = {} # index=category name, value=set of parameter names in category
+        category_setD['Ox Properties'] = set()
+        category_setD['Fuel Properties'] = set()
+        M.add_inp_category( '' ) # show unlabeled category 1st
+        M.add_out_category( '' ) # show unlabeled category 1st
+        
+        for name in self.is_inputD.keys():
+            if name.lower().find('ox') >= 0:
+                category_setD['Ox Properties'].add( name )
+            if name.lower().find('fuel') >= 0:
+                category_setD['Fuel Properties'].add( name )
+        
+        # dpOx dpFuel
+        def get_cat( name ):
+            for cn, nameset in category_setD.items():
+                if name in nameset:
+                    return cn
+            return ''
+        
+        specialFmtD = {'DorfFuel':'%.4f', 'DorfOx':'%.4f', 'DorfMin':'%.4f'}
+        # function to add parameters from __doc__ string to ModelSummary
+        def add_param( name, desc='', fmt='', units='', value=None):
             
-            print('    Acoustic frequency set by %s'%msg)
-        elif  self.setNelementsBy == "input":
-            print('    Number of elements = %g'%self.NelementsInp)
-        elif  self.setNelementsBy == "elem_density":
-            print('    Element Density = %g elem/in**2'%self.elemDensInp)
+            if name in self.inp_unitsD:
+                units = self.inp_unitsD[name]
+                
+            if desc=='' and name in self.inp_descD:
+                desc = self.inp_descD[name]
             
-        if self.setNelementsBy == 'acoustics':
-            mil = get_value(self.DorfFlForHzLimit,'inch','mil')
+            if value is None:
+                try:
+                    value = getattr( self, name )
+                except:
+                    return
             
-            if self.DorfFuel < self.DorfFlForHzLimit * 0.999:
-                print( 'WARNING... Fuel Orifice is Less Than D/V Requirement of %.1f mil'%mil )
+            if fmt=='':
+                fmt = specialFmtD.get( name, '' )
+            
+            if self.is_inputD.get(name, False):
+                M.add_inp_param( name, value, units, desc, fmt=fmt, category=get_cat(name))
             else:
-                print( 'Fuel Orifice Meets Stability Requirement of >= %.1f mil'%mil )
-            
-        if self.des_freq >  f3T * 1.0001:
-            print( 'WARNING... Design frequency is above recommended 3T limit of %i Hz'%int(f3T) )
-            
-        if self.DorfOx <  self.DorfMin * 0.999:
-            mil = get_value(self.DorfMin,'inch','mil')
-            print( 'WARNING... Oxidizer Orifice is Less Than minimum limit of %.1f mil'%mil )
-            
-        if self.DorfFuel <  self.DorfMin * 0.999:
-            mil = get_value(self.DorfMin,'inch','mil')
-            print( 'WARNING... Fuel Orifice is Less Than minimum limit of %.1f mil'%mil )
-            
-        print('-------------------------------------------------------')
+                M.add_out_param( name, value, units, desc, fmt=fmt, category=get_cat(name))
         
+        # build a list of __doc__ parameters that should be ignored by ModelSummary
+        ignoreL = ['coreObj', 'geomObj', 'effObj']
         
-        
-        print('           Tox =', '%g'%self.Tox, 'degR, temperature of oxidizer')
-        print('         Tfuel =', '%g'%self.Tfuel, 'degR, temperature of fuel')
-        print('            Em =', '%s'%self.Em, 'Rupe factor of injector')
-        
-        if self.dpOxInp is None:
-            print('       fdPinjOx =', '%g'%self.fdPinjOx, '(dpOx=%.1f psia)'%self.dpOx)
-        else:
-            print('       dpOxInp =', '%.1f psia'%self.dpOxInp, '(fdPinjOx=%g)'%self.fdPinjOx)
-        
-        if self.dpFuelInp is None:
-            print('     fdPinjFuel =', '%g'%self.fdPinjFuel, '(dpFuel=%.1f psia)'%self.dpFuel)
-        else:
-            print('     dpFuelInp =', '%.1f psia'%self.dpFuelInp, '(fdPinjFuel=%g)'%self.fdPinjFuel)
-            
-        print('    OxOrfPerEl =', '%g'%self.OxOrfPerEl, '')
-        print('  FuelOrfPerEl =', '%g'%self.FuelOrfPerEl, '')
-        print('   lolFuelElem =', '%s'%self.lolFuelElem, '')
-        
-        if self.desFreqInp is None:
-            print('  desAcousMode =', '%s'%self.desAcousMode, '(Sv mult=%g)'%self.desAcousMult)
-        else:
-            print('    desFreqInp =', '%g'%self.desFreqInp, 'Hz')
-            
-        print('       CdOxOrf =', '%g'%self.CdOxOrf, '')
-        print('     CdFuelOrf =', '%g'%self.CdFuelOrf, '')
-        print('    dropCorrOx =', '%g'%self.dropCorrOx, '')
-        print('  dropCorrFuel =', '%g'%self.dropCorrFuel, '')
-        print('       DorfMin =', '%g'%self.DorfMin, 'in')
-        print('  LfanOvDorfOx =', '%g'%self.LfanOvDorfOx, '')
-        print('LfanOvDorfFuel =', '%g'%self.LfanOvDorfFuel, '')
-        print()
-        print('          sgOx =', '%g'%self.sgOx, 'g/ml')
-        print('       dHvapOx =', '%g'%self.dHvapOx, 'BTU/lbm')
-        print('        surfOx =', '%g'%self.surfOx, 'lbf/in')
-        print('        viscOx =', '%g'%self.viscOx, 'poise')
-        print('       MolWtOx =', '%g'%self.MolWtOx, 'g/gmole')
-        print()
-        print('        sgFuel =', '%g'%self.sgFuel, 'g/ml')
-        print('     dHvapFuel =', '%g'%self.dHvapFuel, 'BTU/lbm')
-        print('      surfFuel =', '%g'%self.surfFuel, 'lbf/in')
-        print('      viscFuel =', '%g'%self.viscFuel, 'poise')
-        print('     MolWtFuel =', '%g'%self.MolWtFuel, 'g/gmole') 
-        print(' cham sonicVel =', '%g'%self.sonicVel, 'ft/sec') 
-        print()
-        print('          dpOx =', '%g'%self.dpOx, 'psid') 
-        print('        dpFuel =', '%g'%self.dpFuel, 'psid') 
-        
-        
-        print(' cham des_freq =', '%g'%int(self.des_freq), 'Hz (NOTE: 3T = %g Hz)'%int(f3T)) 
-        
+        # ignore some Nelemens inputs if they do not apply
         if self.setNelementsBy == "acoustics":
-            print('DorfFlForHzLim =', '%.4f'%self.DorfFlForHzLimit, 'in, fuel orifice D for frequency in Hewitt Corr.') 
-            print('      dOrifMin =', '%.4f'%self.dOrifMin, 'in, min Dorifice allowed by stability & manufacturing') 
-
-        print('     Nelements =', '%g'%self.Nelements, '(set by %s)'%self.setNelementsBy) 
-        print('      NFuelOrf =', '%g'%self.NFuelOrf, '') 
-        print('        NOxOrf =', '%g'%self.NOxOrf, '') 
-        print('      elemDens =', '%g'%self.elemDensCalc, 'elem/in**2') 
+            
+            ignoreL.extend( ['elemDensInp', 'NelementsInp'] )
+            if self.setAcousticFreqBy == "mode":
+                ignoreL.append( 'desFreqInp' )
+            else:
+                ignoreL.append( 'desAcousMode' )
+        else:
+            ignoreL.extend( ['desAcousMode', 'desFreqInp', 'DorfFlForHzLim'] )
         
-        print('         velOx =', '%g'%self.velOx_fps, 'ft/sec') 
-        print('       velFuel =', '%g'%self.velFuel_fps, 'ft/sec') 
-        print('        AfloOx =', '%g'%self.AfloOx, 'in**2') 
-        print('      AfloFuel =', '%g'%self.AfloFuel, 'in**2') 
-        print('        DorfOx =', '%.4f'%self.DorfOx, 'in') 
-        print('      DorfFuel =', '%.4f'%self.DorfFuel, 'in') 
-        
+        # ignore delta P inputs if they do not apply
+        if self.dpFuelInp is None:
+            ignoreL.append( 'dpFuelInp' )
+        else:
+            ignoreL.append( 'fdPinjFuel' )
 
+        if self.dpOxInp is None:
+            ignoreL.append( 'dpOxInp' )
+        else:
+            ignoreL.append( 'fdPinjOx' )
+        
+        # iterate through __doc__ parameters and add them to ModelSummary
+        for name in self.is_inputD.keys():
+            if name not in ignoreL:
+                add_param( name )
+        
+        # some conditional output NOT in :ivar xxx: section
         #if self.calc_effVap:
         if hasattr(self, 'rDropOx'):
             # only print internal vaporization values if calc'd
-            print('        ---')
-            print('       rDropOx =', '%g'%get_value(self.rDropOx,'inch','mil'), 'mil, median ox droplet radius') 
-            print('     rDropFuel =', '%g'%get_value(self.rDropFuel,'inch','mil'), 'mil, median fuel droplet radius') 
+            #M.add_out_param( name, value, units, desc, fmt=fmt, category=get_cat(name))
+            M.add_out_param('rDropOx', get_value(self.rDropOx,'inch','mil'), 'mil', 'median ox droplet radius', 
+            fmt='%.4f', category='Vaporization') 
+            M.add_out_param('rDropFuel', get_value(self.rDropFuel,'inch','mil'), 'mil', 'median fuel droplet radius', 
+            fmt='%.4f', category='Vaporization') 
             
-            print(' chamShapeFact =', '%g'%self.ShapeFact, '') 
+            M.add_out_param('chamShapeFact', self.ShapeFact, '', 'chamber shape factor', 
+            fmt='%.4f', category='Vaporization') 
             
-            print('   genVapLenOx =', '%g'%self.genVapLenOx, '')
-            print(' genVapLenFuel =', '%g'%self.genVapLenFuel, '')
-            print('     fracVapOx =', '%g'%self.fracVapOx, '')
-            print('   fracVapFuel =', '%g'%self.fracVapFuel, '')
+            M.add_out_param('genVapLenOx', self.genVapLenOx, '', 'Priem generalized vaporization length of oxidizer', 
+            fmt='%.2f', category='Vaporization')
+            M.add_out_param('genVapLenFuel', self.genVapLenFuel, '', 'Priem generalized vaporization length of fuel', 
+            fmt='%.2f', category='Vaporization')
+            M.add_out_param('fracVapOx', self.fracVapOx, '', 'fraction of vaporized oxidizer', 
+            fmt='%.4f', category='Vaporization')
+            M.add_out_param('fracVapFuel', self.fracVapFuel, '', 'fraction of vaporized fuel', 
+            fmt='%.4f', category='Vaporization')
             
-            print('         mrVap =', '%g'%self.mrVap, 'vaporized mixture ratio')
+            M.add_out_param('mrVap', self.mrVap,'', 'vaporized mixture ratio', fmt='%.4f', category='Vaporization')
         
+        # some stability parameters
+        #M.add_out_param( name, value, units, desc, fmt=fmt, category=get_cat(name))
+        M.add_out_param('tauOx',         self.tauOx*1000.0   , 'ms','oxidizer lag time (tau/tResid=%g)'%self.tauOvResOx, category='Combustion Stability')
+        M.add_out_param('tauFuel',       self.tauFuel*1000.0 , 'ms','fuel lag time (tau/tResid=%g)'%self.tauOvResFuel, category='Combustion Stability')
+        M.add_out_param('tResid',        self.tResid*1000.0  , 'ms','residual time in chamber', 
+        fmt='%.4f', category='Combustion Stability')
         
-        print('        ---')
-        print('        tResid =', '%g'%(self.tResid*1000.0,) , 'ms, residual time in chamber')
-        print('         tauOx =', '%g'%(self.tauOx*1000.0,) , 'ms, oxidizer lag time (tau/tResid=%g)'%self.tauOvResOx)
-        print('       tauFuel =', '%g'%(self.tauFuel*1000.0,) , 'ms, fuel lag time (tau/tResid=%g)'%self.tauOvResFuel)
-        print('  fdPinjOxReqd =', '%g'%self.fdPinjOxReqd, 'required oxidizer dP/Pc')
-        print('fdPinjFuelReqd =', '%g'%self.fdPinjFuelReqd, 'required fuel dP/Pc')
+        M.add_out_param('fdPinjOxReqd',  self.fdPinjOxReqd,    '', 'minimum required oxidizer dP/Pc', category='Combustion Stability')
+        M.add_out_param('fdPinjFuelReqd', self.fdPinjFuelReqd, '', 'minimum required fuel dP/Pc', category='Combustion Stability')
         
+        M.add_out_param(' cham sonicVel', self.sonicVel, 'ft/s', 'approximate gas sonic velocity in chamber', category='Combustion Stability') 
         
-        print('    --- Acoustic Modes in Chamber ---')
+        # show the acoustic modes in chamber
+        # calc 3T and 1L for printout only
+        f3T = modeSvnD['3T'] * self.sonicVel / pi / (self.geomObj.Dinj/12.0)
+        freq1L = self.sonicVel * 12.0 / 2.0 / self.geomObj.Lcham
+        
         modeL = [(freq1L,'1L')] # list of (freq, name)
-        
         modeL.append( ( 0.8 * modeSvnD['1T'] * self.sonicVel / pi / (self.geomObj.Dinj/12.0), '80% of 1T') )
         modeL.append( ( 0.8 * modeSvnD['1R'] * self.sonicVel / pi / (self.geomObj.Dinj/12.0), '80% of 1R') )
         modeL.append( ( 0.8 * modeSvnD['3T'] * self.sonicVel / pi / (self.geomObj.Dinj/12.0), '80% of 3T') )
@@ -539,10 +651,125 @@ class Injector:
         for name, mult in modeSvnD.items():
             modeL.append( (mult * self.sonicVel / pi / (self.geomObj.Dinj/12.0), name) )
         modeL.sort()
+        
+        M.add_out_category('Acoustic Modes', allowsort=False)
         for (freq, name) in modeL:
             comment = modeCommentD.get( name, '')
-            print('    %10s ='%name, '%i'%int(freq), 'Hz '+comment)
+            M.add_out_param(name, '%i'%int(freq), 'Hz', comment, category='Acoustic Modes')
+            #M.add_out_param( name, value, units, desc, fmt=fmt, category=get_cat(name))
         
+        
+        
+        # -------------------- WARNING AND ASSUMPTION ADDITIONS --------------------------
+        # maybe add some warnings and assumptions
+            
+        mode, mode_freq, mode_msg = self.get_closest_mode()
+        
+        if self.coreObj.add_barrier:
+            M.add_assumption( 'NOTE: Injector elements are designed by Initial Core Flow ONLY.' )
+            M.add_assumption( '      Fuel Film Cooling orifices must be designed separately.' )
+        
+        M.add_assumption( 'NOTE: number of elements set by '+ self.setNelementsBy )
+
+        # parameters that are NOT attributes OR are conditional
+        if self.setNelementsBy == "acoustics":
+            if self.setAcousticFreqBy == "mode":
+                if self.desAcousMode in modeSvnD:
+                    msg = self.desAcousMode #+ ' where: Svn mult = %g'%self.desAcousMult
+                else:
+                    msg = 'Svn multiplier = %g'%self.desAcousMult
+            elif self.setAcousticFreqBy == "freq":
+                msg = 'freq=%g Hz'%self.desFreqInp
+            
+            M.add_assumption('      Acoustic frequency set by %s'%msg)
+            mil = get_value(self.DorfFlForHzLimit,'inch','mil')
+            
+            if self.DorfFuel < self.DorfFlForHzLimit * 0.999:
+                M.add_warning( 'WARNING... Fuel Orifice Diameter is Less Than D/V Requirement of %.1f mil'%mil )
+            else:
+                M.add_assumption( 'Fuel Orifice Diameter Meets Stability Requirement of >= %.1f mil'%mil )
+            
+            
+        elif  self.setNelementsBy == "input":
+            M.add_assumption('      Number of elements = %g'%self.NelementsInp)
+        elif  self.setNelementsBy == "elem_density":
+            M.add_assumption('      Element Density = %g elem/in**2'%self.elemDensInp)
+        
+        
+        if self.used_Nelem_criteria != self.setNelementsBy:
+            M.add_warning( 'WARNING... Number of elements set by: ' + self.used_Nelem_criteria )
+            M.add_warning( '                 original intent was: ' + self.setNelementsBy )
+                
+        
+        M.add_assumption( 'Chamber design frequency set by: ' + self.used_Nelem_criteria +\
+                          ' to: %g Hz,'%round(self.des_freq) + mode_msg )
+            
+        if self.des_freq >  f3T * 1.01:
+            M.add_warning( 'WARNING... Design frequency is above recommended 3T limit of %i Hz'%int(f3T) )
+            
+        if self.DorfOx <  self.DorfMin * 0.999:
+            mil = get_value(self.DorfMin,'inch','mil')
+            M.add_warning( 'WARNING... Oxidizer Orifice Diameter is Less Than minimum limit of %.1f mil'%mil )
+            
+        if self.DorfFuel <  self.DorfMin * 0.999:
+            mil = get_value(self.DorfMin,'inch','mil')
+            M.add_warning( 'WARNING... Fuel Orifice Diameter is Less Than minimum limit of %.1f mil'%mil )
+
+        if self.Tox_warning:
+            M.add_warning(  self.Tox_warning )
+        if self.Tfuel_warning:
+            M.add_warning(  self.Tfuel_warning )
+
+        if self.dpOx/self.coreObj.Pc < self.fdPinjOxReqd:
+            M.add_warning('WARNING... Oxidizer pressure drop is below stability requirement')
+            M.add_warning('           Oxidizer dP/Pc=%g, should be >= %g'%(self.dpOx/self.coreObj.Pc, self.fdPinjOxReqd) )
+
+        if self.dpFuel/self.coreObj.Pc < self.fdPinjFuelReqd:
+            M.add_warning('WARNING... Fuel pressure drop is below stability requirement')
+            M.add_warning('           Fuel dP/Pc=%g, should be >= %g'%(self.dpFuel/self.coreObj.Pc, self.fdPinjFuelReqd) )
+            
+
+
+        #if self.dpOxInp is None:
+        #    M.add_assumption('dPinjector oxidizer set by fdPinjOx = %g'%self.fdPinjOx)
+        #else:
+        #    M.add_assumption('dPinjector oxidizer set by  dpOxInp = %.1f psia'%self.dpOxInp)
+        
+        #if self.dpFuelInp is None:
+        #    M.add_assumption('dPinjector fuel set by fdPinjFuel = %g'%self.fdPinjFuel)
+        #else:
+        #    M.add_assumption('dPinjector fuel set by dpFuelInp = %.1f psia'%self.dpFuelInp)
+        
+        return M
+    
+    def get_closest_mode(self):
+        """Get the name and frequency of the closest mode to des_freq"""
+        freq1L = self.sonicVel * 12.0 / 2.0 / self.geomObj.Lcham
+        modeL = [(freq1L,'1L')] # list of (freq, name)
+        for name, mult in modeSvnD.items():
+            modeL.append( (mult * self.sonicVel / pi / (self.geomObj.Dinj/12.0), name) )
+        
+        diff = float('inf')
+        mode = 'unknown'
+        mode_freq = 0.0
+        for freq, name in modeL:
+            d = abs( self.des_freq - freq )
+            if d < diff:
+                diff = d
+                mode = name
+                mode_freq = freq
+                
+        if  mode=='1T' and self.des_freq < mode_freq:
+            mode = '%g%% 1T'%round( 100.0 * self.des_freq / mode_freq )
+            mode_freq = self.des_freq
+            
+        mode_msg = ' (%s=%i Hz)'%(mode, int(mode_freq))
+        if mode.find('%') > 0:
+            mode_msg = '(%s)'%mode
+            
+        return mode, mode_freq, mode_msg
+        
+    
         #print(' xxx =', '%g'%self.xxx, 'xxx')
 modeCommentD = {'80% of 1T':'no damping required here',
                 '80% of 1R':'baffles-only work here',
@@ -550,7 +777,6 @@ modeCommentD = {'80% of 1T':'no damping required here',
                 '80% of 3T':'cavities-only work here',
                 '=====> DESIGN':'<== DESIGN IS HERE',
                 ' 3T':'baffles + cavities OR multi-tuned cavities'}
-        
         
 
 if __name__ == '__main__':
@@ -570,10 +796,13 @@ if __name__ == '__main__':
                  Pc=150, CdThroat=0.995,
                  pcentFFC=14.0, ko=0.035)
     
-    I = Injector(core, Em=0.8, fdPinjOx=0.3, fdPinjFuel=0.3, elemDensInp=7.0, NelementsInp=676,
-                 setNelementsBy='elem_density', # can be "acoustics", "elem_density", "input"
-                 desFreqInp=2000,
-                 setAcousticFreqBy='mode', desAcousMode='2T')
+    I = Injector(core, elemEm=0.8, fdPinjOx=0.3, fdPinjFuel=0.3, elemDensInp=7.0, NelementsInp=676,
+                 setNelementsBy="acoustics",#'elem_density', # can be "acoustics", "elem_density", "input"
+                 desFreqInp=2000, #Tox=9999, Tfuel=0,
+                 setAcousticFreqBy='mode', desAcousMode='2T')#, DorfMin=0.05)
     I.evaluate()
     I.summ_print()
+    
+    #M = I.get_model_summ_obj()
+    #print( M.summ_str() )
     

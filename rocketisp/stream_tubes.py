@@ -1,5 +1,8 @@
 from math import pi
 import os
+from rocketisp.model_summ import ModelSummary
+from rocketisp.parse_docstring import get_desc_and_units
+
 
 if 'READTHEDOCS' not in os.environ:
     from rocketcea.cea_obj import CEA_Obj
@@ -63,6 +66,19 @@ class BarrierStream:
     :type ko: float
     :return: BarrierStream object
     :rtype: BarrierStream
+
+    :ivar MRbarrier: barrier mixture ratio
+    :ivar MRwall: mixture ratio at wall
+    :ivar Twallgas: degR, temperature of gas at wall
+    :ivar TcODE_b: degR, average ideal ODE temperature of barrier gas
+    :ivar WentrOvWcool: ratio of entrained flow rate to FFC flow rate
+    :ivar IspDel_b: sec, delivered vacuum barrier Isp
+    :ivar IspODF_b: sec, ideal frozen barrier Isp
+    :ivar IspODK_b: sec, vacuum kinetic Isp of barrier
+    :ivar fracKin_b: fraction of kinetic completion in barrier
+    :ivar IspODE_b:  sec. ideal equilibrium barrier Isp
+    :ivar cstarERE_b: ft/s, delivered cstar
+    :ivar cstarODE_b: ft/s, ideal equilibrium cstar    
     """
     def __init__(self, coreObj, pcentFFC=10.0, ko=0.035):
         """
@@ -78,6 +94,9 @@ class BarrierStream:
         self.warningL  = [] # list of any evaluate warnings
         
         self.evaluate()
+        
+        # get input descriptions and units from doc string
+        self.inp_descD, self.inp_unitsD, self.is_inputD = get_desc_and_units( self.__doc__ )
         
     def __call__(self, name):
         return getattr(self, name ) # let it raise exception if no name attr.
@@ -134,7 +153,7 @@ class BarrierStream:
         massfracOxWall = (1.0 - self.effnessFC) * self.MRbarrier / (1.0 + self.MRbarrier)
         self.MRwall = massfracOxWall / (1.0 - massfracOxWall)
         
-        self.Twall = self.ceaObj.get_Tcomb( Pc=self.coreObj.Pc, MR=self.MRwall)
+        self.Twallgas = self.ceaObj.get_Tcomb( Pc=self.coreObj.Pc, MR=self.MRwall)
         
         # ........... calc ideal performance parameters
         self.IspODE_b, self.cstarODE_b, self.TcODE_b, self.MWchm_b, self.gammaChm_b = \
@@ -170,9 +189,16 @@ class BarrierStream:
         
         # ........ make final summary efficiencies
         effObj = self.coreObj.effObj
-        self.effNoz_b = self.effKin_b * effObj('Div') * effObj('BL') * effObj('TP')
         
-        self.effERE_b = effObj('Vap') * effObj('Mix') * effObj('Em') * effObj('HL')
+        if effObj.effD['Noz'].is_const:
+            self.effNoz_b = self.effKin_b * effObj('Noz')
+        else:
+            self.effNoz_b = self.effKin_b * effObj('Div') * effObj('BL') * effObj('TP')
+        
+        if effObj.effD['ERE'].is_const:
+            self.effERE_b = effObj('ERE')
+        else:
+            self.effERE_b = effObj('Vap') * effObj('Mix') * effObj('Em') * effObj('HL')
         
         self.effIsp_b = self.effNoz_b * self.effERE_b
         self.IspDel_b = self.effIsp_b * self.IspODE_b
@@ -183,27 +209,70 @@ class BarrierStream:
         """
         print to standard output, the current state of BarrierStream instance.
         """
+        print( self.get_summ_str() )
         
-        print('---------------%s/%s barrier stream-----------------------'%\
-             (self.coreObj.oxName, self.coreObj.fuelName))
-             
-        if self.warningL:
-            for warn in self.warningL:
-                print(warn)
-            print('----------------------------------------------------------')
-             
-        print('    pcentFFC =', '%g'%self.pcentFFC, '%')
-        print('   MRbarrier =', '%g'%self.MRbarrier, '')
-        print('      MRwall =', '%g'%self.MRwall, '')
-        print('       Twall =', '%.1f'%self.Twall, 'degR (TcBarrier=%.1f degR)'%self.TcODE_b)
-        print('   effnessFC =', '%g'%self.effnessFC)
-        print('WentrOvWcool =', '%g'%self.WentrOvWcool)
-        print('    IspDel_b =', '%.2f'%self.IspDel_b, 'sec delivered vacuum barrier Isp')
-        print('    IspODF_b =', '%.2f'%self.IspODF_b, 'sec')
-        print('    IspODK_b =', '%.2f'%self.IspODK_b, 'sec (fracKin=%g)'%self.fracKin_b)
-        print('    IspODE_b =', '%.2f'%self.IspODE_b, 'sec')
-        print('  cstarERE_b =', '%.1f'%self.cstarERE_b, 'ft/sec')
-        print('  cstarODE_b =', '%.1f'%self.cstarODE_b, 'ft/sec')
+    def get_summ_str(self, alpha_ordered=True, numbered=False, add_trailer=True, 
+                     fillchar='.', max_banner=76, intro_str=''):
+        
+        """
+        return string of the current state of BarrierStream instance.
+        """
+        
+        M = self.get_model_summ_obj()
+        return M.summ_str(alpha_ordered=alpha_ordered, numbered=numbered, 
+                          add_trailer=add_trailer, fillchar=fillchar, 
+                          max_banner=max_banner, intro_str=intro_str)
+    
+    def get_html_str(self, alpha_ordered=True, numbered=False, intro_str=''):
+        M = self.get_model_summ_obj()
+        return M.html_table_str( alpha_ordered=alpha_ordered, numbered=numbered, intro_str=intro_str)
+                
+    def get_model_summ_obj(self):
+        """
+        return ModelSummary object for current state of BarrierStream instance.
+        """
+        
+        M = ModelSummary( 'Barrier Stream Tube' )
+        M.add_alt_units('ft/s', 'm/s')
+        M.add_alt_units('sec', ['N-sec/kg', 'km/sec'])
+        M.add_alt_units('degR', ['degK','degC','degF'])
+                
+        # function to add parameters from __doc__ string to ModelSummary
+        def add_param( name, desc='', fmt='', units='', value=None):
+            
+            if name in self.inp_unitsD:
+                units = self.inp_unitsD[name]
+                
+            if desc=='' and name in self.inp_descD:
+                desc = self.inp_descD[name]
+            
+            if value is None:
+                value = getattr( self, name )
+            
+            if self.is_inputD.get(name, False):
+                M.add_inp_param( name, value, units, desc, fmt=fmt)
+            else:
+                M.add_out_param( name, value, units, desc, fmt=fmt)
+
+        for name in self.is_inputD.keys():
+            if name not in ['coreObj']:
+                add_param( name )
+        '''
+        add_param('MRbarrier', desc='barrier mixture ratio')
+        add_param('MRwall', desc='mixture ratio at wall')
+        add_param('Twallgas', units='degR', desc='temperature of gas at wall', fmt='%.0f')
+        add_param('TcODE_b', units='degR', desc='average ideal ODE temperature of barrier gas', fmt='%.0f')
+        #add_param('effnessFC', desc='effectiveness from equation 17 in COMBUSTION EFFECTS ON FILM COOLING, page 15')
+        add_param('WentrOvWcool', desc='ratio of entrained flow rate to FFC flow rate')
+        add_param('IspDel_b', units='sec', desc='delivered vacuum barrier Isp', fmt='%.1f')
+        add_param('IspODF_b', units='sec', desc='ideal frozen barrier Isp', fmt='%.1f')
+        add_param('IspODK_b', units='sec', desc='vacuum kinetic Isp of barrier', fmt='%.1f')
+        add_param('fracKin_b', desc='fraction of kinetic completion in barrier')
+        add_param('IspODE_b',  units='sec', desc='ideal equilibrium barrier Isp', fmt='%.1f')
+        add_param('cstarERE_b', units='ft/s', desc='delivered cstar', fmt='%.1f')
+        add_param('cstarODE_b', units='ft/s', desc='ideal equilibrium cstar', fmt='%.1f')
+        '''
+        return M
         
 class CoreStream:
     """
@@ -215,7 +284,7 @@ class CoreStream:
         :param fuelName: name of fuel (e.g. MMH, LH2)
         :param MRcore: mixture ratio of core flow (ox flow rate / fuel flow rate)
         :param Pc: psia, chamber pressure
-        :param CdThroat: Cd of throat (RocketThruster object may override if calc_CdThroat is True)
+        :param CdThroat: Cd of throat (RocketThruster object may override)
         :param Pamb: psia, ambient pressure (for example sea level is 14.7 psia)
         :param adjCstarODE: multiplier on NASA CEA code value of cstar ODE (default is 1.0)
         :param adjIspIdeal: multiplier on NASA CEA code value of Isp ODE (default is 1.0)
@@ -236,7 +305,29 @@ class CoreStream:
         :type ko: float
         :type ignore_noz_sep: bool
         :return: CoreStream object
-        :rtype: CoreStream    
+        :rtype: CoreStream 
+        
+        :ivar FvacTotal: lbf, total vacuum thrust
+        :ivar FvacCore: lbf, vacuum thrust due to core stream tube
+        :ivar MRthruster: total thruster mixture ratio')
+        :ivar IspDel: sec, <=== thruster delivered vacuum Isp ===>
+        :ivar Pexit: psia, nozzle exit pressure
+        :ivar IspDel_core: sec, delivered Isp of core stream tube
+        :ivar IspODF: sec, core frozen Isp
+        :ivar IspODK: sec, core one dimensional kinetic Isp
+        :ivar IspODE: sec, core one dimensional equilibrium Isp
+        :ivar cstarERE: ft/s, delivered core cstar
+        :ivar cstarODE: ft/s, core ideal cstar
+        :ivar CfVacIdeal: ideal vacuum thrust coefficient
+        :ivar CfVacDel: delivered vacuum thrust coefficient
+        :ivar CfAmbDel: delivered ambient thrust coefficient
+        :ivar wdotTot: lbm/s, total propellant flow rate (ox+fuel)
+        :ivar wdotOx: lbm/s, total oxidizer flow rate
+        :ivar wdotFl: lbm/s, total fuel flow rate
+        :ivar TcODE: degR, ideal core gas temperature
+        :ivar MWchm: g/gmole, core gas molecular weight
+        :ivar gammaChm: core gas ratio of specific heats (Cp/Cv)
+        
     """
     
     def __init__(self, geomObj=Geometry(), effObj=Efficiencies(),  #ERE=0.98, Noz=0.97), 
@@ -274,8 +365,13 @@ class CoreStream:
         
         if self.add_barrier:
             self.barrierObj = BarrierStream(self, pcentFFC=pcentFFC, ko=ko)
+        else:
+            self.barrierObj = None
         
         self.evaluate()
+        
+        # get input descriptions and units from doc string
+        self.inp_descD, self.inp_unitsD, self.is_inputD = get_desc_and_units( self.__doc__ )
         
     def __call__(self, name):
         return getattr(self, name ) # let it raise exception if no name attr.
@@ -290,7 +386,6 @@ class CoreStream:
             
         if re_evaluate:
             self.evaluate()
-
             
     def reset_attr(self, name, value, re_evaluate=True):
         """
@@ -300,7 +395,12 @@ class CoreStream:
         if hasattr( self, name ):
             setattr( self, name, value )
         else:
-            raise Exception('Attempting to set un-authorized Geometry attribute named "%s"'%name )
+            raise Exception('Attempting to set un-authorized CoreStream attribute named "%s"'%name )
+            
+        if name in ['oxName','fuelName']:
+            # make CEA object
+            self.ceaObj = CEA_Obj(oxName=self.oxName, fuelName=self.fuelName)
+
             
         if re_evaluate:
             self.evaluate()
@@ -349,7 +449,7 @@ class CoreStream:
         # want a Core-Only ERE in case a barrier calc is done
         effERE_core = self.effObj('ERE')
         if not self.add_barrier: # if no barrier, user may have input FFC
-            effERE_core = effERE_core / self.effObj('FFC')
+            effERE_core = effERE_core * self.effObj('FFC')
 
         cstarERE_core = self.cstarODE * effERE_core
         
@@ -387,16 +487,25 @@ class CoreStream:
         
         self.Atcore = self.frac_At_core * self.geomObj.At
         
-        self.wdotTotcore = self.Pc * self.Atcore * self.CdThroat * 32.174 / cstarERE_core
-        self.wdotOxCore  = self.wdotTotcore * self.MRcore / (1.0 + self.MRcore)
-        self.wdotFlCore = self.wdotTotcore - self.wdotOxCore
+        self.wdotTot_c = self.Pc * self.Atcore * self.CdThroat * 32.174 / cstarERE_core
+        self.wdotOx_c  = self.wdotTot_c * self.MRcore / (1.0 + self.MRcore)
+        self.wdotFl_c = self.wdotTot_c - self.wdotOx_c
         
-        self.FvacCore = self.wdotTotcore * self.IspDel_core
+        self.FvacCore = self.wdotTot_c * self.IspDel_core
         self.FvacTotal = self.FvacCore + self.FvacBarrier
 
-        self.wdotTot = self.wdotTotcore + self.wdotTot_b
-        self.wdotOx  = self.wdotOxCore + self.wdotOx_b
-        self.wdotFl = self.wdotFlCore + self.wdotFl_b
+        self.wdotTot = self.wdotTot_c + self.wdotTot_b
+        self.wdotOx  = self.wdotOx_c + self.wdotOx_b
+        self.wdotFl = self.wdotFl_c + self.wdotFl_b
+        
+        if self.add_barrier:
+            self.wdotFlFFC = (self.barrierObj.pcentFFC/100.0) * self.wdotFl
+            self.wdotFl_cInit = self.wdotFl - self.wdotFlFFC
+            self.wdotTot_cInit = self.wdotOx + self.wdotFl_cInit
+        else:
+            self.wdotFlFFC = 0.0
+            self.wdotFl_cInit = self.wdotFl
+            self.wdotTot_cInit = self.wdotTot
 
         self.IspDel = self.FvacTotal / self.wdotTot
         
@@ -456,82 +565,138 @@ class CoreStream:
         """
         print to standard output, the current state of CoreStream instance.
         """
-        self.geomObj.summ_print()
-        print('---------------%s/%s core stream-----------------------'%(self.oxName, self.fuelName))
-        print('    FvacTotal =', '%.2f'%self.FvacTotal, 'lbf')
-        print('     FvacCore =', '%.2f'%self.FvacCore, 'lbf')
-        if self.Pamb > 0.0:
-            if self.Pamb > 14.5:
-                print('     FseaLevel =', '%.2f'%self.Fambient, 'lbf, (Pamb=%g)'%self.Pamb)
+        print( self.get_summ_str() )
+        
+    def get_summ_str(self, alpha_ordered=True, numbered=False, add_trailer=True, 
+                     fillchar='.', max_banner=76, intro_str=''):
+        """
+        return string of the current state of CoreStream instance.
+        """
+        
+        M = self.get_model_summ_obj()
+        
+        Me = self.effObj.get_model_summ_obj()
+        se = '\n' + Me.summ_str(alpha_ordered=False, fillchar=' ', assumptions_first=False)
+        
+        if self.add_barrier:
+            Mb = self.barrierObj.get_model_summ_obj()
+            sb = '\n' + Mb.summ_str(alpha_ordered=alpha_ordered, numbered=numbered, 
+                                   add_trailer=add_trailer, fillchar=fillchar, 
+                                   max_banner=max_banner, intro_str=intro_str)
+        else:
+            sb = ''
+        
+        return M.summ_str(alpha_ordered=alpha_ordered, numbered=numbered, 
+                          add_trailer=add_trailer, fillchar=fillchar, 
+                          max_banner=max_banner, intro_str=intro_str) + se + sb
+    
+    def get_html_str(self, alpha_ordered=True, numbered=False, intro_str=''):
+        M = self.get_model_summ_obj()
+        
+        
+        Me = self.effObj.get_model_summ_obj()
+        se = '\n' + Me.html_table_str(alpha_ordered=False, assumptions_first=False)
+        
+        if self.add_barrier:
+            Mb = self.barrierObj.get_model_summ_obj()
+            sb = '\n' + Mb.html_table_str(alpha_ordered=alpha_ordered, numbered=numbered, 
+                                   intro_str=intro_str)
+        else:
+            sb = ''
+        
+        
+        return M.html_table_str( alpha_ordered=alpha_ordered, numbered=numbered, intro_str=intro_str)\
+                + se + sb
+    
+    def get_model_summ_obj(self):
+        """
+        return ModelSummary object for current state of CoreStream instance.
+        """
+        
+        M = ModelSummary( '%s/%s Core Stream Tube'%(self.oxName, self.fuelName) )
+        M.add_alt_units('psia', ['MPa','atm','bar'])
+        M.add_alt_units('lbf', 'N')
+        M.add_alt_units('lbm/s', 'kg/s')
+        M.add_alt_units('ft/s', 'm/s')
+        M.add_alt_units('sec', ['N-sec/kg', 'km/sec'])
+        M.add_alt_units('degR', ['degK','degC','degF'])
+        
+        M.add_param_fmt('Pexit', '%.4f')
+        M.add_param_fmt('Pc', '%.1f')
+        
+        M.add_out_category( '' ) # show unlabeled category 1st
+                
+        
+        def add_param( name, desc='', fmt='', units='', value=None, category=''):
+            
+            if name in self.inp_unitsD:
+                units = self.inp_unitsD[name]
+                
+            if desc=='' and name in self.inp_descD:
+                desc = self.inp_descD[name]
+            
+            if value is None:
+                value = getattr( self, name )
+            
+            if self.is_inputD.get(name, False):
+                M.add_inp_param( name, value, units, desc, fmt=fmt)
             else:
-                print('      Fambient =', '%.2f'%self.Fambient, 'lbf, (Pamb=%g)'%self.Pamb)
+                M.add_out_param( name, value, units, desc, fmt=fmt, category=category)
         
+        for name in self.is_inputD.keys():
+            if name not in ['pcentFFC','ko', 'geomObj', 'effObj']:
+                add_param( name )
+        
+        # parameters that are NOT attributes OR are conditional
         if self.add_barrier:
-            print('  FvacBarrier =', '%.2f'%self.FvacBarrier, 'lbf')
-        print('   MRthruster =', '%g'%self.MRthruster, '')
-        print('       MRcore =', '%g'%self.MRcore, '')
-        if self.add_barrier:
-            print('    MRbarrier =', '%g'%self.barrierObj.MRbarrier, '')
-        print('           Pc =', '%g'%self.Pc, 'psia')
+            add_param('FvacBarrier', units='lbf', desc='vacuum thrust due to barrier stream tube')
+            
+        if self.Pamb > 14.5:
+            add_param('Fambient', units='lbf', desc='total sea level thrust')
+            add_param('IspAmb', units='sec', desc='delivered sea level Isp' )
+            M.add_out_comment('Fambient', '%s'%self.noz_mode )
+            M.add_out_comment('IspAmb', '%s'%self.noz_mode )
+        elif self.Pamb > 0.0:
+            add_param('Fambient', units='lbf', desc='total ambient thrust')
+            add_param('IspAmb', units='sec', desc='delivered ambient Isp' )
+            M.add_out_comment('Fambient', '%s'%self.noz_mode)
+            M.add_out_comment('IspAmb', '%s'%self.noz_mode )
         
-        # -------------------- Isp --------------------------
-        print('=====> IspDel =', '%.2f'%self.IspDel, 'sec, ___DELIVERED VACUUM ISP___')
-        
-        if True:#self.Pamb > 0.0:
-            print('       IspAmb =', '%.2f'%self.IspAmb, 'sec, (Pamb=%.4f) %s'%(self.Pamb, self.noz_mode))
-            #print('        Pexit =', '%.4f'%self.Pexit, 'psia, Nozzle Exit Pressure')
         
         if self.effObj('Pulse') < 1.0:
-            print('  IspDelPulse =', '%.2f'%self.IspDelPulse, 'sec, ___DELIVERED PULSING ISP___')
-        
-        print('   IspDelCore =', '%.2f'%self.IspDel_core, 'sec')
-        print('       IspODF =', '%.2f'%self.IspODF, 'sec')
-        print('       IspODK =', '%.2f'%self.IspODK, 'sec (fracKin=%g)'%self.fracKin)
-        print('       IspODE =', '%.2f'%self.IspODE, 'sec')
-        print('===> cstarERE =', '%.1f'%self.cstarERE, 'ft/sec, measured cstar = cstarERE / CdThroat')
-        print('     cstarODE =', '%.1f'%self.cstarODE, 'ft/sec')
-        print()
-        
-        print('   CfVacIdeal =', '%.5f'%self.CfVacIdeal, 'Ideal Vacuum Thrust Coefficient')
-        print('     CfVacDel =', '%.5f'%self.CfVacDel, 'Delivered Vacuum Thrust Coefficient')
-        print('     CfAmbDel =', '%.5f'%self.CfAmbDel, 'Delivered Ambient  Thrust Coefficient')
-        print()
-        
-        # -------------------- efficiencies -----------------------
-        self.effObj.summ_print()
-        
-        # --------------------- Flow Rates -------------------------
-        print()
-        #print('       oxName =', '%s'%self.oxName, '')
-        #print('     fuelName =', '%s'%self.fuelName, '')
-        print('     CdThroat =', '%g'%self.CdThroat, '(%s)'%self.CdThroat_method, 'throat flow coefficient')
-        
-        # -------------------------- Fuel Film Cooloing ------------------
-        if self.add_barrier:
-            print('      wdotTot =', '%g'%self.wdotTot, 'lbm/sec (O/F = %g)'%( self.wdotOx/self.wdotFl, ))
-            print('  wdotTotCore =', '%g'%self.wdotTotcore, 'lbm/sec (O/F = %g)'%( self.wdotOxCore/self.wdotFlCore, ))
-            print('  wdotTotBarr =', '%g'%self.wdotTot_b, 'lbm/sec (O/F = %g)'%( self.wdotOx_b/self.wdotFl_b, ))
-            
-            print('  wdotOxTotal =', '%g'%self.wdotOx, 'lbm/sec')
-            print('   wdotOxCore =', '%g'%self.wdotOxCore, 'lbm/sec')
-            print('   wdotOxBarr =', '%g'%self.wdotOx_b, 'lbm/sec')
-            
-            print('  wdotFlTotal =', '%g'%self.wdotFl, 'lbm/sec')
-            print('   wdotFlCore =', '%g'%self.wdotFlCore, 'lbm/sec')
-            print('   wdotFlBarr =', '%g'%self.wdotFl_b, 'lbm/sec')
-        else:
-            print('      wdotTot =', '%g'%self.wdotTot, 'lbm/sec (O/F = %g)'%( self.wdotOx/self.wdotFl, ))
-            print('       wdotOx =', '%g'%self.wdotOx, 'lbm/sec')
-            print('       wdotFl =', '%g'%self.wdotFl, 'lbm/sec')
+            add_param('IspDelPulse', units='sec', desc='delivered pulsing Isp')
 
         
-        # ------------------- gas properties ------------------
-        print('        TcODE =', '%.1f'%self.TcODE, 'degR')
-        print('        MWchm =', '%g'%self.MWchm, 'g/gmole')
-        print('     gammaChm =', '%g'%self.gammaChm, '')
+        if self.CdThroat_method != 'default':
+            M.add_inp_comment('CdThroat', '(%s)'%self.CdThroat_method)
+            
         
         if self.add_barrier:
-            self.barrierObj.summ_print()
+            add_param('wdotFlFFC', units='lbm/s', desc='fuel film coolant flow rate injected at perimeter',
+                      category='At Injector Face')
+            add_param('wdotFl_cInit', units='lbm/s', desc='initial core fuel flow rate (before any entrainment)',
+                      category='At Injector Face')
+            add_param('wdotTot_cInit', units='lbm/s', desc='initial core total flow rate (before any entrainment)',
+                      category='At Injector Face')
+            
+            add_param('wdotTot_b', units='lbm/s', desc='total barrier propellant flow rate (includes entrained)',
+                      category='After Entrainment')
+            add_param('wdotOx_b', units='lbm/s', desc='barrier oxidizer flow rate (all entrained)',
+                      category='After Entrainment')
+            add_param('wdotFl_b', units='lbm/s', desc='barrier fuel flow rate (FFC + entrained)',
+                      category='After Entrainment')
+        
+            add_param('wdotTot_c', units='lbm/s', desc='total final core propellant flow rate (injected - entrained)',
+                      category='After Entrainment')
+            add_param('wdotOx_c', units='lbm/s', desc='final core oxidizer flow rate (injected - entrained)',
+                      category='After Entrainment')
+            add_param('wdotFl_c', units='lbm/s', desc='final core fuel flow rate (injected - entrained)',
+                      category='After Entrainment')
+            
+        
+        #add_param('xxx', units='xxx', desc='xxx')
+        
+        return M
 
         
 if __name__ == '__main__':
@@ -551,7 +716,7 @@ if __name__ == '__main__':
     effObj.set_const('Div', 0.994775)
     
     core = CoreStream( geomObj, effObj, oxName='N2O4', fuelName='MMH',  MRcore=1.85,
-                 Pc=150, CdThroat=0.995,
+                 Pc=150, CdThroat=0.995, Pamb=14.7,
                  pcentFFC=14.0, ko=0.035)
     #core.reset_attr('Pc', 456)
     core.summ_print()

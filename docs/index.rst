@@ -24,6 +24,7 @@ Contents:
    efficiencies
    nozzle_eff
    chamber_eff
+   comb_stability
    sources
    mlp_summary
    functions

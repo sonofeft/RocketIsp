@@ -104,14 +104,14 @@ Based on these ROCCID equations, **RocketIsp** calculates :math:`\eta_{E_m}` as
 
 .. code-block:: python
 
-    mrLow = MRcore * Em
-    mrHi  = MRcore / Em
+    mrLow = MRcore * elemEm
+    mrHi  = MRcore / elemEm
     
     IspLow  = calcIsp( mrLow )
     IspHi   = calcIsp( mrHi  )
     IspCore = calcIsp( MRcore )
                                   
-    xm1 = (1.0 + mrLow) / (1.0 + Em) / (1.0 + MRcore)
+    xm1 = (1.0 + mrLow) / (1.0 + elemEm) / (1.0 + MRcore)
     xm2 = 1.0 - xm1
     
     effEm = (xm1*IspLow + xm2*IspHi) / IspCore
@@ -125,12 +125,30 @@ or
     :math:`E_m` is an input to RocketIsp.
     For preliminary design purposes, think of mixing factor, :math:`E_m`, as:
     
-    Em = 0.7    Below average injector
+    :math:`E_m` = 0.7    Below average injector
     
-    Em = 0.8    Average injector
+    :math:`E_m` = 0.8    Average injector
     
-    Em = 0.9    Above average injector
+    :math:`E_m` = 0.9    Above average injector
 
+
+.. _ref_to_EmMRopt:
+
+
+:math:`E_m` and :math:`MR_{opt}`
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+One consequence of a mixture ratio distribution due to :math:`E_m` is that a 
+real engine's optimum mixture ratio 
+will be moved away from the steeper side of an Isp vs mixture ratio curve.
+
+The image below shows how optimum mixture ratio for a sample N2O4/MMH thruster 
+is affected by an injector element's ability
+to mix propellants. A perfect injector will tend to optimize near the ODK optimum, 
+real injectors with wider MR distributions will optimize at a more fuel rich mixture ratio.
+
+.. image:: ./_static/effEm_Isp_impact.png
+    :width: 49%
 
 Vaporization Efficiency
 -----------------------
@@ -142,7 +160,7 @@ by Richard J. Priem and Marcus F. Heidmann.
 
 The model calculates the vaporized fraction of both the oxidizer and fuel
 by using the following equation for the generalized vaporization length (Lgen)
-and the chart below it to look up their vaporized fractions.
+and the chart below the equation to look up their vaporized fractions.
 (see document for definition of terms in Lgen equation)
 
 .. image:: ./_static/Lgen_equation.jpg

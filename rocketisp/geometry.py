@@ -1,6 +1,8 @@
+
 from math import pi, sqrt, cos, sin, tan, radians
 from rocketisp.nozzle.nozzle import Nozzle
-
+from rocketisp.model_summ import ModelSummary
+from rocketisp.parse_docstring import get_desc_and_units
 
 def solidCylVol( D, L ):
     '''calculates a cylinder volume'''
@@ -12,6 +14,16 @@ def solidFrustrumVol(  D1, D2, h ):
     r2 = D2/2.0
     V = pi*h*(r1**2 + r1*r2 + r2**2)/3.0
     return  V
+    
+def maybe_show_ft( val ):
+    """If input inches > 12, return string with feet units."""
+    if val > 12.0:
+        ft = int( val / 12 )
+        i = val - ft*12.0
+        s = ' (%g ft %.3f in)'%(ft, i  )
+    else:
+        s = ''
+    return s
 
 
 class Geometry:
@@ -43,7 +55,17 @@ class Geometry:
     :type LchmMin: float
     :type LchamberInp: float
     :return: Geometry object
-    :rtype: Geometry        
+    :rtype: Geometry    
+
+    :ivar At: in**2, throat area
+    :ivar Lnoz: in, nozzle length
+    :ivar Ltotal: in, nozzle + chamber length
+    :ivar Rinj: in, radius of injector
+    :ivar Dinj: in, diameter of injector
+    :ivar Ainj: in**2, area of injector
+    :ivar Lcham_cyl: in, length of cylindrical section of chamber
+    :ivar Lcham_conv: in, length of convergent section of chamber
+    :ivar Vcham: in**3, approximate chamber volume
     """
     def __init__(self,  Rthrt=1,
                  CR=2.5, eps=20,  pcentBell=80, LnozInp=None,
@@ -70,12 +92,16 @@ class Geometry:
         
         self.nozObj        = None # only instantiated if needed.
         
+        # get input descriptions and units from doc string
+        self.inp_descD, self.inp_unitsD, self.is_inputD = get_desc_and_units( self.__doc__ )
+        
         self.evaluate()
         
     def reset_attr(self, name, value, re_evaluate=True):
         """Resets Geometry object attribute by name if that attribute already exists."""
         if hasattr( self, name ):
             setattr( self, name, value )
+            self.nozObj = None # may need to reevalute nozzle contour
         else:
             raise Exception('Attempting to set un-authorized Geometry attribute named "%s"'%name )
             
@@ -117,6 +143,7 @@ class Geometry:
         else:
             self.Lcham = self.LchamberInp
             self.Lcham_desc = '(user input)'
+            self.LchmOvrDt = self.Lcham / (self.Rthrt * 2.0)
 
         self.calc_convergent_section() # may reset Lcham to longer value
         
@@ -145,7 +172,8 @@ class Geometry:
         self.nozObj = noz
         return noz
     
-    def plot_geometry(self, title='Geometry', png_name='', do_show=True, show_grid=True):
+    def plot_geometry(self, title='Geometry', png_name='', pixel_wh=None,
+                      do_show=True, show_grid=True, make_vertical=False):
         import matplotlib.pyplot as plt
         noz = self.getNozObj()
         
@@ -155,17 +183,30 @@ class Geometry:
         zL = list(reversed(zL)) + zL
         rL = list(reversed(rL)) + [-r for r in rL]
         
-        fig = plt.figure()
-        ax = plt.axes()
+        if pixel_wh is None:
+            fig, ax = plt.subplots(nrows=1, ncols=1)
+        else:
+            w,h = pixel_wh
+            fig, ax = plt.subplots(nrows=1, ncols=1, figsize=(w/100.0, h/100.0), dpi=100)
+        
         ax.set_aspect('equal')
-        ax.set_ylim( (-round(noz.abs_rContour[-1]+1), round(noz.abs_rContour[-1]+1)) )
-        #ax.tick_params(axis='y', colors='red')
-        #ax.yaxis.label.set_color('red')
-        plt.plot( zL, rL, '-k' )
+        
+        if make_vertical:
+            zL = [ -(z+self.Lcham) for z in zL ]
+            min_z = min(zL)
+            zL = [z-min_z for z in zL]
+            ax.set_xlim( (-round(noz.abs_rContour[-1]+1), round(noz.abs_rContour[-1]+1)) )
+            plt.plot( rL, zL, '-k' )
+            plt.xlabel( 'Radius (in)' )
+            plt.ylabel( 'Axial Position (in)' )
+        else:
+            ax.set_ylim( (-round(noz.abs_rContour[-1]+1), round(noz.abs_rContour[-1]+1)) )
+            plt.plot( zL, rL, '-k' )
+            plt.ylabel( 'Radius (in)' )
+            plt.xlabel( 'Axial Position (in)' )
+            
         if show_grid:
             plt.grid()
-        plt.ylabel( 'Radius (in)' )
-        plt.xlabel( 'Axial Position (in)' )
         plt.title( title )
         fig.tight_layout()
         
@@ -176,6 +217,8 @@ class Geometry:
         
         if do_show:
             plt.show()
+            
+        return plt
     
     
     def calc_convergent_section(self):
@@ -208,61 +251,79 @@ class Geometry:
             self.Lcham_cyl = 0.0
             self.Lcham = self.Lcham_conv
             self.Lcham_desc = '(convergent section limited)'
+    
+    def get_attr_comment(self, name):
+        """Some attributes may have comments associated with them"""
         
+        if name=='Lnoz' and self.LnozInp is not None:
+            return 'set by user with LnozInp'
+        
+        if name=='pcentBell' and self.LnozInp is not None:
+            return 'calculated from Lnoz=%g in'%self.LnozInp
+        
+        # if no comment, return empty string
+        return ''
+    
     def summ_print(self):
         """
         print to standard output, the current state of Geometry instance.
         """
-        def maybe_show_ft( val ):
-            if val > 12.0:
-                ft = int( val / 12 )
-                i = val - ft*12.0
-                s = ' (%g ft %.3f in)'%(ft, i  )
+        print( self.get_summ_str() )
+        
+        
+    def get_summ_str(self, alpha_ordered=True, numbered=False, add_trailer=True, 
+                     fillchar='.', max_banner=76, intro_str=''):
+        """
+        return string of the current state of Geometry instance.
+        """
+        M = self.get_model_summ_obj()
+        return M.summ_str(alpha_ordered=alpha_ordered, numbered=numbered, 
+                          add_trailer=add_trailer, fillchar=fillchar, 
+                          max_banner=max_banner, intro_str=intro_str)
+    
+    def get_html_str(self, alpha_ordered=True, numbered=False, intro_str=''):
+        M = self.get_model_summ_obj()
+        return M.html_table_str( alpha_ordered=alpha_ordered, numbered=numbered, intro_str=intro_str)
+        
+    def get_model_summ_obj(self):
+        """
+        return ModelSummary object for current state of Geometry instance.
+        """
+        
+        M = ModelSummary( 'Geometry' )
+        M.add_alt_units('in', ['cm','ft'])
+        M.add_alt_units('in**2', 'cm**2')
+        M.add_alt_units('in**3', 'cm**3')
+                        
+        # function to add parameters from __doc__ string to ModelSummary
+        def add_param( name, desc='', fmt='', units='', value=None):
+            
+            if name in self.inp_unitsD:
+                units = self.inp_unitsD[name]
+                
+            if desc=='' and name in self.inp_descD:
+                desc = self.inp_descD[name]
+            
+            if value is None:
+                value = getattr( self, name )
+            
+            if self.is_inputD.get(name, False):
+                M.add_inp_param( name, value, units, desc, fmt=fmt)
             else:
-                s = ''
-            return s
-            
+                M.add_out_param( name, value, units, desc, fmt=fmt)
         
-        print('---------------geometry-----------------------')
-        print('        Rthrt =', '%.3f'%self.Rthrt, 'in (Dthrt=%.3f in)'%(self.Rthrt*2))
-        print('         Rinj =', '%.3f'%self.Rinj, 'in (Dinj=%.3f in)'%(self.Rinj*2))
-        print('        Rexit =', '%.3f'%self.Rexit, 'in (Dexit=%.3f in)'%(self.Rexit*2))
-        print('           At =', '%g'%self.At, 'in**2')
-        print('          eps =', '%g'%self.eps, '')
+        for name in self.is_inputD.keys():
+            add_param( name )
         
-        if self.LnozInp is None:
-            print('    pcentBell =', '%g'%self.pcentBell, '%')
-        else:
-            print('    pcentBell =', '%g'%self.pcentBell, '%%, calculated from Lnoz=%g in'%self.LnozInp)
-            
-        print('           CR =', '%g'%self.CR, 'injector area / throat area')
-        print('         Dinj =', '%g'%self.Dinj, 'in', maybe_show_ft( self.Dinj ))
-        print('         Ainj =', '%g'%self.Ainj, 'in**2')
-        print(' cham_conv_deg=', '%g'%self.cham_conv_deg, 'deg convergent section half angle' )
-        
+        # parameters that are NOT attributes
+        add_param( 'Dexit', value=self.Rexit*2, desc='nozzle exit diameter', units='in' )
+        add_param( 'Dthrt', value=self.Rthrt*2, desc='throat diameter', units='in' )
+
         noz = self.getNozObj()
-        print('entrance_angle=', '%g'%noz.theta, 'deg nozzle initial expansion angle' )
-        print('    exit_angle=', '%g'%noz.exitAng, 'deg nozzle exit angle' )
-                    
-        print('        Lcham =', '%g'%self.Lcham, 'in',self.Lcham_desc, maybe_show_ft( self.Lcham ))
-        print('    Lcham_cyl =', '%g'%self.Lcham_cyl, 'in', maybe_show_ft( self.Lcham_cyl ))
-        print('   Lcham_conv =', '%g'%self.Lcham_conv, 'in', maybe_show_ft( self.Lcham_conv ))
-        
-        print('       Ltotal =', '%g'%self.Ltotal, 'in', maybe_show_ft( self.Ltotal ))
-        
-        if self.LnozInp is None:
-            print('         Lnoz =', '%g'%self.Lnoz, 'in', maybe_show_ft( self.Lnoz ))
-        else:
-            print('         Lnoz =', '%g'%self.Lnoz, 'in, set by user with LnozInp', maybe_show_ft( self.Lnoz ))
-        
-        
-        print('     RchmConv =', '%g'%self.RchmConv, 'convergent section turn radius / throat radius')
-        print('    RupThroat =', '%g'%self.RupThroat, 'upstream radius / throat radius')
-        print('   RdwnThroat =', '%g'%self.RdwnThroat, 'downstream radius / throat radius')
-        print('    LchmOvrDt =', '%g'%self.LchmOvrDt, 'chamber length / throat diameter')
-        print('      LchmMin =', '%g'%self.LchmMin, 'in, minimum allowed chamber length')
-        print('        Vcham =', '%g'%self.Vcham, 'in**3, approximate chamber volume')
-        
+        add_param( 'entrance_angle', value=noz.theta, desc='nozzle initial expansion angle', units='deg' )
+        add_param( 'exit_angle', value=noz.exitAng, desc='nozzle exit angle', units='deg' )
+            
+        return M
         
         
 if __name__ == '__main__':
@@ -273,8 +334,16 @@ if __name__ == '__main__':
             do_show = False
 
     geom = Geometry(Rthrt=1.5,
-                    CR=2.5, eps=20,  pcentBell=80, 
+                    CR=2.5, eps=20,  pcentBell=80, LnozInp=18,
                     RupThroat=1.5, RdwnThroat=1.0, RchmConv=1.0, cham_conv_deg=30,
                     LchmOvrDt=3.10, LchmMin=2.0, LchamberInp=None)
+    
+    #M = geom.get_model_summ_obj()
+    #print( M.summ_str() )
+    
     geom.summ_print()
-    geom.plot_geometry( png_name='geometry.png', do_show=do_show, show_grid=False )
+    
+    
+    if 0:
+        geom.plot_geometry( png_name='geometry.png', do_show=do_show, show_grid=False,
+                            make_vertical=True, pixel_wh=(300,400) )

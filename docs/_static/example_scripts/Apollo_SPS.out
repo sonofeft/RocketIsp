@@ -1,83 +1,157 @@
-==============================  Apollo SPS  ==============================
----------------geometry-----------------------
-        Rthrt = 5.973 in (Dthrt=11.946 in)
-         Rinj = 9.444 in (Dinj=18.888 in)
-        Rexit = 47.220 in (Dexit=94.439 in)
-           At = 112.077 in**2
-          eps = 62.5 
-    pcentBell = 72.3 %
-           CR = 2.5 injector area / throat area
-         Dinj = 18.8878 in  (1 ft 6.888 in)
-         Ainj = 280.191 in**2
- cham_conv_deg= 30 deg convergent section half angle
-entrance_angle= 36.7855 deg nozzle initial expansion angle
-    exit_angle= 9.33502 deg nozzle exit angle
-        Lcham = 37.0317 in (set by user Lcham/Dt = 3.1)  (3 ft 1.032 in)
-    Lcham_cyl = 27.0186 in  (2 ft 3.019 in)
-   Lcham_conv = 10.0131 in 
-       Ltotal = 148.327 in  (12 ft 4.327 in)
-         Lnoz = 111.295 in  (9 ft 3.295 in)
-     RchmConv = 1 convergent section turn radius / throat radius
-    RupThroat = 1.5 upstream radius / throat radius
-   RdwnThroat = 1 downstream radius / throat radius
-    LchmOvrDt = 3.1 chamber length / throat diameter
-      LchmMin = 2 in, minimum allowed chamber length
-        Vcham = 9471.13 in**3, approximate chamber volume
----------------N2O4/A50 core stream-----------------------
-    FvacTotal = 20500.00 lbf
-     FvacCore = 17731.58 lbf
-  FvacBarrier = 2768.42 lbf
-   MRthruster = 1.58666 
-       MRcore = 1.86666 
-    MRbarrier = 0.681816 
-           Pc = 100 psia
-=====> IspDel = 314.03 sec, ___DELIVERED VACUUM ISP___
-       IspAmb = 314.03 sec, (Pamb=0.0000) (Pexit=0.117116 psia)
-   IspDelCore = 320.93 sec
-       IspODF = 317.12 sec
-       IspODK = 333.63 sec (fracKin=0.619406)
-       IspODE = 343.77 sec
-===> cstarERE = 5538.8 ft/sec, measured cstar = cstarERE / CdThroat
-     cstarODE = 5651.8 ft/sec
-
-   CfVacIdeal = 1.95698 Ideal Vacuum Thrust Coefficient
-     CfVacDel = 1.82911 Delivered Vacuum Thrust Coefficient
-     CfAmbDel = 1.82911 Delivered Ambient  Thrust Coefficient
-
-============ Thruster Efficiencies ============
-              0.91349 Overall Isp Efficiency
-------------  0.95262 Nozzle Efficiency ------------
-        Div = 0.98851 (simple fit eps=62.5, %bell=72.3) Divergence Efficiency of Nozzle
-        Kin = 0.97050 (MLP fit) Kinetic Efficiency of Nozzle
-         BL = 0.99299 (MLP fit) Boundary Layer Efficiency of Nozzle
-         TP = 1.00000 (default) Two Phase Efficiency of Nozzle
-------------  0.98000 (constant) Energy Release Efficiency ------------
-
-------------  0.97849 Fuel Film Cooling ------------
-
-     CdThroat = 0.990299 (MLP fit) throat flow coefficient
-      wdotTot = 65.2805 lbm/sec (O/F = 1.58666)
-  wdotTotCore = 55.2501 lbm/sec (O/F = 1.86666)
-  wdotTotBarr = 10.0304 lbm/sec (O/F = 0.681816)
-  wdotOxTotal = 40.0431 lbm/sec
-   wdotOxCore = 35.9768 lbm/sec
-   wdotOxBarr = 4.06638 lbm/sec
-  wdotFlTotal = 25.2374 lbm/sec
-   wdotFlCore = 19.2734 lbm/sec
-   wdotFlBarr = 5.96404 lbm/sec
-        TcODE = 5603.8 degR
-        MWchm = 21.6421 g/gmole
-     gammaChm = 1.13181 
----------------N2O4/A50 barrier stream-----------------------
-    pcentFFC = 15 %
-   MRbarrier = 0.681816 
-      MRwall = 0.255395 
-       Twall = 2151.7 degR (TcBarrier=3458.4 degR)
-   effnessFC = 0.498185
-WentrOvWcool = 1.64962
-    IspDel_b = 276.00 sec delivered vacuum barrier Isp
-    IspODF_b = 281.18 sec
-    IspODK_b = 281.18 sec (fracKin=0)
-    IspODE_b = 294.94 sec
-  cstarERE_b = 5092.5 ft/sec
-  cstarODE_b = 5092.5 ft/sec
+============================== Apollo SPS ==============================
+................................. Geometry .................................
+..................................  Input ..................................
+cham_conv_deg = 30.00 deg  half angle of conical convergent section
+           CR =   2.5      chamber contraction ratio (Ainj / Athroat)
+          eps =  62.5      nozzle area ratio (Aexit / Athroat)
+  LchamberInp =  None  in  user input value of chamber length (will override all other entries)
+      LchmMin = 2.000  in  minimum chamber length (will override LchmOvrDt)
+                           (5.080 cm, 0.167 ft)
+    LchmOvrDt =   3.1      ratio of chamber length to throat diameter (Lcham / Dthrt)
+      LnozInp =  None  in  user input nozzle length (will override pcentBell)
+    pcentBell =  72.3      nozzle percent bell (Lnoz / L_15deg_cone)
+     RchmConv =     1      radius of curvature at start of convergent section (Rconv / Rthrt)
+   RdwnThroat =     1      radius of curvature just downstream of throat (Rdownstream / Rthrt)
+        Rthrt = 5.971  in  throat radius
+                           (15.166 cm, 0.498 ft)
+    RupThroat =   1.5      radius of curvature just upstream of throat (Rupstream / Rthrt)
+............................................................................
+...............................  Output ....................................
+          Ainj = 279.987 in**2  area of injector
+                                (1806.367 cm**2)
+            At = 111.995 in**2  throat area
+                                (722.547 cm**2)
+         Dexit =  94.405    in  nozzle exit diameter
+                                (239.788 cm, 7.867 ft)
+          Dinj =  18.881    in  diameter of injector
+                                (47.958 cm, 1.573 ft)
+         Dthrt =  11.941    in  throat diameter
+                                (30.331 cm, 0.995 ft)
+entrance_angle =   36.79   deg  nozzle initial expansion angle
+    exit_angle =    9.34   deg  nozzle exit angle
+    Lcham_conv =  10.009    in  length of convergent section of chamber
+                                (25.424 cm, 0.834 ft)
+     Lcham_cyl =  27.009    in  length of cylindrical section of chamber
+                                (68.602 cm, 2.251 ft)
+          Lnoz = 111.254    in  nozzle length
+                                (282.586 cm, 9.271 ft)
+        Ltotal = 148.273    in  nozzle + chamber length
+                                (376.613 cm, 12.356 ft)
+          Rinj =   9.440    in  radius of injector
+                                (23.979 cm, 0.787 ft)
+         Vcham =  9460.8 in**3  approximate chamber volume
+                                (155034.6 cm**3)
+............................................................................
+........................ N2O4/A50 Core Stream Tube .........................
+..................................  Input ..................................
+   adjCstarODE =        1       multiplier on NASA CEA code value of cstar ODE (default is 1.0)
+   adjIspIdeal =        1       multiplier on NASA CEA code value of Isp ODE (default is 1.0)
+      CdThroat = 0.990299       Cd of throat (RocketThruster object may override)
+                                ((MLP fit))
+      fuelName =      A50       name of fuel (e.g. MMH, LH2)
+ignore_noz_sep =        0       flag to force nozzle flow separation to be ignored (USE WITH CAUTION)
+        MRcore =  1.87985       mixture ratio of core flow (ox flow rate / fuel flow rate)
+        oxName =     N2O4       name of oxidizer (e.g. N2O4, LOX)
+          Pamb =     0.00 psia  ambient pressure (for example sea level is 14.7 psia)
+                                (0.00 MPa, 0.00 atm, 0.00 bar)
+            Pc =    100.0 psia  chamber pressure
+                                (0.69 MPa, 6.80 atm, 6.89 bar)
+............................................................................
+.................................  Output ..................................
+     CfAmbDel = 1.83044          delivered ambient thrust coefficient
+     CfVacDel = 1.83044          delivered vacuum thrust coefficient
+   CfVacIdeal = 1.95937          ideal vacuum thrust coefficient
+     cstarERE =  5534.6    ft/s  delivered core cstar
+                                 (1686.9 m/s)
+     cstarODE =  5647.5    ft/s  core ideal cstar
+                                 (1721.4 m/s)
+  FvacBarrier =  2691.2     lbf  vacuum thrust due to barrier stream tube
+                                 (11971.1 N)
+     FvacCore = 17808.8     lbf  vacuum thrust due to core stream tube
+                                 (79217.4 N)
+    FvacTotal = 20500.0     lbf  total vacuum thrust
+                                 (91188.5 N)
+     gammaChm = 1.13146          core gas ratio of specific heats (Cp/Cv)
+       IspDel =  313.18     sec  <=== thruster delivered vacuum Isp ===>
+                                 (3071.29 N-sec/kg, 3.07 km/sec)
+  IspDel_core =  320.87     sec  delivered Isp of core stream tube
+                                 (3146.66 N-sec/kg, 3.15 km/sec)
+       IspODE =  343.93     sec  core one dimensional equilibrium Isp
+                                 (3372.79 N-sec/kg, 3.37 km/sec)
+       IspODF =  316.89     sec  core frozen Isp
+                                 (3107.63 N-sec/kg, 3.11 km/sec)
+       IspODK =  333.56     sec  core one dimensional kinetic Isp
+                                 (3271.15 N-sec/kg, 3.27 km/sec)
+   MRthruster = 1.59787          total thruster mixture ratio')
+        MWchm =  21.691 g/gmole  core gas molecular weight
+        Pexit =  0.1179    psia  nozzle exit pressure
+                                 (0.00 MPa, 0.01 atm, 0.01 bar)
+        TcODE =  5606.3    degR  ideal core gas temperature
+                                 (3114.6 degK, 2841.4 degC, 5146.6 degF)
+       wdotFl =  25.196   lbm/s  total fuel flow rate
+                                 (11.429 kg/s)
+       wdotOx =  40.260   lbm/s  total oxidizer flow rate
+                                 (18.262 kg/s)
+      wdotTot =  65.457   lbm/s  total propellant flow rate (ox+fuel)
+                                 (29.691 kg/s)
+..At Injector Face..
+ wdotFl_cInit =  21.417   lbm/s  initial core fuel flow rate (before any entrainment)
+                                 (9.715 kg/s)
+    wdotFlFFC =   3.779   lbm/s  fuel film coolant flow rate injected at perimeter
+                                 (1.714 kg/s)
+wdotTot_cInit =  61.677   lbm/s  initial core total flow rate (before any entrainment)
+                                 (27.976 kg/s)
+..After Entrainment..
+     wdotFl_b =   5.924   lbm/s  barrier fuel flow rate (FFC + entrained)
+                                 (2.687 kg/s)
+     wdotFl_c =  19.272   lbm/s  final core fuel flow rate (injected - entrained)
+                                 (8.742 kg/s)
+     wdotOx_b =   4.031   lbm/s  barrier oxidizer flow rate (all entrained)
+                                 (1.829 kg/s)
+     wdotOx_c =  36.229   lbm/s  final core oxidizer flow rate (injected - entrained)
+                                 (16.433 kg/s)
+    wdotTot_b =   9.955   lbm/s  total barrier propellant flow rate (includes entrained)
+                                 (4.516 kg/s)
+    wdotTot_c =  55.502   lbm/s  total final core propellant flow rate (injected - entrained)
+                                 (25.175 kg/s)
+............................................................................
+                             Efficiencies                             
+                                Output                                
+Isp = 0.91061    Overall Isp Efficiency
+Noz = 0.95199    Nozzle Efficiency
+ERE = 0.98000    (constant) Energy Release Efficiency of Chamber
+FFC = 0.97605    (barrier calc) Fuel Film Cooling Efficiency of Chamber
+..Nozzle..
+Div = 0.98851    (simple fit eps=62.5, %bell=72.3) Divergence Efficiency of Nozzle
+Kin = 0.96986    (MLP fit) Kinetic Efficiency of Nozzle
+ BL = 0.99298    (MLP fit) Boundary Layer Efficiency of Nozzle
+                                                                      
+           Ignored Efficiencies           
+        TP: Two Phase Efficiency of Nozzle
+                                          
+........................... Barrier Stream Tube ............................
+..................................  Input ..................................
+      ko = 0.035    entrainment constant (typical value is 0.035, range from 0.03 to 0.06)
+pcentFFC =    15    percent fuel film cooling ( FFC flowrate / total fuel flowrate)
+............................................................................
+.................................  Output ..................................
+  cstarERE_b =   4988.4 ft/s  delivered cstar
+                              (1520.5 m/s)
+  cstarODE_b =   5090.2 ft/s  ideal equilibrium cstar
+                              (1551.5 m/s)
+   fracKin_b =        0       fraction of kinetic completion in barrier
+    IspDel_b =   270.33  sec  delivered vacuum barrier Isp
+                              (2651.07 N-sec/kg, 2.65 km/sec)
+    IspODE_b =   294.85       sec. ideal equilibrium barrier Isp
+    IspODF_b =   281.03  sec  ideal frozen barrier Isp
+                              (2755.95 N-sec/kg, 2.76 km/sec)
+    IspODK_b =   281.03  sec  vacuum kinetic Isp of barrier
+                              (2755.95 N-sec/kg, 2.76 km/sec)
+   MRbarrier = 0.680508       barrier mixture ratio
+      MRwall = 0.253152       mixture ratio at wall
+     TcODE_b =   3453.4 degR  average ideal ODE temperature of barrier gas
+                              (1918.6 degK, 1645.4 degC, 2993.7 degF)
+    Twallgas =   2149.3 degR  temperature of gas at wall
+                              (1194.1 degK, 920.9 degC, 1689.6 degF)
+WentrOvWcool =  1.63403       ratio of entrained flow rate to FFC flow rate
+............................................................................

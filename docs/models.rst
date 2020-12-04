@@ -113,10 +113,12 @@ the following script can be employed.
     E.summ_print()
 
     #       creates the following output
-    ============ Thruster Efficiencies ============
-                  0.95060 Overall Isp Efficiency
-    ------------  0.97000 (constant) Nozzle Efficiency ------------
-    ------------  0.98000 (constant) Energy Release Efficiency ------------
+    ............................ Efficiencies ............................
+    ...........................  Output ..................................
+    Isp = 0.95060    Overall Isp Efficiency
+    Noz = 0.97000    (constant) Nozzle Efficiency
+    ERE = 0.98000    (constant) Energy Release Efficiency of Chamber
+    ......................................................................
 
 Or perhaps simply set an overall Isp efficiency.
 
@@ -129,27 +131,35 @@ Or perhaps simply set an overall Isp efficiency.
     E.summ_print()
 
     #       creates the following output
-    ============ Thruster Efficiencies ============
-                  0.95000 Overall Isp Efficiency
+    ............................ Efficiencies ............................
+    ....................  Output .........................................
+    Isp = 0.95000    (constant) Overall Isp Efficiency
+    ......................................................................
+    
 
 In a more complete analysis, where both the nozzle and injector are fully analyzed, the following
 output is typical.
 
 .. code-block:: python
 
-    ============ Thruster Efficiencies ============
-                  0.92196 Overall Isp Efficiency
-    ------------  0.94642 Nozzle Efficiency ------------
-            Div = 0.98547 (simple fit eps=35, %bell=70) Divergence Efficiency of Nozzle
-            Kin = 0.96641 (MLP fit) Kinetic Efficiency of Nozzle
-             BL = 0.99376 (MLP fit) Boundary Layer Efficiency of Nozzle
-             TP = 1.00000 (default) Two Phase Efficiency of Nozzle
-    ------------  0.97415 Energy Release Efficiency ------------
-            Mix = 0.99987 (mixAngle=0.23 deg) Inter-Element Mixing Efficiency of Injector
-             Em = 0.98611 (Rupe Em=0.8) Intra-Element Mixing Efficiency of Injector
-            Vap = 0.98801 (gen vaporized length) Vaporization Efficiency of Injector
-             HL = 1.00000 (default) Heat Loss Efficiency of Chamber
-            FFC = 1.00000 (default) Fuel Film Cooling Efficiency of Chamber
+    ............................ Efficiencies ............................
+    ..............................  Output ...............................
+    Isp = 0.94049    Overall Isp Efficiency
+    Noz = 0.97699    Nozzle Efficiency
+    ERE = 0.96264    Energy Release Efficiency of Chamber
+    ..Nozzle..
+    Div = 0.99100    (simple fit eps=20, %bell=80) Divergence Efficiency of Nozzle
+    Kin = 0.99175    (MLP fit) Kinetic Efficiency of Nozzle
+     BL = 0.99406    (MLP fit) Boundary Layer Efficiency of Nozzle
+    ..Chamber..
+    Mix = 0.99252    (mixAngle=1.73 deg) Inter-Element Mixing Efficiency of Injector
+     Em = 0.98800    (Rupe elemEm=0.8) Intra-Element Mixing Efficiency of Injector
+    Vap = 0.98167    (gen vaporized length) Vaporization Efficiency of Injector
+    ......................................................................
+    ........... Ignored Efficiencies ..........
+            TP: Two Phase Efficiency of Nozzle
+            HL: Heat Loss Efficiency of Chamber
+    ...........................................
 
 
 CoreStream
@@ -334,7 +344,7 @@ pressure taken from the CoreStream object.
     <li><p><strong>coreObj</strong> (<a class="reference internal" href="#corestream" title="rocketisp.stream_tubes.CoreStream"><em>CoreStream</em></a>) -- CoreStream object</p></li>
     <li><p><strong>Tox</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a>) -- degR, temperature of oxidizer</p></li>
     <li><p><strong>Tfuel</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a>) -- degR, temperature of fuel</p></li>
-    <li><p><strong>Em</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a>) -- intra-element Rupe mixing factor</p></li>
+    <li><p><strong>elemEm</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a>) -- intra-element Rupe mixing factor</p></li>
     <li><p><strong>fdPinjOx</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a>) -- fraction of Pc used as oxidizer injector pressure drop</p></li>
     <li><p><strong>fdPinjFuel</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a>) -- fraction of Pc used as fuel injector pressure drop</p></li>
     <li><p><strong>dpOxInp</strong> (<a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.8)"><em>None</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a>) -- input value of injector pressure drop for oxidizer  (overrides fdPinjOx)</p></li>

@@ -37,6 +37,9 @@ def search_max(f, a, b, tol=1.0e-9):
     xval, fval = search(fminus, a, b, tol=tol)
     return xval, -fval
 
+def search_min(f, a, b, tol=1.0e-9):
+    return search(f, a, b, tol=tol)
+
 def search(f, a, b, tol=1.0e-9):
     nIter = ceil(-2.078087*log(tol/abs(b-a))) # Eq. (10.4)
     nIter = int( 1 + nIter )

@@ -13,6 +13,6 @@ C = CoreStream( geomObj=Geometry(eps=375),
 R = RocketThruster(name='100 lbf Aerojet HiPAT R-4D', coreObj=C)
 
 R.scale_Rt_to_Thrust( 100 , Pamb=0.0 )
-#R.summ_print()
+R.summ_print()
 
-C.effObj.summ_print()
+#C.effObj.summ_print()

@@ -1,5 +1,5 @@
 """
-model the XLR-134
+model the SpaceX Raptor
 """
 from rocketisp.rocket_isp import RocketThruster
 from rocketisp.geometry import Geometry

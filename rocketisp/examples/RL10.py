@@ -40,7 +40,8 @@ effObj.set_const('ERE', 0.9892 )
 core = CoreStream( geomObj, effObj, oxName='LOX', fuelName='LH2',  MRcore=MRcore,
                    Pc=Pc, CdThroat=CdThroat)
              
-R = RocketThruster(name='RL10',coreObj=core, injObj=None, calc_CdThroat=False, noz_regen_eps=eps)
+R = RocketThruster(name='RL10',coreObj=core, injObj=None, calc_CdThroat=False, 
+                   noz_regen_eps=eps)
              
 R.scale_Rt_to_Thrust( Fvac, Pamb=0.0 , use_scipy=False )
 
