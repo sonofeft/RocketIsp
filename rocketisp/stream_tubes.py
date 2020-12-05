@@ -182,10 +182,18 @@ class BarrierStream:
                                         pcentBell=self.geomObj.pcentBell, 
                                         MR=self.MRbarrier)
             self.IspODK_b *= self.coreObj.adjIspIdeal
-            
-        self.fracKin_b = (self.IspODK_b - self.IspODF_b) / (self.IspODE_b - self.IspODF_b)
         
-        self.effKin_b = self.IspODK_b / self.IspODE_b
+        try:
+            self.fracKin_b = (self.IspODK_b - self.IspODF_b) / (self.IspODE_b - self.IspODF_b)
+        except:
+            # if there's an error with barrier fracKin, just use core value
+            self.fracKin_b = self.coreObj.fracKin
+        
+        try:
+            self.effKin_b = self.IspODK_b / self.IspODE_b
+        except:
+            # if there's an error with barrier effKin_b, just use core value
+            self.effKin_b = self.coreObj.effObj('Kin')
         
         # ........ make final summary efficiencies
         effObj = self.coreObj.effObj
@@ -524,12 +532,12 @@ class CoreStream:
             self.IspAmb = self.IspDel
             self.noz_mode = '(Pexit=%g psia)'%self.Pexit
         else:
-            CfOvCfvacAtEsep, CfOvCfvac, Cfsep, CfiVac, CfiAmbSimple, CfVac, epsSep, self.Psep = \
+            CfOvCfvacAtEsep, CfOvCfvac, Cfsep, CfiVac, CfiAmbSimple, CfVac, self.epsSep, self.Psep = \
                  sepNozzleCf(self.gammaChm, self.geomObj.eps, self.Pc, self.Pamb)
-            #print('epsSep=%g, Psep=%g'%(epsSep, self.Psep))
-            #print('========= Pexit=%g'%self.Pexit, '    Psep=%g'%self.Psep, '  epsSep=%g'%epsSep)
+            #print('epsSep=%g, Psep=%g'%(self.epsSep, self.Psep))
+            #print('========= Pexit=%g'%self.Pexit, '    Psep=%g'%self.Psep, '  epsSep=%g'%self.epsSep)
             
-            if self.Pexit > self.Psep or self.ignore_noz_sep:
+            if self.Pexit > self.Psep or self.geomObj.eps < self.epsSep or self.ignore_noz_sep:
                 # if not separated, use theoretical equation for back-pressure correction
                 self.IspAmb = self.IspDel - self.cstarERE * self.Pamb * self.geomObj.eps / self.Pc / 32.174
                 #print('---------------->  subtraction term =', self.cstarERE * self.Pamb * self.geomObj.eps / self.Pc / 32.174)
@@ -537,7 +545,8 @@ class CoreStream:
                 # if separated, use Kalt and Badal estimate of ambient thrust coefficient
                 # NOTE: there are better, more modern methods available
                 IspODEepsSep, CstarODE, Tc = \
-                    self.ceaObj.get_IvacCstrTc(Pc=self.Pc, MR=self.MRcore, eps=epsSep)
+                    self.ceaObj.get_IvacCstrTc(Pc=self.Pc, MR=self.MRcore, eps=self.epsSep)
+                IspODEepsSep = IspODEepsSep  - self.cstarERE * self.Pamb * self.epsSep / self.Pc / 32.174
                     
                 effPamb = IspODEepsSep / self.IspODE
                 #print('--------------> effPamb=%g'%effPamb, '    IspODEepsSep=%g'%IspODEepsSep, '   IspODE=%g'%self.IspODE)
@@ -546,7 +555,7 @@ class CoreStream:
             
             #print('========= Pamb=%g'%self.Pamb, '    IspAmb=%g'%self.IspAmb)
             # figure out mode of nozzle operation
-            if self.Pexit > self.Psep:
+            if self.Pexit > self.Psep or self.geomObj.eps < self.epsSep:
                 if self.Pexit > self.Pamb + 0.05:
                     self.noz_mode = 'UnderExpanded (Pexit=%g)'%self.Pexit
                 elif self.Pexit < self.Pamb - 0.05:
@@ -554,7 +563,7 @@ class CoreStream:
                 else:
                     self.noz_mode = 'Pexit=%g'%self.Pexit
             else:
-                self.noz_mode = 'Separated (Psep=%g, epsSep=%g)'%(self.Psep,epsSep)
+                self.noz_mode = 'Separated (Psep=%g, epsSep=%g)'%(self.Psep,self.epsSep)
                 
         self.Fambient = self.FvacTotal * self.IspAmb / self.IspDel
 

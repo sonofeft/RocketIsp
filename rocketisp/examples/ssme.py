@@ -36,8 +36,7 @@ geomObj = Geometry(Rthrt=Rthrt,
 effObj = Efficiencies()
 effObj.set_const('ERE', 0.99 )
 
-core = CoreStream( geomObj, effObj, oxName='LOX', fuelName='LH2',  MRcore=MRcore,
-             Pc=Pc, ignore_noz_sep=True)
+core = CoreStream( geomObj, effObj, oxName='LOX', fuelName='LH2',  MRcore=MRcore, Pc=Pc)
              
 
 R = RocketThruster(name='SSME, RS-25',coreObj=core, injObj=None, pulse_sec=float('inf'), pulse_quality=0.8)

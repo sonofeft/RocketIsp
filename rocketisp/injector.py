@@ -310,8 +310,15 @@ class Injector:
         
         # calc vaporization efficiency (protect against excess fracVapTot)
         if self.fracVapTot < 1.0:
-            vapIsp = self.coreObj.ceaObj.get_Isp( Pc=self.coreObj.Pc, MR=self.mrVap, eps=self.geomObj.eps)
-            effVap = min(1.0, self.fracVapTot * vapIsp / self.coreObj.IspODE)
+            #vapIsp = self.coreObj.ceaObj.get_Isp( Pc=self.coreObj.Pc, MR=self.mrVap, eps=self.geomObj.eps)
+            #effVap = min(1.0, self.fracVapTot * vapIsp / self.coreObj.IspODE)
+            
+            # better to use ODK values for Vap loss
+            IspODK = calc_IspODK(self.coreObj.ceaObj, Pc=self.coreObj.Pc, eps=self.geomObj.eps, Rthrt=self.geomObj.Rthrt, 
+                                 pcentBell=self.geomObj.pcentBell, MR=self.coreObj.MRcore)
+            vapIspODK = calc_IspODK(self.coreObj.ceaObj, Pc=self.coreObj.Pc, eps=self.geomObj.eps, Rthrt=self.geomObj.Rthrt, 
+                                    pcentBell=self.geomObj.pcentBell, MR=self.mrVap)
+            effVap = min(1.0, self.fracVapTot * vapIspODK / IspODK)
         else:
             effVap = 1.0
             

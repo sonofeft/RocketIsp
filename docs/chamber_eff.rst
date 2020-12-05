@@ -172,7 +172,7 @@ the Isp vaporization efficiency :math:`\large{\eta_{vap}}`
 as the fraction of total propellant vaporized times the ratio of (Isp at vaporized MR)
 to (Isp at core MR).
 
-:math:`\huge{ \eta_{vap} = \frac { f_{vap} * IspODE_{MRvap}} {IspODE_{MRcore}} }`
+:math:`\huge{ \eta_{vap} = \frac { f_{vap} * IspODK_{MRvap}} {IspODK_{MRcore}} }`
 
 In python code...
 
@@ -186,8 +186,8 @@ In python code...
         fracVapTot = (fracVapOx*wdotOx + fracVapFuel*wdotFl) / wdotTot
         
         # calc vaporization efficiency
-        vapIsp = get_Isp( MR=mrVap )
-        effVap = fracVapTot * vapIsp / IspODE
+        vapIsp = get_IspODK( MR=mrVap )
+        effVap = fracVapTot * vapIsp / IspODK
 
 
 Fuel Film Cooling

@@ -48,3 +48,31 @@ If **Rocketisp** is properly installed, then output similar to the following sho
 
 .. literalinclude:: ./_static/example_scripts/quick_test.out
 
+RocketIsp GUI
+-------------
+
+After installing with ``pip``, there will be a launch command line program called 
+**rocketisp** or, on Windows, **rocketisp.exe** placed into your python Scripts subdirectory.
+
+From a terminal or command prompt window simply type::
+
+    rocketisp
+
+and the following tkinter GUI should appear.
+
+.. image:: ./_static/gui_basic_inputs.jpg
+    :width: 100%
+
+If not, then there may be an issue with your system path.
+The path for the rocketisp executable might be something like::
+
+    /usr/local/bin/rocketisp             (if installed with sudo pip install -e .)
+         or 
+    /home/<user>/.local/bin/rocketisp    (if installed with pip install -e .)
+         or 
+    C:\Python37_64\Scripts\rocketisp.exe    (on Windows)
+
+Make sure your system path includes the above path to **rocketisp**.
+
+
+

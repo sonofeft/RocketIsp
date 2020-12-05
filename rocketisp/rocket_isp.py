@@ -195,6 +195,15 @@ class RocketThruster(object):
         
         return eps_opt
     
+    def set_MRthruster(self, MRthruster=1.6):
+        """
+        Calculate MRcore given desired MRthruster  (assume pcentFFC is already set)
+        """
+        MRcore = MRthruster / (1.0 - self.coreObj.barrierObj.pcentFFC / 100.0)
+        self.coreObj.reset_attr('MRcore', MRcore, re_evaluate=True)
+        self.calc_all_eff()
+        
+    
     def set_mr_to_max_ispdel(self):
         """
         Iterate on MRcore to find the peak Isp
@@ -451,6 +460,8 @@ class RocketThruster(object):
         plt.plot( mrcoreL, ispodfL, label='IspODF', color=colorsL[2] )
         if self.coreObj.barrierObj is not None:
             plt.plot( mrcoreL, ispdel_coreL, ':', label='IspDel_core', color=colorsL[4] )
+            plt.plot( [self.coreObj.MRcore], [self.coreObj.IspDel_core], 'D', markersize=8, color=colorsL[4] )
+            
         plt.plot( mrthrusterL, ispdelL, '--', linewidth=3, label='IspDel vac', color=colorsL[3] )
 
         if self.coreObj.Pamb > 0.0:
@@ -462,6 +473,8 @@ class RocketThruster(object):
         ymin, ymax = ax.get_ylim()
         dy = 0.03 * (ymax - ymin)
         ax.text(MRdes_pt, self.coreObj.IspDel+dy, 'Des Pt', color=colorsL[3])
+        if self.coreObj.barrierObj is not None:
+            ax.text(self.coreObj.MRcore, self.coreObj.IspDel_core+dy, 'Core', color=colorsL[4])
         
         if self.coreObj.Pamb > 0.0:
             isp_max = max(ispdel_ambL)
@@ -615,7 +628,7 @@ class RocketThruster(object):
         
         plt.ylabel( 'Efficiency' )
         if self.coreObj.add_barrier:
-            plt.xlabel( 'Mixture Ratio (Core and Thruster)' )
+            plt.xlabel( 'Core Mixture Ratio' )
         else:
             plt.xlabel( 'Mixture Ratio' )
             
@@ -677,24 +690,25 @@ class RocketThruster(object):
         if self.coreObj.Pamb > 0.0:
             sL.append( 'Famb       = %g lbf'%self.coreObj.Fambient )
         
-        mode, mode_freq, mode_msg  = self.injObj.get_closest_mode()
-        
-        sL.append( 'cham_freq  = %g Hz'%self.injObj.des_freq + mode_msg )
-        if self.injObj.des_freq > 1.01*self.injObj._3T_freq:
-            sL.append('    WARNING des_freq > 3T')
-        
-        sL.append( 'Nelements  = %g'%self.injObj.Nelements + ' (set by %s)'%self.injObj.used_Nelem_criteria )
-        sL.append( 'elemDens   = %g'%self.injObj.elemDensCalc + ' elem/in**2' )
-        
-        if self.injObj.DorfOx < self.injObj.DorfMin * 0.999:
-            sL.append( 'DorfOx     = %.4f'%self.injObj.DorfOx + ' in (Violates DorfMin)' )
-        else:
-            sL.append( 'DorfOx     = %.4f'%self.injObj.DorfOx + ' in' )
+        if self.injObj is not None:
+            mode, mode_freq, mode_msg  = self.injObj.get_closest_mode()
             
-        if self.injObj.DorfFuel < self.injObj.DorfMin * 1.01:
-            sL.append( 'DorfFuel   = %.4f'%self.injObj.DorfFuel + ' in (DorfMin=%g)'%self.injObj.DorfMin )
-        else:
-            sL.append( 'DorfFuel   = %.4f'%self.injObj.DorfFuel + ' in' )
+            sL.append( 'cham_freq  = %g Hz'%self.injObj.des_freq + mode_msg )
+            if self.injObj.des_freq > 1.01*self.injObj._3T_freq:
+                sL.append('    WARNING des_freq > 3T')
+            
+            sL.append( 'Nelements  = %g'%self.injObj.Nelements + ' (set by %s)'%self.injObj.used_Nelem_criteria )
+            sL.append( 'elemDens   = %g'%self.injObj.elemDensCalc + ' elem/in**2' )
+            
+            if self.injObj.DorfOx < self.injObj.DorfMin * 0.999:
+                sL.append( 'DorfOx     = %.4f'%self.injObj.DorfOx + ' in (Violates DorfMin)' )
+            else:
+                sL.append( 'DorfOx     = %.4f'%self.injObj.DorfOx + ' in' )
+                
+            if self.injObj.DorfFuel < self.injObj.DorfMin * 1.01:
+                sL.append( 'DorfFuel   = %.4f'%self.injObj.DorfFuel + ' in (DorfMin=%g)'%self.injObj.DorfMin )
+            else:
+                sL.append( 'DorfFuel   = %.4f'%self.injObj.DorfFuel + ' in' )
             
         out_str = '<BR>'.join(sL)
         out_str = out_str.replace(' ','&nbsp;')
