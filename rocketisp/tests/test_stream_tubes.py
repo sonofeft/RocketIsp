@@ -91,7 +91,7 @@ class MyTest(unittest.TestCase):
                 oxName='LOX', fuelName='CH4',  MRcore=3.6,
                 Pc=500, Pamb=14.7)
         
-        self.assertAlmostEqual(C('IspAmb'), 325.1188, places=2)
+        self.assertAlmostEqual(C('IspAmb'), 251.9288, places=2)
         self.assertAlmostEqual(C('IspDel'), 345.2795, places=2)
         self.assertAlmostEqual(C('IspODE'), 363.2227, places=2)
         self.assertAlmostEqual(C('IspODF'), 334.1623, places=2)

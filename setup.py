@@ -89,6 +89,7 @@ setup(
 
     packages = find_packages(exclude=['.tox', '.hg', 'docs']),
     package_data = {'rocketisp':['examples/*.*', 
+                                 'gui/*.*', 
                                  'nozzle/*.npz', 
                                  'efficiency/*.npz', 
                                  'efficiency/fracKinODK/*.npz']},

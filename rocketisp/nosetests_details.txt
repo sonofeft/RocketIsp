@@ -1,4 +1,4 @@
-________tk_nosy UNITTEST RUN# 1_________
+________tk_nosy UNITTEST RUN# 2_________
 
 {Item #1} test__main__, 
 ............................ Efficiencies ............................
@@ -254,7 +254,7 @@ FFC = 0.97935    (barrier calc) Fuel Film Cooling Efficiency of Chamber
 ..Chamber..
 Mix = 0.98956    (mixAngle=2.04 deg) Inter-Element Mixing Efficiency of Injector
  Em = 0.98448    (Rupe Em=0.8) Intra-Element Mixing Efficiency of Injector
-Vap = 0.99637    (gen vaporized length) Vaporization Efficiency of Injector
+Vap = 0.99570    (gen vaporized length) Vaporization Efficiency of Injector
 
               Ignored Efficiencies
         Div: Divergence Efficiency of Nozzle
@@ -414,7 +414,7 @@ IspODK =  315.21118771810467
 
 IspODK =  315.21118771810467    fracKin= 0.690805784550044
 
-module_by_idD = {462616752: <module 'calc_CHNO_fracKin' from 'D:\\2020_py_proj\\RocketIsp\\rocketisp\\efficiency\\fracKinODK\\calc_CHNO_fracKin.py'>}
+module_by_idD = {446495440: <module 'calc_CHNO_fracKin' from 'D:\\2020_py_proj\\RocketIsp\\rocketisp\\efficiency\\fracKinODK\\calc_CHNO_fracKin.py'>}
 
 {Item #6} test_main_eff_divergence, 
 eff_div_eles(eps=25.0, pcBell=80.0) = 0.9879525787192942
@@ -425,28 +425,28 @@ eff_div( eps=25.0, pcBell=55.0) = 0.9714082707639412
 eff_div_cone_eps_bell( eps=25.0, pcBell=80.0, Rd=1.0) = 0.9738082767966942
 
 {Item #7} test_main_get_elements, 
-N2O4/A50 CHNO   ox list= ['O', 'N']   fuel list= ['C', 'H', 'N']
-            N2O4/CH4 CHNO   ox list= ['O', 'N']   fuel list= ['H', 'C']
-           N2O4/C2H6 CHNO   ox list= ['O', 'N']   fuel list= ['H', 'C']
-        N2O4/Ethanol CHNO   ox list= ['O', 'N']   fuel list= ['O', 'H', 'C']
-       N2O4/Methanol CHNO   ox list= ['O', 'N']   fuel list= ['O', 'H', 'C']
-            N2O4/MMH CHNO   ox list= ['O', 'N']   fuel list= ['N', 'H', 'C']
-           N2O4/MHF3 CHNO   ox list= ['O', 'N']   fuel list= ['N', 'H', 'C']
-           N2O4/N2H4  HNO   ox list= ['O', 'N']   fuel list= ['H', 'N']
-            N2O4/NH3  HNO   ox list= ['O', 'N']   fuel list= ['H', 'N']
-            N2O4/LH2  HNO   ox list= ['O', 'N']   fuel list= ['H']
-        N2O4/Propane CHNO   ox list= ['O', 'N']   fuel list= ['H', 'C']
-           N2O4/UDMH CHNO   ox list= ['O', 'N']   fuel list= ['C', 'H', 'N']
-            N2O4/RP1 CHNO   ox list= ['O', 'N']   fuel list= ['H', 'C']
+N2O4/A50 CHNO   ox list= ['N', 'O']   fuel list= ['C', 'H', 'N']
+            N2O4/CH4 CHNO   ox list= ['N', 'O']   fuel list= ['H', 'C']
+           N2O4/C2H6 CHNO   ox list= ['N', 'O']   fuel list= ['H', 'C']
+        N2O4/Ethanol CHNO   ox list= ['N', 'O']   fuel list= ['H', 'O', 'C']
+       N2O4/Methanol CHNO   ox list= ['N', 'O']   fuel list= ['H', 'O', 'C']
+            N2O4/MMH CHNO   ox list= ['N', 'O']   fuel list= ['N', 'H', 'C']
+           N2O4/MHF3 CHNO   ox list= ['N', 'O']   fuel list= ['N', 'H', 'C']
+           N2O4/N2H4  HNO   ox list= ['N', 'O']   fuel list= ['N', 'H']
+            N2O4/NH3  HNO   ox list= ['N', 'O']   fuel list= ['N', 'H']
+            N2O4/LH2  HNO   ox list= ['N', 'O']   fuel list= ['H']
+        N2O4/Propane CHNO   ox list= ['N', 'O']   fuel list= ['H', 'C']
+           N2O4/UDMH CHNO   ox list= ['N', 'O']   fuel list= ['C', 'H', 'N']
+            N2O4/RP1 CHNO   ox list= ['N', 'O']   fuel list= ['H', 'C']
              LOX/A50 CHNO   ox list= ['O']   fuel list= ['C', 'H', 'N']
              LOX/CH4  CHO   ox list= ['O']   fuel list= ['H', 'C']
             LOX/C2H6  CHO   ox list= ['O']   fuel list= ['H', 'C']
-         LOX/Ethanol  CHO   ox list= ['O']   fuel list= ['O', 'H', 'C']
-        LOX/Methanol  CHO   ox list= ['O']   fuel list= ['O', 'H', 'C']
+         LOX/Ethanol  CHO   ox list= ['O']   fuel list= ['H', 'O', 'C']
+        LOX/Methanol  CHO   ox list= ['O']   fuel list= ['H', 'O', 'C']
              LOX/MMH CHNO   ox list= ['O']   fuel list= ['N', 'H', 'C']
             LOX/MHF3 CHNO   ox list= ['O']   fuel list= ['N', 'H', 'C']
-            LOX/N2H4  HNO   ox list= ['O']   fuel list= ['H', 'N']
-             LOX/NH3  HNO   ox list= ['O']   fuel list= ['H', 'N']
+            LOX/N2H4  HNO   ox list= ['O']   fuel list= ['N', 'H']
+             LOX/NH3  HNO   ox list= ['O']   fuel list= ['N', 'H']
              LOX/LH2   HO   ox list= ['O']   fuel list= ['H']
          LOX/Propane  CHO   ox list= ['O']   fuel list= ['H', 'C']
             LOX/UDMH CHNO   ox list= ['O']   fuel list= ['C', 'H', 'N']
@@ -454,12 +454,12 @@ N2O4/A50 CHNO   ox list= ['O', 'N']   fuel list= ['C', 'H', 'N']
            MON10/A50 CHNO   ox list= ['N', 'O']   fuel list= ['C', 'H', 'N']
            MON10/CH4 CHNO   ox list= ['N', 'O']   fuel list= ['H', 'C']
           MON10/C2H6 CHNO   ox list= ['N', 'O']   fuel list= ['H', 'C']
-       MON10/Ethanol CHNO   ox list= ['N', 'O']   fuel list= ['O', 'H', 'C']
-      MON10/Methanol CHNO   ox list= ['N', 'O']   fuel list= ['O', 'H', 'C']
+       MON10/Ethanol CHNO   ox list= ['N', 'O']   fuel list= ['H', 'O', 'C']
+      MON10/Methanol CHNO   ox list= ['N', 'O']   fuel list= ['H', 'O', 'C']
            MON10/MMH CHNO   ox list= ['N', 'O']   fuel list= ['N', 'H', 'C']
           MON10/MHF3 CHNO   ox list= ['N', 'O']   fuel list= ['N', 'H', 'C']
-          MON10/N2H4  HNO   ox list= ['N', 'O']   fuel list= ['H', 'N']
-           MON10/NH3  HNO   ox list= ['N', 'O']   fuel list= ['H', 'N']
+          MON10/N2H4  HNO   ox list= ['N', 'O']   fuel list= ['N', 'H']
+           MON10/NH3  HNO   ox list= ['N', 'O']   fuel list= ['N', 'H']
            MON10/LH2  HNO   ox list= ['N', 'O']   fuel list= ['H']
        MON10/Propane CHNO   ox list= ['N', 'O']   fuel list= ['H', 'C']
           MON10/UDMH CHNO   ox list= ['N', 'O']   fuel list= ['C', 'H', 'N']
@@ -467,12 +467,12 @@ N2O4/A50 CHNO   ox list= ['O', 'N']   fuel list= ['C', 'H', 'N']
            MON25/A50 CHNO   ox list= ['N', 'O']   fuel list= ['C', 'H', 'N']
            MON25/CH4 CHNO   ox list= ['N', 'O']   fuel list= ['H', 'C']
           MON25/C2H6 CHNO   ox list= ['N', 'O']   fuel list= ['H', 'C']
-       MON25/Ethanol CHNO   ox list= ['N', 'O']   fuel list= ['O', 'H', 'C']
-      MON25/Methanol CHNO   ox list= ['N', 'O']   fuel list= ['O', 'H', 'C']
+       MON25/Ethanol CHNO   ox list= ['N', 'O']   fuel list= ['H', 'O', 'C']
+      MON25/Methanol CHNO   ox list= ['N', 'O']   fuel list= ['H', 'O', 'C']
            MON25/MMH CHNO   ox list= ['N', 'O']   fuel list= ['N', 'H', 'C']
           MON25/MHF3 CHNO   ox list= ['N', 'O']   fuel list= ['N', 'H', 'C']
-          MON25/N2H4  HNO   ox list= ['N', 'O']   fuel list= ['H', 'N']
-           MON25/NH3  HNO   ox list= ['N', 'O']   fuel list= ['H', 'N']
+          MON25/N2H4  HNO   ox list= ['N', 'O']   fuel list= ['N', 'H']
+           MON25/NH3  HNO   ox list= ['N', 'O']   fuel list= ['N', 'H']
            MON25/LH2  HNO   ox list= ['N', 'O']   fuel list= ['H']
        MON25/Propane CHNO   ox list= ['N', 'O']   fuel list= ['H', 'C']
           MON25/UDMH CHNO   ox list= ['N', 'O']   fuel list= ['C', 'H', 'N']
@@ -480,69 +480,69 @@ N2O4/A50 CHNO   ox list= ['O', 'N']   fuel list= ['C', 'H', 'N']
            MON30/A50 CHNO   ox list= ['N', 'O']   fuel list= ['C', 'H', 'N']
            MON30/CH4 CHNO   ox list= ['N', 'O']   fuel list= ['H', 'C']
           MON30/C2H6 CHNO   ox list= ['N', 'O']   fuel list= ['H', 'C']
-       MON30/Ethanol CHNO   ox list= ['N', 'O']   fuel list= ['O', 'H', 'C']
-      MON30/Methanol CHNO   ox list= ['N', 'O']   fuel list= ['O', 'H', 'C']
+       MON30/Ethanol CHNO   ox list= ['N', 'O']   fuel list= ['H', 'O', 'C']
+      MON30/Methanol CHNO   ox list= ['N', 'O']   fuel list= ['H', 'O', 'C']
            MON30/MMH CHNO   ox list= ['N', 'O']   fuel list= ['N', 'H', 'C']
           MON30/MHF3 CHNO   ox list= ['N', 'O']   fuel list= ['N', 'H', 'C']
-          MON30/N2H4  HNO   ox list= ['N', 'O']   fuel list= ['H', 'N']
-           MON30/NH3  HNO   ox list= ['N', 'O']   fuel list= ['H', 'N']
+          MON30/N2H4  HNO   ox list= ['N', 'O']   fuel list= ['N', 'H']
+           MON30/NH3  HNO   ox list= ['N', 'O']   fuel list= ['N', 'H']
            MON30/LH2  HNO   ox list= ['N', 'O']   fuel list= ['H']
        MON30/Propane CHNO   ox list= ['N', 'O']   fuel list= ['H', 'C']
           MON30/UDMH CHNO   ox list= ['N', 'O']   fuel list= ['C', 'H', 'N']
            MON30/RP1 CHNO   ox list= ['N', 'O']   fuel list= ['H', 'C']
-             N2O/A50 CHNO   ox list= ['O', 'N']   fuel list= ['C', 'H', 'N']
-             N2O/CH4 CHNO   ox list= ['O', 'N']   fuel list= ['H', 'C']
-            N2O/C2H6 CHNO   ox list= ['O', 'N']   fuel list= ['H', 'C']
-         N2O/Ethanol CHNO   ox list= ['O', 'N']   fuel list= ['O', 'H', 'C']
-        N2O/Methanol CHNO   ox list= ['O', 'N']   fuel list= ['O', 'H', 'C']
-             N2O/MMH CHNO   ox list= ['O', 'N']   fuel list= ['N', 'H', 'C']
-            N2O/MHF3 CHNO   ox list= ['O', 'N']   fuel list= ['N', 'H', 'C']
-            N2O/N2H4  HNO   ox list= ['O', 'N']   fuel list= ['H', 'N']
-             N2O/NH3  HNO   ox list= ['O', 'N']   fuel list= ['H', 'N']
-             N2O/LH2  HNO   ox list= ['O', 'N']   fuel list= ['H']
-         N2O/Propane CHNO   ox list= ['O', 'N']   fuel list= ['H', 'C']
-            N2O/UDMH CHNO   ox list= ['O', 'N']   fuel list= ['C', 'H', 'N']
-             N2O/RP1 CHNO   ox list= ['O', 'N']   fuel list= ['H', 'C']
-           IRFNA/A50 CFHNO   ox list= ['O', 'H', 'F', 'N']   fuel list= ['C', 'H', 'N']
-           IRFNA/CH4 CFHNO   ox list= ['O', 'H', 'F', 'N']   fuel list= ['H', 'C']
-          IRFNA/C2H6 CFHNO   ox list= ['O', 'H', 'F', 'N']   fuel list= ['H', 'C']
-       IRFNA/Ethanol CFHNO   ox list= ['O', 'H', 'F', 'N']   fuel list= ['O', 'H', 'C']
-      IRFNA/Methanol CFHNO   ox list= ['O', 'H', 'F', 'N']   fuel list= ['O', 'H', 'C']
-           IRFNA/MMH CFHNO   ox list= ['O', 'H', 'F', 'N']   fuel list= ['N', 'H', 'C']
-          IRFNA/MHF3 CFHNO   ox list= ['O', 'H', 'F', 'N']   fuel list= ['N', 'H', 'C']
-          IRFNA/N2H4 FHNO   ox list= ['O', 'H', 'F', 'N']   fuel list= ['H', 'N']
-           IRFNA/NH3 FHNO   ox list= ['O', 'H', 'F', 'N']   fuel list= ['H', 'N']
-           IRFNA/LH2 FHNO   ox list= ['O', 'H', 'F', 'N']   fuel list= ['H']
-       IRFNA/Propane CFHNO   ox list= ['O', 'H', 'F', 'N']   fuel list= ['H', 'C']
-          IRFNA/UDMH CFHNO   ox list= ['O', 'H', 'F', 'N']   fuel list= ['C', 'H', 'N']
-           IRFNA/RP1 CFHNO   ox list= ['O', 'H', 'F', 'N']   fuel list= ['H', 'C']
-            CLF5/A50 CCLFHN   ox list= ['F', 'CL']   fuel list= ['C', 'H', 'N']
-            CLF5/CH4 CCLFH   ox list= ['F', 'CL']   fuel list= ['H', 'C']
-           CLF5/C2H6 CCLFH   ox list= ['F', 'CL']   fuel list= ['H', 'C']
-        CLF5/Ethanol CCLFHO   ox list= ['F', 'CL']   fuel list= ['O', 'H', 'C']
-       CLF5/Methanol CCLFHO   ox list= ['F', 'CL']   fuel list= ['O', 'H', 'C']
-            CLF5/MMH CCLFHN   ox list= ['F', 'CL']   fuel list= ['N', 'H', 'C']
-           CLF5/MHF3 CCLFHN   ox list= ['F', 'CL']   fuel list= ['N', 'H', 'C']
-           CLF5/N2H4 CLFHN   ox list= ['F', 'CL']   fuel list= ['H', 'N']
-            CLF5/NH3 CLFHN   ox list= ['F', 'CL']   fuel list= ['H', 'N']
-            CLF5/LH2 CLFH   ox list= ['F', 'CL']   fuel list= ['H']
-        CLF5/Propane CCLFH   ox list= ['F', 'CL']   fuel list= ['H', 'C']
-           CLF5/UDMH CCLFHN   ox list= ['F', 'CL']   fuel list= ['C', 'H', 'N']
-            CLF5/RP1 CCLFH   ox list= ['F', 'CL']   fuel list= ['H', 'C']
+             N2O/A50 CHNO   ox list= ['N', 'O']   fuel list= ['C', 'H', 'N']
+             N2O/CH4 CHNO   ox list= ['N', 'O']   fuel list= ['H', 'C']
+            N2O/C2H6 CHNO   ox list= ['N', 'O']   fuel list= ['H', 'C']
+         N2O/Ethanol CHNO   ox list= ['N', 'O']   fuel list= ['H', 'O', 'C']
+        N2O/Methanol CHNO   ox list= ['N', 'O']   fuel list= ['H', 'O', 'C']
+             N2O/MMH CHNO   ox list= ['N', 'O']   fuel list= ['N', 'H', 'C']
+            N2O/MHF3 CHNO   ox list= ['N', 'O']   fuel list= ['N', 'H', 'C']
+            N2O/N2H4  HNO   ox list= ['N', 'O']   fuel list= ['N', 'H']
+             N2O/NH3  HNO   ox list= ['N', 'O']   fuel list= ['N', 'H']
+             N2O/LH2  HNO   ox list= ['N', 'O']   fuel list= ['H']
+         N2O/Propane CHNO   ox list= ['N', 'O']   fuel list= ['H', 'C']
+            N2O/UDMH CHNO   ox list= ['N', 'O']   fuel list= ['C', 'H', 'N']
+             N2O/RP1 CHNO   ox list= ['N', 'O']   fuel list= ['H', 'C']
+           IRFNA/A50 CFHNO   ox list= ['N', 'F', 'O', 'H']   fuel list= ['C', 'H', 'N']
+           IRFNA/CH4 CFHNO   ox list= ['N', 'F', 'O', 'H']   fuel list= ['H', 'C']
+          IRFNA/C2H6 CFHNO   ox list= ['N', 'F', 'O', 'H']   fuel list= ['H', 'C']
+       IRFNA/Ethanol CFHNO   ox list= ['N', 'F', 'O', 'H']   fuel list= ['H', 'O', 'C']
+      IRFNA/Methanol CFHNO   ox list= ['N', 'F', 'O', 'H']   fuel list= ['H', 'O', 'C']
+           IRFNA/MMH CFHNO   ox list= ['N', 'F', 'O', 'H']   fuel list= ['N', 'H', 'C']
+          IRFNA/MHF3 CFHNO   ox list= ['N', 'F', 'O', 'H']   fuel list= ['N', 'H', 'C']
+          IRFNA/N2H4 FHNO   ox list= ['N', 'F', 'O', 'H']   fuel list= ['N', 'H']
+           IRFNA/NH3 FHNO   ox list= ['N', 'F', 'O', 'H']   fuel list= ['N', 'H']
+           IRFNA/LH2 FHNO   ox list= ['N', 'F', 'O', 'H']   fuel list= ['H']
+       IRFNA/Propane CFHNO   ox list= ['N', 'F', 'O', 'H']   fuel list= ['H', 'C']
+          IRFNA/UDMH CFHNO   ox list= ['N', 'F', 'O', 'H']   fuel list= ['C', 'H', 'N']
+           IRFNA/RP1 CFHNO   ox list= ['N', 'F', 'O', 'H']   fuel list= ['H', 'C']
+            CLF5/A50 CCLFHN   ox list= ['CL', 'F']   fuel list= ['C', 'H', 'N']
+            CLF5/CH4 CCLFH   ox list= ['CL', 'F']   fuel list= ['H', 'C']
+           CLF5/C2H6 CCLFH   ox list= ['CL', 'F']   fuel list= ['H', 'C']
+        CLF5/Ethanol CCLFHO   ox list= ['CL', 'F']   fuel list= ['H', 'O', 'C']
+       CLF5/Methanol CCLFHO   ox list= ['CL', 'F']   fuel list= ['H', 'O', 'C']
+            CLF5/MMH CCLFHN   ox list= ['CL', 'F']   fuel list= ['N', 'H', 'C']
+           CLF5/MHF3 CCLFHN   ox list= ['CL', 'F']   fuel list= ['N', 'H', 'C']
+           CLF5/N2H4 CLFHN   ox list= ['CL', 'F']   fuel list= ['N', 'H']
+            CLF5/NH3 CLFHN   ox list= ['CL', 'F']   fuel list= ['N', 'H']
+            CLF5/LH2 CLFH   ox list= ['CL', 'F']   fuel list= ['H']
+        CLF5/Propane CCLFH   ox list= ['CL', 'F']   fuel list= ['H', 'C']
+           CLF5/UDMH CCLFHN   ox list= ['CL', 'F']   fuel list= ['C', 'H', 'N']
+            CLF5/RP1 CCLFH   ox list= ['CL', 'F']   fuel list= ['H', 'C']
               F2/A50 CFHN   ox list= ['F']   fuel list= ['C', 'H', 'N']
               F2/CH4  CFH   ox list= ['F']   fuel list= ['H', 'C']
              F2/C2H6  CFH   ox list= ['F']   fuel list= ['H', 'C']
-          F2/Ethanol CFHO   ox list= ['F']   fuel list= ['O', 'H', 'C']
-         F2/Methanol CFHO   ox list= ['F']   fuel list= ['O', 'H', 'C']
+          F2/Ethanol CFHO   ox list= ['F']   fuel list= ['H', 'O', 'C']
+         F2/Methanol CFHO   ox list= ['F']   fuel list= ['H', 'O', 'C']
               F2/MMH CFHN   ox list= ['F']   fuel list= ['N', 'H', 'C']
              F2/MHF3 CFHN   ox list= ['F']   fuel list= ['N', 'H', 'C']
-             F2/N2H4  FHN   ox list= ['F']   fuel list= ['H', 'N']
-              F2/NH3  FHN   ox list= ['F']   fuel list= ['H', 'N']
+             F2/N2H4  FHN   ox list= ['F']   fuel list= ['N', 'H']
+              F2/NH3  FHN   ox list= ['F']   fuel list= ['N', 'H']
               F2/LH2   FH   ox list= ['F']   fuel list= ['H']
           F2/Propane  CFH   ox list= ['F']   fuel list= ['H', 'C']
              F2/UDMH CFHN   ox list= ['F']   fuel list= ['C', 'H', 'N']
               F2/RP1  CFH   ox list= ['F']   fuel list= ['H', 'C']
-group_set = {'CFH', 'CCLFH', 'FHNO', 'FHN', 'CFHNO', 'HO', 'CLFHN', 'CHNO', 'CCLFHN', 'CLFH', 'CFHN', 'HNO', 'FH', 'CHO', 'CCLFHO', 'CFHO'}
+group_set = {'CLFH', 'CFH', 'CFHNO', 'CHO', 'CCLFHN', 'HO', 'CHNO', 'HNO', 'CLFHN', 'CCLFHO', 'CFHN', 'FHN', 'CFHO', 'CCLFH', 'FH', 'FHNO'}
 get_ox_fuel_pair_in_group( "HO" ) = ('LOX', 'LH2')
 
 {Item #8} test_main_huzel_data, 
@@ -626,8 +626,8 @@ ignore_noz_sep =        0       flag to force nozzle flow separation to be ignor
      CfAmbDel = 1.88109          delivered ambient thrust coefficient
      CfVacDel = 1.88109          delivered vacuum thrust coefficient
    CfVacIdeal = 1.97675          ideal vacuum thrust coefficient
-     cstarERE =  5399.1    ft/s  delivered core cstar
-                                 (1645.6 m/s)
+     cstarERE =  5345.8    ft/s  delivered core cstar
+                                 (1629.4 m/s)
      cstarODE =  5699.0    ft/s  core ideal cstar
                                  (1737.1 m/s)
   FvacBarrier =   920.7     lbf  vacuum thrust due to barrier stream tube
@@ -637,10 +637,10 @@ ignore_noz_sep =        0       flag to force nozzle flow separation to be ignor
     FvacTotal =  7630.8     lbf  total vacuum thrust
                                  (33943.5 N)
      gammaChm = 1.14132          core gas ratio of specific heats (Cp/Cv)
-       IspDel =  312.16     sec  <=== thruster delivered vacuum Isp ===>
-                                 (3061.21 N-sec/kg, 3.06 km/sec)
-  IspDel_core =  318.74     sec  delivered Isp of core stream tube
-                                 (3125.74 N-sec/kg, 3.13 km/sec)
+       IspDel =  309.08     sec  <=== thruster delivered vacuum Isp ===>
+                                 (3031.00 N-sec/kg, 3.03 km/sec)
+  IspDel_core =  315.59     sec  delivered Isp of core stream tube
+                                 (3094.89 N-sec/kg, 3.09 km/sec)
        IspODE =  350.14     sec  core one dimensional equilibrium Isp
                                  (3433.74 N-sec/kg, 3.43 km/sec)
        IspODF =  327.28     sec  core frozen Isp
@@ -653,38 +653,38 @@ ignore_noz_sep =        0       flag to force nozzle flow separation to be ignor
                                  (0.00 MPa, 0.00 atm, 0.00 bar)
         TcODE =  5651.4    degR  ideal core gas temperature
                                  (3139.7 degK, 2866.5 degC, 5191.8 degF)
-       wdotFl =   9.435   lbm/s  total fuel flow rate
-                                 (4.280 kg/s)
-       wdotOx =  15.011   lbm/s  total oxidizer flow rate
-                                 (6.809 kg/s)
-      wdotTot =  24.445   lbm/s  total propellant flow rate (ox+fuel)
-                                 (11.088 kg/s)
+       wdotFl =   9.529   lbm/s  total fuel flow rate
+                                 (4.322 kg/s)
+       wdotOx =  15.160   lbm/s  total oxidizer flow rate
+                                 (6.877 kg/s)
+      wdotTot =  24.689   lbm/s  total propellant flow rate (ox+fuel)
+                                 (11.199 kg/s)
 ..At Injector Face..
- wdotFl_cInit =   8.114   lbm/s  initial core fuel flow rate (before any entrainment)
-                                 (3.680 kg/s)
-    wdotFlFFC =   1.321   lbm/s  fuel film coolant flow rate injected at perimeter
-                                 (0.599 kg/s)
-wdotTot_cInit =  23.125   lbm/s  initial core total flow rate (before any entrainment)
-                                 (10.489 kg/s)
+ wdotFl_cInit =   8.195   lbm/s  initial core fuel flow rate (before any entrainment)
+                                 (3.717 kg/s)
+    wdotFlFFC =   1.334   lbm/s  fuel film coolant flow rate injected at perimeter
+                                 (0.605 kg/s)
+wdotTot_cInit =  23.355   lbm/s  initial core total flow rate (before any entrainment)
+                                 (10.594 kg/s)
 ..After Entrainment..
-     wdotFl_b =   2.048   lbm/s  barrier fuel flow rate (FFC + entrained)
-                                 (0.929 kg/s)
-     wdotFl_c =   7.387   lbm/s  final core fuel flow rate (injected - entrained)
-                                 (3.351 kg/s)
-     wdotOx_b =   1.345   lbm/s  barrier oxidizer flow rate (all entrained)
-                                 (0.610 kg/s)
-     wdotOx_c =  13.665   lbm/s  final core oxidizer flow rate (injected - entrained)
-                                 (6.199 kg/s)
-    wdotTot_b =   3.393   lbm/s  total barrier propellant flow rate (includes entrained)
-                                 (1.539 kg/s)
-    wdotTot_c =  21.052   lbm/s  total final core propellant flow rate (injected - entrained)
-                                 (9.549 kg/s)
+     wdotFl_b =   2.068   lbm/s  barrier fuel flow rate (FFC + entrained)
+                                 (0.938 kg/s)
+     wdotFl_c =   7.460   lbm/s  final core fuel flow rate (injected - entrained)
+                                 (3.384 kg/s)
+     wdotOx_b =   1.359   lbm/s  barrier oxidizer flow rate (all entrained)
+                                 (0.616 kg/s)
+     wdotOx_c =  13.802   lbm/s  final core oxidizer flow rate (injected - entrained)
+                                 (6.260 kg/s)
+    wdotTot_b =   3.427   lbm/s  total barrier propellant flow rate (includes entrained)
+                                 (1.555 kg/s)
+    wdotTot_c =  21.262   lbm/s  total final core propellant flow rate (injected - entrained)
+                                 (9.644 kg/s)
 ............................................................................
                              Efficiencies
                                 Output
-Isp = 0.89151    Overall Isp Efficiency
+Isp = 0.88271    Overall Isp Efficiency
 Noz = 0.96087    Nozzle Efficiency
-ERE = 0.94737    Energy Release Efficiency of Chamber
+ERE = 0.93802    Energy Release Efficiency of Chamber
 FFC = 0.97935    (barrier calc) Fuel Film Cooling Efficiency of Chamber
 ..Nozzle..
 Div = 0.99377    (simple fit eps=150, %bell=80) Divergence Efficiency of Nozzle
@@ -693,7 +693,7 @@ Kin = 0.97528    (MLP fit) Kinetic Efficiency of Nozzle
 ..Chamber..
 Mix = 0.99457    (mixAngle=1.47 deg) Inter-Element Mixing Efficiency of Injector
  Em = 0.99641    (Rupe elemEm=0.9) Intra-Element Mixing Efficiency of Injector
-Vap = 0.95598    (gen vaporized length) Vaporization Efficiency of Injector
+Vap = 0.94654    (gen vaporized length) Vaporization Efficiency of Injector
 
             Ignored Efficiencies
         TP: Two Phase Efficiency of Nozzle
@@ -705,13 +705,13 @@ Vap = 0.95598    (gen vaporized length) Vaporization Efficiency of Injector
 pcentFFC =    14    percent fuel film cooling ( FFC flowrate / total fuel flowrate)
 ............................................................................
 .................................  Output ..................................
-  cstarERE_b =   4580.9 ft/s  delivered cstar
-                              (1396.2 m/s)
+  cstarERE_b =   4535.6 ft/s  delivered cstar
+                              (1382.5 m/s)
   cstarODE_b =   4835.3 ft/s  ideal equilibrium cstar
                               (1473.8 m/s)
    fracKin_b = 0.621333       fraction of kinetic completion in barrier
-    IspDel_b =   271.33  sec  delivered vacuum barrier Isp
-                              (2660.85 N-sec/kg, 2.66 km/sec)
+    IspDel_b =   268.65  sec  delivered vacuum barrier Isp
+                              (2634.59 N-sec/kg, 2.63 km/sec)
     IspODE_b =  298.067       sec. ideal equilibrium barrier Isp
     IspODF_b =   278.61  sec  ideal frozen barrier Isp
                               (2732.21 N-sec/kg, 2.73 km/sec)
@@ -860,15 +860,15 @@ ignore_noz_sep =     0       flag to force nozzle flow separation to be ignored 
                              (1.03 MPa, 10.21 atm, 10.34 bar)
 ............................................................................
 .................................  Output ..................................
-     CfAmbDel = 1.54915          delivered ambient thrust coefficient
+     CfAmbDel = 1.13021          delivered ambient thrust coefficient
      CfVacDel = 1.86934          delivered vacuum thrust coefficient
    CfVacIdeal = 1.97675          ideal vacuum thrust coefficient
      cstarERE =  5663.5    ft/s  delivered core cstar
                                  (1726.2 m/s)
      cstarODE =  5699.0    ft/s  core ideal cstar
                                  (1737.1 m/s)
-     Fambient =  6284.3     lbf  total sea level thrust
-                                 (27953.8 N)
+     Fambient =  4584.8     lbf  total sea level thrust
+                                 (20394.3 N)
                                  (Separated (Psep=6.15845, epsSep=4.54878))
   FvacBarrier =   915.0     lbf  vacuum thrust due to barrier stream tube
                                  (4070.0 N)
@@ -877,8 +877,8 @@ ignore_noz_sep =     0       flag to force nozzle flow separation to be ignored 
     FvacTotal =  7583.1     lbf  total vacuum thrust
                                  (33731.5 N)
      gammaChm = 1.14132          core gas ratio of specific heats (Cp/Cv)
-       IspAmb =  268.30     sec  delivered sea level Isp
-                                 (2631.12 N-sec/kg, 2.63 km/sec)
+       IspAmb =  195.74     sec  delivered sea level Isp
+                                 (1919.59 N-sec/kg, 1.92 km/sec)
                                  (Separated (Psep=6.15845, epsSep=4.54878))
        IspDel =  323.75     sec  <=== thruster delivered vacuum Isp ===>
                                  (3174.94 N-sec/kg, 3.17 km/sec)
