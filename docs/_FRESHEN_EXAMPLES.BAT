@@ -11,9 +11,13 @@ python copy_example_to_static.py plot_example_results.py
 python copy_example_to_static.py plot_odekf.py
 python copy_example_to_static.py plot_eff_mixing_angle.py
 python copy_example_to_static.py plot_effEm_Isp_impact.py
+python copy_example_to_static.py plot_hewitt_criteria.py
 
 rem ======= move to example_scripts area =============
 cd .\_static\example_scripts
+
+rem =================== Plot Hewitt Criteria ====================
+python plot_hewitt_criteria.py > plot_hewitt_criteria.out
 
 rem =================== Em impact on MRopt ====================
 python plot_effEm_Isp_impact.py > plot_effEm_Isp_impact.out

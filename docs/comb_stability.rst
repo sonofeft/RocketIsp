@@ -141,14 +141,25 @@ the relationship between Strouhal number and Reynolds number for circular cylind
 Notice in the above chart that a Strouhal number of 0.2 applies to a wide range of Reynolds number
 for the circular cylinder data.
 
-When Ross Hewitt correlated liquid rocket engine test data to create the Hewitt criteria, 
-that same value of 0.2 was discovered as applying to the oscillations of injected propellant streams.
-The Hewitt criteria calculates the injection frequency, :math:`f_H`, as:
+The Hewitt criteria can be reproduced when assuming a Strouhal number of 0.2 as shown in the chart below.
+
+.. image:: ./_static/hewitt_derived.png
+    :width: 59%
+
+Using the above observation,
+the Hewitt criteria calculates injection frequency, :math:`f_H`, as:
 
 :math:`f_H = 0.2 \; U_j / d_o`
 
-When the least volatile propellant is injected from a like-on-like element, the effective :math:`d_o` is considered to
-be doubled such that injection frequency for like-on-like, :math:`f_{Hlol}`, is:
+The use of a Strouhal number of 0.2 is assumed to apply ONLY to elements using
+a single orifice for the least volatile propellant, for example an unlike doublet.
+
+When an injector element combines orifices of the least volatile propellant,
+then some modification for the effective :math:`d_o` must be made.
+
+In a like-on-like element, for example,
+the effective :math:`d_o` can be considered to
+be double the individual :math:`d_o` such that injection frequency for like-on-like, :math:`f_{Hlol}`, is:
 
 :math:`f_{Hlol} = 0.1 \; U_j / d_o`
 
