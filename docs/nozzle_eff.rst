@@ -470,7 +470,7 @@ to be used for all propellant combinations that are members of the group.
 .. raw:: html
 
     <table><tr> <th>Group</th> <th>#1</th> <th>#2</th> <th>#3</th> <th>#4</th> <th>#5</th> <th>#6</th> </tr>
-        <tr  style="background-color:#DBE4EE"><td style="font-weight:bold"><a class="reference internal image-reference" href="./_static/FH_fracKin_corr_params_30x30.png">FH</a></td>
+        <tr  style="background-color:#DBE4EE"><td style="font-weight:bold"><a class="reference internal image-reference" href="./_static/FH_frackin_corr_params_30x30.png">FH</a></td>
             <td>Rthrt</td>
             <td>H2F2</td>
             <td>MolWt</td>
@@ -478,7 +478,7 @@ to be used for all propellant combinations that are members of the group.
             <td>*HF</td>
             <td>*H2</td>
         </tr>
-        <tr  style="background-color:#F5F7FA"><td style="font-weight:bold"><a class="reference internal image-reference" href="./_static/HO_fracKin_corr_params_30x30.png">HO</a></td>
+        <tr  style="background-color:#F5F7FA"><td style="font-weight:bold"><a class="reference internal image-reference" href="./_static/HO_frackin_corr_params_30x30.png">HO</a></td>
             <td>Rthrt</td>
             <td>Pc</td>
             <td>*H2</td>
@@ -486,7 +486,7 @@ to be used for all propellant combinations that are members of the group.
             <td>HO2</td>
             <td>H2O</td>
         </tr>
-        <tr  style="background-color:#DBE4EE"><td style="font-weight:bold"><a class="reference internal image-reference" href="./_static/CHO_fracKin_corr_params_30x30.png">CHO</a></td>
+        <tr  style="background-color:#DBE4EE"><td style="font-weight:bold"><a class="reference internal image-reference" href="./_static/CHO_frackin_corr_params_30x30.png">CHO</a></td>
             <td>Rthrt</td>
             <td>COOH</td>
             <td>eps</td>
@@ -494,7 +494,7 @@ to be used for all propellant combinations that are members of the group.
             <td>Pc</td>
             <td>*O2</td>
         </tr>
-        <tr  style="background-color:#F5F7FA"><td style="font-weight:bold"><a class="reference internal image-reference" href="./_static/FHN_fracKin_corr_params_30x30.png">FHN</a></td>
+        <tr  style="background-color:#F5F7FA"><td style="font-weight:bold"><a class="reference internal image-reference" href="./_static/FHN_frackin_corr_params_30x30.png">FHN</a></td>
             <td>Rthrt</td>
             <td>Pc</td>
             <td>*H2</td>
@@ -502,7 +502,7 @@ to be used for all propellant combinations that are members of the group.
             <td>gammaInit</td>
             <td>NH3</td>
         </tr>
-        <tr  style="background-color:#DBE4EE"><td style="font-weight:bold"><a class="reference internal image-reference" href="./_static/HNO_fracKin_corr_params_30x30.png">HNO</a></td>
+        <tr  style="background-color:#DBE4EE"><td style="font-weight:bold"><a class="reference internal image-reference" href="./_static/HNO_frackin_corr_params_30x30.png">HNO</a></td>
             <td>Rthrt</td>
             <td>Pc</td>
             <td>gammaInit</td>
@@ -510,7 +510,7 @@ to be used for all propellant combinations that are members of the group.
             <td>*H2</td>
             <td>TcCham</td>
         </tr>
-        <tr  style="background-color:#F5F7FA"><td style="font-weight:bold"><a class="reference internal image-reference" href="./_static/CFHN_fracKin_corr_params_30x30.png">CFHN</a></td>
+        <tr  style="background-color:#F5F7FA"><td style="font-weight:bold"><a class="reference internal image-reference" href="./_static/CFHN_frackin_corr_params_30x30.png">CFHN</a></td>
             <td>Rthrt</td>
             <td>*NH</td>
             <td>eps</td>
@@ -518,7 +518,7 @@ to be used for all propellant combinations that are members of the group.
             <td>Pc</td>
             <td>MolWt</td>
         </tr>
-        <tr  style="background-color:#DBE4EE"><td style="font-weight:bold"><a class="reference internal image-reference" href="./_static/CFHO_fracKin_corr_params_30x30.png">CFHO</a></td>
+        <tr  style="background-color:#DBE4EE"><td style="font-weight:bold"><a class="reference internal image-reference" href="./_static/CFHO_frackin_corr_params_30x30.png">CFHO</a></td>
             <td>Rthrt</td>
             <td>Pc</td>
             <td>*CO2</td>
@@ -526,7 +526,7 @@ to be used for all propellant combinations that are members of the group.
             <td>*CO</td>
             <td>CH2F</td>
         </tr>
-        <tr  style="background-color:#F5F7FA"><td style="font-weight:bold"><a class="reference internal image-reference" href="./_static/CHNO_fracKin_corr_params_30x30.png">CHNO</a></td>
+        <tr  style="background-color:#F5F7FA"><td style="font-weight:bold"><a class="reference internal image-reference" href="./_static/CHNO_frackin_corr_params_30x30.png">CHNO</a></td>
             <td>Rthrt</td>
             <td>TcCham</td>
             <td>Pc</td>
@@ -534,7 +534,7 @@ to be used for all propellant combinations that are members of the group.
             <td>*H2</td>
             <td>*OH</td>
         </tr>
-        <tr  style="background-color:#DBE4EE"><td style="font-weight:bold"><a class="reference internal image-reference" href="./_static/CLFH_fracKin_corr_params_30x30.png">CLFH</a></td>
+        <tr  style="background-color:#DBE4EE"><td style="font-weight:bold"><a class="reference internal image-reference" href="./_static/CLFH_frackin_corr_params_30x30.png">CLFH</a></td>
             <td>*H2</td>
             <td>Rthrt</td>
             <td>Pc</td>
@@ -542,7 +542,7 @@ to be used for all propellant combinations that are members of the group.
             <td>*CL</td>
             <td>*HF</td>
         </tr>
-        <tr  style="background-color:#F5F7FA"><td style="font-weight:bold"><a class="reference internal image-reference" href="./_static/FHNO_fracKin_corr_params_30x30.png">FHNO</a></td>
+        <tr  style="background-color:#F5F7FA"><td style="font-weight:bold"><a class="reference internal image-reference" href="./_static/FHNO_frackin_corr_params_30x30.png">FHNO</a></td>
             <td>Rthrt</td>
             <td>Pc</td>
             <td>*HF</td>
@@ -550,7 +550,7 @@ to be used for all propellant combinations that are members of the group.
             <td>gammaInit</td>
             <td>*NO</td>
         </tr>
-        <tr  style="background-color:#DBE4EE"><td style="font-weight:bold"><a class="reference internal image-reference" href="./_static/CFHNO_fracKin_corr_params_30x30.png">CFHNO</a></td>
+        <tr  style="background-color:#DBE4EE"><td style="font-weight:bold"><a class="reference internal image-reference" href="./_static/CFHNO_frackin_corr_params_30x30.png">CFHNO</a></td>
             <td>Rthrt</td>
             <td>TcCham</td>
             <td>*O</td>
@@ -558,7 +558,7 @@ to be used for all propellant combinations that are members of the group.
             <td>Pc</td>
             <td>gammaInit</td>
         </tr>
-        <tr  style="background-color:#F5F7FA"><td style="font-weight:bold"><a class="reference internal image-reference" href="./_static/CLFHN_fracKin_corr_params_30x30.png">CLFHN</a></td>
+        <tr  style="background-color:#F5F7FA"><td style="font-weight:bold"><a class="reference internal image-reference" href="./_static/CLFHN_frackin_corr_params_30x30.png">CLFHN</a></td>
             <td>*N2</td>
             <td>Rthrt</td>
             <td>eps</td>
@@ -566,7 +566,7 @@ to be used for all propellant combinations that are members of the group.
             <td>HCL</td>
             <td>Pc</td>
         </tr>
-        <tr  style="background-color:#DBE4EE"><td style="font-weight:bold"><a class="reference internal image-reference" href="./_static/CCLFHN_fracKin_corr_params_30x30.png">CCLFHN</a></td>
+        <tr  style="background-color:#DBE4EE"><td style="font-weight:bold"><a class="reference internal image-reference" href="./_static/CCLFHN_frackin_corr_params_30x30.png">CCLFHN</a></td>
             <td>*CL</td>
             <td>eps</td>
             <td>*N2</td>
@@ -574,7 +574,7 @@ to be used for all propellant combinations that are members of the group.
             <td>MolWt</td>
             <td>*HF</td>
         </tr>
-        <tr  style="background-color:#F5F7FA"><td style="font-weight:bold"><a class="reference internal image-reference" href="./_static/All_fracKin_corr_params_30x30.png">Combined</a></td>
+        <tr  style="background-color:#F5F7FA"><td style="font-weight:bold"><a class="reference internal image-reference" href="./_static/All_frackin_corr_params_30x30.png">Combined</a></td>
             <td>Rthrt</td>
             <td>TcCham</td>
             <td>Pc</td>
