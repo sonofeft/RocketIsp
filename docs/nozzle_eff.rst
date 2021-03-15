@@ -594,3 +594,51 @@ to be used for all propellant combinations that are members of the group.
 .. note::
 
     Molecules listed in the table above refer to the mass fraction of those molecules.
+
+.. image:: ./_static/FH_fracKin_corr_params_30x30.png
+    :width: 6%
+
+.. image:: ./_static/HO_fracKin_corr_params_30x30.png
+    :width: 6%
+
+.. image:: ./_static/CHO_fracKin_corr_params_30x30.png
+    :width: 6%
+
+
+.. image:: ./_static/FHN_fracKin_corr_params_30x30.png
+    :width: 6%
+
+.. image:: ./_static/HNO_fracKin_corr_params_30x30.png
+    :width: 6%
+
+.. image:: ./_static/CFHN_fracKin_corr_params_30x30.png
+    :width: 6%
+
+
+.. image:: ./_static/CFHO_fracKin_corr_params_30x30.png
+    :width: 6%
+
+.. image:: ./_static/CHNO_fracKin_corr_params_30x30.png
+    :width: 6%
+
+.. image:: ./_static/CLFH_fracKin_corr_params_30x30.png
+    :width: 6%
+
+
+.. image:: ./_static/FHNO_fracKin_corr_params_30x30.png
+    :width: 6%
+
+.. image:: ./_static/CFHNO_fracKin_corr_params_30x30.png
+    :width: 6%
+
+.. image:: ./_static/CLFHN_fracKin_corr_params_30x30.png
+    :width: 6%
+
+
+.. image:: ./_static/CCLFHN_fracKin_corr_params_30x30.png
+    :width: 6%
+
+.. image:: ./_static/All_fracKin_corr_params_30x30.png
+    :width: 6%
+
+
