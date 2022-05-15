@@ -1,0 +1,612 @@
+
+
+<!doctype html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Examples &#8212; RocketIsp 0.1.11 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/bizstyle.css" />
+    
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/bizstyle.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="copyright" title="Copyright" href="copyright.html" />
+    <link rel="next" title="JANNAF Standard" href="jannaf.html" />
+    <link rel="prev" title="Models" href="models.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <!--[if lt IE 9]>
+    <script src="_static/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="jannaf.html" title="JANNAF Standard"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="models.html" title="Models"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">RocketIsp 0.1.11 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Examples</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="examples">
+<h1>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h1>
+<p><strong>Rocketisp</strong> uses a simplified <a class="reference internal" href="jannaf.html#ref-to-jannaf-standard"><span class="std std-ref">JANNAF Standard</span></a> approach to calculate delivered
+specific impulse (Isp) for liquid rocket thrust chambers.</p>
+<p>The following examples taken from
+<a class="reference external" href="https://www.alternatewars.com/BBOW/Space_Engines/Space_Engine_Encyclopedia.htm">Space Engine Encyclopedia</a>
+demonstrate how to use <strong>Rocketisp</strong>.</p>
+<div class="section" id="apollo-sps">
+<h2>Apollo SPS<a class="headerlink" href="#apollo-sps" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="https://ntrs.nasa.gov/search.jsp?R=20100027319">Aerojet AJ10-137 (Apollo Service Module Engine)</a>
+part of the <a class="reference external" href="https://en.wikipedia.org/wiki/AJ10">AJ10</a> line of Aerojet engines.</p>
+<p>The Apollo SPS engine was used to power the
+<a class="reference external" href="https://en.wikipedia.org/wiki/Apollo_command_and_service_module#:~:text=%20Apollo%20command%20and%20service%20module%20%201,inches%20%283.23...%204%20See%20also.%20%20More%20">Apollo command and service module</a></p>
+<p>The SPS engine was used to place the Apollo spacecraft into and out of lunar orbit,
+and for mid-course corrections between the Earth and Moon.
+It also served as a retrorocket to perform the deorbit burn for Earth orbital Apollo flights.</p>
+<p>Based on the
+<a class="reference external" href="https://www.semanticscholar.org/paper/BLOCK-II-AJ10-137-APOLLO-SERVICE-MODULE-ENGINE-AT-DeFord-McIlveen/c970eff6d329ba0a9d686f7f28feb6b2dc012e71">Apollo BlockII SPS Engine Testing</a>,
+the performance of the engine was about 314 sec at 100 psia chamber pressure.</p>
+<p>With a guess of 15% for fuel film cooling,
+the <strong>RocketIsp</strong> model below predicts a delivered Isp of 313.2 seconds.</p>
+<p>Note that the operating core mixture ratio was calculated based on maximizing the delivered Isp
+by using the method <em>set_mr_to_max_ispdel</em>.</p>
+<a class="reference internal image-reference" href="_images/AJ10-137_SPS_Engine.jpg"><img alt="_images/AJ10-137_SPS_Engine.jpg" src="_images/AJ10-137_SPS_Engine.jpg" style="width: 49%;" /></a>
+<a class="reference internal image-reference" href="_images/Apollo_SPS_Isp_curves.jpg"><img alt="_images/Apollo_SPS_Isp_curves.jpg" src="_images/Apollo_SPS_Isp_curves.jpg" style="width: 49%;" /></a>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Apollo SPS, Aerojet AJ10-137 (Apollo Service Module Engine)</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">rocketisp.rocket_isp</span> <span class="k">import</span> <span class="n">RocketThruster</span>
+<span class="kn">from</span> <span class="nn">rocketisp.geometry</span> <span class="k">import</span> <span class="n">Geometry</span>
+<span class="kn">from</span> <span class="nn">rocketisp.stream_tubes</span> <span class="k">import</span> <span class="n">CoreStream</span>
+<span class="kn">from</span> <span class="nn">rocketisp.efficiencies</span> <span class="k">import</span> <span class="n">Efficiencies</span>
+
+<span class="c1"># create basic Geometry.</span>
+<span class="c1"># Use &quot;place-holder&quot; of 1 inch for throat radius... correct later with &quot;scale_Rt_to_Thrust&quot;</span>
+<span class="n">geomObj</span> <span class="o">=</span> <span class="n">Geometry</span><span class="p">(</span><span class="n">Rthrt</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                   <span class="n">CR</span><span class="o">=</span><span class="mf">2.5</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="mf">62.5</span><span class="p">,</span>  <span class="n">pcentBell</span><span class="o">=</span><span class="mf">72.3</span><span class="p">,</span>
+                   <span class="n">RupThroat</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">RdwnThroat</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">RchmConv</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">cham_conv_deg</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span>
+                   <span class="n">LchmOvrDt</span><span class="o">=</span><span class="mf">3.10</span><span class="p">,</span> <span class="n">LchmMin</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">LchamberInp</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+
+<span class="n">effObj</span> <span class="o">=</span> <span class="n">Efficiencies</span><span class="p">()</span>
+<span class="n">effObj</span><span class="o">.</span><span class="n">set_const</span><span class="p">(</span><span class="s1">&#39;ERE&#39;</span><span class="p">,</span> <span class="mf">0.98</span><span class="p">)</span> <span class="c1"># don&#39;t know injector details so set effERE=0.98</span>
+
+<span class="c1"># It&#39;s an ablative chamber, so some FFC (fuel film cooling) is required... guess about 15%</span>
+<span class="n">core</span> <span class="o">=</span> <span class="n">CoreStream</span><span class="p">(</span> <span class="n">geomObj</span><span class="o">=</span><span class="n">geomObj</span><span class="p">,</span> <span class="n">effObj</span><span class="o">=</span><span class="n">effObj</span><span class="p">,</span> <span class="n">pcentFFC</span><span class="o">=</span><span class="mf">15.0</span><span class="p">,</span>
+                   <span class="n">oxName</span><span class="o">=</span><span class="s1">&#39;N2O4&#39;</span><span class="p">,</span> <span class="n">fuelName</span><span class="o">=</span><span class="s1">&#39;A50&#39;</span><span class="p">,</span>  <span class="n">MRcore</span><span class="o">=</span><span class="mf">1.6</span><span class="p">,</span> <span class="n">Pc</span><span class="o">=</span><span class="mi">100</span> <span class="p">)</span>
+
+<span class="n">R</span> <span class="o">=</span> <span class="n">RocketThruster</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;Apollo SPS&#39;</span><span class="p">,</span><span class="n">coreObj</span><span class="o">=</span><span class="n">core</span><span class="p">)</span>
+
+<span class="c1"># scale geometry to give 20,500 lbf of thrust for current conditions</span>
+<span class="n">R</span><span class="o">.</span><span class="n">scale_Rt_to_Thrust</span><span class="p">(</span> <span class="mi">20500</span> <span class="p">,</span> <span class="n">Pamb</span><span class="o">=</span><span class="mf">0.0</span>  <span class="p">)</span>
+
+<span class="c1"># figure out best mixture ratio to run the engine.</span>
+<span class="n">R</span><span class="o">.</span><span class="n">set_mr_to_max_ispdel</span><span class="p">()</span>
+
+<span class="c1"># re-scale geometry to give 20,500 lbf of thrust after MR change</span>
+<span class="n">R</span><span class="o">.</span><span class="n">scale_Rt_to_Thrust</span><span class="p">(</span> <span class="mi">20500</span> <span class="p">,</span> <span class="n">Pamb</span><span class="o">=</span><span class="mf">0.0</span>  <span class="p">)</span>
+
+<span class="n">R</span><span class="o">.</span><span class="n">summ_print</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>The resulting summary print is</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">==============================</span> <span class="n">Apollo</span> <span class="n">SPS</span> <span class="o">==============================</span>
+<span class="o">.................................</span> <span class="n">Geometry</span> <span class="o">.................................</span>
+<span class="o">..................................</span>  <span class="n">Input</span> <span class="o">..................................</span>
+<span class="n">cham_conv_deg</span> <span class="o">=</span> <span class="mf">30.00</span> <span class="n">deg</span>  <span class="n">half</span> <span class="n">angle</span> <span class="n">of</span> <span class="n">conical</span> <span class="n">convergent</span> <span class="n">section</span>
+           <span class="n">CR</span> <span class="o">=</span>   <span class="mf">2.5</span>      <span class="n">chamber</span> <span class="n">contraction</span> <span class="n">ratio</span> <span class="p">(</span><span class="n">Ainj</span> <span class="o">/</span> <span class="n">Athroat</span><span class="p">)</span>
+          <span class="n">eps</span> <span class="o">=</span>  <span class="mf">62.5</span>      <span class="n">nozzle</span> <span class="n">area</span> <span class="n">ratio</span> <span class="p">(</span><span class="n">Aexit</span> <span class="o">/</span> <span class="n">Athroat</span><span class="p">)</span>
+  <span class="n">LchamberInp</span> <span class="o">=</span>  <span class="kc">None</span>  <span class="ow">in</span>  <span class="n">user</span> <span class="nb">input</span> <span class="n">value</span> <span class="n">of</span> <span class="n">chamber</span> <span class="n">length</span> <span class="p">(</span><span class="n">will</span> <span class="n">override</span> <span class="nb">all</span> <span class="n">other</span> <span class="n">entries</span><span class="p">)</span>
+      <span class="n">LchmMin</span> <span class="o">=</span> <span class="mf">2.000</span>  <span class="ow">in</span>  <span class="n">minimum</span> <span class="n">chamber</span> <span class="n">length</span> <span class="p">(</span><span class="n">will</span> <span class="n">override</span> <span class="n">LchmOvrDt</span><span class="p">)</span>
+                           <span class="p">(</span><span class="mf">5.080</span> <span class="n">cm</span><span class="p">,</span> <span class="mf">0.167</span> <span class="n">ft</span><span class="p">)</span>
+    <span class="n">LchmOvrDt</span> <span class="o">=</span>   <span class="mf">3.1</span>      <span class="n">ratio</span> <span class="n">of</span> <span class="n">chamber</span> <span class="n">length</span> <span class="n">to</span> <span class="n">throat</span> <span class="n">diameter</span> <span class="p">(</span><span class="n">Lcham</span> <span class="o">/</span> <span class="n">Dthrt</span><span class="p">)</span>
+      <span class="n">LnozInp</span> <span class="o">=</span>  <span class="kc">None</span>  <span class="ow">in</span>  <span class="n">user</span> <span class="nb">input</span> <span class="n">nozzle</span> <span class="n">length</span> <span class="p">(</span><span class="n">will</span> <span class="n">override</span> <span class="n">pcentBell</span><span class="p">)</span>
+    <span class="n">pcentBell</span> <span class="o">=</span>  <span class="mf">72.3</span>      <span class="n">nozzle</span> <span class="n">percent</span> <span class="n">bell</span> <span class="p">(</span><span class="n">Lnoz</span> <span class="o">/</span> <span class="n">L_15deg_cone</span><span class="p">)</span>
+     <span class="n">RchmConv</span> <span class="o">=</span>     <span class="mi">1</span>      <span class="n">radius</span> <span class="n">of</span> <span class="n">curvature</span> <span class="n">at</span> <span class="n">start</span> <span class="n">of</span> <span class="n">convergent</span> <span class="n">section</span> <span class="p">(</span><span class="n">Rconv</span> <span class="o">/</span> <span class="n">Rthrt</span><span class="p">)</span>
+   <span class="n">RdwnThroat</span> <span class="o">=</span>     <span class="mi">1</span>      <span class="n">radius</span> <span class="n">of</span> <span class="n">curvature</span> <span class="n">just</span> <span class="n">downstream</span> <span class="n">of</span> <span class="n">throat</span> <span class="p">(</span><span class="n">Rdownstream</span> <span class="o">/</span> <span class="n">Rthrt</span><span class="p">)</span>
+        <span class="n">Rthrt</span> <span class="o">=</span> <span class="mf">5.971</span>  <span class="ow">in</span>  <span class="n">throat</span> <span class="n">radius</span>
+                           <span class="p">(</span><span class="mf">15.166</span> <span class="n">cm</span><span class="p">,</span> <span class="mf">0.498</span> <span class="n">ft</span><span class="p">)</span>
+    <span class="n">RupThroat</span> <span class="o">=</span>   <span class="mf">1.5</span>      <span class="n">radius</span> <span class="n">of</span> <span class="n">curvature</span> <span class="n">just</span> <span class="n">upstream</span> <span class="n">of</span> <span class="n">throat</span> <span class="p">(</span><span class="n">Rupstream</span> <span class="o">/</span> <span class="n">Rthrt</span><span class="p">)</span>
+<span class="o">............................................................................</span>
+<span class="o">...............................</span>  <span class="n">Output</span> <span class="o">....................................</span>
+          <span class="n">Ainj</span> <span class="o">=</span> <span class="mf">279.987</span> <span class="ow">in</span><span class="o">**</span><span class="mi">2</span>  <span class="n">area</span> <span class="n">of</span> <span class="n">injector</span>
+                                <span class="p">(</span><span class="mf">1806.367</span> <span class="n">cm</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+            <span class="n">At</span> <span class="o">=</span> <span class="mf">111.995</span> <span class="ow">in</span><span class="o">**</span><span class="mi">2</span>  <span class="n">throat</span> <span class="n">area</span>
+                                <span class="p">(</span><span class="mf">722.547</span> <span class="n">cm</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+         <span class="n">Dexit</span> <span class="o">=</span>  <span class="mf">94.405</span>    <span class="ow">in</span>  <span class="n">nozzle</span> <span class="n">exit</span> <span class="n">diameter</span>
+                                <span class="p">(</span><span class="mf">239.788</span> <span class="n">cm</span><span class="p">,</span> <span class="mf">7.867</span> <span class="n">ft</span><span class="p">)</span>
+          <span class="n">Dinj</span> <span class="o">=</span>  <span class="mf">18.881</span>    <span class="ow">in</span>  <span class="n">diameter</span> <span class="n">of</span> <span class="n">injector</span>
+                                <span class="p">(</span><span class="mf">47.958</span> <span class="n">cm</span><span class="p">,</span> <span class="mf">1.573</span> <span class="n">ft</span><span class="p">)</span>
+         <span class="n">Dthrt</span> <span class="o">=</span>  <span class="mf">11.941</span>    <span class="ow">in</span>  <span class="n">throat</span> <span class="n">diameter</span>
+                                <span class="p">(</span><span class="mf">30.331</span> <span class="n">cm</span><span class="p">,</span> <span class="mf">0.995</span> <span class="n">ft</span><span class="p">)</span>
+<span class="n">entrance_angle</span> <span class="o">=</span>   <span class="mf">36.79</span>   <span class="n">deg</span>  <span class="n">nozzle</span> <span class="n">initial</span> <span class="n">expansion</span> <span class="n">angle</span>
+    <span class="n">exit_angle</span> <span class="o">=</span>    <span class="mf">9.34</span>   <span class="n">deg</span>  <span class="n">nozzle</span> <span class="n">exit</span> <span class="n">angle</span>
+    <span class="n">Lcham_conv</span> <span class="o">=</span>  <span class="mf">10.009</span>    <span class="ow">in</span>  <span class="n">length</span> <span class="n">of</span> <span class="n">convergent</span> <span class="n">section</span> <span class="n">of</span> <span class="n">chamber</span>
+                                <span class="p">(</span><span class="mf">25.424</span> <span class="n">cm</span><span class="p">,</span> <span class="mf">0.834</span> <span class="n">ft</span><span class="p">)</span>
+     <span class="n">Lcham_cyl</span> <span class="o">=</span>  <span class="mf">27.009</span>    <span class="ow">in</span>  <span class="n">length</span> <span class="n">of</span> <span class="n">cylindrical</span> <span class="n">section</span> <span class="n">of</span> <span class="n">chamber</span>
+                                <span class="p">(</span><span class="mf">68.602</span> <span class="n">cm</span><span class="p">,</span> <span class="mf">2.251</span> <span class="n">ft</span><span class="p">)</span>
+          <span class="n">Lnoz</span> <span class="o">=</span> <span class="mf">111.254</span>    <span class="ow">in</span>  <span class="n">nozzle</span> <span class="n">length</span>
+                                <span class="p">(</span><span class="mf">282.586</span> <span class="n">cm</span><span class="p">,</span> <span class="mf">9.271</span> <span class="n">ft</span><span class="p">)</span>
+        <span class="n">Ltotal</span> <span class="o">=</span> <span class="mf">148.273</span>    <span class="ow">in</span>  <span class="n">nozzle</span> <span class="o">+</span> <span class="n">chamber</span> <span class="n">length</span>
+                                <span class="p">(</span><span class="mf">376.613</span> <span class="n">cm</span><span class="p">,</span> <span class="mf">12.356</span> <span class="n">ft</span><span class="p">)</span>
+          <span class="n">Rinj</span> <span class="o">=</span>   <span class="mf">9.440</span>    <span class="ow">in</span>  <span class="n">radius</span> <span class="n">of</span> <span class="n">injector</span>
+                                <span class="p">(</span><span class="mf">23.979</span> <span class="n">cm</span><span class="p">,</span> <span class="mf">0.787</span> <span class="n">ft</span><span class="p">)</span>
+         <span class="n">Vcham</span> <span class="o">=</span>  <span class="mf">9460.8</span> <span class="ow">in</span><span class="o">**</span><span class="mi">3</span>  <span class="n">approximate</span> <span class="n">chamber</span> <span class="n">volume</span>
+                                <span class="p">(</span><span class="mf">155034.6</span> <span class="n">cm</span><span class="o">**</span><span class="mi">3</span><span class="p">)</span>
+<span class="o">............................................................................</span>
+<span class="o">........................</span> <span class="n">N2O4</span><span class="o">/</span><span class="n">A50</span> <span class="n">Core</span> <span class="n">Stream</span> <span class="n">Tube</span> <span class="o">.........................</span>
+<span class="o">..................................</span>  <span class="n">Input</span> <span class="o">..................................</span>
+   <span class="n">adjCstarODE</span> <span class="o">=</span>        <span class="mi">1</span>       <span class="n">multiplier</span> <span class="n">on</span> <span class="n">NASA</span> <span class="n">CEA</span> <span class="n">code</span> <span class="n">value</span> <span class="n">of</span> <span class="n">cstar</span> <span class="n">ODE</span> <span class="p">(</span><span class="n">default</span> <span class="ow">is</span> <span class="mf">1.0</span><span class="p">)</span>
+   <span class="n">adjIspIdeal</span> <span class="o">=</span>        <span class="mi">1</span>       <span class="n">multiplier</span> <span class="n">on</span> <span class="n">NASA</span> <span class="n">CEA</span> <span class="n">code</span> <span class="n">value</span> <span class="n">of</span> <span class="n">Isp</span> <span class="n">ODE</span> <span class="p">(</span><span class="n">default</span> <span class="ow">is</span> <span class="mf">1.0</span><span class="p">)</span>
+      <span class="n">CdThroat</span> <span class="o">=</span> <span class="mf">0.990299</span>       <span class="n">Cd</span> <span class="n">of</span> <span class="n">throat</span> <span class="p">(</span><span class="n">RocketThruster</span> <span class="nb">object</span> <span class="n">may</span> <span class="n">override</span><span class="p">)</span>
+                                <span class="p">((</span><span class="n">MLP</span> <span class="n">fit</span><span class="p">))</span>
+      <span class="n">fuelName</span> <span class="o">=</span>      <span class="n">A50</span>       <span class="n">name</span> <span class="n">of</span> <span class="n">fuel</span> <span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">g</span><span class="o">.</span> <span class="n">MMH</span><span class="p">,</span> <span class="n">LH2</span><span class="p">)</span>
+<span class="n">ignore_noz_sep</span> <span class="o">=</span>        <span class="mi">0</span>       <span class="n">flag</span> <span class="n">to</span> <span class="n">force</span> <span class="n">nozzle</span> <span class="n">flow</span> <span class="n">separation</span> <span class="n">to</span> <span class="n">be</span> <span class="n">ignored</span> <span class="p">(</span><span class="n">USE</span> <span class="n">WITH</span> <span class="n">CAUTION</span><span class="p">)</span>
+        <span class="n">MRcore</span> <span class="o">=</span>  <span class="mf">1.87985</span>       <span class="n">mixture</span> <span class="n">ratio</span> <span class="n">of</span> <span class="n">core</span> <span class="n">flow</span> <span class="p">(</span><span class="n">ox</span> <span class="n">flow</span> <span class="n">rate</span> <span class="o">/</span> <span class="n">fuel</span> <span class="n">flow</span> <span class="n">rate</span><span class="p">)</span>
+        <span class="n">oxName</span> <span class="o">=</span>     <span class="n">N2O4</span>       <span class="n">name</span> <span class="n">of</span> <span class="n">oxidizer</span> <span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">g</span><span class="o">.</span> <span class="n">N2O4</span><span class="p">,</span> <span class="n">LOX</span><span class="p">)</span>
+          <span class="n">Pamb</span> <span class="o">=</span>     <span class="mf">0.00</span> <span class="n">psia</span>  <span class="n">ambient</span> <span class="n">pressure</span> <span class="p">(</span><span class="k">for</span> <span class="n">example</span> <span class="n">sea</span> <span class="n">level</span> <span class="ow">is</span> <span class="mf">14.7</span> <span class="n">psia</span><span class="p">)</span>
+                                <span class="p">(</span><span class="mf">0.00</span> <span class="n">MPa</span><span class="p">,</span> <span class="mf">0.00</span> <span class="n">atm</span><span class="p">,</span> <span class="mf">0.00</span> <span class="n">bar</span><span class="p">)</span>
+            <span class="n">Pc</span> <span class="o">=</span>    <span class="mf">100.0</span> <span class="n">psia</span>  <span class="n">chamber</span> <span class="n">pressure</span>
+                                <span class="p">(</span><span class="mf">0.69</span> <span class="n">MPa</span><span class="p">,</span> <span class="mf">6.80</span> <span class="n">atm</span><span class="p">,</span> <span class="mf">6.89</span> <span class="n">bar</span><span class="p">)</span>
+<span class="o">............................................................................</span>
+<span class="o">.................................</span>  <span class="n">Output</span> <span class="o">..................................</span>
+     <span class="n">CfAmbDel</span> <span class="o">=</span> <span class="mf">1.83044</span>          <span class="n">delivered</span> <span class="n">ambient</span> <span class="n">thrust</span> <span class="n">coefficient</span>
+     <span class="n">CfVacDel</span> <span class="o">=</span> <span class="mf">1.83044</span>          <span class="n">delivered</span> <span class="n">vacuum</span> <span class="n">thrust</span> <span class="n">coefficient</span>
+   <span class="n">CfVacIdeal</span> <span class="o">=</span> <span class="mf">1.95937</span>          <span class="n">ideal</span> <span class="n">vacuum</span> <span class="n">thrust</span> <span class="n">coefficient</span>
+     <span class="n">cstarERE</span> <span class="o">=</span>  <span class="mf">5534.6</span>    <span class="n">ft</span><span class="o">/</span><span class="n">s</span>  <span class="n">delivered</span> <span class="n">core</span> <span class="n">cstar</span>
+                                 <span class="p">(</span><span class="mf">1686.9</span> <span class="n">m</span><span class="o">/</span><span class="n">s</span><span class="p">)</span>
+     <span class="n">cstarODE</span> <span class="o">=</span>  <span class="mf">5647.5</span>    <span class="n">ft</span><span class="o">/</span><span class="n">s</span>  <span class="n">core</span> <span class="n">ideal</span> <span class="n">cstar</span>
+                                 <span class="p">(</span><span class="mf">1721.4</span> <span class="n">m</span><span class="o">/</span><span class="n">s</span><span class="p">)</span>
+  <span class="n">FvacBarrier</span> <span class="o">=</span>  <span class="mf">2691.2</span>     <span class="n">lbf</span>  <span class="n">vacuum</span> <span class="n">thrust</span> <span class="n">due</span> <span class="n">to</span> <span class="n">barrier</span> <span class="n">stream</span> <span class="n">tube</span>
+                                 <span class="p">(</span><span class="mf">11971.1</span> <span class="n">N</span><span class="p">)</span>
+     <span class="n">FvacCore</span> <span class="o">=</span> <span class="mf">17808.8</span>     <span class="n">lbf</span>  <span class="n">vacuum</span> <span class="n">thrust</span> <span class="n">due</span> <span class="n">to</span> <span class="n">core</span> <span class="n">stream</span> <span class="n">tube</span>
+                                 <span class="p">(</span><span class="mf">79217.4</span> <span class="n">N</span><span class="p">)</span>
+    <span class="n">FvacTotal</span> <span class="o">=</span> <span class="mf">20500.0</span>     <span class="n">lbf</span>  <span class="n">total</span> <span class="n">vacuum</span> <span class="n">thrust</span>
+                                 <span class="p">(</span><span class="mf">91188.5</span> <span class="n">N</span><span class="p">)</span>
+     <span class="n">gammaChm</span> <span class="o">=</span> <span class="mf">1.13146</span>          <span class="n">core</span> <span class="n">gas</span> <span class="n">ratio</span> <span class="n">of</span> <span class="n">specific</span> <span class="n">heats</span> <span class="p">(</span><span class="n">Cp</span><span class="o">/</span><span class="n">Cv</span><span class="p">)</span>
+       <span class="n">IspDel</span> <span class="o">=</span>  <span class="mf">313.18</span>     <span class="n">sec</span>  <span class="o">&lt;===</span> <span class="n">thruster</span> <span class="n">delivered</span> <span class="n">vacuum</span> <span class="n">Isp</span> <span class="o">===&gt;</span>
+                                 <span class="p">(</span><span class="mf">3071.29</span> <span class="n">N</span><span class="o">-</span><span class="n">sec</span><span class="o">/</span><span class="n">kg</span><span class="p">,</span> <span class="mf">3.07</span> <span class="n">km</span><span class="o">/</span><span class="n">sec</span><span class="p">)</span>
+  <span class="n">IspDel_core</span> <span class="o">=</span>  <span class="mf">320.87</span>     <span class="n">sec</span>  <span class="n">delivered</span> <span class="n">Isp</span> <span class="n">of</span> <span class="n">core</span> <span class="n">stream</span> <span class="n">tube</span>
+                                 <span class="p">(</span><span class="mf">3146.66</span> <span class="n">N</span><span class="o">-</span><span class="n">sec</span><span class="o">/</span><span class="n">kg</span><span class="p">,</span> <span class="mf">3.15</span> <span class="n">km</span><span class="o">/</span><span class="n">sec</span><span class="p">)</span>
+       <span class="n">IspODE</span> <span class="o">=</span>  <span class="mf">343.93</span>     <span class="n">sec</span>  <span class="n">core</span> <span class="n">one</span> <span class="n">dimensional</span> <span class="n">equilibrium</span> <span class="n">Isp</span>
+                                 <span class="p">(</span><span class="mf">3372.79</span> <span class="n">N</span><span class="o">-</span><span class="n">sec</span><span class="o">/</span><span class="n">kg</span><span class="p">,</span> <span class="mf">3.37</span> <span class="n">km</span><span class="o">/</span><span class="n">sec</span><span class="p">)</span>
+       <span class="n">IspODF</span> <span class="o">=</span>  <span class="mf">316.89</span>     <span class="n">sec</span>  <span class="n">core</span> <span class="n">frozen</span> <span class="n">Isp</span>
+                                 <span class="p">(</span><span class="mf">3107.63</span> <span class="n">N</span><span class="o">-</span><span class="n">sec</span><span class="o">/</span><span class="n">kg</span><span class="p">,</span> <span class="mf">3.11</span> <span class="n">km</span><span class="o">/</span><span class="n">sec</span><span class="p">)</span>
+       <span class="n">IspODK</span> <span class="o">=</span>  <span class="mf">333.56</span>     <span class="n">sec</span>  <span class="n">core</span> <span class="n">one</span> <span class="n">dimensional</span> <span class="n">kinetic</span> <span class="n">Isp</span>
+                                 <span class="p">(</span><span class="mf">3271.15</span> <span class="n">N</span><span class="o">-</span><span class="n">sec</span><span class="o">/</span><span class="n">kg</span><span class="p">,</span> <span class="mf">3.27</span> <span class="n">km</span><span class="o">/</span><span class="n">sec</span><span class="p">)</span>
+   <span class="n">MRthruster</span> <span class="o">=</span> <span class="mf">1.59787</span>          <span class="n">total</span> <span class="n">thruster</span> <span class="n">mixture</span> <span class="n">ratio</span><span class="s1">&#39;)</span>
+        <span class="n">MWchm</span> <span class="o">=</span>  <span class="mf">21.691</span> <span class="n">g</span><span class="o">/</span><span class="n">gmole</span>  <span class="n">core</span> <span class="n">gas</span> <span class="n">molecular</span> <span class="n">weight</span>
+        <span class="n">Pexit</span> <span class="o">=</span>  <span class="mf">0.1179</span>    <span class="n">psia</span>  <span class="n">nozzle</span> <span class="n">exit</span> <span class="n">pressure</span>
+                                 <span class="p">(</span><span class="mf">0.00</span> <span class="n">MPa</span><span class="p">,</span> <span class="mf">0.01</span> <span class="n">atm</span><span class="p">,</span> <span class="mf">0.01</span> <span class="n">bar</span><span class="p">)</span>
+        <span class="n">TcODE</span> <span class="o">=</span>  <span class="mf">5606.3</span>    <span class="n">degR</span>  <span class="n">ideal</span> <span class="n">core</span> <span class="n">gas</span> <span class="n">temperature</span>
+                                 <span class="p">(</span><span class="mf">3114.6</span> <span class="n">degK</span><span class="p">,</span> <span class="mf">2841.4</span> <span class="n">degC</span><span class="p">,</span> <span class="mf">5146.6</span> <span class="n">degF</span><span class="p">)</span>
+       <span class="n">wdotFl</span> <span class="o">=</span>  <span class="mf">25.196</span>   <span class="n">lbm</span><span class="o">/</span><span class="n">s</span>  <span class="n">total</span> <span class="n">fuel</span> <span class="n">flow</span> <span class="n">rate</span>
+                                 <span class="p">(</span><span class="mf">11.429</span> <span class="n">kg</span><span class="o">/</span><span class="n">s</span><span class="p">)</span>
+       <span class="n">wdotOx</span> <span class="o">=</span>  <span class="mf">40.260</span>   <span class="n">lbm</span><span class="o">/</span><span class="n">s</span>  <span class="n">total</span> <span class="n">oxidizer</span> <span class="n">flow</span> <span class="n">rate</span>
+                                 <span class="p">(</span><span class="mf">18.262</span> <span class="n">kg</span><span class="o">/</span><span class="n">s</span><span class="p">)</span>
+      <span class="n">wdotTot</span> <span class="o">=</span>  <span class="mf">65.457</span>   <span class="n">lbm</span><span class="o">/</span><span class="n">s</span>  <span class="n">total</span> <span class="n">propellant</span> <span class="n">flow</span> <span class="n">rate</span> <span class="p">(</span><span class="n">ox</span><span class="o">+</span><span class="n">fuel</span><span class="p">)</span>
+                                 <span class="p">(</span><span class="mf">29.691</span> <span class="n">kg</span><span class="o">/</span><span class="n">s</span><span class="p">)</span>
+<span class="o">..</span><span class="n">At</span> <span class="n">Injector</span> <span class="n">Face</span><span class="o">..</span>
+ <span class="n">wdotFl_cInit</span> <span class="o">=</span>  <span class="mf">21.417</span>   <span class="n">lbm</span><span class="o">/</span><span class="n">s</span>  <span class="n">initial</span> <span class="n">core</span> <span class="n">fuel</span> <span class="n">flow</span> <span class="n">rate</span> <span class="p">(</span><span class="n">before</span> <span class="nb">any</span> <span class="n">entrainment</span><span class="p">)</span>
+                                 <span class="p">(</span><span class="mf">9.715</span> <span class="n">kg</span><span class="o">/</span><span class="n">s</span><span class="p">)</span>
+    <span class="n">wdotFlFFC</span> <span class="o">=</span>   <span class="mf">3.779</span>   <span class="n">lbm</span><span class="o">/</span><span class="n">s</span>  <span class="n">fuel</span> <span class="n">film</span> <span class="n">coolant</span> <span class="n">flow</span> <span class="n">rate</span> <span class="n">injected</span> <span class="n">at</span> <span class="n">perimeter</span>
+                                 <span class="p">(</span><span class="mf">1.714</span> <span class="n">kg</span><span class="o">/</span><span class="n">s</span><span class="p">)</span>
+<span class="n">wdotTot_cInit</span> <span class="o">=</span>  <span class="mf">61.677</span>   <span class="n">lbm</span><span class="o">/</span><span class="n">s</span>  <span class="n">initial</span> <span class="n">core</span> <span class="n">total</span> <span class="n">flow</span> <span class="n">rate</span> <span class="p">(</span><span class="n">before</span> <span class="nb">any</span> <span class="n">entrainment</span><span class="p">)</span>
+                                 <span class="p">(</span><span class="mf">27.976</span> <span class="n">kg</span><span class="o">/</span><span class="n">s</span><span class="p">)</span>
+<span class="o">..</span><span class="n">After</span> <span class="n">Entrainment</span><span class="o">..</span>
+     <span class="n">wdotFl_b</span> <span class="o">=</span>   <span class="mf">5.924</span>   <span class="n">lbm</span><span class="o">/</span><span class="n">s</span>  <span class="n">barrier</span> <span class="n">fuel</span> <span class="n">flow</span> <span class="n">rate</span> <span class="p">(</span><span class="n">FFC</span> <span class="o">+</span> <span class="n">entrained</span><span class="p">)</span>
+                                 <span class="p">(</span><span class="mf">2.687</span> <span class="n">kg</span><span class="o">/</span><span class="n">s</span><span class="p">)</span>
+     <span class="n">wdotFl_c</span> <span class="o">=</span>  <span class="mf">19.272</span>   <span class="n">lbm</span><span class="o">/</span><span class="n">s</span>  <span class="n">final</span> <span class="n">core</span> <span class="n">fuel</span> <span class="n">flow</span> <span class="n">rate</span> <span class="p">(</span><span class="n">injected</span> <span class="o">-</span> <span class="n">entrained</span><span class="p">)</span>
+                                 <span class="p">(</span><span class="mf">8.742</span> <span class="n">kg</span><span class="o">/</span><span class="n">s</span><span class="p">)</span>
+     <span class="n">wdotOx_b</span> <span class="o">=</span>   <span class="mf">4.031</span>   <span class="n">lbm</span><span class="o">/</span><span class="n">s</span>  <span class="n">barrier</span> <span class="n">oxidizer</span> <span class="n">flow</span> <span class="n">rate</span> <span class="p">(</span><span class="nb">all</span> <span class="n">entrained</span><span class="p">)</span>
+                                 <span class="p">(</span><span class="mf">1.829</span> <span class="n">kg</span><span class="o">/</span><span class="n">s</span><span class="p">)</span>
+     <span class="n">wdotOx_c</span> <span class="o">=</span>  <span class="mf">36.229</span>   <span class="n">lbm</span><span class="o">/</span><span class="n">s</span>  <span class="n">final</span> <span class="n">core</span> <span class="n">oxidizer</span> <span class="n">flow</span> <span class="n">rate</span> <span class="p">(</span><span class="n">injected</span> <span class="o">-</span> <span class="n">entrained</span><span class="p">)</span>
+                                 <span class="p">(</span><span class="mf">16.433</span> <span class="n">kg</span><span class="o">/</span><span class="n">s</span><span class="p">)</span>
+    <span class="n">wdotTot_b</span> <span class="o">=</span>   <span class="mf">9.955</span>   <span class="n">lbm</span><span class="o">/</span><span class="n">s</span>  <span class="n">total</span> <span class="n">barrier</span> <span class="n">propellant</span> <span class="n">flow</span> <span class="n">rate</span> <span class="p">(</span><span class="n">includes</span> <span class="n">entrained</span><span class="p">)</span>
+                                 <span class="p">(</span><span class="mf">4.516</span> <span class="n">kg</span><span class="o">/</span><span class="n">s</span><span class="p">)</span>
+    <span class="n">wdotTot_c</span> <span class="o">=</span>  <span class="mf">55.502</span>   <span class="n">lbm</span><span class="o">/</span><span class="n">s</span>  <span class="n">total</span> <span class="n">final</span> <span class="n">core</span> <span class="n">propellant</span> <span class="n">flow</span> <span class="n">rate</span> <span class="p">(</span><span class="n">injected</span> <span class="o">-</span> <span class="n">entrained</span><span class="p">)</span>
+                                 <span class="p">(</span><span class="mf">25.175</span> <span class="n">kg</span><span class="o">/</span><span class="n">s</span><span class="p">)</span>
+<span class="o">............................................................................</span>
+                             <span class="n">Efficiencies</span>                             
+                                <span class="n">Output</span>                                
+<span class="n">Isp</span> <span class="o">=</span> <span class="mf">0.91061</span>    <span class="n">Overall</span> <span class="n">Isp</span> <span class="n">Efficiency</span>
+<span class="n">Noz</span> <span class="o">=</span> <span class="mf">0.95199</span>    <span class="n">Nozzle</span> <span class="n">Efficiency</span>
+<span class="n">ERE</span> <span class="o">=</span> <span class="mf">0.98000</span>    <span class="p">(</span><span class="n">constant</span><span class="p">)</span> <span class="n">Energy</span> <span class="n">Release</span> <span class="n">Efficiency</span> <span class="n">of</span> <span class="n">Chamber</span>
+<span class="n">FFC</span> <span class="o">=</span> <span class="mf">0.97605</span>    <span class="p">(</span><span class="n">barrier</span> <span class="n">calc</span><span class="p">)</span> <span class="n">Fuel</span> <span class="n">Film</span> <span class="n">Cooling</span> <span class="n">Efficiency</span> <span class="n">of</span> <span class="n">Chamber</span>
+<span class="o">..</span><span class="n">Nozzle</span><span class="o">..</span>
+<span class="n">Div</span> <span class="o">=</span> <span class="mf">0.98851</span>    <span class="p">(</span><span class="n">simple</span> <span class="n">fit</span> <span class="n">eps</span><span class="o">=</span><span class="mf">62.5</span><span class="p">,</span> <span class="o">%</span><span class="n">bell</span><span class="o">=</span><span class="mf">72.3</span><span class="p">)</span> <span class="n">Divergence</span> <span class="n">Efficiency</span> <span class="n">of</span> <span class="n">Nozzle</span>
+<span class="n">Kin</span> <span class="o">=</span> <span class="mf">0.96986</span>    <span class="p">(</span><span class="n">MLP</span> <span class="n">fit</span><span class="p">)</span> <span class="n">Kinetic</span> <span class="n">Efficiency</span> <span class="n">of</span> <span class="n">Nozzle</span>
+ <span class="n">BL</span> <span class="o">=</span> <span class="mf">0.99298</span>    <span class="p">(</span><span class="n">MLP</span> <span class="n">fit</span><span class="p">)</span> <span class="n">Boundary</span> <span class="n">Layer</span> <span class="n">Efficiency</span> <span class="n">of</span> <span class="n">Nozzle</span>
+                                                                      
+           <span class="n">Ignored</span> <span class="n">Efficiencies</span>           
+        <span class="n">TP</span><span class="p">:</span> <span class="n">Two</span> <span class="n">Phase</span> <span class="n">Efficiency</span> <span class="n">of</span> <span class="n">Nozzle</span>
+                                          
+<span class="o">...........................</span> <span class="n">Barrier</span> <span class="n">Stream</span> <span class="n">Tube</span> <span class="o">............................</span>
+<span class="o">..................................</span>  <span class="n">Input</span> <span class="o">..................................</span>
+      <span class="n">ko</span> <span class="o">=</span> <span class="mf">0.035</span>    <span class="n">entrainment</span> <span class="n">constant</span> <span class="p">(</span><span class="n">typical</span> <span class="n">value</span> <span class="ow">is</span> <span class="mf">0.035</span><span class="p">,</span> <span class="nb">range</span> <span class="kn">from</span> <span class="mf">0.03</span> <span class="n">to</span> <span class="mf">0.06</span><span class="p">)</span>
+<span class="n">pcentFFC</span> <span class="o">=</span>    <span class="mi">15</span>    <span class="n">percent</span> <span class="n">fuel</span> <span class="n">film</span> <span class="n">cooling</span> <span class="p">(</span> <span class="n">FFC</span> <span class="n">flowrate</span> <span class="o">/</span> <span class="n">total</span> <span class="n">fuel</span> <span class="n">flowrate</span><span class="p">)</span>
+<span class="o">............................................................................</span>
+<span class="o">.................................</span>  <span class="n">Output</span> <span class="o">..................................</span>
+  <span class="n">cstarERE_b</span> <span class="o">=</span>   <span class="mf">4988.4</span> <span class="n">ft</span><span class="o">/</span><span class="n">s</span>  <span class="n">delivered</span> <span class="n">cstar</span>
+                              <span class="p">(</span><span class="mf">1520.5</span> <span class="n">m</span><span class="o">/</span><span class="n">s</span><span class="p">)</span>
+  <span class="n">cstarODE_b</span> <span class="o">=</span>   <span class="mf">5090.2</span> <span class="n">ft</span><span class="o">/</span><span class="n">s</span>  <span class="n">ideal</span> <span class="n">equilibrium</span> <span class="n">cstar</span>
+                              <span class="p">(</span><span class="mf">1551.5</span> <span class="n">m</span><span class="o">/</span><span class="n">s</span><span class="p">)</span>
+   <span class="n">fracKin_b</span> <span class="o">=</span>        <span class="mi">0</span>       <span class="n">fraction</span> <span class="n">of</span> <span class="n">kinetic</span> <span class="n">completion</span> <span class="ow">in</span> <span class="n">barrier</span>
+    <span class="n">IspDel_b</span> <span class="o">=</span>   <span class="mf">270.33</span>  <span class="n">sec</span>  <span class="n">delivered</span> <span class="n">vacuum</span> <span class="n">barrier</span> <span class="n">Isp</span>
+                              <span class="p">(</span><span class="mf">2651.07</span> <span class="n">N</span><span class="o">-</span><span class="n">sec</span><span class="o">/</span><span class="n">kg</span><span class="p">,</span> <span class="mf">2.65</span> <span class="n">km</span><span class="o">/</span><span class="n">sec</span><span class="p">)</span>
+    <span class="n">IspODE_b</span> <span class="o">=</span>   <span class="mf">294.85</span>       <span class="n">sec</span><span class="o">.</span> <span class="n">ideal</span> <span class="n">equilibrium</span> <span class="n">barrier</span> <span class="n">Isp</span>
+    <span class="n">IspODF_b</span> <span class="o">=</span>   <span class="mf">281.03</span>  <span class="n">sec</span>  <span class="n">ideal</span> <span class="n">frozen</span> <span class="n">barrier</span> <span class="n">Isp</span>
+                              <span class="p">(</span><span class="mf">2755.95</span> <span class="n">N</span><span class="o">-</span><span class="n">sec</span><span class="o">/</span><span class="n">kg</span><span class="p">,</span> <span class="mf">2.76</span> <span class="n">km</span><span class="o">/</span><span class="n">sec</span><span class="p">)</span>
+    <span class="n">IspODK_b</span> <span class="o">=</span>   <span class="mf">281.03</span>  <span class="n">sec</span>  <span class="n">vacuum</span> <span class="n">kinetic</span> <span class="n">Isp</span> <span class="n">of</span> <span class="n">barrier</span>
+                              <span class="p">(</span><span class="mf">2755.95</span> <span class="n">N</span><span class="o">-</span><span class="n">sec</span><span class="o">/</span><span class="n">kg</span><span class="p">,</span> <span class="mf">2.76</span> <span class="n">km</span><span class="o">/</span><span class="n">sec</span><span class="p">)</span>
+   <span class="n">MRbarrier</span> <span class="o">=</span> <span class="mf">0.680508</span>       <span class="n">barrier</span> <span class="n">mixture</span> <span class="n">ratio</span>
+      <span class="n">MRwall</span> <span class="o">=</span> <span class="mf">0.253152</span>       <span class="n">mixture</span> <span class="n">ratio</span> <span class="n">at</span> <span class="n">wall</span>
+     <span class="n">TcODE_b</span> <span class="o">=</span>   <span class="mf">3453.4</span> <span class="n">degR</span>  <span class="n">average</span> <span class="n">ideal</span> <span class="n">ODE</span> <span class="n">temperature</span> <span class="n">of</span> <span class="n">barrier</span> <span class="n">gas</span>
+                              <span class="p">(</span><span class="mf">1918.6</span> <span class="n">degK</span><span class="p">,</span> <span class="mf">1645.4</span> <span class="n">degC</span><span class="p">,</span> <span class="mf">2993.7</span> <span class="n">degF</span><span class="p">)</span>
+    <span class="n">Twallgas</span> <span class="o">=</span>   <span class="mf">2149.3</span> <span class="n">degR</span>  <span class="n">temperature</span> <span class="n">of</span> <span class="n">gas</span> <span class="n">at</span> <span class="n">wall</span>
+                              <span class="p">(</span><span class="mf">1194.1</span> <span class="n">degK</span><span class="p">,</span> <span class="mf">920.9</span> <span class="n">degC</span><span class="p">,</span> <span class="mf">1689.6</span> <span class="n">degF</span><span class="p">)</span>
+<span class="n">WentrOvWcool</span> <span class="o">=</span>  <span class="mf">1.63403</span>       <span class="n">ratio</span> <span class="n">of</span> <span class="n">entrained</span> <span class="n">flow</span> <span class="n">rate</span> <span class="n">to</span> <span class="n">FFC</span> <span class="n">flow</span> <span class="n">rate</span>
+<span class="o">............................................................................</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="r-4d-optimum-mr">
+<h2>R-4D Optimum MR<a class="headerlink" href="#r-4d-optimum-mr" title="Permalink to this headline">¶</a></h2>
+<p>As an exercise in finding the optimum mixture ratio at which to operate a thruster,
+use the <a class="reference external" href="https://www.rocket.com/sites/default/files/documents/In-Space%20Data%20Sheets%204.8.20.pdf">Aerojet HiPAT R-4D Engine</a>
+shown below, as an example.</p>
+<p>The R-4D was originally developed for the reaction control systems for the Apollo Service Module and
+Lunar Excursion Module.
+The HiPAT is the fifth generation of the R-4D 100 lbf thrust class of liquid bipropellant engines.
+It performs orbit-raising maneuvers for many of the world’s communication satellite platforms,
+including Astrium’s Eurostar 3000, Boeing Space Systems’ 702HP, MELCO’s DS-2000 and Loral’s LS-1300.
+The R-4D also has played critical roles in NASA missions such as Cassini’s orbit insertion of Saturn.</p>
+<img alt="_images/HiPAT_NTO_N2H4_100lbf_diag_v2.jpg" src="_images/HiPAT_NTO_N2H4_100lbf_diag_v2.jpg" />
+<p>According to the
+<a class="reference external" href="https://vdocuments.net/american-institute-of-aeronautics-and-astronautics-42nd-aiaaasmesaeasee-5853e818b5e97.html">High Pressure Bipropellant Engine System Study</a>
+the Aerojet HiPAT R-4D engine uses 30% fuel film cooling (FFC) and operates at a mixture ratio of 0.85
+(Note that a newer version of the R-4D has been developed that operates at a nominal 1.0 mixture ratio, so presumably less FFC)</p>
+<p>The objective of this exercise is to model a 100 lbf N2O4/N2H4 engine with 30% FFC, a large 375:1 nozzle expansion ratio
+and discover the mixture ratio for maximizing delivered vacuum Isp.</p>
+<p>The following code sets up a model of the
+<a class="reference external" href="https://www.rocket.com/sites/default/files/documents/In-Space%20Data%20Sheets%204.8.20.pdf">Aerojet HiPAT R-4D Engine</a>
+and iterates through a range of core stream-tube mixture ratios. <strong>RocketIsp</strong> will calculate the overall thruster mixture
+ratio and delivered Isp.</p>
+<p>Because we know little of the internal thruster geometry,
+the method <strong>scale_Rt_to_Thrust</strong> will set the vacuum thrust to 100 lbf at each iteration.
+The only specific geometry parameter is the nozzle area ratio of 375:1.
+The rest of the geometry is left to scale “appropriately”.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">rocketisp.geometry</span> <span class="k">import</span> <span class="n">Geometry</span>
+<span class="kn">from</span> <span class="nn">rocketisp.efficiencies</span> <span class="k">import</span> <span class="n">Efficiencies</span>
+<span class="kn">from</span> <span class="nn">rocketisp.stream_tubes</span> <span class="k">import</span> <span class="n">CoreStream</span>
+<span class="kn">from</span> <span class="nn">rocketisp.rocket_isp</span> <span class="k">import</span> <span class="n">RocketThruster</span>
+
+<span class="c1"># create CoreStream with area ratio=375:1, Pc=137, FFC=30% and effERE=0.99</span>
+<span class="n">C</span> <span class="o">=</span> <span class="n">CoreStream</span><span class="p">(</span> <span class="n">geomObj</span><span class="o">=</span><span class="n">Geometry</span><span class="p">(</span><span class="n">eps</span><span class="o">=</span><span class="mi">375</span><span class="p">),</span>
+                <span class="n">effObj</span><span class="o">=</span><span class="n">Efficiencies</span><span class="p">(</span><span class="n">ERE</span><span class="o">=</span><span class="mf">0.99</span><span class="p">),</span> <span class="n">pcentFFC</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span>
+                <span class="n">oxName</span><span class="o">=</span><span class="s1">&#39;N2O4&#39;</span><span class="p">,</span> <span class="n">fuelName</span><span class="o">=</span><span class="s1">&#39;N2H4&#39;</span><span class="p">,</span>  <span class="n">MRcore</span><span class="o">=</span><span class="mf">1.2</span><span class="p">,</span>
+                <span class="n">Pc</span><span class="o">=</span><span class="mi">137</span><span class="p">,</span> <span class="n">Pamb</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="c1"># instantiate RocketThruster</span>
+<span class="n">R</span> <span class="o">=</span> <span class="n">RocketThruster</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;100 lbf Aerojet HiPAT R-4D&#39;</span><span class="p">,</span> <span class="n">coreObj</span><span class="o">=</span><span class="n">C</span><span class="p">)</span>
+
+<span class="n">ispodeL</span>  <span class="o">=</span> <span class="p">[]</span> <span class="c1"># list of IspODE  (one-dimensional equilibrium)</span>
+<span class="n">ispodkL</span>  <span class="o">=</span> <span class="p">[]</span> <span class="c1"># list of IspODK  (one-dimensional kinetic)</span>
+<span class="n">ispdelL</span>  <span class="o">=</span> <span class="p">[]</span> <span class="c1"># list of IspDel  (delivered Isp)</span>
+<span class="n">mrnetL</span>   <span class="o">=</span> <span class="p">[]</span> <span class="c1"># list of MRthruster (net mixture ratio of core and barrier)</span>
+<span class="n">mrcoreL</span>  <span class="o">=</span> <span class="p">[]</span> <span class="c1"># list of MRcore  (core stream tube mixture ratio)</span>
+<span class="k">for</span> <span class="n">MRcore</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span> <span class="mf">0.9</span><span class="p">,</span> <span class="mf">1.9</span><span class="p">,</span> <span class="n">num</span><span class="o">=</span><span class="mi">60</span> <span class="p">):</span>
+    <span class="n">C</span><span class="o">.</span><span class="n">reset_attr</span><span class="p">(</span> <span class="s1">&#39;MRcore&#39;</span><span class="p">,</span> <span class="n">MRcore</span> <span class="p">)</span>
+    <span class="n">R</span><span class="o">.</span><span class="n">scale_Rt_to_Thrust</span><span class="p">(</span> <span class="mi">100</span> <span class="p">,</span> <span class="n">Pamb</span><span class="o">=</span><span class="mf">0.0</span> <span class="p">)</span>
+
+    <span class="n">ispodeL</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="n">C</span><span class="p">(</span><span class="s1">&#39;IspODE&#39;</span><span class="p">)</span> <span class="p">)</span>
+    <span class="n">ispodkL</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="n">C</span><span class="p">(</span><span class="s1">&#39;IspODK&#39;</span><span class="p">)</span> <span class="p">)</span>
+    <span class="n">ispdelL</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="n">C</span><span class="p">(</span><span class="s1">&#39;IspDel&#39;</span><span class="p">)</span> <span class="p">)</span>
+    <span class="n">mrnetL</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="n">C</span><span class="p">(</span><span class="s1">&#39;MRthruster&#39;</span><span class="p">)</span> <span class="p">)</span>
+    <span class="n">mrcoreL</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="n">C</span><span class="p">(</span><span class="s1">&#39;MRcore&#39;</span><span class="p">)</span> <span class="p">)</span>
+
+    <span class="c1">#print( &#39;MRcore/MReng=%g/%g&#39;%(MRcore, C(&#39;MRthruster&#39;)), &#39;   effNoz=%g&#39;%C.effObj(&#39;Noz&#39;), &#39;   effDiv=%g&#39;%C.effObj(&#39;Div&#39;), &#39;   effBL=%g&#39;%C.effObj(&#39;BL&#39;) )</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span> <span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">mrcoreL</span><span class="p">,</span> <span class="n">ispodeL</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;IspODE&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">mrcoreL</span><span class="p">,</span> <span class="n">ispodkL</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;IspODK&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">mrnetL</span><span class="p">,</span> <span class="n">ispdelL</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;IspDel&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Isp (sec)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Mixture Ratio</span><span class="se">\n</span><span class="s1">(MRcore for IspODE and IspODK, MRengine for IspDel)&#39;</span><span class="p">)</span>
+
+<span class="n">imL</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">([(</span><span class="n">i</span><span class="p">,</span><span class="n">m</span><span class="p">,</span> <span class="n">mc</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">m</span><span class="p">,</span><span class="n">mc</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">ispdelL</span><span class="p">,</span> <span class="n">mrnetL</span><span class="p">,</span> <span class="n">mrcoreL</span><span class="p">)])</span>
+<span class="n">subtitle</span> <span class="o">=</span> <span class="s1">&#39;max IspDel=</span><span class="si">%.1f</span><span class="s1"> at MRthruster=</span><span class="si">%.2f</span><span class="s1">, MRcore=</span><span class="si">%.2f</span><span class="s1">&#39;</span><span class="o">%</span><span class="n">imL</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="n">title</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">/</span><span class="si">%s</span><span class="s1"> Area Ratio=</span><span class="si">%g</span><span class="s1">:1 </span><span class="si">%%</span><span class="s1">Bell=</span><span class="si">%g</span><span class="s1"> </span><span class="si">%%</span><span class="s1">FFC=</span><span class="si">%g</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">%</span><span class="p">(</span> <span class="n">C</span><span class="o">.</span><span class="n">oxName</span><span class="p">,</span> <span class="n">C</span><span class="o">.</span><span class="n">fuelName</span><span class="p">,</span> <span class="n">C</span><span class="o">.</span><span class="n">geomObj</span><span class="o">.</span><span class="n">eps</span><span class="p">,</span>
+        <span class="n">C</span><span class="o">.</span><span class="n">geomObj</span><span class="o">.</span><span class="n">pcentBell</span><span class="p">,</span> <span class="n">C</span><span class="o">.</span><span class="n">barrierObj</span><span class="o">.</span><span class="n">pcentFFC</span> <span class="p">)</span> <span class="o">+</span> <span class="n">subtitle</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span> <span class="n">title</span> <span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span> <span class="s1">&#39;HiPAT_NTO_N2H4_IspDel.png&#39;</span> <span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+</pre></div>
+</div>
+<p>The above script results in the following chart.</p>
+<p>Notice that despite the maximum IspODE mixture ratio for the core optimizing at above 1.4,
+and the maximum IspODK mixture ratio at about 1.2,
+the maximum Isp MR for the R-4D with 30% FFC is right about at its published operating point of 0.85
+(<strong>RocketIsp</strong> predicts a maximum at 0.88, although the peak is pretty flat.)</p>
+<img alt="_images/HiPAT_NTO_N2H4_IspDel.png" src="_images/HiPAT_NTO_N2H4_IspDel.png" />
+<p>The published IspDel for the 375:1 nozzle is 329. The above <strong>RocketIsp</strong> chart shows just over 325… about a 1% difference.</p>
+<p>The output below shows the thruster efficiencies calculated by <strong>RocketIsp</strong> at the IspDel MR peak of 0.88.
+The overall Isp efficiency is 92.6% including the assumed chamber efficiency of 99%.
+The 1% Isp difference could perhaps be accounted for with more sophisticated analysis of the
+individual efficiencies.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">==============================</span> <span class="mi">100</span> <span class="n">lbf</span> <span class="n">Aerojet</span> <span class="n">HiPAT</span> <span class="n">R</span><span class="o">-</span><span class="mi">4</span><span class="n">D</span> <span class="o">==============================</span>
+<span class="o">.................................</span> <span class="n">Geometry</span> <span class="o">.................................</span>
+<span class="o">..................................</span>  <span class="n">Input</span> <span class="o">..................................</span>
+<span class="n">cham_conv_deg</span> <span class="o">=</span> <span class="mf">30.00</span> <span class="n">deg</span>  <span class="n">half</span> <span class="n">angle</span> <span class="n">of</span> <span class="n">conical</span> <span class="n">convergent</span> <span class="n">section</span>
+           <span class="n">CR</span> <span class="o">=</span>   <span class="mf">2.5</span>      <span class="n">chamber</span> <span class="n">contraction</span> <span class="n">ratio</span> <span class="p">(</span><span class="n">Ainj</span> <span class="o">/</span> <span class="n">Athroat</span><span class="p">)</span>
+          <span class="n">eps</span> <span class="o">=</span>   <span class="mi">375</span>      <span class="n">nozzle</span> <span class="n">area</span> <span class="n">ratio</span> <span class="p">(</span><span class="n">Aexit</span> <span class="o">/</span> <span class="n">Athroat</span><span class="p">)</span>
+  <span class="n">LchamberInp</span> <span class="o">=</span>  <span class="kc">None</span>  <span class="ow">in</span>  <span class="n">user</span> <span class="nb">input</span> <span class="n">value</span> <span class="n">of</span> <span class="n">chamber</span> <span class="n">length</span> <span class="p">(</span><span class="n">will</span> <span class="n">override</span> <span class="nb">all</span> <span class="n">other</span> <span class="n">entries</span><span class="p">)</span>
+      <span class="n">LchmMin</span> <span class="o">=</span> <span class="mf">1.000</span>  <span class="ow">in</span>  <span class="n">minimum</span> <span class="n">chamber</span> <span class="n">length</span> <span class="p">(</span><span class="n">will</span> <span class="n">override</span> <span class="n">LchmOvrDt</span><span class="p">)</span>
+                           <span class="p">(</span><span class="mf">2.540</span> <span class="n">cm</span><span class="p">,</span> <span class="mf">0.083</span> <span class="n">ft</span><span class="p">)</span>
+    <span class="n">LchmOvrDt</span> <span class="o">=</span>     <span class="mi">3</span>      <span class="n">ratio</span> <span class="n">of</span> <span class="n">chamber</span> <span class="n">length</span> <span class="n">to</span> <span class="n">throat</span> <span class="n">diameter</span> <span class="p">(</span><span class="n">Lcham</span> <span class="o">/</span> <span class="n">Dthrt</span><span class="p">)</span>
+      <span class="n">LnozInp</span> <span class="o">=</span>  <span class="kc">None</span>  <span class="ow">in</span>  <span class="n">user</span> <span class="nb">input</span> <span class="n">nozzle</span> <span class="n">length</span> <span class="p">(</span><span class="n">will</span> <span class="n">override</span> <span class="n">pcentBell</span><span class="p">)</span>
+    <span class="n">pcentBell</span> <span class="o">=</span>    <span class="mi">80</span>      <span class="n">nozzle</span> <span class="n">percent</span> <span class="n">bell</span> <span class="p">(</span><span class="n">Lnoz</span> <span class="o">/</span> <span class="n">L_15deg_cone</span><span class="p">)</span>
+     <span class="n">RchmConv</span> <span class="o">=</span>     <span class="mi">1</span>      <span class="n">radius</span> <span class="n">of</span> <span class="n">curvature</span> <span class="n">at</span> <span class="n">start</span> <span class="n">of</span> <span class="n">convergent</span> <span class="n">section</span> <span class="p">(</span><span class="n">Rconv</span> <span class="o">/</span> <span class="n">Rthrt</span><span class="p">)</span>
+   <span class="n">RdwnThroat</span> <span class="o">=</span>     <span class="mi">1</span>      <span class="n">radius</span> <span class="n">of</span> <span class="n">curvature</span> <span class="n">just</span> <span class="n">downstream</span> <span class="n">of</span> <span class="n">throat</span> <span class="p">(</span><span class="n">Rdownstream</span> <span class="o">/</span> <span class="n">Rthrt</span><span class="p">)</span>
+        <span class="n">Rthrt</span> <span class="o">=</span> <span class="mf">0.357</span>  <span class="ow">in</span>  <span class="n">throat</span> <span class="n">radius</span>
+                           <span class="p">(</span><span class="mf">0.906</span> <span class="n">cm</span><span class="p">,</span> <span class="mf">0.030</span> <span class="n">ft</span><span class="p">)</span>
+    <span class="n">RupThroat</span> <span class="o">=</span>   <span class="mf">1.5</span>      <span class="n">radius</span> <span class="n">of</span> <span class="n">curvature</span> <span class="n">just</span> <span class="n">upstream</span> <span class="n">of</span> <span class="n">throat</span> <span class="p">(</span><span class="n">Rupstream</span> <span class="o">/</span> <span class="n">Rthrt</span><span class="p">)</span>
+<span class="o">............................................................................</span>
+<span class="o">...............................</span>  <span class="n">Output</span> <span class="o">....................................</span>
+          <span class="n">Ainj</span> <span class="o">=</span>  <span class="mf">1.000</span> <span class="ow">in</span><span class="o">**</span><span class="mi">2</span>  <span class="n">area</span> <span class="n">of</span> <span class="n">injector</span>
+                               <span class="p">(</span><span class="mf">6.449</span> <span class="n">cm</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+            <span class="n">At</span> <span class="o">=</span>  <span class="mf">0.400</span> <span class="ow">in</span><span class="o">**</span><span class="mi">2</span>  <span class="n">throat</span> <span class="n">area</span>
+                               <span class="p">(</span><span class="mf">2.579</span> <span class="n">cm</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+         <span class="n">Dexit</span> <span class="o">=</span> <span class="mf">13.817</span>    <span class="ow">in</span>  <span class="n">nozzle</span> <span class="n">exit</span> <span class="n">diameter</span>
+                               <span class="p">(</span><span class="mf">35.094</span> <span class="n">cm</span><span class="p">,</span> <span class="mf">1.151</span> <span class="n">ft</span><span class="p">)</span>
+          <span class="n">Dinj</span> <span class="o">=</span>  <span class="mf">1.128</span>    <span class="ow">in</span>  <span class="n">diameter</span> <span class="n">of</span> <span class="n">injector</span>
+                               <span class="p">(</span><span class="mf">2.865</span> <span class="n">cm</span><span class="p">,</span> <span class="mf">0.094</span> <span class="n">ft</span><span class="p">)</span>
+         <span class="n">Dthrt</span> <span class="o">=</span>  <span class="mf">0.713</span>    <span class="ow">in</span>  <span class="n">throat</span> <span class="n">diameter</span>
+                               <span class="p">(</span><span class="mf">1.812</span> <span class="n">cm</span><span class="p">,</span> <span class="mf">0.059</span> <span class="n">ft</span><span class="p">)</span>
+<span class="n">entrance_angle</span> <span class="o">=</span>  <span class="mf">39.79</span>   <span class="n">deg</span>  <span class="n">nozzle</span> <span class="n">initial</span> <span class="n">expansion</span> <span class="n">angle</span>
+    <span class="n">exit_angle</span> <span class="o">=</span>   <span class="mf">7.65</span>   <span class="n">deg</span>  <span class="n">nozzle</span> <span class="n">exit</span> <span class="n">angle</span>
+    <span class="n">Lcham_conv</span> <span class="o">=</span>  <span class="mf">0.598</span>    <span class="ow">in</span>  <span class="n">length</span> <span class="n">of</span> <span class="n">convergent</span> <span class="n">section</span> <span class="n">of</span> <span class="n">chamber</span>
+                               <span class="p">(</span><span class="mf">1.519</span> <span class="n">cm</span><span class="p">,</span> <span class="mf">0.050</span> <span class="n">ft</span><span class="p">)</span>
+     <span class="n">Lcham_cyl</span> <span class="o">=</span>  <span class="mf">1.542</span>    <span class="ow">in</span>  <span class="n">length</span> <span class="n">of</span> <span class="n">cylindrical</span> <span class="n">section</span> <span class="n">of</span> <span class="n">chamber</span>
+                               <span class="p">(</span><span class="mf">3.918</span> <span class="n">cm</span><span class="p">,</span> <span class="mf">0.129</span> <span class="n">ft</span><span class="p">)</span>
+          <span class="n">Lnoz</span> <span class="o">=</span> <span class="mf">19.561</span>    <span class="ow">in</span>  <span class="n">nozzle</span> <span class="n">length</span>
+                               <span class="p">(</span><span class="mf">49.684</span> <span class="n">cm</span><span class="p">,</span> <span class="mf">1.630</span> <span class="n">ft</span><span class="p">)</span>
+        <span class="n">Ltotal</span> <span class="o">=</span> <span class="mf">21.701</span>    <span class="ow">in</span>  <span class="n">nozzle</span> <span class="o">+</span> <span class="n">chamber</span> <span class="n">length</span>
+                               <span class="p">(</span><span class="mf">55.121</span> <span class="n">cm</span><span class="p">,</span> <span class="mf">1.808</span> <span class="n">ft</span><span class="p">)</span>
+          <span class="n">Rinj</span> <span class="o">=</span>  <span class="mf">0.564</span>    <span class="ow">in</span>  <span class="n">radius</span> <span class="n">of</span> <span class="n">injector</span>
+                               <span class="p">(</span><span class="mf">1.433</span> <span class="n">cm</span><span class="p">,</span> <span class="mf">0.047</span> <span class="n">ft</span><span class="p">)</span>
+         <span class="n">Vcham</span> <span class="o">=</span>    <span class="mf">1.9</span> <span class="ow">in</span><span class="o">**</span><span class="mi">3</span>  <span class="n">approximate</span> <span class="n">chamber</span> <span class="n">volume</span>
+                               <span class="p">(</span><span class="mf">31.9</span> <span class="n">cm</span><span class="o">**</span><span class="mi">3</span><span class="p">)</span>
+<span class="o">............................................................................</span>
+<span class="o">........................</span> <span class="n">N2O4</span><span class="o">/</span><span class="n">N2H4</span> <span class="n">Core</span> <span class="n">Stream</span> <span class="n">Tube</span> <span class="o">........................</span>
+<span class="o">..................................</span>  <span class="n">Input</span> <span class="o">..................................</span>
+   <span class="n">adjCstarODE</span> <span class="o">=</span>        <span class="mi">1</span>       <span class="n">multiplier</span> <span class="n">on</span> <span class="n">NASA</span> <span class="n">CEA</span> <span class="n">code</span> <span class="n">value</span> <span class="n">of</span> <span class="n">cstar</span> <span class="n">ODE</span> <span class="p">(</span><span class="n">default</span> <span class="ow">is</span> <span class="mf">1.0</span><span class="p">)</span>
+   <span class="n">adjIspIdeal</span> <span class="o">=</span>        <span class="mi">1</span>       <span class="n">multiplier</span> <span class="n">on</span> <span class="n">NASA</span> <span class="n">CEA</span> <span class="n">code</span> <span class="n">value</span> <span class="n">of</span> <span class="n">Isp</span> <span class="n">ODE</span> <span class="p">(</span><span class="n">default</span> <span class="ow">is</span> <span class="mf">1.0</span><span class="p">)</span>
+      <span class="n">CdThroat</span> <span class="o">=</span> <span class="mf">0.985275</span>       <span class="n">Cd</span> <span class="n">of</span> <span class="n">throat</span> <span class="p">(</span><span class="n">RocketThruster</span> <span class="nb">object</span> <span class="n">may</span> <span class="n">override</span><span class="p">)</span>
+                                <span class="p">((</span><span class="n">MLP</span> <span class="n">fit</span><span class="p">))</span>
+      <span class="n">fuelName</span> <span class="o">=</span>     <span class="n">N2H4</span>       <span class="n">name</span> <span class="n">of</span> <span class="n">fuel</span> <span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">g</span><span class="o">.</span> <span class="n">MMH</span><span class="p">,</span> <span class="n">LH2</span><span class="p">)</span>
+<span class="n">ignore_noz_sep</span> <span class="o">=</span>        <span class="mi">0</span>       <span class="n">flag</span> <span class="n">to</span> <span class="n">force</span> <span class="n">nozzle</span> <span class="n">flow</span> <span class="n">separation</span> <span class="n">to</span> <span class="n">be</span> <span class="n">ignored</span> <span class="p">(</span><span class="n">USE</span> <span class="n">WITH</span> <span class="n">CAUTION</span><span class="p">)</span>
+        <span class="n">MRcore</span> <span class="o">=</span>     <span class="mf">1.26</span>       <span class="n">mixture</span> <span class="n">ratio</span> <span class="n">of</span> <span class="n">core</span> <span class="n">flow</span> <span class="p">(</span><span class="n">ox</span> <span class="n">flow</span> <span class="n">rate</span> <span class="o">/</span> <span class="n">fuel</span> <span class="n">flow</span> <span class="n">rate</span><span class="p">)</span>
+        <span class="n">oxName</span> <span class="o">=</span>     <span class="n">N2O4</span>       <span class="n">name</span> <span class="n">of</span> <span class="n">oxidizer</span> <span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">g</span><span class="o">.</span> <span class="n">N2O4</span><span class="p">,</span> <span class="n">LOX</span><span class="p">)</span>
+          <span class="n">Pamb</span> <span class="o">=</span>     <span class="mf">0.00</span> <span class="n">psia</span>  <span class="n">ambient</span> <span class="n">pressure</span> <span class="p">(</span><span class="k">for</span> <span class="n">example</span> <span class="n">sea</span> <span class="n">level</span> <span class="ow">is</span> <span class="mf">14.7</span> <span class="n">psia</span><span class="p">)</span>
+                                <span class="p">(</span><span class="mf">0.00</span> <span class="n">MPa</span><span class="p">,</span> <span class="mf">0.00</span> <span class="n">atm</span><span class="p">,</span> <span class="mf">0.00</span> <span class="n">bar</span><span class="p">)</span>
+            <span class="n">Pc</span> <span class="o">=</span>    <span class="mf">137.0</span> <span class="n">psia</span>  <span class="n">chamber</span> <span class="n">pressure</span>
+                                <span class="p">(</span><span class="mf">0.94</span> <span class="n">MPa</span><span class="p">,</span> <span class="mf">9.32</span> <span class="n">atm</span><span class="p">,</span> <span class="mf">9.45</span> <span class="n">bar</span><span class="p">)</span>
+<span class="o">............................................................................</span>
+<span class="o">.................................</span>  <span class="n">Output</span> <span class="o">..................................</span>
+     <span class="n">CfAmbDel</span> <span class="o">=</span> <span class="mf">1.82564</span>          <span class="n">delivered</span> <span class="n">ambient</span> <span class="n">thrust</span> <span class="n">coefficient</span>
+     <span class="n">CfVacDel</span> <span class="o">=</span> <span class="mf">1.82564</span>          <span class="n">delivered</span> <span class="n">vacuum</span> <span class="n">thrust</span> <span class="n">coefficient</span>
+   <span class="n">CfVacIdeal</span> <span class="o">=</span> <span class="mf">2.01252</span>          <span class="n">ideal</span> <span class="n">vacuum</span> <span class="n">thrust</span> <span class="n">coefficient</span>
+     <span class="n">cstarERE</span> <span class="o">=</span>  <span class="mf">5729.7</span>    <span class="n">ft</span><span class="o">/</span><span class="n">s</span>  <span class="n">delivered</span> <span class="n">core</span> <span class="n">cstar</span>
+                                 <span class="p">(</span><span class="mf">1746.4</span> <span class="n">m</span><span class="o">/</span><span class="n">s</span><span class="p">)</span>
+     <span class="n">cstarODE</span> <span class="o">=</span>  <span class="mf">5787.6</span>    <span class="n">ft</span><span class="o">/</span><span class="n">s</span>  <span class="n">core</span> <span class="n">ideal</span> <span class="n">cstar</span>
+                                 <span class="p">(</span><span class="mf">1764.1</span> <span class="n">m</span><span class="o">/</span><span class="n">s</span><span class="p">)</span>
+  <span class="n">FvacBarrier</span> <span class="o">=</span>    <span class="mf">40.8</span>     <span class="n">lbf</span>  <span class="n">vacuum</span> <span class="n">thrust</span> <span class="n">due</span> <span class="n">to</span> <span class="n">barrier</span> <span class="n">stream</span> <span class="n">tube</span>
+                                 <span class="p">(</span><span class="mf">181.4</span> <span class="n">N</span><span class="p">)</span>
+     <span class="n">FvacCore</span> <span class="o">=</span>    <span class="mf">59.2</span>     <span class="n">lbf</span>  <span class="n">vacuum</span> <span class="n">thrust</span> <span class="n">due</span> <span class="n">to</span> <span class="n">core</span> <span class="n">stream</span> <span class="n">tube</span>
+                                 <span class="p">(</span><span class="mf">263.5</span> <span class="n">N</span><span class="p">)</span>
+    <span class="n">FvacTotal</span> <span class="o">=</span>   <span class="mf">100.0</span>     <span class="n">lbf</span>  <span class="n">total</span> <span class="n">vacuum</span> <span class="n">thrust</span>
+                                 <span class="p">(</span><span class="mf">444.8</span> <span class="n">N</span><span class="p">)</span>
+     <span class="n">gammaChm</span> <span class="o">=</span> <span class="mf">1.13912</span>          <span class="n">core</span> <span class="n">gas</span> <span class="n">ratio</span> <span class="n">of</span> <span class="n">specific</span> <span class="n">heats</span> <span class="p">(</span><span class="n">Cp</span><span class="o">/</span><span class="n">Cv</span><span class="p">)</span>
+       <span class="n">IspDel</span> <span class="o">=</span>  <span class="mf">324.09</span>     <span class="n">sec</span>  <span class="o">&lt;===</span> <span class="n">thruster</span> <span class="n">delivered</span> <span class="n">vacuum</span> <span class="n">Isp</span> <span class="o">===&gt;</span>
+                                 <span class="p">(</span><span class="mf">3178.27</span> <span class="n">N</span><span class="o">-</span><span class="n">sec</span><span class="o">/</span><span class="n">kg</span><span class="p">,</span> <span class="mf">3.18</span> <span class="n">km</span><span class="o">/</span><span class="n">sec</span><span class="p">)</span>
+  <span class="n">IspDel_core</span> <span class="o">=</span>  <span class="mf">335.21</span>     <span class="n">sec</span>  <span class="n">delivered</span> <span class="n">Isp</span> <span class="n">of</span> <span class="n">core</span> <span class="n">stream</span> <span class="n">tube</span>
+                                 <span class="p">(</span><span class="mf">3287.30</span> <span class="n">N</span><span class="o">-</span><span class="n">sec</span><span class="o">/</span><span class="n">kg</span><span class="p">,</span> <span class="mf">3.29</span> <span class="n">km</span><span class="o">/</span><span class="n">sec</span><span class="p">)</span>
+       <span class="n">IspODE</span> <span class="o">=</span>  <span class="mf">362.02</span>     <span class="n">sec</span>  <span class="n">core</span> <span class="n">one</span> <span class="n">dimensional</span> <span class="n">equilibrium</span> <span class="n">Isp</span>
+                                 <span class="p">(</span><span class="mf">3550.20</span> <span class="n">N</span><span class="o">-</span><span class="n">sec</span><span class="o">/</span><span class="n">kg</span><span class="p">,</span> <span class="mf">3.55</span> <span class="n">km</span><span class="o">/</span><span class="n">sec</span><span class="p">)</span>
+       <span class="n">IspODF</span> <span class="o">=</span>  <span class="mf">337.52</span>     <span class="n">sec</span>  <span class="n">core</span> <span class="n">frozen</span> <span class="n">Isp</span>
+                                 <span class="p">(</span><span class="mf">3309.90</span> <span class="n">N</span><span class="o">-</span><span class="n">sec</span><span class="o">/</span><span class="n">kg</span><span class="p">,</span> <span class="mf">3.31</span> <span class="n">km</span><span class="o">/</span><span class="n">sec</span><span class="p">)</span>
+       <span class="n">IspODK</span> <span class="o">=</span>  <span class="mf">346.44</span>     <span class="n">sec</span>  <span class="n">core</span> <span class="n">one</span> <span class="n">dimensional</span> <span class="n">kinetic</span> <span class="n">Isp</span>
+                                 <span class="p">(</span><span class="mf">3397.42</span> <span class="n">N</span><span class="o">-</span><span class="n">sec</span><span class="o">/</span><span class="n">kg</span><span class="p">,</span> <span class="mf">3.40</span> <span class="n">km</span><span class="o">/</span><span class="n">sec</span><span class="p">)</span>
+   <span class="n">MRthruster</span> <span class="o">=</span>   <span class="mf">0.882</span>          <span class="n">total</span> <span class="n">thruster</span> <span class="n">mixture</span> <span class="n">ratio</span><span class="s1">&#39;)</span>
+        <span class="n">MWchm</span> <span class="o">=</span>  <span class="mf">20.222</span> <span class="n">g</span><span class="o">/</span><span class="n">gmole</span>  <span class="n">core</span> <span class="n">gas</span> <span class="n">molecular</span> <span class="n">weight</span>
+        <span class="n">Pexit</span> <span class="o">=</span>  <span class="mf">0.0124</span>    <span class="n">psia</span>  <span class="n">nozzle</span> <span class="n">exit</span> <span class="n">pressure</span>
+                                 <span class="p">(</span><span class="mf">0.00</span> <span class="n">MPa</span><span class="p">,</span> <span class="mf">0.00</span> <span class="n">atm</span><span class="p">,</span> <span class="mf">0.00</span> <span class="n">bar</span><span class="p">)</span>
+        <span class="n">TcODE</span> <span class="o">=</span>  <span class="mf">5521.3</span>    <span class="n">degR</span>  <span class="n">ideal</span> <span class="n">core</span> <span class="n">gas</span> <span class="n">temperature</span>
+                                 <span class="p">(</span><span class="mf">3067.4</span> <span class="n">degK</span><span class="p">,</span> <span class="mf">2794.2</span> <span class="n">degC</span><span class="p">,</span> <span class="mf">5061.6</span> <span class="n">degF</span><span class="p">)</span>
+       <span class="n">wdotFl</span> <span class="o">=</span>   <span class="mf">0.164</span>   <span class="n">lbm</span><span class="o">/</span><span class="n">s</span>  <span class="n">total</span> <span class="n">fuel</span> <span class="n">flow</span> <span class="n">rate</span>
+                                 <span class="p">(</span><span class="mf">0.074</span> <span class="n">kg</span><span class="o">/</span><span class="n">s</span><span class="p">)</span>
+       <span class="n">wdotOx</span> <span class="o">=</span>   <span class="mf">0.145</span>   <span class="n">lbm</span><span class="o">/</span><span class="n">s</span>  <span class="n">total</span> <span class="n">oxidizer</span> <span class="n">flow</span> <span class="n">rate</span>
+                                 <span class="p">(</span><span class="mf">0.066</span> <span class="n">kg</span><span class="o">/</span><span class="n">s</span><span class="p">)</span>
+      <span class="n">wdotTot</span> <span class="o">=</span>   <span class="mf">0.309</span>   <span class="n">lbm</span><span class="o">/</span><span class="n">s</span>  <span class="n">total</span> <span class="n">propellant</span> <span class="n">flow</span> <span class="n">rate</span> <span class="p">(</span><span class="n">ox</span><span class="o">+</span><span class="n">fuel</span><span class="p">)</span>
+                                 <span class="p">(</span><span class="mf">0.140</span> <span class="n">kg</span><span class="o">/</span><span class="n">s</span><span class="p">)</span>
+<span class="o">..</span><span class="n">At</span> <span class="n">Injector</span> <span class="n">Face</span><span class="o">..</span>
+ <span class="n">wdotFl_cInit</span> <span class="o">=</span>   <span class="mf">0.115</span>   <span class="n">lbm</span><span class="o">/</span><span class="n">s</span>  <span class="n">initial</span> <span class="n">core</span> <span class="n">fuel</span> <span class="n">flow</span> <span class="n">rate</span> <span class="p">(</span><span class="n">before</span> <span class="nb">any</span> <span class="n">entrainment</span><span class="p">)</span>
+                                 <span class="p">(</span><span class="mf">0.052</span> <span class="n">kg</span><span class="o">/</span><span class="n">s</span><span class="p">)</span>
+    <span class="n">wdotFlFFC</span> <span class="o">=</span>   <span class="mf">0.049</span>   <span class="n">lbm</span><span class="o">/</span><span class="n">s</span>  <span class="n">fuel</span> <span class="n">film</span> <span class="n">coolant</span> <span class="n">flow</span> <span class="n">rate</span> <span class="n">injected</span> <span class="n">at</span> <span class="n">perimeter</span>
+                                 <span class="p">(</span><span class="mf">0.022</span> <span class="n">kg</span><span class="o">/</span><span class="n">s</span><span class="p">)</span>
+<span class="n">wdotTot_cInit</span> <span class="o">=</span>   <span class="mf">0.259</span>   <span class="n">lbm</span><span class="o">/</span><span class="n">s</span>  <span class="n">initial</span> <span class="n">core</span> <span class="n">total</span> <span class="n">flow</span> <span class="n">rate</span> <span class="p">(</span><span class="n">before</span> <span class="nb">any</span> <span class="n">entrainment</span><span class="p">)</span>
+                                 <span class="p">(</span><span class="mf">0.118</span> <span class="n">kg</span><span class="o">/</span><span class="n">s</span><span class="p">)</span>
+<span class="o">..</span><span class="n">After</span> <span class="n">Entrainment</span><span class="o">..</span>
+     <span class="n">wdotFl_b</span> <span class="o">=</span>   <span class="mf">0.086</span>   <span class="n">lbm</span><span class="o">/</span><span class="n">s</span>  <span class="n">barrier</span> <span class="n">fuel</span> <span class="n">flow</span> <span class="n">rate</span> <span class="p">(</span><span class="n">FFC</span> <span class="o">+</span> <span class="n">entrained</span><span class="p">)</span>
+                                 <span class="p">(</span><span class="mf">0.039</span> <span class="n">kg</span><span class="o">/</span><span class="n">s</span><span class="p">)</span>
+     <span class="n">wdotFl_c</span> <span class="o">=</span>   <span class="mf">0.078</span>   <span class="n">lbm</span><span class="o">/</span><span class="n">s</span>  <span class="n">final</span> <span class="n">core</span> <span class="n">fuel</span> <span class="n">flow</span> <span class="n">rate</span> <span class="p">(</span><span class="n">injected</span> <span class="o">-</span> <span class="n">entrained</span><span class="p">)</span>
+                                 <span class="p">(</span><span class="mf">0.035</span> <span class="n">kg</span><span class="o">/</span><span class="n">s</span><span class="p">)</span>
+     <span class="n">wdotOx_b</span> <span class="o">=</span>   <span class="mf">0.046</span>   <span class="n">lbm</span><span class="o">/</span><span class="n">s</span>  <span class="n">barrier</span> <span class="n">oxidizer</span> <span class="n">flow</span> <span class="n">rate</span> <span class="p">(</span><span class="nb">all</span> <span class="n">entrained</span><span class="p">)</span>
+                                 <span class="p">(</span><span class="mf">0.021</span> <span class="n">kg</span><span class="o">/</span><span class="n">s</span><span class="p">)</span>
+     <span class="n">wdotOx_c</span> <span class="o">=</span>   <span class="mf">0.099</span>   <span class="n">lbm</span><span class="o">/</span><span class="n">s</span>  <span class="n">final</span> <span class="n">core</span> <span class="n">oxidizer</span> <span class="n">flow</span> <span class="n">rate</span> <span class="p">(</span><span class="n">injected</span> <span class="o">-</span> <span class="n">entrained</span><span class="p">)</span>
+                                 <span class="p">(</span><span class="mf">0.045</span> <span class="n">kg</span><span class="o">/</span><span class="n">s</span><span class="p">)</span>
+    <span class="n">wdotTot_b</span> <span class="o">=</span>   <span class="mf">0.132</span>   <span class="n">lbm</span><span class="o">/</span><span class="n">s</span>  <span class="n">total</span> <span class="n">barrier</span> <span class="n">propellant</span> <span class="n">flow</span> <span class="n">rate</span> <span class="p">(</span><span class="n">includes</span> <span class="n">entrained</span><span class="p">)</span>
+                                 <span class="p">(</span><span class="mf">0.060</span> <span class="n">kg</span><span class="o">/</span><span class="n">s</span><span class="p">)</span>
+    <span class="n">wdotTot_c</span> <span class="o">=</span>   <span class="mf">0.177</span>   <span class="n">lbm</span><span class="o">/</span><span class="n">s</span>  <span class="n">total</span> <span class="n">final</span> <span class="n">core</span> <span class="n">propellant</span> <span class="n">flow</span> <span class="n">rate</span> <span class="p">(</span><span class="n">injected</span> <span class="o">-</span> <span class="n">entrained</span><span class="p">)</span>
+                                 <span class="p">(</span><span class="mf">0.080</span> <span class="n">kg</span><span class="o">/</span><span class="n">s</span><span class="p">)</span>
+<span class="o">............................................................................</span>
+                             <span class="n">Efficiencies</span>                             
+                                <span class="n">Output</span>                                
+<span class="n">Isp</span> <span class="o">=</span> <span class="mf">0.89524</span>    <span class="n">Overall</span> <span class="n">Isp</span> <span class="n">Efficiency</span>
+<span class="n">Noz</span> <span class="o">=</span> <span class="mf">0.93530</span>    <span class="n">Nozzle</span> <span class="n">Efficiency</span>
+<span class="n">ERE</span> <span class="o">=</span> <span class="mf">0.99000</span>    <span class="p">(</span><span class="n">constant</span><span class="p">)</span> <span class="n">Energy</span> <span class="n">Release</span> <span class="n">Efficiency</span> <span class="n">of</span> <span class="n">Chamber</span>
+<span class="n">FFC</span> <span class="o">=</span> <span class="mf">0.96683</span>    <span class="p">(</span><span class="n">barrier</span> <span class="n">calc</span><span class="p">)</span> <span class="n">Fuel</span> <span class="n">Film</span> <span class="n">Cooling</span> <span class="n">Efficiency</span> <span class="n">of</span> <span class="n">Chamber</span>
+<span class="o">..</span><span class="n">Nozzle</span><span class="o">..</span>
+<span class="n">Div</span> <span class="o">=</span> <span class="mf">0.99403</span>    <span class="p">(</span><span class="n">simple</span> <span class="n">fit</span> <span class="n">eps</span><span class="o">=</span><span class="mi">375</span><span class="p">,</span> <span class="o">%</span><span class="n">bell</span><span class="o">=</span><span class="mi">80</span><span class="p">)</span> <span class="n">Divergence</span> <span class="n">Efficiency</span> <span class="n">of</span> <span class="n">Nozzle</span>
+<span class="n">Kin</span> <span class="o">=</span> <span class="mf">0.95697</span>    <span class="p">(</span><span class="n">MLP</span> <span class="n">fit</span><span class="p">)</span> <span class="n">Kinetic</span> <span class="n">Efficiency</span> <span class="n">of</span> <span class="n">Nozzle</span>
+ <span class="n">BL</span> <span class="o">=</span> <span class="mf">0.98323</span>    <span class="p">(</span><span class="n">MLP</span> <span class="n">fit</span><span class="p">)</span> <span class="n">Boundary</span> <span class="n">Layer</span> <span class="n">Efficiency</span> <span class="n">of</span> <span class="n">Nozzle</span>
+                                                                      
+           <span class="n">Ignored</span> <span class="n">Efficiencies</span>           
+        <span class="n">TP</span><span class="p">:</span> <span class="n">Two</span> <span class="n">Phase</span> <span class="n">Efficiency</span> <span class="n">of</span> <span class="n">Nozzle</span>
+                                          
+<span class="o">...........................</span> <span class="n">Barrier</span> <span class="n">Stream</span> <span class="n">Tube</span> <span class="o">............................</span>
+<span class="o">..................................</span>  <span class="n">Input</span> <span class="o">..................................</span>
+      <span class="n">ko</span> <span class="o">=</span> <span class="mf">0.035</span>    <span class="n">entrainment</span> <span class="n">constant</span> <span class="p">(</span><span class="n">typical</span> <span class="n">value</span> <span class="ow">is</span> <span class="mf">0.035</span><span class="p">,</span> <span class="nb">range</span> <span class="kn">from</span> <span class="mf">0.03</span> <span class="n">to</span> <span class="mf">0.06</span><span class="p">)</span>
+<span class="n">pcentFFC</span> <span class="o">=</span>    <span class="mi">30</span>    <span class="n">percent</span> <span class="n">fuel</span> <span class="n">film</span> <span class="n">cooling</span> <span class="p">(</span> <span class="n">FFC</span> <span class="n">flowrate</span> <span class="o">/</span> <span class="n">total</span> <span class="n">fuel</span> <span class="n">flowrate</span><span class="p">)</span>
+<span class="o">............................................................................</span>
+<span class="o">.................................</span>  <span class="n">Output</span> <span class="o">..................................</span>
+  <span class="n">cstarERE_b</span> <span class="o">=</span>    <span class="mf">5490.6</span> <span class="n">ft</span><span class="o">/</span><span class="n">s</span>  <span class="n">delivered</span> <span class="n">cstar</span>
+                               <span class="p">(</span><span class="mf">1673.5</span> <span class="n">m</span><span class="o">/</span><span class="n">s</span><span class="p">)</span>
+  <span class="n">cstarODE_b</span> <span class="o">=</span>    <span class="mf">5546.1</span> <span class="n">ft</span><span class="o">/</span><span class="n">s</span>  <span class="n">ideal</span> <span class="n">equilibrium</span> <span class="n">cstar</span>
+                               <span class="p">(</span><span class="mf">1690.5</span> <span class="n">m</span><span class="o">/</span><span class="n">s</span><span class="p">)</span>
+   <span class="n">fracKin_b</span> <span class="o">=</span> <span class="mf">0.0628378</span>       <span class="n">fraction</span> <span class="n">of</span> <span class="n">kinetic</span> <span class="n">completion</span> <span class="ow">in</span> <span class="n">barrier</span>
+    <span class="n">IspDel_b</span> <span class="o">=</span>    <span class="mf">309.20</span>  <span class="n">sec</span>  <span class="n">delivered</span> <span class="n">vacuum</span> <span class="n">barrier</span> <span class="n">Isp</span>
+                               <span class="p">(</span><span class="mf">3032.17</span> <span class="n">N</span><span class="o">-</span><span class="n">sec</span><span class="o">/</span><span class="n">kg</span><span class="p">,</span> <span class="mf">3.03</span> <span class="n">km</span><span class="o">/</span><span class="n">sec</span><span class="p">)</span>
+    <span class="n">IspODE_b</span> <span class="o">=</span>   <span class="mf">321.837</span>       <span class="n">sec</span><span class="o">.</span> <span class="n">ideal</span> <span class="n">equilibrium</span> <span class="n">barrier</span> <span class="n">Isp</span>
+    <span class="n">IspODF_b</span> <span class="o">=</span>    <span class="mf">319.40</span>  <span class="n">sec</span>  <span class="n">ideal</span> <span class="n">frozen</span> <span class="n">barrier</span> <span class="n">Isp</span>
+                               <span class="p">(</span><span class="mf">3132.24</span> <span class="n">N</span><span class="o">-</span><span class="n">sec</span><span class="o">/</span><span class="n">kg</span><span class="p">,</span> <span class="mf">3.13</span> <span class="n">km</span><span class="o">/</span><span class="n">sec</span><span class="p">)</span>
+    <span class="n">IspODK_b</span> <span class="o">=</span>    <span class="mf">319.55</span>  <span class="n">sec</span>  <span class="n">vacuum</span> <span class="n">kinetic</span> <span class="n">Isp</span> <span class="n">of</span> <span class="n">barrier</span>
+                               <span class="p">(</span><span class="mf">3133.74</span> <span class="n">N</span><span class="o">-</span><span class="n">sec</span><span class="o">/</span><span class="n">kg</span><span class="p">,</span> <span class="mf">3.13</span> <span class="n">km</span><span class="o">/</span><span class="n">sec</span><span class="p">)</span>
+   <span class="n">MRbarrier</span> <span class="o">=</span>  <span class="mf">0.537454</span>       <span class="n">barrier</span> <span class="n">mixture</span> <span class="n">ratio</span>
+      <span class="n">MRwall</span> <span class="o">=</span>  <span class="mf">0.215753</span>       <span class="n">mixture</span> <span class="n">ratio</span> <span class="n">at</span> <span class="n">wall</span>
+     <span class="n">TcODE_b</span> <span class="o">=</span>    <span class="mf">4153.2</span> <span class="n">degR</span>  <span class="n">average</span> <span class="n">ideal</span> <span class="n">ODE</span> <span class="n">temperature</span> <span class="n">of</span> <span class="n">barrier</span> <span class="n">gas</span>
+                               <span class="p">(</span><span class="mf">2307.3</span> <span class="n">degK</span><span class="p">,</span> <span class="mf">2034.2</span> <span class="n">degC</span><span class="p">,</span> <span class="mf">3693.5</span> <span class="n">degF</span><span class="p">)</span>
+    <span class="n">Twallgas</span> <span class="o">=</span>    <span class="mf">2774.3</span> <span class="n">degR</span>  <span class="n">temperature</span> <span class="n">of</span> <span class="n">gas</span> <span class="n">at</span> <span class="n">wall</span>
+                               <span class="p">(</span><span class="mf">1541.3</span> <span class="n">degK</span><span class="p">,</span> <span class="mf">1268.1</span> <span class="n">degC</span><span class="p">,</span> <span class="mf">2314.6</span> <span class="n">degF</span><span class="p">)</span>
+<span class="n">WentrOvWcool</span> <span class="o">=</span>   <span class="mf">1.68107</span>       <span class="n">ratio</span> <span class="n">of</span> <span class="n">entrained</span> <span class="n">flow</span> <span class="n">rate</span> <span class="n">to</span> <span class="n">FFC</span> <span class="n">flow</span> <span class="n">rate</span>
+<span class="o">............................................................................</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/generic_logo.svg" alt="Logo"/>
+            </a></p>
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">QuickStart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="models.html">Models</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#apollo-sps">Apollo SPS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#r-4d-optimum-mr">R-4D Optimum MR</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="jannaf.html">JANNAF Standard</a></li>
+<li class="toctree-l1"><a class="reference internal" href="efficiencies.html">Efficiencies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nozzle_eff.html">Nozzle Efficiencies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chamber_eff.html">Chamber Efficiencies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="comb_stability.html">Combustion Stability</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sources.html">Sources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mlp_summary.html">Multilayer Perceptron</a></li>
+<li class="toctree-l1"><a class="reference internal" href="functions.html">RocketIsp Code Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="copyright.html">Copyright</a></li>
+<li class="toctree-l1"><a class="reference internal" href="authors.html">Authors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="history.html">History</a></li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="models.html"
+                        title="previous chapter">Models</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="jannaf.html"
+                        title="next chapter">JANNAF Standard</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/examples.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="jannaf.html" title="JANNAF Standard"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="models.html" title="Models"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">RocketIsp 0.1.11 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Examples</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; <a href="copyright.html">Copyright</a> 2015, Charlie Taylor.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.0.
+    </div>
+  </body>
+</html>

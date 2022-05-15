@@ -18,6 +18,8 @@ def eff_pulse( pulse_sec=0.1, pulse_quality=0.8):
 
 if __name__ == "__main__": #Self Test
     from pylab import *
+    import sys
+
     do_show = True
     if len(sys.argv) > 1:
         if sys.argv[1] == 'suppress_show':

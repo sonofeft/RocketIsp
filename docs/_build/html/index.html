@@ -1,0 +1,247 @@
+
+
+<!doctype html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RocketIsp &#8212; RocketIsp 0.1.11 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/bizstyle.css" />
+    
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/bizstyle.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="copyright" title="Copyright" href="copyright.html" />
+    <link rel="next" title="QuickStart" href="quickstart.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <!--[if lt IE 9]>
+    <script src="_static/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="quickstart.html" title="QuickStart"
+             accesskey="N">next</a> |</li>
+        <li class="nav-item nav-item-0"><a href="#">RocketIsp 0.1.11 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">RocketIsp</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <img alt="https://travis-ci.org/sonofeft/RocketIsp.svg?branch=master" src="https://travis-ci.org/sonofeft/RocketIsp.svg?branch=master" />
+<img alt="https://img.shields.io/pypi/v/RocketIsp.svg" src="https://img.shields.io/pypi/v/RocketIsp.svg" /><img alt="https://img.shields.io/badge/python-3.5|3.6|3.7|3.8-blue" src="https://img.shields.io/badge/python-3.5|3.6|3.7|3.8-blue" />
+<img alt="https://img.shields.io/pypi/l/RocketIsp.svg" src="https://img.shields.io/pypi/l/RocketIsp.svg" /><p>RocketIsp is in the early stages of development… should stabilize soon.</p>
+<p><strong>Rocketisp</strong> Calculates Delivered Specific Impulse (Isp) For Liquid Rocket Thrust Chambers.</p>
+<p>See the Code at: <a class="reference external" href="https://github.com/sonofeft/RocketIsp">https://github.com/sonofeft/RocketIsp</a></p>
+<p>See the Docs at: <a class="reference external" href="http://rocketisp.readthedocs.org/en/latest/">http://rocketisp.readthedocs.org/en/latest/</a></p>
+<p>See PyPI page at:<a class="reference external" href="https://pypi.python.org/pypi/rocketisp">https://pypi.python.org/pypi/rocketisp</a></p>
+<p><strong>Rocketisp</strong> uses a simplified JANNAF approach to calculate delivered
+specific impulse (Isp) for liquid rocket thrust chambers.</p>
+<p>Note that <strong>RocketIsp</strong> gets propellant properties from the companion project <a class="reference external" href="https://rocketprops.readthedocs.io/en/latest/">RocketProps</a>
+and ideal Isp performance from the companion project  <a class="reference external" href="https://rocketcea.readthedocs.io/en/latest/">RocketCEA</a> .</p>
+<div class="section" id="rocketisp">
+<h1>RocketIsp<a class="headerlink" href="#rocketisp" title="Permalink to this headline">¶</a></h1>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>RocketIsp is in the early stages of development… should stabilize soon.</p>
+</div>
+<p>Contents:</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">QuickStart</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html#install-rocketisp">Install RocketIsp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html#installation-from-source">Installation From Source</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html#running-rocketisp">Running RocketIsp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html#rocketisp-gui">RocketIsp GUI</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="models.html">Models</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="models.html#geometry">Geometry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="models.html#efficiencies">Efficiencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="models.html#corestream">CoreStream</a></li>
+<li class="toctree-l2"><a class="reference internal" href="models.html#barrierstream">BarrierStream</a></li>
+<li class="toctree-l2"><a class="reference internal" href="models.html#rocketthruster">RocketThruster</a></li>
+<li class="toctree-l2"><a class="reference internal" href="models.html#injector">Injector</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#apollo-sps">Apollo SPS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#r-4d-optimum-mr">R-4D Optimum MR</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="jannaf.html">JANNAF Standard</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="jannaf.html#rigorous-model">Rigorous Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jannaf.html#simplified-model">Simplified Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jannaf.html#nozzle-losses">Nozzle Losses</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jannaf.html#chamber-losses">Chamber Losses</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="efficiencies.html">Efficiencies</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="efficiencies.html#cstar-efficiency">Cstar Efficiency</a></li>
+<li class="toctree-l2"><a class="reference internal" href="efficiencies.html#discharge-coefficient">Discharge Coefficient</a></li>
+<li class="toctree-l2"><a class="reference internal" href="efficiencies.html#isp-efficiency">Isp Efficiency</a></li>
+<li class="toctree-l2"><a class="reference internal" href="efficiencies.html#perfect-injector">Perfect Injector</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="nozzle_eff.html">Nozzle Efficiencies</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="nozzle_eff.html#boundary-layer-loss">Boundary Layer Loss</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nozzle_eff.html#divergence-efficiency">Divergence Efficiency</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nozzle_eff.html#two-phase-efficiency">Two Phase Efficiency</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nozzle_eff.html#kinetic-efficiency">Kinetic Efficiency</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="chamber_eff.html">Chamber Efficiencies</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="chamber_eff.html#mixing-efficiency">Mixing Efficiency</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chamber_eff.html#vaporization-efficiency">Vaporization Efficiency</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chamber_eff.html#fuel-film-cooling">Fuel Film Cooling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chamber_eff.html#pulsing-efficiency">Pulsing Efficiency</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="comb_stability.html">Combustion Stability</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="comb_stability.html#acoustic-modes">Acoustic Modes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="comb_stability.html#hewitt-criteria">Hewitt Criteria</a></li>
+<li class="toctree-l2"><a class="reference internal" href="comb_stability.html#strouhal-number">Strouhal Number</a></li>
+<li class="toctree-l2"><a class="reference internal" href="comb_stability.html#applying-hewitt-criteria">Applying Hewitt Criteria</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="sources.html">Sources</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="sources.html#cpia-246">CPIA 246</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sources.html#huzel-and-huang">Huzel and Huang</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sources.html#sutton">Sutton</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sources.html#turner">Turner</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sources.html#nasa">NASA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sources.html#rocket-engines">Rocket Engines</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="mlp_summary.html">Multilayer Perceptron</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="mlp_summary.html#monte-carlo-method">Monte Carlo Method</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mlp_summary.html#example">Example</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="functions.html">RocketIsp Code Functions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="functions.html#module-rocketisp.rocket_isp">Thruster</a></li>
+<li class="toctree-l2"><a class="reference internal" href="functions.html#module-rocketisp.geometry">Geometry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="functions.html#module-rocketisp.efficiencies">Efficiencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="functions.html#module-rocketisp.stream_tubes">Stream Tubes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="functions.html#module-rocketisp.injector">Injector</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="copyright.html">Copyright</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="copyright.html#license">License</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="authors.html">Authors</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="authors.html#development-lead">Development Lead</a></li>
+<li class="toctree-l2"><a class="reference internal" href="authors.html#patches-and-ideas">Patches and Ideas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="authors.html#initial-project-layout">Initial Project Layout</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="history.html">History</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="history.html#github-log">GitHub Log</a></li>
+<li class="toctree-l2"><a class="reference internal" href="history.html#pyhatch">PyHatch</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="indices-and-tables">
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
+</ul>
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="#">
+              <img class="logo" src="_static/generic_logo.svg" alt="Logo"/>
+            </a></p>
+  <h3><a href="#">Table of Contents</a></h3>
+  <ul>
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">QuickStart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="models.html">Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="jannaf.html">JANNAF Standard</a></li>
+<li class="toctree-l1"><a class="reference internal" href="efficiencies.html">Efficiencies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nozzle_eff.html">Nozzle Efficiencies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chamber_eff.html">Chamber Efficiencies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="comb_stability.html">Combustion Stability</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sources.html">Sources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mlp_summary.html">Multilayer Perceptron</a></li>
+<li class="toctree-l1"><a class="reference internal" href="functions.html">RocketIsp Code Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="copyright.html">Copyright</a></li>
+<li class="toctree-l1"><a class="reference internal" href="authors.html">Authors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="history.html">History</a></li>
+</ul>
+
+  <h4>Next topic</h4>
+  <p class="topless"><a href="quickstart.html"
+                        title="next chapter">QuickStart</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/index.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="quickstart.html" title="QuickStart"
+             >next</a> |</li>
+        <li class="nav-item nav-item-0"><a href="#">RocketIsp 0.1.11 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">RocketIsp</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; <a href="copyright.html">Copyright</a> 2015, Charlie Taylor.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.0.
+    </div>
+  </body>
+</html>

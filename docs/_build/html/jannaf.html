@@ -1,0 +1,277 @@
+
+
+<!doctype html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JANNAF Standard &#8212; RocketIsp 0.1.11 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/bizstyle.css" />
+    
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="_static/bizstyle.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="copyright" title="Copyright" href="copyright.html" />
+    <link rel="next" title="Efficiencies" href="efficiencies.html" />
+    <link rel="prev" title="Examples" href="examples.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <!--[if lt IE 9]>
+    <script src="_static/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="efficiencies.html" title="Efficiencies"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="examples.html" title="Examples"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">RocketIsp 0.1.11 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">JANNAF Standard</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="jannaf-standard">
+<span id="ref-to-jannaf-standard"></span><h1>JANNAF Standard<a class="headerlink" href="#jannaf-standard" title="Permalink to this headline">¶</a></h1>
+<p>In 1975, the <a class="reference external" href="https://www.jhuapl.edu/">John Hopkins University, Applied Physics Laboratory</a>
+published <a class="reference external" href="https://apps.dtic.mil/docs/citations/ADA127784">CPIA 246</a> in conjunction with
+<a class="reference external" href="https://www.jannaf.org/">JANNAF (Joint Army-Navy-NASA-Air Force)</a> titled
+<a class="reference external" href="https://apps.dtic.mil/sti/citations/ADA127784">Rocket Engine Performance Test Data Acquisition and Interpretation Manual</a></p>
+<p><a class="reference internal" href="sources.html#ref-to-cpia-246"><span class="std std-ref">CPIA 246 JANNAF Rocket Engine Performance Prediction and Evaluation Manual</span></a>  established a US
+national standard for the analytical and experimental evaluation of the performance of
+liquid propellant rocket engines and is a result of the work by the
+<a class="reference external" href="https://www.jannaf.org/about/history">Interagency Chemical Rocket Propulsion Group (ICRPG)</a>
+formed in 1962. In 1973,
+<a class="reference external" href="https://ntrs.nasa.gov/search?q=ICRPG%20Liquid%20Propellant%20Thrust%20Chamber%20Performance%20Evaluation%20Manual&amp;highlight=true&amp;reportNumber=JPL-TM-33-548&amp;fundingNumber=NAS7-100">NASA-CR-131519</a>
+was published to discuss the history of the <a class="reference external" href="https://www.jannaf.org/about/history">ICRPG</a>  meetings that led to
+<a class="reference internal" href="sources.html#ref-to-cpia-246"><span class="std std-ref">CPIA 246</span></a> and to
+summarize the selected model approaches.</p>
+<p>In 1977, <a class="reference external" href="https://en.wikipedia.org/wiki/Aerojet">Aerojet Liquid Rocket Company (ALRC)</a>, now known as
+<a class="reference external" href="https://www.rocket.com/">Aerojet Rocketdyne</a>,
+published an update to <a class="reference internal" href="sources.html#ref-to-cpia-246"><span class="std std-ref">CPIA 246</span></a>
+entitled <a class="reference external" href="https://ntrs.nasa.gov/citations/19770012219">Analysis of rocket engine injection combustion processes</a>
+that reflects on-going improvements to the models and software used to implement the
+“standard” JANNAF model. The <a class="reference external" href="https://www.rocket.com/">Aerojet</a> report also indicates that,
+in 1977, the <a class="reference external" href="https://www.jannaf.org/">JANNAF</a> model, in general,
+could not yet achieve a 1% accuracy on predicting Isp without the help of test data.</p>
+<p>There are two model approaches offered by <a class="reference external" href="https://www.jannaf.org/">JANNAF</a>,
+a rigorous model and a simplified model.</p>
+<div class="section" id="rigorous-model">
+<h2>Rigorous Model<a class="headerlink" href="#rigorous-model" title="Permalink to this headline">¶</a></h2>
+<p>The rigorous model is intended for the detailed analysis of an engine that is preparing for a
+hardware production design; either test or flight hardware.</p>
+<p>The rigorous model requires many more resources and much more technical expertise than
+can be presented here.</p>
+<p>Since 1977, much has changed in how aerospace companies conduct rigorous performance analysis.
+The rigorous approach has evolved.
+The advent of <a class="reference external" href="https://en.wikipedia.org/wiki/Computational_fluid_dynamics">Computational fluid dynamics (CFD)</a>
+has given rise to analysis approaches like the NASA Space Launch System (SLS) at
+<a class="reference external" href="https://www.nasa.gov/ames/designing-new-rocket-engines-for-nasa-s-space-launch-system">NASA Ames Research Center</a> and
+<a class="reference external" href="https://www.nas.nasa.gov/SC14/demos/demo20.html">NASA Marshall Space Flight Center (MSFC)</a>.
+Such models require super computers or large computer clusters in order to complete a single run
+in a reasonable time (often several days of run time).</p>
+</div>
+<div class="section" id="simplified-model">
+<h2>Simplified Model<a class="headerlink" href="#simplified-model" title="Permalink to this headline">¶</a></h2>
+<p>The simplified model is intended more for preliminary analysis where general trends and influences are more important
+than low-level design details.</p>
+<p>The simplified model can be performed with some
+first-order efficiency models and the <a class="reference external" href="https://www.python.org">python</a> project
+<a class="reference external" href="https://rocketcea.readthedocs.io/en/latest/">RocketCEA</a>
+(<a class="reference external" href="https://rocketcea.readthedocs.io/en/latest/">RocketCEA</a> wraps
+the <a class="reference external" href="https://www.grc.nasa.gov/WWW/CEAWeb/ceaHome.htm">NASA FORTRAN CEA code</a> that calculates
+One Dimensional Equilibrium Isp)</p>
+<p><strong>Rocketisp</strong> will focus on a simplified model of performance prediction.</p>
+<p><a class="reference external" href="https://ntrs.nasa.gov/search?q=ICRPG%20Liquid%20Propellant%20Thrust%20Chamber%20Performance%20Evaluation%20Manual&amp;highlight=true&amp;reportNumber=JPL-TM-33-548&amp;fundingNumber=NAS7-100">NASA-CR-131519</a>
+describes the simplified model for calculating delivered Isp (<span class="math notranslate nohighlight">\(Isp_{del}\)</span>) as having 3 basic assumptions:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">1</span>  <span class="n">One</span><span class="o">-</span><span class="n">dimensional</span> <span class="n">isentropic</span> <span class="n">expansion</span> <span class="p">(</span><span class="n">ODE</span><span class="p">)</span>
+<span class="mf">2.</span> <span class="n">Simple</span> <span class="n">nozzle</span> <span class="n">geometry</span>
+<span class="mf">3.</span> <span class="n">A</span> <span class="n">system</span> <span class="n">of</span> <span class="n">correction</span> <span class="n">losses</span> <span class="n">to</span> <span class="n">the</span> <span class="n">ODE</span> <span class="n">value</span>
+    <span class="n">a</span><span class="o">.</span> <span class="n">Mixture</span> <span class="n">ratio</span> <span class="n">distribution</span>
+    <span class="n">b</span><span class="o">.</span> <span class="n">Chamber</span> <span class="n">friction</span>
+    <span class="n">c</span><span class="o">.</span> <span class="n">Chamber</span> <span class="n">heat</span> <span class="n">transfer</span>
+    <span class="n">d</span><span class="o">.</span> <span class="n">Energy</span> <span class="n">release</span> <span class="n">efficiency</span>
+    <span class="n">e</span><span class="o">.</span> <span class="n">Nozzle</span> <span class="n">friction</span>
+    <span class="n">f</span><span class="o">.</span> <span class="n">Nozzle</span> <span class="n">heat</span> <span class="n">transfer</span>
+    <span class="n">g</span><span class="o">.</span> <span class="n">Nozzle</span> <span class="n">geometry</span>
+    <span class="n">h</span><span class="o">.</span> <span class="n">Kinetics</span>
+    <span class="n">i</span><span class="o">.</span> <span class="n">Mass</span> <span class="n">distribution</span>
+    <span class="n">j</span><span class="o">.</span> <span class="n">Two</span><span class="o">-</span><span class="n">phase</span> <span class="n">flow</span>
+    <span class="n">k</span><span class="o">.</span> <span class="n">Nonstandard</span> <span class="n">inlet</span> <span class="n">conditions</span>
+</pre></div>
+</div>
+<p>In its most simplified form, the delivered Isp (<span class="math notranslate nohighlight">\(Isp_{del}\)</span>) of a liquid propellant rocket engine
+with a conventional nozzle
+is just the One Dimensional Equilibrium Isp
+(<span class="math notranslate nohighlight">\(Isp_{ODE}\)</span>) generated by <a class="reference external" href="https://rocketcea.readthedocs.io/en/latest/">RocketCEA</a> multiplied
+times each of the efficiencies (<span class="math notranslate nohighlight">\(\eta_i\)</span>) described by the correction losses, a through k, above.</p>
+<div class="math notranslate nohighlight">
+\[\Large{Isp_{del} = Isp_{ODE} * \prod_{i=a}^k \eta_i}\]</div>
+<p>The above efficiencies are usually separated into two groups; those that happen in the chamber and
+those that happen in the nozzle.</p>
+</div>
+<div class="section" id="nozzle-losses">
+<h2>Nozzle Losses<a class="headerlink" href="#nozzle-losses" title="Permalink to this headline">¶</a></h2>
+<p>The Isp losses in the nozzle are more simple to model than the chamber losses and are usually
+more consequential to the delivered Isp.</p>
+<p><strong>Rocketisp</strong> calculates overall nozzle efficiency from:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">effDiv</span> <span class="o">=</span> <span class="n">Divergence</span> <span class="n">Efficiency</span> <span class="n">of</span> <span class="n">Nozzle</span>
+<span class="n">effKin</span> <span class="o">=</span> <span class="n">Kinetic</span> <span class="n">Efficiency</span> <span class="n">of</span> <span class="n">Nozzle</span>
+<span class="n">effBL</span>  <span class="o">=</span> <span class="n">Boundary</span> <span class="n">Layer</span> <span class="n">Efficiency</span> <span class="n">of</span> <span class="n">Nozzle</span>
+<span class="n">effTP</span>  <span class="o">=</span> <span class="n">Two</span> <span class="n">Phase</span> <span class="n">Efficiency</span> <span class="n">of</span> <span class="n">Nozzle</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="chamber-losses">
+<h2>Chamber Losses<a class="headerlink" href="#chamber-losses" title="Permalink to this headline">¶</a></h2>
+<p>Chamber losses are usually more difficult to model than losses in the nozzle and
+they are usually more subject to detailed design features.</p>
+<p>That said, the combined chamber losses are usually small in production engines.
+For example, 98% efficiency is a very typical value for all the combined chamber losses.</p>
+<p><strong>Rocketisp</strong> calculates overall chamber efficiency from:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">effMix</span>   <span class="o">=</span> <span class="n">Inter</span><span class="o">-</span><span class="n">Element</span> <span class="n">Mixing</span> <span class="n">Efficiency</span> <span class="n">of</span> <span class="n">Injector</span>
+<span class="n">effEm</span>    <span class="o">=</span> <span class="n">Intra</span><span class="o">-</span><span class="n">Element</span> <span class="n">Mixing</span> <span class="n">Efficiency</span> <span class="n">of</span> <span class="n">Injector</span>
+<span class="n">effVap</span>   <span class="o">=</span> <span class="n">Vaporization</span> <span class="n">Efficiency</span> <span class="n">of</span> <span class="n">Injector</span>
+<span class="n">effHL</span>    <span class="o">=</span> <span class="n">Heat</span> <span class="n">Loss</span> <span class="n">Efficiency</span> <span class="n">of</span> <span class="n">Chamber</span>
+<span class="n">effFFC</span>   <span class="o">=</span> <span class="n">Fuel</span> <span class="n">Film</span> <span class="n">Cooling</span> <span class="n">Efficiency</span> <span class="n">of</span> <span class="n">Chamber</span>
+<span class="n">effPulse</span> <span class="o">=</span> <span class="n">Pulsing</span> <span class="n">Efficiency</span> <span class="n">of</span> <span class="n">Thruster</span>
+</pre></div>
+</div>
+<p>Mixing loss results from less than ideal mixing between the fuel and the oxidizer.
+Vaporization loss results when the fuel and/or oxidizer do not completely vaporize to enable full combustion.
+Those losses combined with any inability of combustion to reach
+equilibrium chemistry are lumped to yield the injector losses,
+sometimes referred to as combustion efficiency or energy release losses.</p>
+<p>The most universally used parameter to characterize an injector is the characteristic velocity (<span class="math notranslate nohighlight">\(c^*\)</span>).</p>
+<p><a class="reference external" href="https://archive.org/details/Rocket_Propulsion_Elements_8th_Edition_by_Oscar_Biblarz_George_P._Sutton">Rocket Propulsion Elements</a>,
+defines <span class="math notranslate nohighlight">\(c^*\)</span>, pronounced “cee-star”, as:</p>
+<div class="math notranslate nohighlight">
+\[\Large{c^* = P_c * A_t / \dot m}\]</div>
+<p>The characteristic velocity (<span class="math notranslate nohighlight">\(c^*\)</span>) is easily
+determined from measured data of mass flow rate (<span class="math notranslate nohighlight">\(\dot m\)</span>), chamber pressure (<span class="math notranslate nohighlight">\(P_c\)</span>),
+and throat area (<span class="math notranslate nohighlight">\(A_t\)</span>). It relates to the efficiency of
+the combustion and is essentially independent of nozzle characteristics.</p>
+<p><span class="math notranslate nohighlight">\(c^*\)</span> is often
+used as a measure of the injector excellence since fully mixed and
+reacted propellants generally have higher <span class="math notranslate nohighlight">\(c^*\)</span> than poorly-mixed and
+partially-reacted propellants.</p>
+<p>The most direct measurement of energy release efficiency (<span class="math notranslate nohighlight">\(\eta_{ERE}\)</span>)
+is the measured <span class="math notranslate nohighlight">\(c^*\)</span> efficiency (<span class="math notranslate nohighlight">\(\eta_{c^*}\)</span>) of the thrust chamber. If the
+<span class="math notranslate nohighlight">\(c^*\)</span> efficiency is used to back out energy release efficiency , then the effect of the nozzle discharge
+coefficient <span class="math notranslate nohighlight">\(C_D\)</span> must be taken into account.</p>
+<p>In other words, for a perfect injector: <span class="math notranslate nohighlight">\(\Large{\eta_{c^*_{PI}} = 1 / C_D}\)</span></p>
+<p>For a real injector: <span class="math notranslate nohighlight">\(\Large{\eta_{c^*} = \eta_{ERE} / C_D}\)</span></p>
+<p>such that the energy release efficiency can be calculated as:</p>
+<div class="math notranslate nohighlight">
+\[\Large{\eta_{ERE} = \eta_{c^*} * C_D}\]</div>
+<p>Note that, <em>In general, the use of empirical data is required to predict the energy release efficiency.</em>
+– <a class="reference external" href="https://arc.aiaa.org/doi/book/10.2514/4.866760">D.E. Coats</a></p>
+</div>
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/generic_logo.svg" alt="Logo"/>
+            </a></p>
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">QuickStart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="models.html">Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">JANNAF Standard</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#rigorous-model">Rigorous Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#simplified-model">Simplified Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#nozzle-losses">Nozzle Losses</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#chamber-losses">Chamber Losses</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="efficiencies.html">Efficiencies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nozzle_eff.html">Nozzle Efficiencies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chamber_eff.html">Chamber Efficiencies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="comb_stability.html">Combustion Stability</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sources.html">Sources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mlp_summary.html">Multilayer Perceptron</a></li>
+<li class="toctree-l1"><a class="reference internal" href="functions.html">RocketIsp Code Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="copyright.html">Copyright</a></li>
+<li class="toctree-l1"><a class="reference internal" href="authors.html">Authors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="history.html">History</a></li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="examples.html"
+                        title="previous chapter">Examples</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="efficiencies.html"
+                        title="next chapter">Efficiencies</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/jannaf.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="efficiencies.html" title="Efficiencies"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="examples.html" title="Examples"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">RocketIsp 0.1.11 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">JANNAF Standard</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; <a href="copyright.html">Copyright</a> 2015, Charlie Taylor.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.0.
+    </div>
+  </body>
+</html>

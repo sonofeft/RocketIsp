@@ -1,0 +1,640 @@
+
+
+<!doctype html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nozzle Efficiencies &#8212; RocketIsp 0.1.11 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/bizstyle.css" />
+    
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="_static/bizstyle.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="copyright" title="Copyright" href="copyright.html" />
+    <link rel="next" title="Chamber Efficiencies" href="chamber_eff.html" />
+    <link rel="prev" title="Efficiencies" href="efficiencies.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <!--[if lt IE 9]>
+    <script src="_static/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="chamber_eff.html" title="Chamber Efficiencies"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="efficiencies.html" title="Efficiencies"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">RocketIsp 0.1.11 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Nozzle Efficiencies</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="nozzle-efficiencies">
+<h1>Nozzle Efficiencies<a class="headerlink" href="#nozzle-efficiencies" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="boundary-layer-loss">
+<h2>Boundary Layer Loss<a class="headerlink" href="#boundary-layer-loss" title="Permalink to this headline">¶</a></h2>
+<p>The boundary layer loss is a result of not only the friction and heat transfer with the combustor wall,
+but also the change those forces make in the <strong>aerodynamic geometry</strong> as opposed to the <strong>physical geometry</strong>.
+In other words, the flow area of the throat and nozzle exit is less than the physical dimensions of the hardware
+due to the formation of a boundary layer.</p>
+<p>In general the <strong>aerodynamic area ratio</strong> will be less than the <strong>physical area ratio</strong>.
+That area ratio reduction will account for a large fraction of the overall boundary layer loss
+since smaller area ratios tend to have lower ideal Isp.</p>
+<p>In <a class="reference external" href="http://rocketisp.readthedocs.org/en/latest/">RocketIsp</a> ,
+one source for the boundary layer loss correlation is
+<a class="reference external" href="https://ntrs.nasa.gov/search.jsp?R=19770009165">NASA SP 8120</a>. Figure 4 of that document
+(shown below) displays a correlation of boundary layer loss over a range of area ratio, chamber pressure
+and throat diameter.
+A curve fit of Figure 4 from <a class="reference external" href="https://ntrs.nasa.gov/search.jsp?R=19770009165">NASA SP 8120</a>
+is displayed as an efficiency in the right-hand plot.
+(Figure 4 curves were digitized using <a class="reference external" href="https://digiplot.readthedocs.io/en/latest/">Digiplot</a>.)</p>
+<p>Because <a class="reference external" href="https://ntrs.nasa.gov/search.jsp?R=19770009165">NASA SP 8120</a>
+correlated loss as a percentage of nozzle thrust, the multiplier form of effBL (<span class="math notranslate nohighlight">\(\large{\eta_{BL}}\)</span>) in the
+<span class="math notranslate nohighlight">\(Isp_{del}\)</span>
+equation should be used with this correlation.</p>
+<table width="100%">
+<tr>
+<th style="text-align:center;"> NASA SP 8120 Loss </th>
+<th style="text-align:center;"> Curve Fit SP 8120 </th>
+</tr>
+<tr>
+<td width="50%">
+<a class="reference internal image-reference" href="./_static/viscous_drag_loss.jpg">
+<img src="./_static/viscous_drag_loss.jpg">
+</a>
+</td>
+<td>
+<a class="reference internal image-reference" href="./_static/nasa_sp8120_bl_eff.png">
+<img src="./_static/nasa_sp8120_bl_eff.png">
+</a>
+</td>
+</tr>
+<tr>
+<td colspan="2" style="text-align:center;">
+<p><cite>Click image to see full size</cite></p>
+</td>
+</tr>
+</table><p>Bear in mind that while the above correlation is qualitatively correct, it does not carry the accuracy
+of a more full analysis. The most accurate estimate would come from a rigorous analysis of the
+thin gas layer along the wall of the nozzle. The results would include the effects of the gas
+thermodynamic and transport properties as well as the nozzle shape, surface roughness and temperature.
+Such an analysis is conducted in the next section for
+<a class="reference internal" href="#ref-to-bl-monte-carlo"><span class="std std-ref">Monte Carlo Boundary Layer Analysis</span></a>.</p>
+<p>As is evident in the above graphs, the boundary layer efficiency improves with increasing chamber pressure
+and increasing throat diameter. The loss worsens with increasing area ratio.</p>
+<div class="section" id="eta-bl-monte-carlo">
+<span id="ref-to-bl-monte-carlo"></span><h3><span class="math notranslate nohighlight">\(\eta_{BL}\)</span> Monte Carlo<a class="headerlink" href="#eta-bl-monte-carlo" title="Permalink to this headline">¶</a></h3>
+<p>In order to more fully characterize the variation in <span class="math notranslate nohighlight">\(\eta_{BL}\)</span> and identify any additional influencing parameters, a
+<a class="reference external" href="https://en.wikipedia.org/wiki/Monte_Carlo_method">Monte Carlo</a> analysis was conducted
+on a wide range of propellant combinations, chamber pressures and thrust chamber geometries. Many thousands of boundary layer
+analyses were run in order to identify boundary layer influences.
+<span class="math notranslate nohighlight">\(\eta_{BL}\)</span> was then fitted with a <a class="reference internal" href="mlp_summary.html#ref-to-mlp-summary"><span class="std std-ref">Multi-layer Perceptron regressor</span></a>.</p>
+<p>The independent parameters in the <a class="reference external" href="https://en.wikipedia.org/wiki/Monte_Carlo_method">Monte Carlo</a> analysis
+are shown across the x axis of the chart below. The y axis shows the correlation coefficient that results from
+fitting <span class="math notranslate nohighlight">\(\eta_{BL}\)</span> with a <a class="reference internal" href="mlp_summary.html#ref-to-mlp-summary"><span class="std std-ref">Multi-layer Perceptron regressor</span></a>
+when selecting, one by one, the best scoring independent parameter to add next.</p>
+<p>The chart shows that the <span class="math notranslate nohighlight">\(\eta_{BL}\)</span> is well characterized by using three independent parameters, throat radius (Rthrt),
+area ratio (eps) and chamber pressure (Pc); the same three parameters that appear in
+<a class="reference external" href="https://ntrs.nasa.gov/search.jsp?R=19770009165">NASA SP 8120</a> .</p>
+<p>Some small gains in correlation coefficient can be attained by adding
+percent bell (pcentBell) and chamber temperature (TcCham) as independent parameters.</p>
+<a class="reference internal image-reference" href="_images/pcentlossbl_corr_params.png"><img alt="_images/pcentlossbl_corr_params.png" src="_images/pcentlossbl_corr_params.png" style="width: 49%;" /></a>
+<p><cite>Click Image to View Fill Size</cite></p>
+<p>A comparison of <span class="math notranslate nohighlight">\(\eta_{BL}\)</span> as predicted by the <a class="reference external" href="https://ntrs.nasa.gov/search.jsp?R=19770009165">NASA SP 8120 Report</a>
+to <span class="math notranslate nohighlight">\(\eta_{BL}\)</span> predicted by the
+<a class="reference internal" href="mlp_summary.html#ref-to-mlp-summary"><span class="std std-ref">Multi-layer Perceptron regressor</span></a>
+are shown below. Both models predict that <span class="math notranslate nohighlight">\(\eta_{BL}\)</span> improves for higher chamber pressure, larger
+throat diameter and smaller area ratio.</p>
+<p>Notice that <a class="reference external" href="https://ntrs.nasa.gov/search.jsp?R=19770009165">NASA SP 8120 Report</a> predicts about twice as much
+boundary layer loss as the
+<a class="reference internal" href="mlp_summary.html#ref-to-mlp-summary"><span class="std std-ref">Multi-layer Perceptron regressor</span></a>.</p>
+<p>Because the <a class="reference external" href="https://ntrs.nasa.gov/search.jsp?R=19770009165">NASA SP 8120 Report</a> uses the product of
+chamber pressure and throat diameter as an independent variable, that correlation can not predict <span class="math notranslate nohighlight">\(\eta_{BL}\)</span>
+beyond about a 1 inch throat radius at 1000 psia chamber pressure.</p>
+<p>The
+<a class="reference internal" href="mlp_summary.html#ref-to-mlp-summary"><span class="std std-ref">Multi-layer Perceptron regressor</span></a>
+model was selected as the default boundary layer loss model in <strong>RocketIsp</strong> because it covers a wider range of cases and
+it is based on a more recent understanding of <span class="math notranslate nohighlight">\(\eta_{BL}\)</span> as modeled by thousands of detailed computer analyses.</p>
+<table width="100%">
+<tr>
+<th style="text-align:center;"> Pc=100 psia </th>
+<th style="text-align:center;"> Pc=1000 psia </th>
+</tr>
+<tr>
+<td width="50%">
+<a class="reference internal image-reference" href="./_static/effbl_parametrics_Pc100.png">
+<img src="./_static/effbl_parametrics_Pc100.png">
+</a>
+</td>
+<td>
+<a class="reference internal image-reference" href="./_static/effbl_parametrics_Pc1000.png">
+<img src="./_static/effbl_parametrics_Pc1000.png">
+</a>
+</td>
+</tr>
+<tr>
+<td colspan="2" style="text-align:center;">
+<p><cite>Click image to see full size</cite></p>
+</td>
+</tr>
+</table></div>
+</div>
+<div class="section" id="divergence-efficiency">
+<h2>Divergence Efficiency<a class="headerlink" href="#divergence-efficiency" title="Permalink to this headline">¶</a></h2>
+<p>The divergence efficiency (<span class="math notranslate nohighlight">\(\large{\eta_{div}}\)</span>) represents the difference in performance between one-dimensional
+and axisymmetric two-dimensional flow.</p>
+<p>The divergence efficiency correlation shown below-left
+was created by taking the results of 6 common
+propellant combinations and analyzing them with the
+<a class="reference external" href="http://www.seainc.com/productsTDK.php">TDK</a> computer program.</p>
+<p><a class="reference external" href="http://www.seainc.com/productsTDK.php">TDK</a>  calculated boundary layer properties and
+assumed some nominal operating conditions with a nominal chamber and throat geometry.
+A large range of area ratio was use, each run employed the <strong>NCO</strong> option that
+finds the optimum entrance and exit angles for a
+<a class="reference external" href="http://www.aspirespace.org.uk/downloads/Thrust%20optimised%20parabolic%20nozzle.pdf">skewed parabolic nozzle</a>.
+The efficiency correlation
+therefore assumes that the best possible parabolic nozzle is being used.
+(This data is from 2006 and I believe, the version of <a class="reference external" href="http://www.seainc.com/productsTDK.php">TDK</a> used for this was
+the 2004 version.)</p>
+<p>The chart below-right is from
+<a class="reference internal" href="sources.html#ref-to-cpia-246"><span class="std std-ref">CPIA 246 JANNAF Rocket Engine Performance Prediction and Evaluation Manual</span></a>
+It shows very similar results as the <a class="reference external" href="http://www.seainc.com/productsTDK.php">TDK</a> output, however,
+it is clear from the <a class="reference external" href="http://www.seainc.com/productsTDK.php">TDK</a>
+results that some boundary layer and/or combustion gas properties can affect the divergence loss by about 10%.
+In other words, 10% of <span class="math notranslate nohighlight">\((1.0-\large{\eta_{div}})\)</span></p>
+<table width="100%">
+<tr>
+<th style="text-align:center;"> TDK Runs </th>
+<th style="text-align:center;"> CPIA 246 </th>
+</tr>
+<tr>
+<td width="60%">
+<a class="reference internal image-reference" href="./_static/effdiv_simple.png">
+<img src="./_static/effdiv_simple.png">
+</a>
+</td>
+<td>
+<a class="reference internal image-reference" href="./_static/etadiv_cpia_246_pg3_2_4b.jpg">
+<img src="./_static/etadiv_cpia_246_pg3_2_4b.jpg">
+</a>
+</td>
+</tr>
+<tr>
+<td colspan="2" style="text-align:center;">
+<p><cite>Click image to see full size</cite></p>
+</td>
+</tr>
+</table><div class="section" id="eta-div-monte-carlo">
+<h3><span class="math notranslate nohighlight">\(\eta_{div}\)</span> Monte Carlo<a class="headerlink" href="#eta-div-monte-carlo" title="Permalink to this headline">¶</a></h3>
+<p>The above correlation assumed some nominal operating conditions with a nominal chamber and throat geometry.
+In order to more fully characterize the variation in <span class="math notranslate nohighlight">\(\eta_{div}\)</span> and identify any additional influencing parameters, a
+<a class="reference external" href="https://en.wikipedia.org/wiki/Monte_Carlo_method">Monte Carlo</a> analysis was conducted
+on a wide range of propellant combinations, chamber pressures and thrust chamber geometries. Many thousands of boundary layer
+analyses were run in order to include operating points and geometry influences on <span class="math notranslate nohighlight">\(\eta_{div}\)</span>.
+<span class="math notranslate nohighlight">\(\eta_{div}\)</span> was then fitted with a <a class="reference internal" href="mlp_summary.html#ref-to-mlp-summary"><span class="std std-ref">Multi-layer Perceptron regressor</span></a>.</p>
+<p>The independent parameters in the <a class="reference external" href="https://en.wikipedia.org/wiki/Monte_Carlo_method">Monte Carlo</a> analysis
+are shown across the x axis of the chart below. The y axis shows the correlation coefficient that results from
+fitting <span class="math notranslate nohighlight">\(\eta_{div}\)</span> with a <a class="reference internal" href="mlp_summary.html#ref-to-mlp-summary"><span class="std std-ref">Multi-layer Perceptron regressor</span></a>
+when selecting, one by one, the best scoring independent parameter to add next.</p>
+<p>The chart shows that <span class="math notranslate nohighlight">\(\eta_{div}\)</span> is mostly dependent on only two independent parameters, percent bell (pcentBell),
+and area ratio (AreaRatio); the same two parameters that appear above in
+<a class="reference internal" href="sources.html#ref-to-cpia-246"><span class="std std-ref">CPIA 246 JANNAF Rocket Engine Performance Prediction and Evaluation Manual</span></a>.</p>
+<p>About 10% improvement in correlation coefficient can be attained by adding
+downstream radius of curvature (RdwnThroat), throat radius (Rthrt),
+combustion temperature (TcCham), chamber pressure (Pc), molecular weight (MolWt)
+and ratio of specific heats (gamma) as independent parameters.</p>
+<a class="reference internal image-reference" href="_images/pcentlossdiv_corr_params.png"><img alt="_images/pcentlossdiv_corr_params.png" src="_images/pcentlossdiv_corr_params.png" style="width: 49%;" /></a>
+<p><cite>Click Image to View Fill Size</cite></p>
+<p>Below are two charts showing how <span class="math notranslate nohighlight">\(\eta_{div}\)</span> varies as a result of downstream radius of curvature (RdwnThroat)
+and throat radius (Rthrt). As the correlation coefficient indicated, RdwnThroat variation has more impact than Rthrt variation.</p>
+<p>The charts below indicate that RdwnThroat has more impact at low area ratio, and Rthrt has more impact at high area ratio.</p>
+<table width="100%">
+<tr>
+<th style="text-align:center;"> RdwnThroat Sensitivity </th>
+<th style="text-align:center;"> Rthrt Sensitivity </th>
+</tr>
+<tr>
+<td width="50%">
+<a class="reference internal image-reference" href="./_static/effdiv_monte_Rd.png">
+<img src="./_static/effdiv_monte_Rd.png">
+</a>
+</td>
+<td>
+<a class="reference internal image-reference" href="./_static/effdiv_monte_Rthrt.png">
+<img src="./_static/effdiv_monte_Rthrt.png" >
+</a>
+</td>
+</tr>
+<tr>
+<td colspan="2" style="text-align:center;">
+<p><cite>Click image to see full size</cite></p>
+</td>
+</tr>
+</table></div>
+</div>
+<div class="section" id="two-phase-efficiency">
+<h2>Two Phase Efficiency<a class="headerlink" href="#two-phase-efficiency" title="Permalink to this headline">¶</a></h2>
+<p>Two phase flow loss is a result of the thermal and velocity lag between the expanding gas and particles of
+either liquid or solid.</p>
+<p>There is currently no model in <strong>RocketIsp</strong> to predict two phase efficiency, however, <span class="math notranslate nohighlight">\(eta_{TP}\)</span> can
+be input and accounted for if the user has appropriate data available.</p>
+</div>
+<div class="section" id="kinetic-efficiency">
+<h2>Kinetic Efficiency<a class="headerlink" href="#kinetic-efficiency" title="Permalink to this headline">¶</a></h2>
+<p>Kinetic efficiency is a result of finite reaction rates in the nozzle.</p>
+<p>The <a class="reference external" href="https://www.grc.nasa.gov/WWW/CEAWeb/ceaHome.htm">NASA CEA code</a>
+used by <a class="reference external" href="http://rocketcea.readthedocs.org/en/latest/">RocketCEA</a>
+and <strong>RocketIsp</strong> is a one dimensional equilibrium (ODE) code.
+It calculates temperature, pressure and species concentrations based on a one dimensional flow model
+where all molecular species are kept at chemical equilibrium (ODE).</p>
+<p>While equilibrium is the most common mode in which to run <a class="reference external" href="https://www.grc.nasa.gov/WWW/CEAWeb/ceaHome.htm">CEA</a>
+(and <a class="reference external" href="http://rocketcea.readthedocs.org/en/latest/">RocketCEA</a> ),
+both can also be run assuming that the molecular species concentrations are held
+constant (frozen) from the combustion chamber to the nozzle exit.</p>
+<p>Real rocket engines operate somewhere between frozen(ODF) and equilibrium(ODE).
+This is because chemical reactions take a finite amount of time to reach equilibrium.
+Given no time, the species are frozen, given infinite time the species reach equilibrium.</p>
+<p>Because frozen Isp, <span class="math notranslate nohighlight">\(Isp_{ODF}\)</span>, is lower than equilibrium Isp, <span class="math notranslate nohighlight">\(Isp_{ODE}\)</span>,
+there is a loss associated with nozzle kinetics.
+Kinetics loss is typically in the range of 0.1 to 10% of Isp.</p>
+<p>Chemical equilibrium is aided by high temperature and pressure (faster reactions/more molecular collisions)
+and species residence time (rocket engine’s physical size).
+An infinitely small engine has frozen chemistry.
+An infinitely large engine has equilibrium chemistry.</p>
+<p>This also means that real rocket engines will typically
+have maximum Isp at a mixture ratio(MR) somewhere between the frozen peak MR and the equilibrium peak MR.
+The figure below shows this kinetics efficiency impact on MR for a small, low pressure N2O4/MMH thruster.</p>
+<a class="reference internal image-reference" href="_images/odekf_N2O4_MMH.png"><img alt="_images/odekf_N2O4_MMH.png" src="_images/odekf_N2O4_MMH.png" style="width: 60%;" /></a>
+<div class="section" id="kinetics-groups">
+<span id="ref-to-kinetics-groups"></span><h3>Kinetics Groups<a class="headerlink" href="#kinetics-groups" title="Permalink to this headline">¶</a></h3>
+<p>Chemical kinetics are usually analyzed based on the element components in the combustion products.
+For example a LOX/LH2 engine is in group <strong>HO</strong> because is only has Hydrogen and Oxygen.
+A LOX/CH4 engine is in group <strong>CHO</strong> for Carbon, Hydrogen and Oxygen.
+The table below shows common group names and some propellant combinations belonging to them.</p>
+<table><tr> <th>Group</th> <th>Oxidizer</th> <th>Fuels</th> </tr>
+    <tr  style="background-color:#DBE4EE"><td rowspan="1" style="font-weight:bold">FH</td>
+        <td>F2</td><td>LH2</td></tr>
+    <tr  style="background-color:#F5F7FA"><td rowspan="1" style="font-weight:bold">HO</td>
+        <td>LOX</td><td>LH2</td></tr>
+    <tr  style="background-color:#DBE4EE"><td rowspan="1" style="font-weight:bold">FHN</td>
+        <td>F2</td><td>N2H4, NH3</td></tr>
+    <tr  style="background-color:#F5F7FA"><td rowspan="1" style="font-weight:bold">CHO</td>
+        <td>LOX</td><td>C2H6, CH4, Ethanol, Methanol, Propane, RP1</td></tr>
+    <tr  style="background-color:#DBE4EE"><td rowspan="6" style="font-weight:bold">HNO</td>
+        <td>LOX</td><td>N2H4, NH3</td></tr>
+        <tr  style="background-color:#DBE4EE"><td>MON10</td><td>LH2, N2H4, NH3</td></tr>
+        <tr  style="background-color:#DBE4EE"><td>MON25</td><td>LH2, N2H4, NH3</td></tr>
+        <tr  style="background-color:#DBE4EE"><td>MON30</td><td>LH2, N2H4, NH3</td></tr>
+        <tr  style="background-color:#DBE4EE"><td>N2O</td><td>LH2, N2H4, NH3</td></tr>
+        <tr  style="background-color:#DBE4EE"><td>N2O4</td><td>LH2, N2H4, NH3</td></tr>
+    <tr  style="background-color:#F5F7FA"><td rowspan="1" style="font-weight:bold">CLFH</td>
+        <td>CLF5</td><td>LH2</td></tr>
+    <tr  style="background-color:#DBE4EE"><td rowspan="1" style="font-weight:bold">CFHN</td>
+        <td>F2</td><td>A50, MHF3, MMH, UDMH</td></tr>
+    <tr  style="background-color:#F5F7FA"><td rowspan="1" style="font-weight:bold">CFHO</td>
+        <td>F2</td><td>Ethanol, Methanol</td></tr>
+    <tr  style="background-color:#DBE4EE"><td rowspan="1" style="font-weight:bold">FHNO</td>
+        <td>IRFNA</td><td>LH2, N2H4, NH3</td></tr>
+    <tr  style="background-color:#F5F7FA"><td rowspan="6" style="font-weight:bold">CHNO</td>
+        <td>LOX</td><td>A50, MHF3, MMH, UDMH</td></tr>
+        <tr  style="background-color:#F5F7FA"><td>MON10</td><td>A50, C2H6, CH4, Ethanol, MHF3, MMH, Methanol, Propane, RP1, UDMH</td></tr>
+        <tr  style="background-color:#F5F7FA"><td>MON25</td><td>A50, C2H6, CH4, Ethanol, MHF3, MMH, Methanol, Propane, RP1, UDMH</td></tr>
+        <tr  style="background-color:#F5F7FA"><td>MON30</td><td>A50, C2H6, CH4, Ethanol, MHF3, MMH, Methanol, Propane, RP1, UDMH</td></tr>
+        <tr  style="background-color:#F5F7FA"><td>N2O</td><td>A50, C2H6, CH4, Ethanol, MHF3, MMH, Methanol, Propane, RP1, UDMH</td></tr>
+        <tr  style="background-color:#F5F7FA"><td>N2O4</td><td>A50, C2H6, CH4, Ethanol, MHF3, MMH, Methanol, Propane, RP1, UDMH</td></tr>
+    <tr  style="background-color:#DBE4EE"><td rowspan="1" style="font-weight:bold">CLFHN</td>
+        <td>CLF5</td><td>N2H4, NH3</td></tr>
+    <tr  style="background-color:#F5F7FA"><td rowspan="1" style="font-weight:bold">CFHNO</td>
+        <td>IRFNA</td><td>A50, C2H6, CH4, Ethanol, MHF3, MMH, Methanol, Propane, RP1, UDMH</td></tr>
+    <tr  style="background-color:#DBE4EE"><td rowspan="1" style="font-weight:bold">CCLFHN</td>
+        <td>CLF5</td><td>A50, MHF3, MMH, UDMH</td></tr>
+</table><p>The kinetic loss for each of the groups is controlled by a list of primary chemical reactions.
+A unique list of reactions for each group is listed in
+Appendix A of the <strong>TDK</strong> manual
+<a class="reference external" href="https://ntrs.nasa.gov/citations/19860007470">1985 Engineering and programming manual: Two-dimensional kinetic reference computer program (TDK)</a>
+that contains tables of reactions and their reaction rates for the various element groups.</p>
+<p>In the AIAA paper <a class="reference external" href="http://docshare01.docshare.tips/files/24936/249361716.pdf">Nozzle Performance Predictions Using the TDK 97 Code</a>
+by Stuart Dunn and Douglas Coats gives suggested chemical reactions for the CHON element group.</p>
+<img alt="_images/CHON_Reactions.jpg" src="_images/CHON_Reactions.jpg" />
+<p>The <strong>TDK</strong> code is the accepted standard for the <a class="reference external" href="https://www.jannaf.org/">JANNAF</a>
+performance calculation method.
+As far as I know, <a class="reference external" href="https://www.jannaf.org/">JANNAF</a>  only controls a version of
+<a class="reference external" href="https://www.jannaf.org/products/codes">TDK from 1993</a>
+and the only modern versions are the two commercial versions
+<a class="reference external" href="http://www.seainc.com/productsTDK.php">TDK at Software &amp; Engineering Associates</a>
+and
+<a class="reference external" href="http://sierraengineering.com/TDK/tdk.html">TDK at Sierra Engineering &amp; Software, Inc.</a></p>
+<p>The charts below show typical results from a <strong>TDK</strong>
+chemical kinetics calculation. The charts demonstrate the shifting species mass fractions for a
+LOX/LH2 thruster as a function of area ratio.</p>
+<p>Notice how the mass fractions move from the frozen value towards the equilibrium value
+and how large throats shift further than small throats.</p>
+<p>Notice also that reaction rates near the throat are much higher than at the nozzle exit
+(due to higher temperature and pressure near the throat).</p>
+<table width="100%">
+<tr>
+<th style="text-align:center;"> H2O </th>
+<th style="text-align:center;"> OH </th>
+</tr>
+<tr>
+<td width="50%">
+<a class="reference internal image-reference" href="./_static/ho_LOX_LH2_H2O.png">
+<img src="./_static/ho_LOX_LH2_H2O.png">
+</a>
+</td>
+<td>
+<a class="reference internal image-reference" href="./_static/ho_LOX_LH2_OH.png">
+<img src="./_static/ho_LOX_LH2_OH.png">
+</a>
+</td>
+</tr>
+<tr>
+<td colspan="2" style="text-align:center;">
+<p><cite>Click image to see full size</cite></p>
+</td>
+</tr>
+</table></div>
+<div class="section" id="frackin">
+<span id="ref-to-frackin-def"></span><h3>fracKin<a class="headerlink" href="#frackin" title="Permalink to this headline">¶</a></h3>
+<p>In the AIAA paper <a class="reference external" href="http://docshare01.docshare.tips/files/24936/249361716.pdf">Nozzle Performance Predictions Using the TDK 97 Code</a>
+by Stuart Dunn and Douglas Coats and
+the publication, <a class="reference external" href="https://arc.aiaa.org/doi/book/10.2514/4.866760">Liquid Rocket Thrust Chambers</a>
+Chapter 17, <em>Assessment of Thrust Chamber Performance</em>, the authors
+define the two most common ways to express kinetics loss.</p>
+<ol class="arabic simple">
+<li><p>The ratio of specific impulse with and without the loss, <span class="math notranslate nohighlight">\(\eta_{kin}\)</span></p></li>
+<li><p>The fraction of the difference between equilibrium and frozen flow, <span class="math notranslate nohighlight">\(\eta_{kin}^\prime\)</span></p></li>
+</ol>
+<p>The equations for <span class="math notranslate nohighlight">\(\eta_{kin}\)</span> and  <span class="math notranslate nohighlight">\(\eta_{kin}^\prime\)</span> are given as</p>
+<img alt="_images/etakin_and_etakinprime.jpg" src="_images/etakin_and_etakinprime.jpg" />
+<p>For calculating kinetic loss, <strong>RocketIsp</strong> uses the  <span class="math notranslate nohighlight">\(\eta_{kin}^\prime\)</span> form, however,
+within the code it is called <strong>fracKin</strong>. This name is used to avoid confusion with <span class="math notranslate nohighlight">\(\eta_{kin}\)</span>.</p>
+<p><strong>fracKin</strong> can be thought of as the fraction of kinetics completion.
+A value of 0.0 is frozen, 1.0 is equilibrium.</p>
+</div>
+<div class="section" id="eta-kin-monte-carlo">
+<h3><span class="math notranslate nohighlight">\(\eta_{kin}\)</span> Monte Carlo<a class="headerlink" href="#eta-kin-monte-carlo" title="Permalink to this headline">¶</a></h3>
+<p>In order to characterize the kinetic efficiency, many thousands of one dimensional kinetic (ODK) analyses were run
+and the results were fitted with a <a class="reference internal" href="mlp_summary.html#ref-to-mlp-summary"><span class="std std-ref">Multi-layer Perceptron regressor</span></a>.</p>
+<p>Each <a class="reference internal" href="#ref-to-kinetics-groups"><span class="std std-ref">major species group</span></a>, created a
+<a class="reference internal" href="#ref-to-frackin-def"><span class="std std-ref">fracKin</span></a> (aka <span class="math notranslate nohighlight">\(\eta_{kin}^\prime\)</span>) <a class="reference internal" href="mlp_summary.html#ref-to-mlp-summary"><span class="std std-ref">MLP regressor</span></a></p>
+<p>The <a class="reference internal" href="mlp_summary.html#ref-to-mlp-summary"><span class="std std-ref">MLP regressor</span></a>
+is used to calculate <a class="reference internal" href="#ref-to-frackin-def"><span class="std std-ref">fracKin</span></a>,
+<a class="reference internal" href="#ref-to-frackin-def"><span class="std std-ref">fracKin</span></a> is used to calculate <span class="math notranslate nohighlight">\(\eta_{kin}\)</span>,
+and finally, <span class="math notranslate nohighlight">\(\eta_{kin}\)</span> is used in the <a class="reference internal" href="efficiencies.html#ref-to-full-efficiency-eqn"><span class="std std-ref">full Isp efficiency equation</span></a></p>
+<p>The table below shows the top six most important parameters in the
+<a class="reference internal" href="mlp_summary.html#ref-to-mlp-summary"><span class="std std-ref">MLP regressor</span></a>
+used to correlate <a class="reference internal" href="#ref-to-frackin-def"><span class="std std-ref">fracKin</span></a> for each element group.
+The order of the parameters results from selecting, one by one,
+the independent parameter with the best correlation coefficient to add next.</p>
+<p>For most groups, thruster size (Rthrt) is the most important factor in determining kinetic efficiency.</p>
+<p>Notice that while propellant mixture ratio (MR) is not used explicitly to correlate <a class="reference internal" href="#ref-to-frackin-def"><span class="std std-ref">fracKin</span></a>,
+the mass fraction of molecular species is a proxy for MR and allows the same correlation
+to be used for all propellant combinations that are members of the group.</p>
+<table><tr> <th>Group</th> <th>#1</th> <th>#2</th> <th>#3</th> <th>#4</th> <th>#5</th> <th>#6</th> </tr>
+    <tr  style="background-color:#DBE4EE"><td style="font-weight:bold"><a class="reference internal image-reference" href="./_static/FH_frackin_corr_params_30x30.png">FH</a></td>
+        <td>Rthrt</td>
+        <td>H2F2</td>
+        <td>MolWt</td>
+        <td>eps</td>
+        <td>*HF</td>
+        <td>*H2</td>
+    </tr>
+    <tr  style="background-color:#F5F7FA"><td style="font-weight:bold"><a class="reference internal image-reference" href="./_static/HO_frackin_corr_params_30x30.png">HO</a></td>
+        <td>Rthrt</td>
+        <td>Pc</td>
+        <td>*H2</td>
+        <td>eps</td>
+        <td>HO2</td>
+        <td>H2O</td>
+    </tr>
+    <tr  style="background-color:#DBE4EE"><td style="font-weight:bold"><a class="reference internal image-reference" href="./_static/CHO_frackin_corr_params_30x30.png">CHO</a></td>
+        <td>Rthrt</td>
+        <td>COOH</td>
+        <td>eps</td>
+        <td>*OH</td>
+        <td>Pc</td>
+        <td>*O2</td>
+    </tr>
+    <tr  style="background-color:#F5F7FA"><td style="font-weight:bold"><a class="reference internal image-reference" href="./_static/FHN_frackin_corr_params_30x30.png">FHN</a></td>
+        <td>Rthrt</td>
+        <td>Pc</td>
+        <td>*H2</td>
+        <td>eps</td>
+        <td>gammaInit</td>
+        <td>NH3</td>
+    </tr>
+    <tr  style="background-color:#DBE4EE"><td style="font-weight:bold"><a class="reference internal image-reference" href="./_static/HNO_frackin_corr_params_30x30.png">HNO</a></td>
+        <td>Rthrt</td>
+        <td>Pc</td>
+        <td>gammaInit</td>
+        <td>eps</td>
+        <td>*H2</td>
+        <td>TcCham</td>
+    </tr>
+    <tr  style="background-color:#F5F7FA"><td style="font-weight:bold"><a class="reference internal image-reference" href="./_static/CFHN_frackin_corr_params_30x30.png">CFHN</a></td>
+        <td>Rthrt</td>
+        <td>*NH</td>
+        <td>eps</td>
+        <td>FCN</td>
+        <td>Pc</td>
+        <td>MolWt</td>
+    </tr>
+    <tr  style="background-color:#DBE4EE"><td style="font-weight:bold"><a class="reference internal image-reference" href="./_static/CFHO_frackin_corr_params_30x30.png">CFHO</a></td>
+        <td>Rthrt</td>
+        <td>Pc</td>
+        <td>*CO2</td>
+        <td>eps</td>
+        <td>*CO</td>
+        <td>CH2F</td>
+    </tr>
+    <tr  style="background-color:#F5F7FA"><td style="font-weight:bold"><a class="reference internal image-reference" href="./_static/CHNO_frackin_corr_params_30x30.png">CHNO</a></td>
+        <td>Rthrt</td>
+        <td>TcCham</td>
+        <td>Pc</td>
+        <td>eps</td>
+        <td>*H2</td>
+        <td>*OH</td>
+    </tr>
+    <tr  style="background-color:#DBE4EE"><td style="font-weight:bold"><a class="reference internal image-reference" href="./_static/CLFH_frackin_corr_params_30x30.png">CLFH</a></td>
+        <td>*H2</td>
+        <td>Rthrt</td>
+        <td>Pc</td>
+        <td>eps</td>
+        <td>*CL</td>
+        <td>*HF</td>
+    </tr>
+    <tr  style="background-color:#F5F7FA"><td style="font-weight:bold"><a class="reference internal image-reference" href="./_static/FHNO_frackin_corr_params_30x30.png">FHNO</a></td>
+        <td>Rthrt</td>
+        <td>Pc</td>
+        <td>*HF</td>
+        <td>eps</td>
+        <td>gammaInit</td>
+        <td>*NO</td>
+    </tr>
+    <tr  style="background-color:#DBE4EE"><td style="font-weight:bold"><a class="reference internal image-reference" href="./_static/CFHNO_frackin_corr_params_30x30.png">CFHNO</a></td>
+        <td>Rthrt</td>
+        <td>TcCham</td>
+        <td>*O</td>
+        <td>eps</td>
+        <td>Pc</td>
+        <td>gammaInit</td>
+    </tr>
+    <tr  style="background-color:#F5F7FA"><td style="font-weight:bold"><a class="reference internal image-reference" href="./_static/CLFHN_frackin_corr_params_30x30.png">CLFHN</a></td>
+        <td>*N2</td>
+        <td>Rthrt</td>
+        <td>eps</td>
+        <td>gammaInit</td>
+        <td>HCL</td>
+        <td>Pc</td>
+    </tr>
+    <tr  style="background-color:#DBE4EE"><td style="font-weight:bold"><a class="reference internal image-reference" href="./_static/CCLFHN_frackin_corr_params_30x30.png">CCLFHN</a></td>
+        <td>*CL</td>
+        <td>eps</td>
+        <td>*N2</td>
+        <td>Rthrt</td>
+        <td>MolWt</td>
+        <td>*HF</td>
+    </tr>
+    <tr  style="background-color:#F5F7FA"><td style="font-weight:bold"><a class="reference internal image-reference" href="./_static/All_frackin_corr_params_30x30.png">Combined</a></td>
+        <td>Rthrt</td>
+        <td>TcCham</td>
+        <td>Pc</td>
+        <td>HCL</td>
+        <td>*CO</td>
+        <td>eps</td>
+    </tr>
+
+    <tr>
+    <td colspan="7" style="text-align:center;">
+    <p><cite>Click Group link to view Correlation Coefficient Plot</cite></p>
+    </td>
+    </tr>
+
+</table><div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Molecules listed in the table above refer to the mass fraction of those molecules.</p>
+</div>
+</div>
+</div>
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/generic_logo.svg" alt="Logo"/>
+            </a></p>
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">QuickStart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="models.html">Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="jannaf.html">JANNAF Standard</a></li>
+<li class="toctree-l1"><a class="reference internal" href="efficiencies.html">Efficiencies</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Nozzle Efficiencies</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#boundary-layer-loss">Boundary Layer Loss</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#eta-bl-monte-carlo"><span class="math notranslate nohighlight">\(\eta_{BL}\)</span> Monte Carlo</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#divergence-efficiency">Divergence Efficiency</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#eta-div-monte-carlo"><span class="math notranslate nohighlight">\(\eta_{div}\)</span> Monte Carlo</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#two-phase-efficiency">Two Phase Efficiency</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#kinetic-efficiency">Kinetic Efficiency</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#kinetics-groups">Kinetics Groups</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#frackin">fracKin</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#eta-kin-monte-carlo"><span class="math notranslate nohighlight">\(\eta_{kin}\)</span> Monte Carlo</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="chamber_eff.html">Chamber Efficiencies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="comb_stability.html">Combustion Stability</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sources.html">Sources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mlp_summary.html">Multilayer Perceptron</a></li>
+<li class="toctree-l1"><a class="reference internal" href="functions.html">RocketIsp Code Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="copyright.html">Copyright</a></li>
+<li class="toctree-l1"><a class="reference internal" href="authors.html">Authors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="history.html">History</a></li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="efficiencies.html"
+                        title="previous chapter">Efficiencies</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="chamber_eff.html"
+                        title="next chapter">Chamber Efficiencies</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/nozzle_eff.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="chamber_eff.html" title="Chamber Efficiencies"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="efficiencies.html" title="Efficiencies"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">RocketIsp 0.1.11 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Nozzle Efficiencies</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; <a href="copyright.html">Copyright</a> 2015, Charlie Taylor.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.0.
+    </div>
+  </body>
+</html>

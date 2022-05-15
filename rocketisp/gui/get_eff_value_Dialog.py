@@ -31,6 +31,7 @@ from tkinter import _setit as set_command
 # >>>>>>insert any user code below this comment for section "imports"
 # Place any user import statements here
 from rocketisp.cast import floatCast, is_float, is_int, intCast
+import sys
 
 # TkGridGUI generated code. DO NOT EDIT THE FOLLOWING. section "top_of_init"
 

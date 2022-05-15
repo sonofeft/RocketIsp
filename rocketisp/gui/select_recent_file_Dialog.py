@@ -30,6 +30,8 @@ from tkinter import _setit as set_command
 # >>>>>>insert any user code below this comment for section "imports"
 # Place any user import statements here
 import os
+import sys
+
 # TkGridGUI generated code. DO NOT EDIT THE FOLLOWING. section "top_of_init"
 
 if sys.version_info < (3,):

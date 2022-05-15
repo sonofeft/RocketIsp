@@ -1,0 +1,421 @@
+
+
+<!doctype html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Efficiencies &#8212; RocketIsp 0.1.11 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/bizstyle.css" />
+    
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="_static/bizstyle.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="copyright" title="Copyright" href="copyright.html" />
+    <link rel="next" title="Nozzle Efficiencies" href="nozzle_eff.html" />
+    <link rel="prev" title="JANNAF Standard" href="jannaf.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <!--[if lt IE 9]>
+    <script src="_static/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="nozzle_eff.html" title="Nozzle Efficiencies"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="jannaf.html" title="JANNAF Standard"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">RocketIsp 0.1.11 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Efficiencies</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="efficiencies">
+<span id="ref-to-efficiencies"></span><h1>Efficiencies<a class="headerlink" href="#efficiencies" title="Permalink to this headline">¶</a></h1>
+<p>Efficiency is represented with the symbol <span class="math notranslate nohighlight">\(\large{\eta}\)</span>.
+Each <span class="math notranslate nohighlight">\(\large{\eta}\)</span> will have a subscript to indicate the type of efficiency,
+for example mixing efficiency can be shown as <span class="math notranslate nohighlight">\(\large{\eta_{mix}}\)</span></p>
+<p>In a liquid propellant rocket engine there are two main, overall efficiencies to consider:</p>
+<ul class="simple">
+<li><p>Efficiency of the characteristic velocity, <span class="math notranslate nohighlight">\(\large{\eta_{C^*}}\)</span>, called Cstar Efficiency</p></li>
+<li><p>Efficiency of the specific impulse, <span class="math notranslate nohighlight">\(\large{\eta_{Isp}}\)</span>, called Isp Efficiency</p></li>
+</ul>
+<div class="section" id="cstar-efficiency">
+<h2>Cstar Efficiency<a class="headerlink" href="#cstar-efficiency" title="Permalink to this headline">¶</a></h2>
+<p>The characteristic velocity, or Cstar (<span class="math notranslate nohighlight">\(C^*\)</span>), is a property of propellant combustion
+products that will dictate
+the flow rate (<span class="math notranslate nohighlight">\(\dot m\)</span>) through a rocket thruster throat of given area (<span class="math notranslate nohighlight">\(A_t\)</span>)
+and discharge coefficient (<span class="math notranslate nohighlight">\(C_d\)</span>).
+The ideal value of cstar is calculated by <a class="reference external" href="https://rocketcea.readthedocs.io/en/latest/">RocketCEA</a>
+a <a class="reference external" href="http://www.python.org">python</a> wrapper of the <a class="reference external" href="https://www.grc.nasa.gov/WWW/CEAWeb/ceaHome.htm">NASA CEA FORTRAN Code</a>.</p>
+<p>The Cstar Efficiency, <span class="math notranslate nohighlight">\(\large{\eta_{C^*}}\)</span>, is used to calculate the delivered Cstar of the thruster.
+Note that <span class="math notranslate nohighlight">\(\large{\eta_{C^*}}\)</span> is calculated from the product of other chamber efficiencies.</p>
+<div class="math notranslate nohighlight">
+\[\Large{C^*_{del} = C^*_{ODE} \cdot \eta_{C^*}}\]</div>
+<p>Thruster mass flow rate is then given by the following equation.</p>
+<div class="math notranslate nohighlight">
+\[\Large{\dot m = \frac {P_c \cdot A_t \cdot C_d}  {C^*_{del}} }\]</div>
+<p>Note that as <span class="math notranslate nohighlight">\(\large{C^*_{del}}\)</span> gets smaller <span class="math notranslate nohighlight">\(\large{\dot m}\)</span> gets larger.
+Thus when Cstar Efficiency, <span class="math notranslate nohighlight">\(\large{\eta_{C^*}}\)</span> gets smaller,  <span class="math notranslate nohighlight">\(\large{\dot m}\)</span> gets larger.</p>
+<p><span class="math notranslate nohighlight">\(\large{C^*_{del}}\)</span>  and  <span class="math notranslate nohighlight">\(\large{\dot m}\)</span> are <strong>inversely</strong> proportional.</p>
+<p>The Cstar Efficiency, <span class="math notranslate nohighlight">\(\large{\eta_{C^*}}\)</span>, is often used to characterize injector design quality
+since fully mixed, vaporized and combusted propellants tend to have higher <span class="math notranslate nohighlight">\(\large{\eta_{C^*}}\)</span>.</p>
+</div>
+<div class="section" id="discharge-coefficient">
+<h2>Discharge Coefficient<a class="headerlink" href="#discharge-coefficient" title="Permalink to this headline">¶</a></h2>
+<p>When calculating throat discharge coefficient (<span class="math notranslate nohighlight">\(C_d\)</span>) with a model using constant gas properties and ignoring the boundary layer,
+<span class="math notranslate nohighlight">\(C_d\)</span> is shown to be primarily a function of the upstream radius
+of curvature, <a class="reference internal" href="models.html#ref-to-geom-image"><span class="std std-ref">RupThroat</span></a>.
+The ratio of specific heats of the combustion gas, gamma (<span class="math notranslate nohighlight">\(\large{\gamma}\)</span>) has a small influence
+at low values of <a class="reference internal" href="models.html#ref-to-geom-image"><span class="std std-ref">RupThroat</span></a>, but in this simple model <span class="math notranslate nohighlight">\(\large{\gamma}\)</span> can be ignored
+with little difference in calculated <span class="math notranslate nohighlight">\(C_d\)</span>.</p>
+<p>The chart at below shows <span class="math notranslate nohighlight">\(C_d\)</span> as calculated by such a model having constant gas properties
+and ignoring the boundary layer.
+The chart compares those calculations with published values from
+<a class="reference external" href="https://ntrs.nasa.gov/search.jsp?R=19770009165">NASA SP 8120</a> and  from
+<a class="reference external" href="https://ntrs.nasa.gov/citations/19730012958">NASA Technical Memorandum 33-548, Simplified Procedures for Correlation of Experimentally Measured and Predicted Thrust
+Chamber Performance</a></p>
+<p>More sophisticated models will, in general, predict <span class="math notranslate nohighlight">\(C_d\)</span> values
+lower than what is shown here, however, this more simple model shows good agreement with both NASA sources.
+(The NASA curves were digitized using <a class="reference external" href="https://digiplot.readthedocs.io/en/latest/">Digiplot</a>.)</p>
+<a class="reference internal image-reference" href="_images/cmp_nasa_cd.png"><img alt="_images/cmp_nasa_cd.png" src="_images/cmp_nasa_cd.png" style="width: 55%;" /></a>
+<table width="100%">
+<tr>
+<th style="text-align:center;"> NASA SP 8120 </th>
+<th style="text-align:center;"> NASA 33-548 </th>
+</tr>
+<tr>
+<td width="40%">
+<a class="reference internal image-reference" href="./_static/At_flow_vs_geom_v2.jpg">
+<img src="./_static/At_flow_vs_geom_v2.jpg">
+</a>
+</td>
+<td>
+<a class="reference internal image-reference" href="./_static/Cd_NASA_1973.jpg">
+<img src="./_static/Cd_NASA_1973.jpg" ; width="60%">
+</a>
+</td>
+</tr>
+<tr>
+<td colspan="2" style="text-align:center;">
+<p><cite>Click image to see full size</cite></p>
+</td>
+</tr>
+</table><p>Shown above-left is Figure 3 from <a class="reference external" href="https://ntrs.nasa.gov/search.jsp?R=19770009165">NASA SP 8120</a>,
+above-right, is figure 9 from 1973 <a class="reference external" href="https://ntrs.nasa.gov/citations/19730012958">NASA Technical Memorandum 33-548, Simplified Procedures for Correlation of Experimentally Measured and Predicted Thrust
+Chamber Performance</a>.</p>
+<p>Figure 3 from NASA SP 8120 as well as the top curve of the NASA 33-548 figure by Kliegel and Levine
+show very similar predictions to the constant gas properties calculations.</p>
+<p>While <a class="reference internal" href="models.html#ref-to-geom-image"><span class="std std-ref">RupThroat</span></a> is clearly a major independent parameter for calculating <span class="math notranslate nohighlight">\(C_d\)</span>,
+the wide spread of <span class="math notranslate nohighlight">\(C_d\)</span> values in the <a class="reference external" href="https://ntrs.nasa.gov/citations/19730012958">NASA 33-548 report</a>
+would seem to indicate that additional influencing parameters should, perhaps be considered.</p>
+<div class="section" id="c-d-monte-carlo">
+<h3><span class="math notranslate nohighlight">\(C_d\)</span> Monte Carlo<a class="headerlink" href="#c-d-monte-carlo" title="Permalink to this headline">¶</a></h3>
+<p>In order to characterize the variation in <span class="math notranslate nohighlight">\(C_d\)</span> beyond just <a class="reference internal" href="models.html#ref-to-geom-image"><span class="std std-ref">RupThroat</span></a>
+and to identify additional influencing parameters, a
+<a class="reference external" href="https://en.wikipedia.org/wiki/Monte_Carlo_method">Monte Carlo</a> analysis was conducted
+on a wide range of propellant combinations, chamber pressures and thrust chamber geometries. Many thousands of boundary layer
+analyses were performed such that the calculated <span class="math notranslate nohighlight">\(C_d\)</span> included boundary layer influences.
+<span class="math notranslate nohighlight">\(C_d\)</span> was then fitted with a <a class="reference internal" href="mlp_summary.html#ref-to-mlp-summary"><span class="std std-ref">Multi-layer Perceptron regressor</span></a>.</p>
+<p>The independent parameters in the <a class="reference external" href="https://en.wikipedia.org/wiki/Monte_Carlo_method">Monte Carlo</a> analysis
+are shown across the x axis of the chart below. The y axis shows the correlation coefficient that results from
+fitting <span class="math notranslate nohighlight">\(C_d\)</span> with a <a class="reference internal" href="mlp_summary.html#ref-to-mlp-summary"><span class="std std-ref">Multi-layer Perceptron regressor</span></a>
+when selecting, one by one, the best scoring independent parameter to add next.</p>
+<p>The chart shows that the <span class="math notranslate nohighlight">\(C_d\)</span> is well characterized by using three independent parameters, throat radius (Rthrt),
+chamber pressure (Pc) and upstream radius of curvature (RupThroat).</p>
+<a class="reference internal image-reference" href="_images/cd_corr_params.png"><img alt="_images/cd_corr_params.png" src="_images/cd_corr_params.png" style="width: 70%;" /></a>
+<p>Using the above dependence sensitivities, a correlation of <span class="math notranslate nohighlight">\(C_d\)</span> was created from the
+<a class="reference external" href="https://en.wikipedia.org/wiki/Monte_Carlo_method">Monte Carlo</a> data using
+a <a class="reference internal" href="mlp_summary.html#ref-to-mlp-summary"><span class="std std-ref">Multi-layer Perceptron regressor</span></a>
+that includes the effects of a boundary layer analysis.</p>
+<p>The plots below show the sensitivity of the <span class="math notranslate nohighlight">\(C_d\)</span>
+correlation to the three independent parameters, throat radius (Rthrt),
+chamber pressure (Pc) and upstream radius of curvature (RupThroat).</p>
+<p>The simple, constant gas properties model is shown for comparison.</p>
+<p>Note that the <a class="reference internal" href="mlp_summary.html#ref-to-mlp-summary"><span class="std std-ref">Multi-layer Perceptron regressor</span></a>
+tends to be a bit piece-wise linear and, compared to the simple model, predicts lower <span class="math notranslate nohighlight">\(C_d\)</span>.
+The decrement to <span class="math notranslate nohighlight">\(C_d\)</span> is in the range of 0.002 to 0.013 depending on the thruster design.</p>
+<table width="100%">
+<tr>
+<th style="text-align:center;"> Throat Radius=1 inch </th>
+<th style="text-align:center;"> Chamber Pressure=200 psia </th>
+</tr>
+<tr>
+<td width="50%">
+<a class="reference internal image-reference" href="./_static/cmp_cd_calcs_pc.png">
+<img src="./_static/cmp_cd_calcs_pc.png">
+</a>
+</td>
+<td>
+<a class="reference internal image-reference" href="./_static/cmp_cd_calcs_rthrt.png">
+<img src="./_static/cmp_cd_calcs_rthrt.png" >
+</a>
+</td>
+</tr>
+<tr>
+<td colspan="2" style="text-align:center;">
+<p><cite>Click image to see full size</cite></p>
+</td>
+</tr>
+</table><table width="100%">
+<tr>
+<th style="text-align:center;"> High Pc, Large Throat </th>
+<th style="text-align:center;"> Low Pc, Small Throat </th>
+</tr>
+<tr>
+<td width="50%">
+<a class="reference internal image-reference" href="./_static/cmp_cd_calcs_best.png">
+<img src="./_static/cmp_cd_calcs_best.png">
+</a>
+</td>
+<td>
+<a class="reference internal image-reference" href="./_static/cmp_cd_calcs_worst.png">
+<img src="./_static/cmp_cd_calcs_worst.png" >
+</a>
+</td>
+</tr>
+<tr>
+<td colspan="2" style="text-align:center;">
+<p><cite>Click image to see full size</cite></p>
+</td>
+</tr>
+</table></div>
+</div>
+<div class="section" id="isp-efficiency">
+<h2>Isp Efficiency<a class="headerlink" href="#isp-efficiency" title="Permalink to this headline">¶</a></h2>
+<p>Vacuum specific impulse (<span class="math notranslate nohighlight">\(\large{Isp_{vac}}\)</span>) is defined as steady state vacuum thrust
+(<span class="math notranslate nohighlight">\(\large{F_{vac}}\)</span>)
+divided by steady state mass flow rate (<span class="math notranslate nohighlight">\(\large{\dot m}\)</span>).</p>
+<div class="math notranslate nohighlight">
+\[\Large{Isp_{vac} = F_{vac} / \dot m}\]</div>
+<p>The maximum possible achievable <span class="math notranslate nohighlight">\(Isp_{vac}\)</span> is the one dimensional equilibrium (ODE) value
+predicted by the <a class="reference external" href="https://www.grc.nasa.gov/WWW/CEAWeb/ceaHome.htm">NASA CEA FORTRAN Code</a>
+via <a class="reference external" href="https://rocketcea.readthedocs.io/en/latest/">RocketCEA</a> .</p>
+<p>The delivered Isp (<span class="math notranslate nohighlight">\(Isp_{del}\)</span>) of a real thrust chamber will equal the ideal ODE performance
+(<span class="math notranslate nohighlight">\(\large{Isp_{ODE}}\)</span>)
+decremented by various efficiencies.</p>
+<p>Thrust chamber performance efficiencies are usually broken down into two categories,
+the combustion chamber and the nozzle. The combustion chamber is where propellants must get
+mixed, vaporized and combusted efficiently. The nozzle is where the combustion products must
+be expanded and directed aft efficiently. The Greek letter, <span class="math notranslate nohighlight">\(\large{\eta}\)</span>, is often used to
+represent each of the efficiencies.</p>
+<p>These efficiencies can have different names,
+depending on the aerospace company or government agency,
+however, common designations are:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>_________Combustion Chamber Losses_________
+- Mixing Loss - How well does the injector mix the oxidizer and fuel
+- Vaporization Loss - Both propellants must vaporize before they can combust
+- Heat Loss - The chamber wall may lose heat to the environment
+              (note that regen-cooled chambers recover the lost heat)
+              (and that ablative chambers lose heat to phase change of the ablative)
+- Fuel Film Cooling Loss - A barrier of lower temperature fuel rich combustion gas
+                           along the wall may be used to limit wall material temperature
+- Pulsing Loss - When short pulses of thrust are used, the performance is
+                 degraded from the steady state performance
+
+_______________Nozzle Losses_______________
+- Divergence Loss - nonaxial directed flow at nozzle exit.
+- Two Phase Loss - drag from solid or liquid particles in flow stream
+                   (e.g. condensibles, uncombusted, aluminized or gel propellants)
+- Kinetic Loss - finite reaction rates in the nozzle
+                 (i.e. ranging from frozen to equilibrium chemistry)
+- Boundary Layer Loss - viscous drag along the nozzle contour
+                       (often combined with nozzle heat loss)
+    ... Heat Loss - Included in boundary layer loss, the nozzle wall may lose heat
+                    to the environment
+                    (note that regen-cooled nozzles recover the lost heat)
+</pre></div>
+</div>
+<p>Delivered steady state Isp (<span class="math notranslate nohighlight">\(Isp_{del}SS\)</span>) for the thrust chamber can be calculated from the
+one dimensional equilibrium Isp (<span class="math notranslate nohighlight">\(Isp_{ODE}\)</span>)
+that is modified by the above efficiencies.</p>
+<div class="math notranslate nohighlight" id="ref-to-full-efficiency-eqn">
+\[\Large{Isp_{del}SS = Isp_{ODE} * \eta_{ML} * \eta_{Vap} * \eta_{HL} * \eta_{FFC} * \eta_{Div} * \eta_{TP} * \eta_{Kin} * \eta_{BL}}\]</div>
+<p>If thruster on/off pulsing is involved, then the steady state Isp equation may be further modified as shown below.
+Note also that pulsing usually changes the overall thruster mixture ratio due to different leads or lags of the
+fuel and oxidizer being fed into the thruster, as well as any dribble volume differences between fuel and oxidizer.</p>
+<div class="math notranslate nohighlight">
+\[\Large{Isp_{del} = Isp_{del}SS * \eta_{Pulse}}\]</div>
+<p>In python code the equation might look like:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">IspDelSS</span> <span class="o">=</span> <span class="n">IspODE</span> <span class="o">*</span> <span class="n">effML</span> <span class="o">*</span> <span class="n">effVap</span> <span class="o">*</span> <span class="n">effHL</span> <span class="o">*</span> <span class="n">effFFC</span> <span class="o">*</span> <span class="n">effDiv</span> <span class="o">*</span> <span class="n">effTP</span> <span class="o">*</span> <span class="n">effKin</span>  <span class="o">*</span> <span class="n">effBL</span>
+
+<span class="c1">#... or in alternate form:</span>
+<span class="n">IspDelSS</span> <span class="o">=</span> <span class="n">IspODE</span> <span class="o">*</span> <span class="p">[</span> <span class="n">effML</span> <span class="o">*</span> <span class="n">effVap</span> <span class="o">*</span> <span class="n">effHL</span> <span class="o">*</span> <span class="n">effFFC</span> <span class="o">*</span> <span class="n">effDiv</span> <span class="o">*</span> <span class="n">effTP</span> <span class="o">*</span> <span class="n">effKin</span> <span class="o">-</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">effBL</span><span class="p">)</span> <span class="p">]</span>
+
+<span class="c1"># if Pulsing</span>
+<span class="n">IspDel</span> <span class="o">=</span> <span class="n">IspDelSS</span> <span class="o">*</span> <span class="n">effPulse</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">where:</span>
+<span class="sd">IspDelSS = Steady State Delivered Isp (sec)</span>
+<span class="sd">IspDel   = Delivered Isp (sec)</span>
+<span class="sd">IspODE   = One Dimensional Equilibrium Isp (directly from RocketCEA)</span>
+<span class="sd">effML    = Mixing Efficiency</span>
+<span class="sd">effVap   = Vaporization Efficiency</span>
+<span class="sd">effHL    = Chamber Heat Loss Efficiency</span>
+<span class="sd">effDiv   = Nozzle Divergence Efficiency</span>
+<span class="sd">effTP    = Nozzle Two-Phase Efficiency</span>
+<span class="sd">effKin   = Nozzle Kinetic Efficiency</span>
+<span class="sd">effBL    = Nozzle Boundary Layer Efficiency (includes nozzle heat loss)</span>
+<span class="sd">effFFC   = Fuel Film Cooling Efficiency of Chamber</span>
+<span class="sd">effPulse = Pulsing Efficiency of Thruster</span>
+<span class="sd">&quot;&quot;&quot;</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Note that the nozzle boundary layer loss is often calculated as a
+force subtraction from the thrust chamber as shown in the alternate equation above.
+The boundary layer removes an annular ring
+of flow area from the exit plane of the nozzle, and becomes a subtractive loss
+to thrust.</p>
+<p>It is possible for either of the two equations to be correct, depending on the manner in which
+the nozzle boundary layer loss correlation was formulated. In other words effBL
+can be tailored to either equation format. In a preliminary design analysis,
+the uncertainty in the boundary layer loss may well render the issue moot since both
+equations yield very nearly the same answer and the difference is likely below the ability
+of an engine test to measure.</p>
+<p>“Although both approaches have their ardent supporters, there are really no
+significant differences between the two.”
+– <a class="reference external" href="https://arc.aiaa.org/doi/book/10.2514/4.866760">D.E. Coats</a></p>
+</div>
+<p>The image below from
+<a class="reference external" href="https://ntrs.nasa.gov/search.jsp?R=19870009172">NASA CR-179025 pub:1986</a>
+illustrates the various mechanisms, where they occur and their major influencing effects.</p>
+<a class="reference internal image-reference" href="_images/eff_zones.jpg"><img alt="_images/eff_zones.jpg" src="_images/eff_zones.jpg" style="width: 80%;" /></a>
+</div>
+<div class="section" id="perfect-injector">
+<h2>Perfect Injector<a class="headerlink" href="#perfect-injector" title="Permalink to this headline">¶</a></h2>
+<p>When approaching the performance analysis of a liquid bi-propellant thrust chamber it is useful to
+realize that a number of the above losses are almost completely out of the designers control.
+The nozzle losses, in particular, are fixed once a few basic
+thrust chamber design choices are made.</p>
+<p>The boundary layer, divergence and
+kinetic losses are fixed once the engine’s thrust, chamber pressure,
+propellant combination, nozzle contour and area ratio are selected.</p>
+<p>Therefor, a powerful approach to preliminary design is to start with an engine that has a
+<strong>perfect injector</strong>. In other words, the chamber’s mixing, vaporization and
+heat losses are <em>temporarily</em> ignored while the nozzle losses are evaluated.</p>
+<p>This approach is further supported by the fact that in production engines,
+98% efficiency is a very typical value for all the combined chamber losses.
+Using a constant 98% for effERE (<span class="math notranslate nohighlight">\(\large{\eta_{ERE}}\)</span>) and calculating the nozzle losses will be a good
+first approximation for most liquid thrust chambers.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>When optimizing thruster mixture ratio, a perfect injector can be a bad assumption.</p>
+<p>The  injector’s ability to mix the propellants via <span class="math notranslate nohighlight">\(E_m\)</span> can affect
+<span class="math notranslate nohighlight">\(MR_{opt}\)</span>, (<a class="reference internal" href="chamber_eff.html#ref-to-emmropt"><span class="std std-ref">see Em impact on MRopt</span></a>)</p>
+</div>
+</div>
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/generic_logo.svg" alt="Logo"/>
+            </a></p>
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">QuickStart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="models.html">Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="jannaf.html">JANNAF Standard</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Efficiencies</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#cstar-efficiency">Cstar Efficiency</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#discharge-coefficient">Discharge Coefficient</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#c-d-monte-carlo"><span class="math notranslate nohighlight">\(C_d\)</span> Monte Carlo</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#isp-efficiency">Isp Efficiency</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#perfect-injector">Perfect Injector</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="nozzle_eff.html">Nozzle Efficiencies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chamber_eff.html">Chamber Efficiencies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="comb_stability.html">Combustion Stability</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sources.html">Sources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mlp_summary.html">Multilayer Perceptron</a></li>
+<li class="toctree-l1"><a class="reference internal" href="functions.html">RocketIsp Code Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="copyright.html">Copyright</a></li>
+<li class="toctree-l1"><a class="reference internal" href="authors.html">Authors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="history.html">History</a></li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="jannaf.html"
+                        title="previous chapter">JANNAF Standard</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="nozzle_eff.html"
+                        title="next chapter">Nozzle Efficiencies</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/efficiencies.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="nozzle_eff.html" title="Nozzle Efficiencies"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="jannaf.html" title="JANNAF Standard"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">RocketIsp 0.1.11 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Efficiencies</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; <a href="copyright.html">Copyright</a> 2015, Charlie Taylor.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.0.
+    </div>
+  </body>
+</html>

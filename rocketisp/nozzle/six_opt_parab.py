@@ -111,6 +111,8 @@ def my_interp( xval, xL, yL ):
 if __name__ == "__main__":
     
     import matplotlib.pyplot as plt
+    import sys
+
     do_show = True
     if len(sys.argv) > 1:
         if sys.argv[1] == 'suppress_show':
