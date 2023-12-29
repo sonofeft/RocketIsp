@@ -2,19 +2,19 @@
 
 <!doctype html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
     <title>JANNAF Standard &#8212; RocketIsp 0.1.11 documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/bizstyle.css" />
     
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="_static/bizstyle.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -51,8 +51,8 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="jannaf-standard">
-<span id="ref-to-jannaf-standard"></span><h1>JANNAF Standard<a class="headerlink" href="#jannaf-standard" title="Permalink to this headline">¶</a></h1>
+  <section id="jannaf-standard">
+<span id="ref-to-jannaf-standard"></span><h1>JANNAF Standard<a class="headerlink" href="#jannaf-standard" title="Permalink to this heading">¶</a></h1>
 <p>In 1975, the <a class="reference external" href="https://www.jhuapl.edu/">John Hopkins University, Applied Physics Laboratory</a>
 published <a class="reference external" href="https://apps.dtic.mil/docs/citations/ADA127784">CPIA 246</a> in conjunction with
 <a class="reference external" href="https://www.jannaf.org/">JANNAF (Joint Army-Navy-NASA-Air Force)</a> titled
@@ -76,8 +76,8 @@ in 1977, the <a class="reference external" href="https://www.jannaf.org/">JANNAF
 could not yet achieve a 1% accuracy on predicting Isp without the help of test data.</p>
 <p>There are two model approaches offered by <a class="reference external" href="https://www.jannaf.org/">JANNAF</a>,
 a rigorous model and a simplified model.</p>
-<div class="section" id="rigorous-model">
-<h2>Rigorous Model<a class="headerlink" href="#rigorous-model" title="Permalink to this headline">¶</a></h2>
+<section id="rigorous-model">
+<h2>Rigorous Model<a class="headerlink" href="#rigorous-model" title="Permalink to this heading">¶</a></h2>
 <p>The rigorous model is intended for the detailed analysis of an engine that is preparing for a
 hardware production design; either test or flight hardware.</p>
 <p>The rigorous model requires many more resources and much more technical expertise than
@@ -90,9 +90,9 @@ has given rise to analysis approaches like the NASA Space Launch System (SLS) at
 <a class="reference external" href="https://www.nas.nasa.gov/SC14/demos/demo20.html">NASA Marshall Space Flight Center (MSFC)</a>.
 Such models require super computers or large computer clusters in order to complete a single run
 in a reasonable time (often several days of run time).</p>
-</div>
-<div class="section" id="simplified-model">
-<h2>Simplified Model<a class="headerlink" href="#simplified-model" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="simplified-model">
+<h2>Simplified Model<a class="headerlink" href="#simplified-model" title="Permalink to this heading">¶</a></h2>
 <p>The simplified model is intended more for preliminary analysis where general trends and influences are more important
 than low-level design details.</p>
 <p>The simplified model can be performed with some
@@ -129,9 +129,9 @@ times each of the efficiencies (<span class="math notranslate nohighlight">\(\et
 \[\Large{Isp_{del} = Isp_{ODE} * \prod_{i=a}^k \eta_i}\]</div>
 <p>The above efficiencies are usually separated into two groups; those that happen in the chamber and
 those that happen in the nozzle.</p>
-</div>
-<div class="section" id="nozzle-losses">
-<h2>Nozzle Losses<a class="headerlink" href="#nozzle-losses" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="nozzle-losses">
+<h2>Nozzle Losses<a class="headerlink" href="#nozzle-losses" title="Permalink to this heading">¶</a></h2>
 <p>The Isp losses in the nozzle are more simple to model than the chamber losses and are usually
 more consequential to the delivered Isp.</p>
 <p><strong>Rocketisp</strong> calculates overall nozzle efficiency from:</p>
@@ -141,9 +141,9 @@ more consequential to the delivered Isp.</p>
 <span class="n">effTP</span>  <span class="o">=</span> <span class="n">Two</span> <span class="n">Phase</span> <span class="n">Efficiency</span> <span class="n">of</span> <span class="n">Nozzle</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="chamber-losses">
-<h2>Chamber Losses<a class="headerlink" href="#chamber-losses" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="chamber-losses">
+<h2>Chamber Losses<a class="headerlink" href="#chamber-losses" title="Permalink to this heading">¶</a></h2>
 <p>Chamber losses are usually more difficult to model than losses in the nozzle and
 they are usually more subject to detailed design features.</p>
 <p>That said, the combined chamber losses are usually small in production engines.
@@ -186,8 +186,8 @@ coefficient <span class="math notranslate nohighlight">\(C_D\)</span> must be ta
 \[\Large{\eta_{ERE} = \eta_{c^*} * C_D}\]</div>
 <p>Note that, <em>In general, the use of empirical data is required to predict the energy release efficiency.</em>
 – <a class="reference external" href="https://arc.aiaa.org/doi/book/10.2514/4.866760">D.E. Coats</a></p>
-</div>
-</div>
+</section>
+</section>
 
 
             <div class="clearer"></div>
@@ -199,8 +199,9 @@ coefficient <span class="math notranslate nohighlight">\(C_D\)</span> must be ta
             <p class="logo"><a href="index.html">
               <img class="logo" src="_static/generic_logo.svg" alt="Logo"/>
             </a></p>
-  <h3><a href="index.html">Table of Contents</a></h3>
-  <ul class="current">
+  <div>
+    <h3><a href="index.html">Table of Contents</a></h3>
+    <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="quickstart.html">QuickStart</a></li>
 <li class="toctree-l1"><a class="reference internal" href="models.html">Models</a></li>
 <li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
@@ -223,12 +224,17 @@ coefficient <span class="math notranslate nohighlight">\(C_D\)</span> must be ta
 <li class="toctree-l1"><a class="reference internal" href="history.html">History</a></li>
 </ul>
 
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="examples.html"
-                        title="previous chapter">Examples</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="efficiencies.html"
-                        title="next chapter">Efficiencies</a></p>
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="examples.html"
+                          title="previous chapter">Examples</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="efficiencies.html"
+                          title="next chapter">Efficiencies</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -245,7 +251,7 @@ coefficient <span class="math notranslate nohighlight">\(C_D\)</span> must be ta
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -271,7 +277,7 @@ coefficient <span class="math notranslate nohighlight">\(C_D\)</span> must be ta
     </div>
     <div class="footer" role="contentinfo">
         &#169; <a href="copyright.html">Copyright</a> 2015, Charlie Taylor.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
     </div>
   </body>
 </html>

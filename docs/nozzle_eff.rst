@@ -367,7 +367,7 @@ that contains tables of reactions and their reaction rates for the various eleme
 In the AIAA paper `Nozzle Performance Predictions Using the TDK 97 Code <http://docshare01.docshare.tips/files/24936/249361716.pdf>`_
 by Stuart Dunn and Douglas Coats gives suggested chemical reactions for the CHON element group.
 
-.. image:: ./_static/CHON_Reactions.jpg
+.. image:: ./_static/CHON_reactions.jpg
 
 
 The **TDK** code is the accepted standard for the `JANNAF <https://www.jannaf.org/>`_ 

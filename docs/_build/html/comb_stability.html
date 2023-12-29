@@ -2,19 +2,19 @@
 
 <!doctype html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
     <title>Combustion Stability &#8212; RocketIsp 0.1.11 documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/bizstyle.css" />
     
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="_static/bizstyle.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -51,8 +51,8 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="combustion-stability">
-<h1>Combustion Stability<a class="headerlink" href="#combustion-stability" title="Permalink to this headline">¶</a></h1>
+  <section id="combustion-stability">
+<h1>Combustion Stability<a class="headerlink" href="#combustion-stability" title="Permalink to this heading">¶</a></h1>
 <p>Combustion stability is an extremely large topic, much too large for <strong>RocketIsp</strong> to explore in detail.</p>
 <p>The paper <a class="reference external" href="./_static/LiqRocketAcoustic_Pirk.pdf">Liquid rocket combustion chamber acoustic characterization</a>
 by Rogerio Pirk et al, describes combustion stability as follows.</p>
@@ -71,8 +71,8 @@ There is, however, a simple first approximation for high frequency combustion in
 the Hewitt criteria, that is included in <strong>RocketIsp</strong>.</p>
 <p>The Hewitt criteria applies to high frequency combustion instability in
 rocket thrusters where the chamber pressure oscillates in resonance with the chamber acoustic modes.</p>
-<div class="section" id="acoustic-modes">
-<h2>Acoustic Modes<a class="headerlink" href="#acoustic-modes" title="Permalink to this headline">¶</a></h2>
+<section id="acoustic-modes">
+<h2>Acoustic Modes<a class="headerlink" href="#acoustic-modes" title="Permalink to this heading">¶</a></h2>
 <p><a class="reference external" href="https://ntrs.nasa.gov/citations/19720026079">NASA-SP-194 Liquid propellant rocket combustion instability</a>
 displays the pressure and velocity profiles of the primary chamber acoustic modes as shown below.</p>
 <img alt="_images/acoustic_modes_NASA_RT.jpg" src="_images/acoustic_modes_NASA_RT.jpg" />
@@ -83,9 +83,9 @@ where <span class="math notranslate nohighlight">\(c\)</span> = speed of sound a
 <p><span class="math notranslate nohighlight">\(f_{2T} =  (3.0542 \; c) / (2 \pi R_c)\)</span> = second tangential mode</p>
 <p><span class="math notranslate nohighlight">\(f_{1R} =  (3.8317 \; c) / (2 \pi R_c)\)</span> = first radial mode</p>
 <p><span class="math notranslate nohighlight">\(f_{2R} =  (7.0156 \; c) / (2 \pi R_c)\)</span> = second radial mode</p>
-</div>
-<div class="section" id="hewitt-criteria">
-<h2>Hewitt Criteria<a class="headerlink" href="#hewitt-criteria" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="hewitt-criteria">
+<h2>Hewitt Criteria<a class="headerlink" href="#hewitt-criteria" title="Permalink to this heading">¶</a></h2>
 <p>The Hewitt criteria is a simple correlation of several injector and chamber parameters.
 It relates those parameters to the above acoustic modes in a liquid bipropellant thruster and indicates
 where instability will likely occur. It also highlights the inherent trade off between
@@ -136,9 +136,9 @@ Because combustion takes place in the gas phase, both oxidizer and fuel must be 
 It is the least volatile propellant that vaporizes last and therefor controls combustion rate
 and the potential combustion coupling with chamber acoustics.
 It therefor also follows that the Hewitt criteria is dependent on the <span class="math notranslate nohighlight">\(d_o / U_j\)</span> of the <strong>least volatile propellant</strong> (usually the fuel).</p>
-</div>
-<div class="section" id="strouhal-number">
-<h2>Strouhal Number<a class="headerlink" href="#strouhal-number" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="strouhal-number">
+<h2>Strouhal Number<a class="headerlink" href="#strouhal-number" title="Permalink to this heading">¶</a></h2>
 <p>The Hewitt correlation finds its technical roots in the <a class="reference external" href="https://en.wikipedia.org/wiki/Strouhal_number">Strouhal number</a>
 which is a dimensionless number describing oscillating flow mechanisms
 (named after <a class="reference external" href="https://en.wikipedia.org/wiki/Vincenc_Strouhal">Vincenc Strouhal</a>).
@@ -166,9 +166,9 @@ then some modification for the effective <span class="math notranslate nohighlig
 the effective <span class="math notranslate nohighlight">\(d_o\)</span> can be considered to
 be double the individual <span class="math notranslate nohighlight">\(d_o\)</span> such that injection frequency for like-on-like, <span class="math notranslate nohighlight">\(f_{Hlol}\)</span>, is:</p>
 <p><span class="math notranslate nohighlight">\(f_{Hlol} = 0.1 \; U_j / d_o\)</span></p>
-</div>
-<div class="section" id="applying-hewitt-criteria">
-<h2>Applying Hewitt Criteria<a class="headerlink" href="#applying-hewitt-criteria" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="applying-hewitt-criteria">
+<h2>Applying Hewitt Criteria<a class="headerlink" href="#applying-hewitt-criteria" title="Permalink to this heading">¶</a></h2>
 <p>Within <strong>RocketIsp</strong> the Hewitt criteria is used to either design orifice diameters or to
 evaluate user specified orifice diameters against the criteria (i.e. <span class="math notranslate nohighlight">\(f_H \leq\)</span> 3T).</p>
 <p>When designing orifices with the Hewitt criteria, one can either specify
@@ -184,8 +184,8 @@ diameter will be calculated from required mass flow rate and the proximity to th
 be an output. The equation for the 3T mode is shown below.</p>
 <p><span class="math notranslate nohighlight">\(f_{3T} =  (4.2012 \; c) / (2 \pi R_c)\)</span> = third tangential mode</p>
 <p>A warning will be issued to the <strong>RocketIsp</strong> user if <span class="math notranslate nohighlight">\(f_H &gt; f_{3T}\)</span>.</p>
-</div>
-</div>
+</section>
+</section>
 
 
             <div class="clearer"></div>
@@ -197,8 +197,9 @@ be an output. The equation for the 3T mode is shown below.</p>
             <p class="logo"><a href="index.html">
               <img class="logo" src="_static/generic_logo.svg" alt="Logo"/>
             </a></p>
-  <h3><a href="index.html">Table of Contents</a></h3>
-  <ul class="current">
+  <div>
+    <h3><a href="index.html">Table of Contents</a></h3>
+    <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="quickstart.html">QuickStart</a></li>
 <li class="toctree-l1"><a class="reference internal" href="models.html">Models</a></li>
 <li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
@@ -221,12 +222,17 @@ be an output. The equation for the 3T mode is shown below.</p>
 <li class="toctree-l1"><a class="reference internal" href="history.html">History</a></li>
 </ul>
 
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="chamber_eff.html"
-                        title="previous chapter">Chamber Efficiencies</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="sources.html"
-                        title="next chapter">Sources</a></p>
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="chamber_eff.html"
+                          title="previous chapter">Chamber Efficiencies</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="sources.html"
+                          title="next chapter">Sources</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -243,7 +249,7 @@ be an output. The equation for the 3T mode is shown below.</p>
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -269,7 +275,7 @@ be an output. The equation for the 3T mode is shown below.</p>
     </div>
     <div class="footer" role="contentinfo">
         &#169; <a href="copyright.html">Copyright</a> 2015, Charlie Taylor.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
     </div>
   </body>
 </html>

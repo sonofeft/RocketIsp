@@ -2,18 +2,18 @@
 
 <!doctype html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
     <title>RocketIsp Code Functions &#8212; RocketIsp 0.1.11 documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/bizstyle.css" />
     
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
     <script src="_static/bizstyle.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -50,10 +50,10 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="rocketisp-code-functions">
-<h1>RocketIsp Code Functions<a class="headerlink" href="#rocketisp-code-functions" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="module-rocketisp.rocket_isp">
-<span id="thruster"></span><h2>Thruster<a class="headerlink" href="#module-rocketisp.rocket_isp" title="Permalink to this headline">¶</a></h2>
+  <section id="rocketisp-code-functions">
+<h1>RocketIsp Code Functions<a class="headerlink" href="#rocketisp-code-functions" title="Permalink to this heading">¶</a></h1>
+<section id="module-rocketisp.rocket_isp">
+<span id="thruster"></span><h2>Thruster<a class="headerlink" href="#module-rocketisp.rocket_isp" title="Permalink to this heading">¶</a></h2>
 <p>RocketIsp calculates delivered Isp for liquid rocket thrust chambers.</p>
 <p>RocketIsp uses a simplified JANNAF approach to calculate delivered
 specific impulse (Isp) for liquid rocket thrust chambers.</p>
@@ -75,22 +75,22 @@ along with this program.  If not, see &lt;<a class="reference external" href="ht
 <dd><p>RocketIsp calculates delivered Isp for liquid rocket thrust chambers by
 simplified JANNAF method.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – name of RocketThruster</p></li>
+<li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – name of RocketThruster</p></li>
 <li><p><strong>coreObj</strong> (<a class="reference internal" href="#rocketisp.stream_tubes.CoreStream" title="rocketisp.stream_tubes.CoreStream"><em>CoreStream</em></a>) – CoreStream object</p></li>
 <li><p><strong>injObj</strong> (<a class="reference internal" href="#rocketisp.injector.Injector" title="rocketisp.injector.Injector"><em>Injector</em></a>) – Injector object (optional)</p></li>
-<li><p><strong>noz_regen_eps</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – regen cooled nozzle area ratio</p></li>
-<li><p><strong>pulse_sec</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – s,duration of pulsing engine (default = infinity)</p></li>
-<li><p><strong>pulse_quality</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – on a scale of 0.0 to 1.0, how good is engine at pulsing</p></li>
-<li><p><strong>isRegenCham</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a>) – flag to indicate chamber is regen cooled</p></li>
-<li><p><strong>calc_CdThroat</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a>) – flag to trigger calc_CdThroat</p></li>
+<li><p><strong>noz_regen_eps</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a>) – regen cooled nozzle area ratio</p></li>
+<li><p><strong>pulse_sec</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a>) – s,duration of pulsing engine (default = infinity)</p></li>
+<li><p><strong>pulse_quality</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a>) – on a scale of 0.0 to 1.0, how good is engine at pulsing</p></li>
+<li><p><strong>isRegenCham</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><em>bool</em></a>) – flag to indicate chamber is regen cooled</p></li>
+<li><p><strong>calc_CdThroat</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><em>bool</em></a>) – flag to trigger calc_CdThroat</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>RocketThruster object</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference internal" href="#rocketisp.rocket_isp.RocketThruster" title="rocketisp.rocket_isp.RocketThruster">RocketThruster</a></p>
 </dd>
 </dl>
@@ -126,18 +126,18 @@ If re_evaluate is True, then call self.evaluate() after resetting the value of t
 <span class="sig-name descname"><span class="pre">scale_Rt_to_Thrust</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ThrustLbf</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">500.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Pamb</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_scipy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rocketisp.rocket_isp.RocketThruster.scale_Rt_to_Thrust" title="Permalink to this definition">¶</a></dt>
 <dd><p>Adjust throat size in order to get total thrust at specified ambient pressure exactly</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>ThrustLbf</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – lbf, desired thrust at specified ambient pressure (Pamb)</p></li>
-<li><p><strong>Pamb</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – psia, ambient pressure</p></li>
-<li><p><strong>use_scipy</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a>) – flag to indicate the need for more sophisticated root finder</p></li>
+<li><p><strong>ThrustLbf</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a>) – lbf, desired thrust at specified ambient pressure (Pamb)</p></li>
+<li><p><strong>Pamb</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a>) – psia, ambient pressure</p></li>
+<li><p><strong>use_scipy</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><em>bool</em></a>) – flag to indicate the need for more sophisticated root finder</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
 </dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)">None</a></p>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
 </dd>
 </dl>
 </dd></dl>
@@ -155,17 +155,17 @@ If re_evaluate is True, then call self.evaluate() after resetting the value of t
 For example, change from the simple nozzle divergence model (Div) to the 
 Multi-Layer Perceptron (MLP) divergence model.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>eff_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – name of efficiency (e.g. Div, BL, Kin)</p></li>
-<li><p><strong>model_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – name of model to be used (must be in AVAIL_EFF_MODEL_D)</p></li>
+<li><p><strong>eff_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – name of efficiency (e.g. Div, BL, Kin)</p></li>
+<li><p><strong>model_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – name of model to be used (must be in AVAIL_EFF_MODEL_D)</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
 </dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)">None</a></p>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
 </dd>
 </dl>
 </dd></dl>
@@ -190,37 +190,37 @@ Multi-Layer Perceptron (MLP) divergence model.</p>
 
 </dd></dl>
 
-</div>
-<div class="section" id="module-rocketisp.geometry">
-<span id="geometry"></span><h2>Geometry<a class="headerlink" href="#module-rocketisp.geometry" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="module-rocketisp.geometry">
+<span id="geometry"></span><h2>Geometry<a class="headerlink" href="#module-rocketisp.geometry" title="Permalink to this heading">¶</a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="rocketisp.geometry.Geometry">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">rocketisp.geometry.</span></span><span class="sig-name descname"><span class="pre">Geometry</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Rthrt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">CR</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">20</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pcentBell</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">80</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">LnozInp</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">RupThroat</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">RdwnThroat</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">RchmConv</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cham_conv_deg</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">30</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">LchmOvrDt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">LchmMin</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">LchamberInp</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rocketisp.geometry.Geometry" title="Permalink to this definition">¶</a></dt>
 <dd><p>The Geometry object holds all the major thrust chamber geometry values.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>Rthrt</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – in, throat radius</p></li>
-<li><p><strong>CR</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – chamber contraction ratio (Ainj / Athroat)</p></li>
-<li><p><strong>eps</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – nozzle area ratio (Aexit / Athroat)</p></li>
-<li><p><strong>pcentBell</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – nozzle percent bell (Lnoz / L_15deg_cone)</p></li>
-<li><p><strong>LnozInp</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – in, user input nozzle length (will override pcentBell)</p></li>
-<li><p><strong>RupThroat</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – radius of curvature just upstream of throat (Rupstream / Rthrt)</p></li>
-<li><p><strong>RdwnThroat</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – radius of curvature just downstream of throat (Rdownstream / Rthrt)</p></li>
-<li><p><strong>RchmConv</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – radius of curvature at start of convergent section (Rconv / Rthrt)</p></li>
-<li><p><strong>cham_conv_deg</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – deg, half angle of conical convergent section</p></li>
-<li><p><strong>LchmOvrDt</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – ratio of chamber length to throat diameter (Lcham / Dthrt)</p></li>
-<li><p><strong>LchmMin</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – in, minimum chamber length (will override LchmOvrDt)</p></li>
-<li><p><strong>LchamberInp</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – in, user input value of chamber length (will override all other entries)</p></li>
+<li><p><strong>Rthrt</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a>) – in, throat radius</p></li>
+<li><p><strong>CR</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a>) – chamber contraction ratio (Ainj / Athroat)</p></li>
+<li><p><strong>eps</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a>) – nozzle area ratio (Aexit / Athroat)</p></li>
+<li><p><strong>pcentBell</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a>) – nozzle percent bell (Lnoz / L_15deg_cone)</p></li>
+<li><p><strong>LnozInp</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a>) – in, user input nozzle length (will override pcentBell)</p></li>
+<li><p><strong>RupThroat</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a>) – radius of curvature just upstream of throat (Rupstream / Rthrt)</p></li>
+<li><p><strong>RdwnThroat</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a>) – radius of curvature just downstream of throat (Rdownstream / Rthrt)</p></li>
+<li><p><strong>RchmConv</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a>) – radius of curvature at start of convergent section (Rconv / Rthrt)</p></li>
+<li><p><strong>cham_conv_deg</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a>) – deg, half angle of conical convergent section</p></li>
+<li><p><strong>LchmOvrDt</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a>) – ratio of chamber length to throat diameter (Lcham / Dthrt)</p></li>
+<li><p><strong>LchmMin</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a>) – in, minimum chamber length (will override LchmOvrDt)</p></li>
+<li><p><strong>LchamberInp</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a>) – in, user input value of chamber length (will override all other entries)</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>Geometry object</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference internal" href="#rocketisp.geometry.Geometry" title="rocketisp.geometry.Geometry">Geometry</a></p>
 </dd>
-<dt class="field-even">Variables</dt>
+<dt class="field-even">Variables<span class="colon">:</span></dt>
 <dd class="field-even"><ul class="simple">
 <li><p><strong>At</strong> – in**2, throat area</p></li>
 <li><p><strong>Lnoz</strong> – in, nozzle length</p></li>
@@ -303,8 +303,8 @@ Multi-Layer Perceptron (MLP) divergence model.</p>
 <dd><p>calculates cone frustrum</p>
 </dd></dl>
 
-<div class="section" id="module-rocketisp.nozzle.nozzle">
-<span id="nozzle"></span><h3>Nozzle<a class="headerlink" href="#module-rocketisp.nozzle.nozzle" title="Permalink to this headline">¶</a></h3>
+<section id="module-rocketisp.nozzle.nozzle">
+<span id="nozzle"></span><h3>Nozzle<a class="headerlink" href="#module-rocketisp.nozzle.nozzle" title="Permalink to this heading">¶</a></h3>
 <dl class="py class">
 <dt class="sig sig-object py" id="rocketisp.nozzle.nozzle.Nozzle">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">rocketisp.nozzle.nozzle.</span></span><span class="sig-name descname"><span class="pre">Nozzle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">CR</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">16.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pcentBell</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">80.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Rt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Nsegs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">20</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Rup</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Rd</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cham_conv_ang</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">30.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Rc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">theta</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exitAng</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">forceCone</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_huzel_angles</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rocketisp.nozzle.nozzle.Nozzle" title="Permalink to this definition">¶</a></dt>
@@ -312,27 +312,27 @@ Multi-Layer Perceptron (MLP) divergence model.</p>
 representation of the nozzle.
 It includes interpolators for entire contour.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>CR</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – contraction ratio of chamber (Ainj / Athroat)</p></li>
-<li><p><strong>eps</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – nozzle area ratio (Aexit / Athroat)</p></li>
-<li><p><strong>pcentBell</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – nozzle percent bell (Lnoz / L_15deg_cone)</p></li>
-<li><p><strong>Rt</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – in, throat radius</p></li>
-<li><p><strong>Nsegs</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – number of segments to hold in array of nozzle contour</p></li>
-<li><p><strong>Rup</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – radius of curvature just upstream of throat (Rupstream / Rthroat)</p></li>
-<li><p><strong>Rd</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – radius of curvature just downstream of throat (Rdownstream / Rthroat)</p></li>
-<li><p><strong>cham_conv_ang</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – deg, half angle of convergent section of chamber</p></li>
-<li><p><strong>Rc</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – radius of curvature at start of convergent section (Rconvergent / Rthroat)</p></li>
-<li><p><strong>theta</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – deg, entrance angle of nozzle (tangent to Rd circular curve)</p></li>
-<li><p><strong>exitAng</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – deg, exit angle of nozzle</p></li>
-<li><p><strong>forceCone</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a>) – flag to force nozzle to be a conical nozzle instead of bell nozzle.</p></li>
-<li><p><strong>use_huzel_angles</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a>) – flag to force use of Huzel entrance and exit angle correlation</p></li>
+<li><p><strong>CR</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a>) – contraction ratio of chamber (Ainj / Athroat)</p></li>
+<li><p><strong>eps</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a>) – nozzle area ratio (Aexit / Athroat)</p></li>
+<li><p><strong>pcentBell</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a>) – nozzle percent bell (Lnoz / L_15deg_cone)</p></li>
+<li><p><strong>Rt</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a>) – in, throat radius</p></li>
+<li><p><strong>Nsegs</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – number of segments to hold in array of nozzle contour</p></li>
+<li><p><strong>Rup</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a>) – radius of curvature just upstream of throat (Rupstream / Rthroat)</p></li>
+<li><p><strong>Rd</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a>) – radius of curvature just downstream of throat (Rdownstream / Rthroat)</p></li>
+<li><p><strong>cham_conv_ang</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a>) – deg, half angle of convergent section of chamber</p></li>
+<li><p><strong>Rc</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a>) – radius of curvature at start of convergent section (Rconvergent / Rthroat)</p></li>
+<li><p><strong>theta</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a>) – deg, entrance angle of nozzle (tangent to Rd circular curve)</p></li>
+<li><p><strong>exitAng</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a>) – deg, exit angle of nozzle</p></li>
+<li><p><strong>forceCone</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><em>bool</em></a>) – flag to force nozzle to be a conical nozzle instead of bell nozzle.</p></li>
+<li><p><strong>use_huzel_angles</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><em>bool</em></a>) – flag to force use of Huzel entrance and exit angle correlation</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>Nozzle object</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference internal" href="#rocketisp.nozzle.nozzle.Nozzle" title="rocketisp.nozzle.nozzle.Nozzle">Nozzle</a></p>
 </dd>
 </dl>
@@ -374,10 +374,10 @@ NOT including Throat</p>
 <dd><p>DIMENSIONLESS Parabolic Nozzle Contour (Rthroat = 1.0)</p>
 </dd></dl>
 
-</div>
-</div>
-<div class="section" id="module-rocketisp.efficiencies">
-<span id="efficiencies"></span><h2>Efficiencies<a class="headerlink" href="#module-rocketisp.efficiencies" title="Permalink to this headline">¶</a></h2>
+</section>
+</section>
+<section id="module-rocketisp.efficiencies">
+<span id="efficiencies"></span><h2>Efficiencies<a class="headerlink" href="#module-rocketisp.efficiencies" title="Permalink to this heading">¶</a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="rocketisp.efficiencies.Efficiencies">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">rocketisp.efficiencies.</span></span><span class="sig-name descname"><span class="pre">Efficiencies</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">constD</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rocketisp.efficiencies.Efficiencies" title="Permalink to this definition">¶</a></dt>
@@ -434,18 +434,18 @@ Gives overall Isp efficiency including any pulsing effects.</p>
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">rocketisp.efficiencies.</span></span><span class="sig-name descname"><span class="pre">Efficiency</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">desc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value_src</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rocketisp.efficiencies.Efficiency" title="Permalink to this definition">¶</a></dt>
 <dd><p>Holds an individual efficiency that is coordinated by the Efficiencies object.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – name of efficiency (e.g. Div, BL, Kin, etc)</p></li>
-<li><p><strong>value</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – initial value of efficiency (should be between 0.0 and 1.0)</p></li>
-<li><p><strong>desc</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – long description of efficiency</p></li>
-<li><p><strong>value_src</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – technical source of the efficiency (e.g. user input, NASA model, etc.)</p></li>
+<li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – name of efficiency (e.g. Div, BL, Kin, etc)</p></li>
+<li><p><strong>value</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a>) – initial value of efficiency (should be between 0.0 and 1.0)</p></li>
+<li><p><strong>desc</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – long description of efficiency</p></li>
+<li><p><strong>value_src</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – technical source of the efficiency (e.g. user input, NASA model, etc.)</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>Efficiency object</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference internal" href="#rocketisp.efficiencies.Efficiency" title="rocketisp.efficiencies.Efficiency">Efficiency</a></p>
 </dd>
 </dl>
@@ -463,9 +463,9 @@ Gives overall Isp efficiency including any pulsing effects.</p>
 
 </dd></dl>
 
-</div>
-<div class="section" id="module-rocketisp.stream_tubes">
-<span id="stream-tubes"></span><h2>Stream Tubes<a class="headerlink" href="#module-rocketisp.stream_tubes" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="module-rocketisp.stream_tubes">
+<span id="stream-tubes"></span><h2>Stream Tubes<a class="headerlink" href="#module-rocketisp.stream_tubes" title="Permalink to this heading">¶</a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="rocketisp.stream_tubes.BarrierStream">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">rocketisp.stream_tubes.</span></span><span class="sig-name descname"><span class="pre">BarrierStream</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">coreObj</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pcentFFC</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ko</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.035</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rocketisp.stream_tubes.BarrierStream" title="Permalink to this definition">¶</a></dt>
@@ -473,20 +473,20 @@ Gives overall Isp efficiency including any pulsing effects.</p>
 see: <a class="reference external" href="https://ntrs.nasa.gov/citations/19770014416">https://ntrs.nasa.gov/citations/19770014416</a>
 COMBUSTION EFFECTS ON FILM COOLING, 24 Feb 1977 by Aerojet Liquid Rocket Co.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>coreObj</strong> (<a class="reference internal" href="#rocketisp.stream_tubes.CoreStream" title="rocketisp.stream_tubes.CoreStream"><em>CoreStream</em></a>) – core stream tube object, CoreStream</p></li>
-<li><p><strong>pcentFFC</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – percent fuel film cooling ( FFC flowrate / total fuel flowrate)</p></li>
-<li><p><strong>ko</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – entrainment constant (typical value is 0.035, range from 0.03 to 0.06)</p></li>
+<li><p><strong>pcentFFC</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a>) – percent fuel film cooling ( FFC flowrate / total fuel flowrate)</p></li>
+<li><p><strong>ko</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a>) – entrainment constant (typical value is 0.035, range from 0.03 to 0.06)</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>BarrierStream object</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference internal" href="#rocketisp.stream_tubes.BarrierStream" title="rocketisp.stream_tubes.BarrierStream">BarrierStream</a></p>
 </dd>
-<dt class="field-even">Variables</dt>
+<dt class="field-even">Variables<span class="colon">:</span></dt>
 <dd class="field-even"><ul class="simple">
 <li><p><strong>MRbarrier</strong> – barrier mixture ratio</p></li>
 <li><p><strong>MRwall</strong> – mixture ratio at wall</p></li>
@@ -535,30 +535,30 @@ performance of barrier stream tube.</p>
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">rocketisp.stream_tubes.</span></span><span class="sig-name descname"><span class="pre">CoreStream</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">geomObj=&lt;rocketisp.geometry.Geometry</span> <span class="pre">object&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">effObj=&lt;rocketisp.efficiencies.Efficiencies</span> <span class="pre">object&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">oxName='N2O4'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fuelName='MMH'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">MRcore=1.9</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Pc=500</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">CdThroat=0.995</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Pamb=0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">adjCstarODE=1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">adjIspIdeal=1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pcentFFC=0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ko=0.035</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ignore_noz_sep=False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rocketisp.stream_tubes.CoreStream" title="Permalink to this definition">¶</a></dt>
 <dd><p>Core stream tube of liquid bipropellant thruster.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>geomObj</strong> (<a class="reference internal" href="#rocketisp.geometry.Geometry" title="rocketisp.geometry.Geometry"><em>Geometry</em></a>) – Geometry that describes thruster</p></li>
 <li><p><strong>effObj</strong> (<a class="reference internal" href="#rocketisp.efficiencies.Efficiencies" title="rocketisp.efficiencies.Efficiencies"><em>Efficiencies</em></a>) – Efficiencies object to hold individual efficiencies</p></li>
-<li><p><strong>oxName</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – name of oxidizer (e.g. N2O4, LOX)</p></li>
-<li><p><strong>fuelName</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – name of fuel (e.g. MMH, LH2)</p></li>
-<li><p><strong>MRcore</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – mixture ratio of core flow (ox flow rate / fuel flow rate)</p></li>
-<li><p><strong>Pc</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – psia, chamber pressure</p></li>
-<li><p><strong>CdThroat</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – Cd of throat (RocketThruster object may override)</p></li>
-<li><p><strong>Pamb</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – psia, ambient pressure (for example sea level is 14.7 psia)</p></li>
-<li><p><strong>adjCstarODE</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – multiplier on NASA CEA code value of cstar ODE (default is 1.0)</p></li>
-<li><p><strong>adjIspIdeal</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – multiplier on NASA CEA code value of Isp ODE (default is 1.0)</p></li>
-<li><p><strong>pcentFFC</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – percent fuel film cooling (if &gt; 0 then add BarrierStream)</p></li>
-<li><p><strong>ko</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – entrainment constant (passed to BarrierStream object, range from 0.03 to 0.06)</p></li>
-<li><p><strong>ignore_noz_sep</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a>) – flag to force nozzle flow separation to be ignored (USE WITH CAUTION)</p></li>
+<li><p><strong>oxName</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – name of oxidizer (e.g. N2O4, LOX)</p></li>
+<li><p><strong>fuelName</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – name of fuel (e.g. MMH, LH2)</p></li>
+<li><p><strong>MRcore</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a>) – mixture ratio of core flow (ox flow rate / fuel flow rate)</p></li>
+<li><p><strong>Pc</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a>) – psia, chamber pressure</p></li>
+<li><p><strong>CdThroat</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a>) – Cd of throat (RocketThruster object may override)</p></li>
+<li><p><strong>Pamb</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a>) – psia, ambient pressure (for example sea level is 14.7 psia)</p></li>
+<li><p><strong>adjCstarODE</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a>) – multiplier on NASA CEA code value of cstar ODE (default is 1.0)</p></li>
+<li><p><strong>adjIspIdeal</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a>) – multiplier on NASA CEA code value of Isp ODE (default is 1.0)</p></li>
+<li><p><strong>pcentFFC</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a>) – percent fuel film cooling (if &gt; 0 then add BarrierStream)</p></li>
+<li><p><strong>ko</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a>) – entrainment constant (passed to BarrierStream object, range from 0.03 to 0.06)</p></li>
+<li><p><strong>ignore_noz_sep</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><em>bool</em></a>) – flag to force nozzle flow separation to be ignored (USE WITH CAUTION)</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>CoreStream object</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference internal" href="#rocketisp.stream_tubes.CoreStream" title="rocketisp.stream_tubes.CoreStream">CoreStream</a></p>
 </dd>
-<dt class="field-even">Variables</dt>
+<dt class="field-even">Variables<span class="colon">:</span></dt>
 <dd class="field-even"><ul class="simple">
 <li><p><strong>FvacTotal</strong> – lbf, total vacuum thrust</p></li>
 <li><p><strong>FvacCore</strong> – lbf, vacuum thrust due to core stream tube</p></li>
@@ -645,9 +645,9 @@ If re_evaluate is True, then call self.evaluate() after resetting the value of t
 between the core and barrier.</p>
 </dd></dl>
 
-</div>
-<div class="section" id="module-rocketisp.injector">
-<span id="injector"></span><h2>Injector<a class="headerlink" href="#module-rocketisp.injector" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="module-rocketisp.injector">
+<span id="injector"></span><h2>Injector<a class="headerlink" href="#module-rocketisp.injector" title="Permalink to this heading">¶</a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="rocketisp.injector.Injector">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">rocketisp.injector.</span></span><span class="sig-name descname"><span class="pre">Injector</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">coreObj</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Tox</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Tfuel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">elemEm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.8</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fdPinjOx</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.25</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fdPinjFuel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.25</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dpOxInp</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dpFuelInp</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">setNelementsBy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'acoustics'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">elemDensInp</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">NelementsInp</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">OxOrfPerEl</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">FuelOrfPerEl</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lolFuelElem</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">setAcousticFreqBy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'mode'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">desAcousMode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'3T'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">desFreqInp</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">CdOxOrf</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.75</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">CdFuelOrf</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.75</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dropCorrOx</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.33</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dropCorrFuel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.33</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">DorfMin</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.008</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">LfanOvDorfOx</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">20.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">LfanOvDorfFuel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">20.0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rocketisp.injector.Injector" title="Permalink to this definition">¶</a></dt>
@@ -655,41 +655,41 @@ between the core and barrier.</p>
 Injector design features are calculated
 including chamber losses due to the injector, Em, Mix and Vap.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>coreObj</strong> (<a class="reference internal" href="#rocketisp.stream_tubes.CoreStream" title="rocketisp.stream_tubes.CoreStream"><em>CoreStream</em></a>) – CoreStream object</p></li>
-<li><p><strong>Tox</strong> (<a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)"><em>None</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – degR, temperature of oxidizer</p></li>
-<li><p><strong>Tfuel</strong> (<a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)"><em>None</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – degR, temperature of fuel</p></li>
-<li><p><strong>elemEm</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – intra-element Rupe mixing factor (0.7 below ave, 0.8 ave, 0.9 above ave)</p></li>
-<li><p><strong>fdPinjOx</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – fraction of Pc used as oxidizer injector pressure drop</p></li>
-<li><p><strong>fdPinjFuel</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – fraction of Pc used as fuel injector pressure drop</p></li>
-<li><p><strong>dpOxInp</strong> (<a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)"><em>None</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – psia,input value of injector pressure drop for oxidizer (overrides fdPinjOx)</p></li>
-<li><p><strong>dpFuelInp</strong> (<a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)"><em>None</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – psia,input value of injector pressure drop for fuel (overrides fdPinjFuel)</p></li>
-<li><p><strong>setNelementsBy</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – flag determines how to calculate number of elements ( “acoustics”, “elem_density”, “input”)</p></li>
-<li><p><strong>elemDensInp</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – elem/in**2, input value for element density (setNelementsBy == “elem_density”)</p></li>
-<li><p><strong>NelementsInp</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – input value for number of elements (setNelementsBy == “input”)</p></li>
-<li><p><strong>OxOrfPerEl</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – number of oxidizer orifices per element</p></li>
-<li><p><strong>FuelOrfPerEl</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – number of fuel orifices per element</p></li>
-<li><p><strong>lolFuelElem</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a>) – flag for like-on-like fuel element (determines strouhal multiplier)</p></li>
-<li><p><strong>setAcousticFreqBy</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – flag indicating how to determine design frequency. (can be “mode” or “freq”)</p></li>
-<li><p><strong>desAcousMode</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – driving acoustic mode of injector OR acoustic mode multiplier (setNelementsBy==”acoustics” and setAcousticFreqBy==”mode”)</p></li>
-<li><p><strong>desFreqInp</strong> (<a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)"><em>None</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – Hz, driving acoustic frequency of injector (sets D/V if setNelementsBy==”acoustics” and setAcousticFreqBy==”freq”)</p></li>
-<li><p><strong>CdOxOrf</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – flow coefficient of oxidizer orifices</p></li>
-<li><p><strong>CdFuelOrf</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – flow coefficient of fuel orifices</p></li>
-<li><p><strong>dropCorrOx</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – oxidizer drop size multiplier (showerhead=3.0, like-doublet=1.0, vortex=0.5, unlike-doublet=0.33)</p></li>
-<li><p><strong>dropCorrFuel</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – fuel drop size multiplier (showerhead=3.0, like-doublet=1.0, vortex=0.5, unlike-doublet=0.33)</p></li>
-<li><p><strong>DorfMin</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – in, minimum orifice diameter (lower limit)</p></li>
-<li><p><strong>LfanOvDorfOx</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – fan length / oxidizer orifice diameter</p></li>
-<li><p><strong>LfanOvDorfFuel</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – fan length / fuel orifice diameter</p></li>
+<li><p><strong>Tox</strong> (<em>None</em><em> or </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a>) – degR, temperature of oxidizer</p></li>
+<li><p><strong>Tfuel</strong> (<em>None</em><em> or </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a>) – degR, temperature of fuel</p></li>
+<li><p><strong>elemEm</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a>) – intra-element Rupe mixing factor (0.7 below ave, 0.8 ave, 0.9 above ave)</p></li>
+<li><p><strong>fdPinjOx</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a>) – fraction of Pc used as oxidizer injector pressure drop</p></li>
+<li><p><strong>fdPinjFuel</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a>) – fraction of Pc used as fuel injector pressure drop</p></li>
+<li><p><strong>dpOxInp</strong> (<em>None</em><em> or </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a>) – psia,input value of injector pressure drop for oxidizer (overrides fdPinjOx)</p></li>
+<li><p><strong>dpFuelInp</strong> (<em>None</em><em> or </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a>) – psia,input value of injector pressure drop for fuel (overrides fdPinjFuel)</p></li>
+<li><p><strong>setNelementsBy</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – flag determines how to calculate number of elements ( “acoustics”, “elem_density”, “input”)</p></li>
+<li><p><strong>elemDensInp</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a>) – elem/in**2, input value for element density (setNelementsBy == “elem_density”)</p></li>
+<li><p><strong>NelementsInp</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a>) – input value for number of elements (setNelementsBy == “input”)</p></li>
+<li><p><strong>OxOrfPerEl</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a>) – number of oxidizer orifices per element</p></li>
+<li><p><strong>FuelOrfPerEl</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a>) – number of fuel orifices per element</p></li>
+<li><p><strong>lolFuelElem</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><em>bool</em></a>) – flag for like-on-like fuel element (determines strouhal multiplier)</p></li>
+<li><p><strong>setAcousticFreqBy</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – flag indicating how to determine design frequency. (can be “mode” or “freq”)</p></li>
+<li><p><strong>desAcousMode</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a>) – driving acoustic mode of injector OR acoustic mode multiplier (setNelementsBy==”acoustics” and setAcousticFreqBy==”mode”)</p></li>
+<li><p><strong>desFreqInp</strong> (<em>None</em><em> or </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a>) – Hz, driving acoustic frequency of injector (sets D/V if setNelementsBy==”acoustics” and setAcousticFreqBy==”freq”)</p></li>
+<li><p><strong>CdOxOrf</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a>) – flow coefficient of oxidizer orifices</p></li>
+<li><p><strong>CdFuelOrf</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a>) – flow coefficient of fuel orifices</p></li>
+<li><p><strong>dropCorrOx</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a>) – oxidizer drop size multiplier (showerhead=3.0, like-doublet=1.0, vortex=0.5, unlike-doublet=0.33)</p></li>
+<li><p><strong>dropCorrFuel</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a>) – fuel drop size multiplier (showerhead=3.0, like-doublet=1.0, vortex=0.5, unlike-doublet=0.33)</p></li>
+<li><p><strong>DorfMin</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a>) – in, minimum orifice diameter (lower limit)</p></li>
+<li><p><strong>LfanOvDorfOx</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a>) – fan length / oxidizer orifice diameter</p></li>
+<li><p><strong>LfanOvDorfFuel</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a>) – fan length / fuel orifice diameter</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>Injector object</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference internal" href="#rocketisp.injector.Injector" title="rocketisp.injector.Injector">Injector</a></p>
 </dd>
-<dt class="field-even">Variables</dt>
+<dt class="field-even">Variables<span class="colon">:</span></dt>
 <dd class="field-even"><ul class="simple">
 <li><p><strong>sgOx</strong> – g/ml, oxidizer density</p></li>
 <li><p><strong>dHvapOx</strong> – BTU/lbm, oxidizer heat of vaporization</p></li>
@@ -781,8 +781,8 @@ including chamber losses due to the injector, Em, Mix and Vap.</p>
 <dd><p>Check to see if name is limited in range.</p>
 </dd></dl>
 
-</div>
-</div>
+</section>
+</section>
 
 
             <div class="clearer"></div>
@@ -794,8 +794,9 @@ including chamber losses due to the injector, Em, Mix and Vap.</p>
             <p class="logo"><a href="index.html">
               <img class="logo" src="_static/generic_logo.svg" alt="Logo"/>
             </a></p>
-  <h3><a href="index.html">Table of Contents</a></h3>
-  <ul class="current">
+  <div>
+    <h3><a href="index.html">Table of Contents</a></h3>
+    <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="quickstart.html">QuickStart</a></li>
 <li class="toctree-l1"><a class="reference internal" href="models.html">Models</a></li>
 <li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
@@ -807,14 +808,106 @@ including chamber losses due to the injector, Em, Mix and Vap.</p>
 <li class="toctree-l1"><a class="reference internal" href="sources.html">Sources</a></li>
 <li class="toctree-l1"><a class="reference internal" href="mlp_summary.html">Multilayer Perceptron</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">RocketIsp Code Functions</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#module-rocketisp.rocket_isp">Thruster</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#module-rocketisp.geometry">Geometry</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#module-rocketisp.nozzle.nozzle">Nozzle</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-rocketisp.rocket_isp">Thruster</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#rocketisp.rocket_isp.RocketThruster"><code class="docutils literal notranslate"><span class="pre">RocketThruster</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#rocketisp.rocket_isp.RocketThruster.calc_all_eff"><code class="docutils literal notranslate"><span class="pre">RocketThruster.calc_all_eff()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rocketisp.rocket_isp.RocketThruster.get_html_file_str"><code class="docutils literal notranslate"><span class="pre">RocketThruster.get_html_file_str()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rocketisp.rocket_isp.RocketThruster.get_summ_str"><code class="docutils literal notranslate"><span class="pre">RocketThruster.get_summ_str()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rocketisp.rocket_isp.RocketThruster.reset_attr"><code class="docutils literal notranslate"><span class="pre">RocketThruster.reset_attr()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rocketisp.rocket_isp.RocketThruster.scale_Rt_to_Thrust"><code class="docutils literal notranslate"><span class="pre">RocketThruster.scale_Rt_to_Thrust()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rocketisp.rocket_isp.RocketThruster.set_MRthruster"><code class="docutils literal notranslate"><span class="pre">RocketThruster.set_MRthruster()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rocketisp.rocket_isp.RocketThruster.set_eff_model"><code class="docutils literal notranslate"><span class="pre">RocketThruster.set_eff_model()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rocketisp.rocket_isp.RocketThruster.set_eps_to_equal_pexit"><code class="docutils literal notranslate"><span class="pre">RocketThruster.set_eps_to_equal_pexit()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rocketisp.rocket_isp.RocketThruster.set_mr_to_max_ispdel"><code class="docutils literal notranslate"><span class="pre">RocketThruster.set_mr_to_max_ispdel()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rocketisp.rocket_isp.RocketThruster.summ_print"><code class="docutils literal notranslate"><span class="pre">RocketThruster.summ_print()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#module-rocketisp.efficiencies">Efficiencies</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#module-rocketisp.stream_tubes">Stream Tubes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#module-rocketisp.injector">Injector</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-rocketisp.geometry">Geometry</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#rocketisp.geometry.Geometry"><code class="docutils literal notranslate"><span class="pre">Geometry</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#rocketisp.geometry.Geometry.LprimeOvRcham"><code class="docutils literal notranslate"><span class="pre">Geometry.LprimeOvRcham()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rocketisp.geometry.Geometry.evaluate"><code class="docutils literal notranslate"><span class="pre">Geometry.evaluate()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rocketisp.geometry.Geometry.getNozObj"><code class="docutils literal notranslate"><span class="pre">Geometry.getNozObj()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rocketisp.geometry.Geometry.get_attr_comment"><code class="docutils literal notranslate"><span class="pre">Geometry.get_attr_comment()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rocketisp.geometry.Geometry.get_model_summ_obj"><code class="docutils literal notranslate"><span class="pre">Geometry.get_model_summ_obj()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rocketisp.geometry.Geometry.get_summ_str"><code class="docutils literal notranslate"><span class="pre">Geometry.get_summ_str()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rocketisp.geometry.Geometry.reset_attr"><code class="docutils literal notranslate"><span class="pre">Geometry.reset_attr()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rocketisp.geometry.Geometry.summ_print"><code class="docutils literal notranslate"><span class="pre">Geometry.summ_print()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#rocketisp.geometry.maybe_show_ft"><code class="docutils literal notranslate"><span class="pre">maybe_show_ft()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rocketisp.geometry.solidCylVol"><code class="docutils literal notranslate"><span class="pre">solidCylVol()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rocketisp.geometry.solidFrustrumVol"><code class="docutils literal notranslate"><span class="pre">solidFrustrumVol()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-rocketisp.nozzle.nozzle">Nozzle</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#rocketisp.nozzle.nozzle.Nozzle"><code class="docutils literal notranslate"><span class="pre">Nozzle</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#rocketisp.nozzle.nozzle.Nozzle.get_conv_zL_epsL"><code class="docutils literal notranslate"><span class="pre">Nozzle.get_conv_zL_epsL()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#rocketisp.nozzle.nozzle.Nozzle.get_div_zL_epsL"><code class="docutils literal notranslate"><span class="pre">Nozzle.get_div_zL_epsL()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#rocketisp.nozzle.nozzle.Nozzle.set_abs_Rt"><code class="docutils literal notranslate"><span class="pre">Nozzle.set_abs_Rt()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#rocketisp.nozzle.nozzle.Nozzle.z_range"><code class="docutils literal notranslate"><span class="pre">Nozzle.z_range()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#rocketisp.nozzle.nozzle.ref_nozzle"><code class="docutils literal notranslate"><span class="pre">ref_nozzle()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-rocketisp.efficiencies">Efficiencies</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#rocketisp.efficiencies.Efficiencies"><code class="docutils literal notranslate"><span class="pre">Efficiencies</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#rocketisp.efficiencies.Efficiencies.evaluate"><code class="docutils literal notranslate"><span class="pre">Efficiencies.evaluate()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rocketisp.efficiencies.Efficiencies.get_model_summ_obj"><code class="docutils literal notranslate"><span class="pre">Efficiencies.get_model_summ_obj()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rocketisp.efficiencies.Efficiencies.get_state_str_list"><code class="docutils literal notranslate"><span class="pre">Efficiencies.get_state_str_list()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rocketisp.efficiencies.Efficiencies.get_summ_str"><code class="docutils literal notranslate"><span class="pre">Efficiencies.get_summ_str()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rocketisp.efficiencies.Efficiencies.set_const"><code class="docutils literal notranslate"><span class="pre">Efficiencies.set_const()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rocketisp.efficiencies.Efficiencies.set_value"><code class="docutils literal notranslate"><span class="pre">Efficiencies.set_value()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rocketisp.efficiencies.Efficiencies.summ_print"><code class="docutils literal notranslate"><span class="pre">Efficiencies.summ_print()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#rocketisp.efficiencies.Efficiency"><code class="docutils literal notranslate"><span class="pre">Efficiency</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#rocketisp.efficiencies.Efficiency.get_state_str"><code class="docutils literal notranslate"><span class="pre">Efficiency.get_state_str()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rocketisp.efficiencies.Efficiency.set_value"><code class="docutils literal notranslate"><span class="pre">Efficiency.set_value()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-rocketisp.stream_tubes">Stream Tubes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#rocketisp.stream_tubes.BarrierStream"><code class="docutils literal notranslate"><span class="pre">BarrierStream</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#rocketisp.stream_tubes.BarrierStream.evaluate"><code class="docutils literal notranslate"><span class="pre">BarrierStream.evaluate()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rocketisp.stream_tubes.BarrierStream.get_model_summ_obj"><code class="docutils literal notranslate"><span class="pre">BarrierStream.get_model_summ_obj()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rocketisp.stream_tubes.BarrierStream.get_summ_str"><code class="docutils literal notranslate"><span class="pre">BarrierStream.get_summ_str()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rocketisp.stream_tubes.BarrierStream.summ_print"><code class="docutils literal notranslate"><span class="pre">BarrierStream.summ_print()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#rocketisp.stream_tubes.CoreStream"><code class="docutils literal notranslate"><span class="pre">CoreStream</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#rocketisp.stream_tubes.CoreStream.calc_cea_perf_params"><code class="docutils literal notranslate"><span class="pre">CoreStream.calc_cea_perf_params()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rocketisp.stream_tubes.CoreStream.evaluate"><code class="docutils literal notranslate"><span class="pre">CoreStream.evaluate()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rocketisp.stream_tubes.CoreStream.get_model_summ_obj"><code class="docutils literal notranslate"><span class="pre">CoreStream.get_model_summ_obj()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rocketisp.stream_tubes.CoreStream.get_summ_str"><code class="docutils literal notranslate"><span class="pre">CoreStream.get_summ_str()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rocketisp.stream_tubes.CoreStream.reset_CdThroat"><code class="docutils literal notranslate"><span class="pre">CoreStream.reset_CdThroat()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rocketisp.stream_tubes.CoreStream.reset_attr"><code class="docutils literal notranslate"><span class="pre">CoreStream.reset_attr()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rocketisp.stream_tubes.CoreStream.summ_print"><code class="docutils literal notranslate"><span class="pre">CoreStream.summ_print()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#rocketisp.stream_tubes.shapeFactor"><code class="docutils literal notranslate"><span class="pre">shapeFactor()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rocketisp.stream_tubes.solve_At_split"><code class="docutils literal notranslate"><span class="pre">solve_At_split()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-rocketisp.injector">Injector</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#rocketisp.injector.Injector"><code class="docutils literal notranslate"><span class="pre">Injector</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#rocketisp.injector.Injector.calc_element_attr"><code class="docutils literal notranslate"><span class="pre">Injector.calc_element_attr()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rocketisp.injector.Injector.calculate_effEm"><code class="docutils literal notranslate"><span class="pre">Injector.calculate_effEm()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rocketisp.injector.Injector.calculate_effMix"><code class="docutils literal notranslate"><span class="pre">Injector.calculate_effMix()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rocketisp.injector.Injector.calculate_effVap"><code class="docutils literal notranslate"><span class="pre">Injector.calculate_effVap()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rocketisp.injector.Injector.evaluate"><code class="docutils literal notranslate"><span class="pre">Injector.evaluate()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rocketisp.injector.Injector.get_closest_mode"><code class="docutils literal notranslate"><span class="pre">Injector.get_closest_mode()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rocketisp.injector.Injector.get_model_summ_obj"><code class="docutils literal notranslate"><span class="pre">Injector.get_model_summ_obj()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rocketisp.injector.Injector.get_summ_str"><code class="docutils literal notranslate"><span class="pre">Injector.get_summ_str()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rocketisp.injector.Injector.summ_print"><code class="docutils literal notranslate"><span class="pre">Injector.summ_print()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#rocketisp.injector.temperature_clamp"><code class="docutils literal notranslate"><span class="pre">temperature_clamp()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="copyright.html">Copyright</a></li>
@@ -822,12 +915,17 @@ including chamber losses due to the injector, Em, Mix and Vap.</p>
 <li class="toctree-l1"><a class="reference internal" href="history.html">History</a></li>
 </ul>
 
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="mlp_summary.html"
-                        title="previous chapter">Multilayer Perceptron</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="copyright.html"
-                        title="next chapter">Copyright</a></p>
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="mlp_summary.html"
+                          title="previous chapter">Multilayer Perceptron</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="copyright.html"
+                          title="next chapter">Copyright</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -844,7 +942,7 @@ including chamber losses due to the injector, Em, Mix and Vap.</p>
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -870,7 +968,7 @@ including chamber losses due to the injector, Em, Mix and Vap.</p>
     </div>
     <div class="footer" role="contentinfo">
         &#169; <a href="copyright.html">Copyright</a> 2015, Charlie Taylor.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
     </div>
   </body>
 </html>

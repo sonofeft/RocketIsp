@@ -2,19 +2,19 @@
 
 <!doctype html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
     <title>Efficiencies &#8212; RocketIsp 0.1.11 documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/bizstyle.css" />
     
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="_static/bizstyle.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -51,8 +51,8 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="efficiencies">
-<span id="ref-to-efficiencies"></span><h1>Efficiencies<a class="headerlink" href="#efficiencies" title="Permalink to this headline">¶</a></h1>
+  <section id="efficiencies">
+<span id="ref-to-efficiencies"></span><h1>Efficiencies<a class="headerlink" href="#efficiencies" title="Permalink to this heading">¶</a></h1>
 <p>Efficiency is represented with the symbol <span class="math notranslate nohighlight">\(\large{\eta}\)</span>.
 Each <span class="math notranslate nohighlight">\(\large{\eta}\)</span> will have a subscript to indicate the type of efficiency,
 for example mixing efficiency can be shown as <span class="math notranslate nohighlight">\(\large{\eta_{mix}}\)</span></p>
@@ -61,8 +61,8 @@ for example mixing efficiency can be shown as <span class="math notranslate nohi
 <li><p>Efficiency of the characteristic velocity, <span class="math notranslate nohighlight">\(\large{\eta_{C^*}}\)</span>, called Cstar Efficiency</p></li>
 <li><p>Efficiency of the specific impulse, <span class="math notranslate nohighlight">\(\large{\eta_{Isp}}\)</span>, called Isp Efficiency</p></li>
 </ul>
-<div class="section" id="cstar-efficiency">
-<h2>Cstar Efficiency<a class="headerlink" href="#cstar-efficiency" title="Permalink to this headline">¶</a></h2>
+<section id="cstar-efficiency">
+<h2>Cstar Efficiency<a class="headerlink" href="#cstar-efficiency" title="Permalink to this heading">¶</a></h2>
 <p>The characteristic velocity, or Cstar (<span class="math notranslate nohighlight">\(C^*\)</span>), is a property of propellant combustion
 products that will dictate
 the flow rate (<span class="math notranslate nohighlight">\(\dot m\)</span>) through a rocket thruster throat of given area (<span class="math notranslate nohighlight">\(A_t\)</span>)
@@ -81,9 +81,9 @@ Thus when Cstar Efficiency, <span class="math notranslate nohighlight">\(\large{
 <p><span class="math notranslate nohighlight">\(\large{C^*_{del}}\)</span>  and  <span class="math notranslate nohighlight">\(\large{\dot m}\)</span> are <strong>inversely</strong> proportional.</p>
 <p>The Cstar Efficiency, <span class="math notranslate nohighlight">\(\large{\eta_{C^*}}\)</span>, is often used to characterize injector design quality
 since fully mixed, vaporized and combusted propellants tend to have higher <span class="math notranslate nohighlight">\(\large{\eta_{C^*}}\)</span>.</p>
-</div>
-<div class="section" id="discharge-coefficient">
-<h2>Discharge Coefficient<a class="headerlink" href="#discharge-coefficient" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="discharge-coefficient">
+<h2>Discharge Coefficient<a class="headerlink" href="#discharge-coefficient" title="Permalink to this heading">¶</a></h2>
 <p>When calculating throat discharge coefficient (<span class="math notranslate nohighlight">\(C_d\)</span>) with a model using constant gas properties and ignoring the boundary layer,
 <span class="math notranslate nohighlight">\(C_d\)</span> is shown to be primarily a function of the upstream radius
 of curvature, <a class="reference internal" href="models.html#ref-to-geom-image"><span class="std std-ref">RupThroat</span></a>.
@@ -130,8 +130,8 @@ show very similar predictions to the constant gas properties calculations.</p>
 <p>While <a class="reference internal" href="models.html#ref-to-geom-image"><span class="std std-ref">RupThroat</span></a> is clearly a major independent parameter for calculating <span class="math notranslate nohighlight">\(C_d\)</span>,
 the wide spread of <span class="math notranslate nohighlight">\(C_d\)</span> values in the <a class="reference external" href="https://ntrs.nasa.gov/citations/19730012958">NASA 33-548 report</a>
 would seem to indicate that additional influencing parameters should, perhaps be considered.</p>
-<div class="section" id="c-d-monte-carlo">
-<h3><span class="math notranslate nohighlight">\(C_d\)</span> Monte Carlo<a class="headerlink" href="#c-d-monte-carlo" title="Permalink to this headline">¶</a></h3>
+<section id="c-d-monte-carlo">
+<h3><span class="math notranslate nohighlight">\(C_d\)</span> Monte Carlo<a class="headerlink" href="#c-d-monte-carlo" title="Permalink to this heading">¶</a></h3>
 <p>In order to characterize the variation in <span class="math notranslate nohighlight">\(C_d\)</span> beyond just <a class="reference internal" href="models.html#ref-to-geom-image"><span class="std std-ref">RupThroat</span></a>
 and to identify additional influencing parameters, a
 <a class="reference external" href="https://en.wikipedia.org/wiki/Monte_Carlo_method">Monte Carlo</a> analysis was conducted
@@ -200,10 +200,10 @@ The decrement to <span class="math notranslate nohighlight">\(C_d\)</span> is in
 <p><cite>Click image to see full size</cite></p>
 </td>
 </tr>
-</table></div>
-</div>
-<div class="section" id="isp-efficiency">
-<h2>Isp Efficiency<a class="headerlink" href="#isp-efficiency" title="Permalink to this headline">¶</a></h2>
+</table></section>
+</section>
+<section id="isp-efficiency">
+<h2>Isp Efficiency<a class="headerlink" href="#isp-efficiency" title="Permalink to this heading">¶</a></h2>
 <p>Vacuum specific impulse (<span class="math notranslate nohighlight">\(\large{Isp_{vac}}\)</span>) is defined as steady state vacuum thrust
 (<span class="math notranslate nohighlight">\(\large{F_{vac}}\)</span>)
 divided by steady state mass flow rate (<span class="math notranslate nohighlight">\(\large{\dot m}\)</span>).</p>
@@ -304,9 +304,9 @@ significant differences between the two.”
 <a class="reference external" href="https://ntrs.nasa.gov/search.jsp?R=19870009172">NASA CR-179025 pub:1986</a>
 illustrates the various mechanisms, where they occur and their major influencing effects.</p>
 <a class="reference internal image-reference" href="_images/eff_zones.jpg"><img alt="_images/eff_zones.jpg" src="_images/eff_zones.jpg" style="width: 80%;" /></a>
-</div>
-<div class="section" id="perfect-injector">
-<h2>Perfect Injector<a class="headerlink" href="#perfect-injector" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="perfect-injector">
+<h2>Perfect Injector<a class="headerlink" href="#perfect-injector" title="Permalink to this heading">¶</a></h2>
 <p>When approaching the performance analysis of a liquid bi-propellant thrust chamber it is useful to
 realize that a number of the above losses are almost completely out of the designers control.
 The nozzle losses, in particular, are fixed once a few basic
@@ -327,8 +327,8 @@ first approximation for most liquid thrust chambers.</p>
 <p>The  injector’s ability to mix the propellants via <span class="math notranslate nohighlight">\(E_m\)</span> can affect
 <span class="math notranslate nohighlight">\(MR_{opt}\)</span>, (<a class="reference internal" href="chamber_eff.html#ref-to-emmropt"><span class="std std-ref">see Em impact on MRopt</span></a>)</p>
 </div>
-</div>
-</div>
+</section>
+</section>
 
 
             <div class="clearer"></div>
@@ -340,8 +340,9 @@ first approximation for most liquid thrust chambers.</p>
             <p class="logo"><a href="index.html">
               <img class="logo" src="_static/generic_logo.svg" alt="Logo"/>
             </a></p>
-  <h3><a href="index.html">Table of Contents</a></h3>
-  <ul class="current">
+  <div>
+    <h3><a href="index.html">Table of Contents</a></h3>
+    <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="quickstart.html">QuickStart</a></li>
 <li class="toctree-l1"><a class="reference internal" href="models.html">Models</a></li>
 <li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
@@ -367,12 +368,17 @@ first approximation for most liquid thrust chambers.</p>
 <li class="toctree-l1"><a class="reference internal" href="history.html">History</a></li>
 </ul>
 
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="jannaf.html"
-                        title="previous chapter">JANNAF Standard</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="nozzle_eff.html"
-                        title="next chapter">Nozzle Efficiencies</a></p>
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="jannaf.html"
+                          title="previous chapter">JANNAF Standard</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="nozzle_eff.html"
+                          title="next chapter">Nozzle Efficiencies</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -389,7 +395,7 @@ first approximation for most liquid thrust chambers.</p>
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -415,7 +421,7 @@ first approximation for most liquid thrust chambers.</p>
     </div>
     <div class="footer" role="contentinfo">
         &#169; <a href="copyright.html">Copyright</a> 2015, Charlie Taylor.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
     </div>
   </body>
 </html>

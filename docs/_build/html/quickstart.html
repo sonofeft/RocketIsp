@@ -2,18 +2,18 @@
 
 <!doctype html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
     <title>QuickStart &#8212; RocketIsp 0.1.11 documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/bizstyle.css" />
     
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
     <script src="_static/bizstyle.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -50,10 +50,10 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="quickstart">
-<h1>QuickStart<a class="headerlink" href="#quickstart" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="install-rocketisp">
-<h2>Install RocketIsp<a class="headerlink" href="#install-rocketisp" title="Permalink to this headline">¶</a></h2>
+  <section id="quickstart">
+<h1>QuickStart<a class="headerlink" href="#quickstart" title="Permalink to this heading">¶</a></h1>
+<section id="install-rocketisp">
+<h2>Install RocketIsp<a class="headerlink" href="#install-rocketisp" title="Permalink to this heading">¶</a></h2>
 <p>The easiest way to install <strong>Rocketisp</strong> is:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">rocketisp</span>
 
@@ -63,9 +63,9 @@
 <span class="n">pip</span> <span class="n">install</span> <span class="o">--</span><span class="n">user</span> <span class="n">rocketisp</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="installation-from-source">
-<span id="internal-source-install"></span><h2>Installation From Source<a class="headerlink" href="#installation-from-source" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="installation-from-source">
+<span id="internal-source-install"></span><h2>Installation From Source<a class="headerlink" href="#installation-from-source" title="Permalink to this heading">¶</a></h2>
 <p>Much less common, but if installing from source, then
 the best way to install rocketisp is still <code class="docutils literal notranslate"><span class="pre">pip</span></code>.</p>
 <p>After navigating to the directory holding <strong>Rocketisp</strong> source code, do the following:</p>
@@ -79,9 +79,9 @@ the best way to install rocketisp is still <code class="docutils literal notrans
 </pre></div>
 </div>
 <p>This will execute the local <code class="docutils literal notranslate"><span class="pre">setup.py</span></code> file and insure that the pip-specific commands in <code class="docutils literal notranslate"><span class="pre">setup.py</span></code> are run.</p>
-</div>
-<div class="section" id="running-rocketisp">
-<h2>Running RocketIsp<a class="headerlink" href="#running-rocketisp" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="running-rocketisp">
+<h2>Running RocketIsp<a class="headerlink" href="#running-rocketisp" title="Permalink to this heading">¶</a></h2>
 <p>To test the installation, from the command prompt input the command:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="o">-</span><span class="n">c</span> <span class="s2">&quot;from rocketisp.rocket_isp import RocketThruster; RocketThruster().summ_print()&quot;</span>
 </pre></div>
@@ -201,9 +201,9 @@ the best way to install rocketisp is still <code class="docutils literal notrans
                                                         
 </pre></div>
 </div>
-</div>
-<div class="section" id="rocketisp-gui">
-<h2>RocketIsp GUI<a class="headerlink" href="#rocketisp-gui" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="rocketisp-gui">
+<h2>RocketIsp GUI<a class="headerlink" href="#rocketisp-gui" title="Permalink to this heading">¶</a></h2>
 <p>After installing with <code class="docutils literal notranslate"><span class="pre">pip</span></code>, there will be a launch command line program called
 <strong>rocketisp</strong> or, on Windows, <strong>rocketisp.exe</strong> placed into your python Scripts subdirectory.</p>
 <p>From a terminal or command prompt window simply type:</p>
@@ -222,8 +222,8 @@ The path for the rocketisp executable might be something like:</p>
 </pre></div>
 </div>
 <p>Make sure your system path includes the above path to <strong>rocketisp</strong>.</p>
-</div>
-</div>
+</section>
+</section>
 
 
             <div class="clearer"></div>
@@ -235,8 +235,9 @@ The path for the rocketisp executable might be something like:</p>
             <p class="logo"><a href="index.html">
               <img class="logo" src="_static/generic_logo.svg" alt="Logo"/>
             </a></p>
-  <h3><a href="index.html">Table of Contents</a></h3>
-  <ul class="current">
+  <div>
+    <h3><a href="index.html">Table of Contents</a></h3>
+    <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">QuickStart</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#install-rocketisp">Install RocketIsp</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#installation-from-source">Installation From Source</a></li>
@@ -259,12 +260,17 @@ The path for the rocketisp executable might be something like:</p>
 <li class="toctree-l1"><a class="reference internal" href="history.html">History</a></li>
 </ul>
 
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="index.html"
-                        title="previous chapter">RocketIsp</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="models.html"
-                        title="next chapter">Models</a></p>
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="index.html"
+                          title="previous chapter">RocketIsp</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="models.html"
+                          title="next chapter">Models</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -281,7 +287,7 @@ The path for the rocketisp executable might be something like:</p>
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -307,7 +313,7 @@ The path for the rocketisp executable might be something like:</p>
     </div>
     <div class="footer" role="contentinfo">
         &#169; <a href="copyright.html">Copyright</a> 2015, Charlie Taylor.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
     </div>
   </body>
 </html>

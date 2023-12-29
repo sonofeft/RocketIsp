@@ -2,19 +2,19 @@
 
 <!doctype html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
     <title>Multilayer Perceptron &#8212; RocketIsp 0.1.11 documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/bizstyle.css" />
     
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="_static/bizstyle.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -51,16 +51,16 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="multilayer-perceptron">
-<span id="ref-to-mlp-summary"></span><h1>Multilayer Perceptron<a class="headerlink" href="#multilayer-perceptron" title="Permalink to this headline">¶</a></h1>
+  <section id="multilayer-perceptron">
+<span id="ref-to-mlp-summary"></span><h1>Multilayer Perceptron<a class="headerlink" href="#multilayer-perceptron" title="Permalink to this heading">¶</a></h1>
 <p>Multi-layer Perceptron (MLP) is a supervised learning algorithm that learns a function
 by training on a dataset. It can have multiple input variables and create multiple output values.</p>
 <p>Given a set of features and a target , it can learn a non-linear function approximator.</p>
 <p>See the discussion on <a class="reference external" href="https://en.wikipedia.org/wiki/Multilayer_perceptron">Wikipedia</a>
 and the <a class="reference external" href="https://scikit-learn.org/stable/index.html">sklearn</a> implementation at
 <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.neural_network.MLPRegressor.html">Multi-layer Perceptron regressor</a>.</p>
-<div class="section" id="monte-carlo-method">
-<h2>Monte Carlo Method<a class="headerlink" href="#monte-carlo-method" title="Permalink to this headline">¶</a></h2>
+<section id="monte-carlo-method">
+<h2>Monte Carlo Method<a class="headerlink" href="#monte-carlo-method" title="Permalink to this heading">¶</a></h2>
 <p>Many of the calculated parameters required by <strong>RocketIsp</strong> are best calculated by large complex numerical models.
 Since including those models in <strong>RocketIsp</strong> is not feasible, correlations of those models’ output is used.</p>
 <p><strong>RocketIsp</strong> uses <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.neural_network.MLPRegressor.html">Multi-layer Perceptron regressors</a>
@@ -69,9 +69,9 @@ Each model is treated as a <a class="reference external" href="https://en.wikipe
 a large random sampling of inputs to the model are used to generate a large sampling of results.
 The results are then correlated with a <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.neural_network.MLPRegressor.html">Multi-layer Perceptron regressor</a>.</p>
 <p>Such a data-generation approach is known as a <a class="reference external" href="https://en.wikipedia.org/wiki/Monte_Carlo_method">Monte Carlo</a> method.</p>
-</div>
-<div class="section" id="example">
-<h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="example">
+<h2>Example<a class="headerlink" href="#example" title="Permalink to this heading">¶</a></h2>
 <p>In order to demonstrate the method, the large complex numerical model
 <a class="reference external" href="https://en.wikipedia.org/wiki/Black_box">Black Box</a>
 will be replaced by a very simple model, <a class="reference external" href="https://en.wikipedia.org/wiki/Monte_Carlo_method">Monte Carlo</a>
@@ -98,8 +98,8 @@ This example will use that equation to simulate a large complex model.</p>
     <span class="k">return</span> <span class="n">effBL</span>
 </pre></div>
 </div>
-<div class="section" id="create-dataset">
-<h3>Create Dataset<a class="headerlink" href="#create-dataset" title="Permalink to this headline">¶</a></h3>
+<section id="create-dataset">
+<h3>Create Dataset<a class="headerlink" href="#create-dataset" title="Permalink to this heading">¶</a></h3>
 <p>One of the considerations when generating data for a
 <a class="reference external" href="https://en.wikipedia.org/wiki/Monte_Carlo_method">Monte Carlo</a> analysis is the selection
 of distribution type for each input parameter. In general a
@@ -119,7 +119,7 @@ This is the data that will be fitted with a
 <summary>
  Click HERE to view python code
 </summary><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span><span class="o">,</span> <span class="nn">sys</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">log10</span><span class="p">,</span> <span class="n">log</span>
 <span class="kn">import</span> <span class="nn">random</span>
 <span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span> <span class="c1"># for this example make reproducible results</span>
@@ -164,9 +164,9 @@ This is the data that will be fitted with a
     
 <span class="n">df</span> <span class="o">=</span> <span class="n">create_pandas_monte_carlo</span><span class="p">()</span>
 
-<span class="k">print</span><span class="p">(</span> <span class="n">df</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span> <span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span> <span class="n">df</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span> <span class="p">)</span>
 
-<span class="n">df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span> <span class="s1">&#39;mlp_example.csv&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="bp">False</span> <span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span> <span class="s1">&#39;mlp_example.csv&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span> <span class="p">)</span>
 </pre></div>
 </div>
 </details><p>A display of the <a class="reference external" href="https://pandas.pydata.org/docs/getting_started/overview.html">pandas</a> dataframe description is
@@ -182,9 +182,9 @@ shown below. Notice that <strong>timeOfDay</strong> is included to act as an unc
 <span class="nb">max</span>        <span class="mf">0.995327</span>      <span class="mf">3.477062</span>      <span class="mf">5.476351</span>      <span class="mf">2.300927</span>     <span class="mf">23.999201</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="select-independent-inputs">
-<h3>Select Independent Inputs<a class="headerlink" href="#select-independent-inputs" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="select-independent-inputs">
+<h3>Select Independent Inputs<a class="headerlink" href="#select-independent-inputs" title="Permalink to this heading">¶</a></h3>
 <p>While it is possible to simply use all of the complex model’s inputs as inputs to the
 <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.neural_network.MLPRegressor.html">Multi-layer Perceptron regressor</a>,
 it is probably better to select only those inputs that make a difference in the output, <span class="math notranslate nohighlight">\(\large{\eta_{bl}}\)</span>.</p>
@@ -201,9 +201,9 @@ It indicates that AreaRatio and Thrust are both very important. Pc adds some imp
 (knowing what is in the <a class="reference external" href="https://en.wikipedia.org/wiki/Black_box">Black Box</a> we should have expected those
 3 inputs, but we may not have known their order of importance)</p>
 <a class="reference internal image-reference" href="_images/mlp_example_plot_dep.png"><img alt="_images/mlp_example_plot_dep.png" src="_images/mlp_example_plot_dep.png" style="width: 49%;" /></a>
-</div>
-<div class="section" id="fit-mlp-to-dataset">
-<h3>Fit MLP to Dataset<a class="headerlink" href="#fit-mlp-to-dataset" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="fit-mlp-to-dataset">
+<h3>Fit MLP to Dataset<a class="headerlink" href="#fit-mlp-to-dataset" title="Permalink to this heading">¶</a></h3>
 <p>A small python script was used to fit the monte carlo data to a
 <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.neural_network.MLPRegressor.html">Multi-layer Perceptron regressor</a></p>
 <details style="font-size: 120%; margin: 10px 10px 10px 10px; cursor: pointer; font-style: italic; color:green">
@@ -211,9 +211,9 @@ It indicates that AreaRatio and Thrust are both very important. Pc adds some imp
  Click HERE to view python code
 </summary><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span><span class="o">,</span> <span class="nn">sys</span>
 <span class="kn">import</span> <span class="nn">pandas</span>
-<span class="kn">from</span> <span class="nn">numpy</span> <span class="k">import</span> <span class="n">log10</span>
-<span class="kn">from</span> <span class="nn">sklearn.neural_network</span> <span class="k">import</span> <span class="n">MLPRegressor</span>
-<span class="kn">from</span> <span class="nn">joblib</span> <span class="k">import</span> <span class="n">dump</span><span class="p">,</span> <span class="n">load</span>
+<span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">log10</span>
+<span class="kn">from</span> <span class="nn">sklearn.neural_network</span> <span class="kn">import</span> <span class="n">MLPRegressor</span>
+<span class="kn">from</span> <span class="nn">joblib</span> <span class="kn">import</span> <span class="n">dump</span><span class="p">,</span> <span class="n">load</span>
 
 <span class="n">csv_name</span> <span class="o">=</span> <span class="s1">&#39;mlp_example.csv&#39;</span>
 <span class="n">df</span> <span class="o">=</span> <span class="n">pandas</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span> <span class="n">csv_name</span> <span class="p">)</span>
@@ -275,9 +275,9 @@ of the correlation.:</p>
 <span class="n">correlation</span> <span class="n">coefficient</span><span class="p">:</span> <span class="mf">0.9998603014551914</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="use-the-regressor">
-<h3>Use The Regressor<a class="headerlink" href="#use-the-regressor" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="use-the-regressor">
+<h3>Use The Regressor<a class="headerlink" href="#use-the-regressor" title="Permalink to this heading">¶</a></h3>
 <p>Our black box was very well behaved and the MLP fit was excellent.
 The charts below demonstrate an excellent agreement between the original black box data
 and the MLP prediction.</p>
@@ -315,9 +315,9 @@ the <a class="reference external" href="https://en.wikipedia.org/wiki/Black_box"
 original values of the <a class="reference external" href="https://en.wikipedia.org/wiki/Black_box">Black Box</a>.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span><span class="o">,</span> <span class="nn">sys</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">numpy</span> <span class="k">import</span> <span class="n">log10</span>
-<span class="kn">from</span> <span class="nn">sklearn.neural_network</span> <span class="k">import</span> <span class="n">MLPRegressor</span>
-<span class="kn">from</span> <span class="nn">joblib</span> <span class="k">import</span> <span class="n">dump</span><span class="p">,</span> <span class="n">load</span>
+<span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">log10</span>
+<span class="kn">from</span> <span class="nn">sklearn.neural_network</span> <span class="kn">import</span> <span class="n">MLPRegressor</span>
+<span class="kn">from</span> <span class="nn">joblib</span> <span class="kn">import</span> <span class="n">dump</span><span class="p">,</span> <span class="n">load</span>
 
 <span class="n">regr</span> <span class="o">=</span> <span class="n">load</span><span class="p">(</span> <span class="s1">&#39;mlp_example.joblib&#39;</span> <span class="p">)</span> 
 
@@ -345,9 +345,9 @@ original values of the <a class="reference external" href="https://en.wikipedia.
             <span class="n">calc_black_box</span><span class="p">(</span><span class="n">Pc</span><span class="o">=</span><span class="mf">100.0</span><span class="p">,</span> <span class="n">Fvac</span><span class="o">=</span><span class="mf">1000.0</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="mf">20.0</span><span class="p">)</span> <span class="p">)</span>
 </pre></div>
 </div>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
 
 
             <div class="clearer"></div>
@@ -359,8 +359,9 @@ original values of the <a class="reference external" href="https://en.wikipedia.
             <p class="logo"><a href="index.html">
               <img class="logo" src="_static/generic_logo.svg" alt="Logo"/>
             </a></p>
-  <h3><a href="index.html">Table of Contents</a></h3>
-  <ul class="current">
+  <div>
+    <h3><a href="index.html">Table of Contents</a></h3>
+    <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="quickstart.html">QuickStart</a></li>
 <li class="toctree-l1"><a class="reference internal" href="models.html">Models</a></li>
 <li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
@@ -387,12 +388,17 @@ original values of the <a class="reference external" href="https://en.wikipedia.
 <li class="toctree-l1"><a class="reference internal" href="history.html">History</a></li>
 </ul>
 
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="sources.html"
-                        title="previous chapter">Sources</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="functions.html"
-                        title="next chapter">RocketIsp Code Functions</a></p>
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="sources.html"
+                          title="previous chapter">Sources</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="functions.html"
+                          title="next chapter">RocketIsp Code Functions</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -409,7 +415,7 @@ original values of the <a class="reference external" href="https://en.wikipedia.
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -435,7 +441,7 @@ original values of the <a class="reference external" href="https://en.wikipedia.
     </div>
     <div class="footer" role="contentinfo">
         &#169; <a href="copyright.html">Copyright</a> 2015, Charlie Taylor.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
     </div>
   </body>
 </html>
