@@ -8,12 +8,16 @@ version: 2
 # Set the version of Python and other tools you might need
 build:
   os: ubuntu-22.04
+  apt_packages:
+    - gfortran  
   tools:
     python: "3.10"
 
 # Build documentation in the docs/ directory with Sphinx
 sphinx:
   configuration: docs/conf.py
+  fail_on_warning: false
+  builder: html
 
 # We recommend specifying your dependencies to enable reproducible builds:
 # https://docs.readthedocs.io/en/stable/guides/reproducible-builds.html
