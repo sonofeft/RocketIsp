@@ -58,7 +58,8 @@ def calc_fracKin(ceaObj, Pc=500, eps=20, Rthrt=1, pcentBell=80, MR=1.5):
     return kin_module.calc_fracKin(ceaObj, Pc=Pc, eps=eps, Rthrt=Rthrt, pcentBell=pcentBell, MR=MR)
 
 
-if __name__ == "__main__":
+def dev_tests():
+    
     from rocketcea.cea_obj import CEA_Obj
     
     ceaObj = CEA_Obj(oxName='N2O4', fuelName='MMH')
@@ -78,5 +79,7 @@ if __name__ == "__main__":
     print('module_by_idD =',module_by_idD)
     
 
+if __name__ == "__main__":
+    dev_tests()
     
 

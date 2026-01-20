@@ -69,7 +69,8 @@ def calc_C1_C2( propObj, TdegR, rho, dHvap, surfTen, visc, MolWt):
 
     return C1, C2
 
-if __name__ == "__main__": #Self Test
+def dev_tests():
+    
     import sys
 
     print( '='*44 )
@@ -78,3 +79,7 @@ if __name__ == "__main__": #Self Test
     print( 'y_xymath=',0.8499157321136039 )
     print( )
     print( 'y_test should equal y_xymath above.' )
+
+if __name__ == "__main__": #Self Test
+    dev_tests()
+    

@@ -53,15 +53,10 @@ def regen_corrected_bl( eff_bl=0.98, eps=30., noz_regen_eps=1.0 ):
     return eff_bl
     
 
-if __name__ == "__main__": #Self Test
+def dev_tests( do_show=True ):
+    
     # plot NASA data and correlation on same chart.
     import pylab
-    import sys
-    do_show = True
-    if len(sys.argv) > 1:
-        if sys.argv[1] == 'suppress_show':
-            do_show = False
-    
     
     pylab.figure( figsize=(9,7) )
     
@@ -105,7 +100,7 @@ if __name__ == "__main__": #Self Test
     i = 0
     for area_ratio, pxdL, lossL in zip(nasa_epsL, pxdLL, pctLL):
         effL = [(100.0 - loss) / 100.0  for loss in lossL]
-        pylab.semilogx(pxdL, effL, '.', marker=MARKERL[i], color=COLORL[i], label='ref AR=%g'%area_ratio)
+        pylab.semilogx(pxdL, effL,  marker=MARKERL[i], color=COLORL[i], label='ref AR=%g'%area_ratio)
         i += 1
         
     i = 0
@@ -129,3 +124,6 @@ if __name__ == "__main__": #Self Test
         
         pylab.show()
 
+
+if __name__ == "__main__": #Self Test
+    dev_tests()

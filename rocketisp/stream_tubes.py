@@ -707,8 +707,9 @@ class CoreStream:
         
         return M
 
-        
-if __name__ == '__main__':
+
+def dev_tests():
+    
     from rocketisp.geometry import Geometry
     from rocketisp.efficiencies import Efficiencies
 
@@ -729,3 +730,7 @@ if __name__ == '__main__':
                  pcentFFC=14.0, ko=0.035)
     #core.reset_attr('Pc', 456)
     core.summ_print()
+        
+if __name__ == '__main__':
+    dev_tests()
+    

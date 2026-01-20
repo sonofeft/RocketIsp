@@ -16,16 +16,12 @@ def eff_pulse( pulse_sec=0.1, pulse_quality=0.8):
     return (worst_eff + pulse_quality * (best_eff - worst_eff)) / 100.0
 
 
-if __name__ == "__main__": #Self Test
-    from pylab import *
+def dev_tests( do_show=True ):
+    
+    import pylab as plt
     import sys
 
-    do_show = True
-    if len(sys.argv) > 1:
-        if sys.argv[1] == 'suppress_show':
-            do_show = False
-
-    fig, ax = subplots()
+    fig, ax = plt.subplots()
     
     for pulse_quality in [1, .75, .5, .25, 0.]:
     
@@ -37,16 +33,19 @@ if __name__ == "__main__": #Self Test
 
             effL.append( eff_pulse(pulse_sec=pw, pulse_quality=pulse_quality) )
             pw *= 1.1
-        semilogx( pwL, effL, label='pulse_quality=%g'%pulse_quality )
+        plt.semilogx( pwL, effL, label='pulse_quality=%g'%pulse_quality )
 
-    legend()
-    grid( True )
-    title('Pulsing Efficiency')
-    ylabel('Pulsing Efficiency')
-    xlabel('Pulse Width (sec)')
-    majorFormatter = FormatStrFormatter('%g')
-    gca().xaxis.set_major_formatter(majorFormatter)
+    plt.legend()
+    plt.grid( True )
+    plt.title('Pulsing Efficiency')
+    plt.ylabel('Pulsing Efficiency')
+    plt.xlabel('Pulse Width (sec)')
+    majorFormatter = plt.FormatStrFormatter('%g')
+    plt.gca().xaxis.set_major_formatter(majorFormatter)
 
     if do_show:
-        savefig( 'pulse_eff_range.png' )
-        show()
+        plt.savefig( 'pulse_eff_range.png' )
+        plt.show()
+
+if __name__ == "__main__": #Self Test
+    dev_tests()

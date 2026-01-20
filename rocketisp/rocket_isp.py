@@ -749,7 +749,8 @@ class RocketThruster(object):
         return '\n'.join(sL)
 
 
-if __name__ == '__main__':
+def dev_tests( do_show=True ):
+    
     from rocketisp.geometry import Geometry
     
     from rocketisp.injector import Injector
@@ -787,11 +788,13 @@ if __name__ == '__main__':
     
     #print( C.iprop )
     C.set_mr_to_max_ispdel()
-    if 0:
+    if do_show:
         C.plot_isp_curves( title='', png_name='', pixel_wh=None,
                           do_show=False, show_grid=True, Npts=30, edge_frac=0.97 )
         C.plot_eff_curves( title='', png_name='', pixel_wh=None,
                           do_show=True, show_grid=True, Npts=30, edge_frac=0.97 )
                       
-                      
+
+if __name__ == '__main__':
+    dev_tests()                      
     

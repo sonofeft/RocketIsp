@@ -70,13 +70,13 @@ pcBell60 = lambda x: 0.9795420864904427 - 0.0981313348710805/x - 0.0210428116582
 
 pcBellFuncL = [pcBell60, pcBell70, pcBell80, pcBell90, pcBell100, pcBell120]
 
-if __name__ == "__main__": #Self Test
+def dev_tests( do_show=True ):
+    
+    if not do_show:
+        import matplotlib
+        matplotlib.use("Agg")
     import pylab
     import sys
-    do_show = True
-    if len(sys.argv) > 1:
-        if sys.argv[1] == 'suppress_show':
-            do_show = False
     
     prop_cycle = pylab.rcParams['axes.prop_cycle']
     colors = prop_cycle.by_key()['color']
@@ -118,3 +118,6 @@ if __name__ == "__main__": #Self Test
         pylab.savefig( 'div_eff.png' )
         pylab.show()
             
+
+if __name__ == "__main__": #Self Test
+    dev_tests()

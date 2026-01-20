@@ -33,7 +33,7 @@ with self.assertRaises(KeyError):
 Test if __name__ == "__main__":
     def test__main__(self):
         # loads and runs the bottom section: if __name__ == "__main__"
-        runpy = imp.load_source('__main__', os.path.join(up_one, 'filename.py') )
+        dev_tests()
 
 
 See:

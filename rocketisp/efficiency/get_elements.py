@@ -59,7 +59,8 @@ def get_ox_fuel_pair_in_group( group_name ):
                 return oxName, fuelName
     return None, None
 
-if __name__ == "__main__":
+def dev_tests():
+    
 
     #for name in sorted( list(oxCards.keys())):
     #    print(name, get_elements(name))
@@ -78,5 +79,7 @@ if __name__ == "__main__":
     
     print('get_ox_fuel_pair_in_group( "HO" ) =',get_ox_fuel_pair_in_group( "HO" ))
             
-            
+
+if __name__ == "__main__":
+    dev_tests()            
             

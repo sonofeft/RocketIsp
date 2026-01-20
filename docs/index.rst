@@ -8,10 +8,6 @@
 RocketIsp
 =========
 
-.. note::
-
-   RocketIsp is in the early stages of development... should stabilize soon.
-
 Contents:
 
 .. toctree::

@@ -402,13 +402,16 @@ def ref_nozzle( Rup=2.0,  Rd=1.0, eps=16., theta=30.,
     
     return zContour,rContour,imaCone,angCone,i_throat
        
-
-if __name__ == "__main__": #Self Test
+def dev_tests( do_show=True ):
     
     noz = Nozzle(CR=2.5, eps=60.0, pcentBell=80.0,
                  Rt=2.54,  Nsegs=20,  
                  Rup=2.0, Rd=1.0, cham_conv_ang=30.0, Rc=1.0,
                  theta=None, exitAng=None, forceCone=0, use_huzel_angles=False)
-                 
-    noz.plot_geom( do_show=True, save_to_png=True )
     
+    if do_show:
+        noz.plot_geom( do_show=True, save_to_png=True )
+
+
+if __name__ == "__main__": #Self Test
+    dev_tests()

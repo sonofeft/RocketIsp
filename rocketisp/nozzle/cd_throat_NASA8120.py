@@ -42,7 +42,7 @@ def cd_nasa_8120( RupThroat ):
     
     return 1.0022637143996103 - 0.017059016193610527/RupThroat + 0.01277626158190225/RupThroat**2 - 0.006961923032422116/RupThroat**3
 
-if __name__=='__main__':
+def dev_tests():
     
     print( '='*44 )
     RuptestL = [0.9838418704932093, 2.304961466033897, 3.626081061574584, -0.01615812950679074, 4.626081061574585]
@@ -61,3 +61,5 @@ if __name__=='__main__':
     print( '  RuptestArr =',RuptestArr, type(RuptestArr))
     print( '='*44 )
 
+if __name__=='__main__':
+    dev_tests()

@@ -107,16 +107,9 @@ def my_interp( xval, xL, yL ):
     # ??? fill_value with tuple crashed ???
     #     return interp1d( xL , yL, kind=2, fill_value=(yL[0], yL[-1]))(xval)
 
-
-if __name__ == "__main__":
+def dev_tests( do_show=True ):
     
     import matplotlib.pyplot as plt
-    import sys
-
-    do_show = True
-    if len(sys.argv) > 1:
-        if sys.argv[1] == 'suppress_show':
-            do_show = False
 
     prop_cycle = plt.rcParams['axes.prop_cycle']
     colors = prop_cycle.by_key()['color']
@@ -171,3 +164,6 @@ if __name__ == "__main__":
         plt.savefig( 'parabolic_exit.png' )
 
         plt.show()
+    
+if __name__ == "__main__":
+    dev_tests()

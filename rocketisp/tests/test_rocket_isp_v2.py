@@ -34,7 +34,7 @@ with self.assertRaises(KeyError):
 Test if __name__ == "__main__":
     def test__main__(self):
         # loads and runs the bottom section: if __name__ == "__main__"
-        runpy = imp.load_source('__main__', os.path.join(up_one, 'filename.py') )
+        dev_tests()
 
 
 See:
@@ -45,10 +45,9 @@ for more assert options
 """
 
 import sys, os
-import imp
 
 
-from rocketisp.rocket_isp import RocketThruster
+from rocketisp.rocket_isp import RocketThruster, dev_tests
 from rocketisp.geometry import Geometry
 from rocketisp.stream_tubes import CoreStream
 from rocketisp.efficiencies import Efficiencies
@@ -89,18 +88,12 @@ class MyTest(unittest.TestCase):
 
     
     def test__main__(self):
-        old_sys_argv = list(sys.argv)
-        sys.argv = list(sys.argv)
-        sys.argv.append('suppress_show')
         
         try:
-            #runpy = imp.load_source('__main__', os.path.join(up_one, 'rocket_isp.py') )
             if 'TRAVIS' not in os.environ:
-                runpy = imp.load_source('__main__',  rocketisp.rocket_isp.__file__)
+                dev_tests( do_show=False )
         except:
             raise Exception('ERROR... failed in __main__ routine')
-        finally:
-            sys.argv = old_sys_argv
 
 
         

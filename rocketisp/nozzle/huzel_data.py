@@ -111,9 +111,8 @@ def my_interp( xval, xL, yL ):
         return yL[-1]
     
     return interp1d( xL , yL, kind=2, fill_value="extrapolate")(xval)
-    
 
-if __name__ == "__main__":
+def dev_tests():    
     
     for (eps,pcb) in [(10., 70.),(20.,80.), (40.,90.), (60.,100.), (80.,110.)]:
         
@@ -129,3 +128,6 @@ if __name__ == "__main__":
     print( entL )
     print( extL )
 
+
+if __name__ == "__main__":
+    dev_tests()

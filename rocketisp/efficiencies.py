@@ -239,8 +239,7 @@ class Efficiencies:
         
         return M
 
-if __name__ == '__main__':
-    import sys
+def dev_tests():
     
     E = Efficiencies()
     E.set_const('Div', .9 )
@@ -270,3 +269,6 @@ if __name__ == '__main__':
     print(contents)
     
     
+if __name__ == '__main__':
+
+    dev_tests()

@@ -34,7 +34,7 @@ with self.assertRaises(KeyError):
 Test if __name__ == "__main__":
     def test__main__(self):
         # loads and runs the bottom section: if __name__ == "__main__"
-        runpy = imp.load_source('__main__', os.path.join(up_one, 'filename.py') )
+        dev_tests()
 
 
 See:
@@ -45,7 +45,6 @@ for more assert options
 """
 
 import sys, os
-import imp
 
 
 from rocketisp.efficiency.eff_vaporization import fracVaporized, calc_C1_C2
@@ -62,62 +61,36 @@ import rocketisp.nozzle.six_opt_parab
 class MyTest(unittest.TestCase):
 
     def test_main_effBL_NASA_SP8120(self):
-        old_sys_argv = list(sys.argv)
-        sys.argv = list(sys.argv)
-        sys.argv.append('suppress_show')
         
         try:
-            #runpy = imp.load_source('__main__', os.path.join(up_one, 'efficiency', 'effBL_NASA_SP8120.py') )
             if 'TRAVIS' not in os.environ:
-                runpy = imp.load_source('__main__',  rocketisp.efficiency.effBL_NASA_SP8120.__file__)
-
-            
+                rocketisp.efficiency.effBL_NASA_SP8120.dev_tests( do_show=False )            
         except:
             raise Exception('ERROR... failed in __main__ routine')
-        finally:
-            sys.argv = old_sys_argv
 
     def test_main_calc_noz_kinetics(self):
-        old_sys_argv = list(sys.argv)
-        sys.argv = list(sys.argv)
-        sys.argv.append('suppress_show')
         
         try:
-            #runpy = imp.load_source('__main__', os.path.join(up_one, 'efficiency', 'calc_noz_kinetics.py') )
             if 'TRAVIS' not in os.environ:
-                runpy = imp.load_source('__main__',  rocketisp.efficiency.calc_noz_kinetics.__file__)
+                rocketisp.efficiency.calc_noz_kinetics.dev_tests()
         except:
             raise Exception('ERROR... failed in __main__ routine')
-        finally:
-            sys.argv = old_sys_argv
 
     def test_main_eff_divergence(self):
-        old_sys_argv = list(sys.argv)
-        sys.argv = list(sys.argv)
-        sys.argv.append('suppress_show')
         
         try:
-            #runpy = imp.load_source('__main__', os.path.join(up_one, 'efficiency', 'eff_divergence.py') )
             if 'TRAVIS' not in os.environ:
-                runpy = imp.load_source('__main__',  rocketisp.efficiency.eff_divergence.__file__)
+                rocketisp.efficiency.eff_divergence.dev_tests( do_show=False )
         except:
             raise Exception('ERROR... failed in __main__ routine')
-        finally:
-            sys.argv = old_sys_argv
 
     def test_main_eff_pulsing(self):
-        old_sys_argv = list(sys.argv)
-        sys.argv = list(sys.argv)
-        sys.argv.append('suppress_show')
         
         try:
-            #runpy = imp.load_source('__main__', os.path.join(up_one, 'efficiency', 'eff_pulsing.py') )
             if 'TRAVIS' not in os.environ:
-                runpy = imp.load_source('__main__',  rocketisp.efficiency.eff_pulsing.__file__)
+                rocketisp.efficiency.eff_pulsing.dev_tests( do_show=False )
         except:
             raise Exception('ERROR... failed in __main__ routine')
-        finally:
-            sys.argv = old_sys_argv
 
     
     def test_main_eff_vaporization(self):
@@ -127,46 +100,28 @@ class MyTest(unittest.TestCase):
 
 
     def test_main_get_elements(self):
-        old_sys_argv = list(sys.argv)
-        sys.argv = list(sys.argv)
-        sys.argv.append('suppress_show')
         
         try:
-            #runpy = imp.load_source('__main__', os.path.join(up_one, 'efficiency', 'get_elements.py') )
             if 'TRAVIS' not in os.environ:
-                runpy = imp.load_source('__main__',  rocketisp.efficiency.get_elements.__file__)
+                rocketisp.efficiency.get_elements.dev_tests()
         except:
             raise Exception('ERROR... failed in __main__ routine')
-        finally:
-            sys.argv = old_sys_argv
         
     def test_main_huzel_data(self):
-        old_sys_argv = list(sys.argv)
-        sys.argv = list(sys.argv)
-        sys.argv.append('suppress_show')
         
         try:
-            #runpy = imp.load_source('__main__', os.path.join(up_one, 'nozzle', 'huzel_data.py') )
             if 'TRAVIS' not in os.environ:
-                runpy = imp.load_source('__main__',  rocketisp.nozzle.huzel_data.__file__)
+                rocketisp.nozzle.huzel_data.dev_tests()
         except:
             raise Exception('ERROR... failed in __main__ routine')
-        finally:
-            sys.argv = old_sys_argv
         
     def test_main_six_opt_parab(self):
-        old_sys_argv = list(sys.argv)
-        sys.argv = list(sys.argv)
-        sys.argv.append('suppress_show')
         
         try:
-            #runpy = imp.load_source('__main__', os.path.join(up_one, 'nozzle', 'six_opt_parab.py') )
             if 'TRAVIS' not in os.environ:
-                runpy = imp.load_source('__main__',  rocketisp.nozzle.six_opt_parab.__file__)
+                rocketisp.nozzle.six_opt_parab.dev_tests( do_show=False )
         except:
             raise Exception('ERROR... failed in __main__ routine')
-        finally:
-            sys.argv = old_sys_argv
         
 
 if __name__ == '__main__':

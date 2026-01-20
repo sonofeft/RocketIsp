@@ -91,7 +91,8 @@ def is_float( fval ):
         
     return 0
 
-if __name__ == "__main__":
+def dev_tests():
+    
     '''https://stackoverflow.com/questions/736043/checking-if-a-string-can-be-converted-to-float-in-python
     Command to parse                        Is it a float?  Comment
     --------------------------------------  --------------- ------------
@@ -149,4 +150,5 @@ if __name__ == "__main__":
                   1.23456, 12.3456, 123.456, 1234.56, 12345.6, 54321.23456]:
         print( value, max_precision_float_str( value, num_decimals=3, soft_len_limit=5 ),
                rounded_number(value, significant_digits=4))
-    
+    if __name__ == "__main__":
+        dev_tests()

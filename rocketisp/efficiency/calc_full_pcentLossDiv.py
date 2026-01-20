@@ -154,8 +154,9 @@ npz_filename =  os.path.join( here, 'calc_full_pcentLossDiv.npz')
 with np.load(npz_filename, allow_pickle=True) as data:
     coefs_ = data['c']
     intercepts_ = data['i']
+
+def dev_tests():
     
-if __name__ == "__main__":
     
     #from rocketcea.cea_obj import CEA_Obj
     
@@ -164,3 +165,7 @@ if __name__ == "__main__":
     ypred = calc_pcentLossDiv( Pc=500.0, eps=20.0, Rthrt=1.0, pcentBell=80.0, gammaInit=1.2,
                        TcCham=5500.0, MolWt=20.0, RWTD=1.0 )
     print( 'ypred pcentLossDiv =', ypred )
+    
+if __name__ == "__main__":
+    dev_tests()
+    

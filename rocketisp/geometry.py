@@ -325,13 +325,9 @@ class Geometry:
             
         return M
         
-        
-if __name__ == '__main__':
-    import sys
-    do_show = True
-    if len(sys.argv) > 1:
-        if sys.argv[1] == 'suppress_show':
-            do_show = False
+
+def dev_tests( do_show=True ):
+    
 
     geom = Geometry(Rthrt=1.5,
                     CR=2.5, eps=20,  pcentBell=80, LnozInp=18,
@@ -347,3 +343,6 @@ if __name__ == '__main__':
     if 0:
         geom.plot_geometry( png_name='geometry.png', do_show=do_show, show_grid=False,
                             make_vertical=True, pixel_wh=(300,400) )
+        
+if __name__ == '__main__':
+    dev_tests()

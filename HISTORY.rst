@@ -6,6 +6,10 @@ History
 
 GitHub Log
 ----------
+* Jan 18, 2026
+    - (by: sonofeft)
+        - version 1.1.12 documentation updates
+
 * May 14, 2022
     - (by: sonofeft)
         - fixed "import sys" error

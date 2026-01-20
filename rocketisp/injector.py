@@ -786,7 +786,8 @@ modeCommentD = {'80% of 1T':'no damping required here',
                 ' 3T':'baffles + cavities OR multi-tuned cavities'}
         
 
-if __name__ == '__main__':
+def dev_tests():
+    
     from rocketisp.geometry import Geometry
     from rocketisp.stream_tubes import CoreStream
     from rocketisp.efficiencies import Efficiencies
@@ -812,4 +813,7 @@ if __name__ == '__main__':
     
     #M = I.get_model_summ_obj()
     #print( M.summ_str() )
-    
+
+if __name__ == '__main__':
+    dev_tests()
+        
