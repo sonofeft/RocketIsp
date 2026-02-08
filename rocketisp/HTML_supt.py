@@ -1,5 +1,5 @@
 import time
-from rocketisp.rocket_isp import __version__
+from rocketisp._version import __version__
 
 
 def getHead(task='Thruster Isp Calculation'):

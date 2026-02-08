@@ -1,20 +1,19 @@
 
+<!DOCTYPE html>
 
-<!doctype html>
-
-<html lang="en">
+<html lang="en" data-content_root="./">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Nozzle Efficiencies &#8212; RocketIsp 0.1.11 documentation</title>
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="_static/bizstyle.css" />
+    <title>Nozzle Efficiencies &#8212; RocketIsp 0.1.12 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/bizstyle.css?v=5283bb3d" />
     
-    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/doctools.js"></script>
-    <script src="_static/sphinx_highlight.js"></script>
-    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="_static/documentation_options.js?v=297ad043"></script>
+    <script src="_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
     <script src="_static/bizstyle.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -26,7 +25,7 @@
     <script src="_static/css3-mediaqueries.js"></script>
     <![endif]-->
   </head><body>
-    <div class="related" role="navigation" aria-label="related navigation">
+    <div class="related" role="navigation" aria-label="Related">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -41,7 +40,7 @@
         <li class="right" >
           <a href="efficiencies.html" title="Efficiencies"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">RocketIsp 0.1.11 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="index.html">RocketIsp 0.1.12 documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Nozzle Efficiencies</a></li> 
       </ul>
     </div>  
@@ -52,9 +51,9 @@
           <div class="body" role="main">
             
   <section id="nozzle-efficiencies">
-<h1>Nozzle Efficiencies<a class="headerlink" href="#nozzle-efficiencies" title="Permalink to this heading">¶</a></h1>
+<h1>Nozzle Efficiencies<a class="headerlink" href="#nozzle-efficiencies" title="Link to this heading">¶</a></h1>
 <section id="boundary-layer-loss">
-<h2>Boundary Layer Loss<a class="headerlink" href="#boundary-layer-loss" title="Permalink to this heading">¶</a></h2>
+<h2>Boundary Layer Loss<a class="headerlink" href="#boundary-layer-loss" title="Link to this heading">¶</a></h2>
 <p>The boundary layer loss is a result of not only the friction and heat transfer with the combustor wall,
 but also the change those forces make in the <strong>aerodynamic geometry</strong> as opposed to the <strong>physical geometry</strong>.
 In other words, the flow area of the throat and nozzle exit is less than the physical dimensions of the hardware
@@ -105,7 +104,7 @@ Such an analysis is conducted in the next section for
 <p>As is evident in the above graphs, the boundary layer efficiency improves with increasing chamber pressure
 and increasing throat diameter. The loss worsens with increasing area ratio.</p>
 <section id="eta-bl-monte-carlo">
-<span id="ref-to-bl-monte-carlo"></span><h3><span class="math notranslate nohighlight">\(\eta_{BL}\)</span> Monte Carlo<a class="headerlink" href="#eta-bl-monte-carlo" title="Permalink to this heading">¶</a></h3>
+<span id="ref-to-bl-monte-carlo"></span><h3><span class="math notranslate nohighlight">\(\eta_{BL}\)</span> Monte Carlo<a class="headerlink" href="#eta-bl-monte-carlo" title="Link to this heading">¶</a></h3>
 <p>In order to more fully characterize the variation in <span class="math notranslate nohighlight">\(\eta_{BL}\)</span> and identify any additional influencing parameters, a
 <a class="reference external" href="https://en.wikipedia.org/wiki/Monte_Carlo_method">Monte Carlo</a> analysis was conducted
 on a wide range of propellant combinations, chamber pressures and thrust chamber geometries. Many thousands of boundary layer
@@ -120,7 +119,8 @@ area ratio (eps) and chamber pressure (Pc); the same three parameters that appea
 <a class="reference external" href="https://ntrs.nasa.gov/search.jsp?R=19770009165">NASA SP 8120</a> .</p>
 <p>Some small gains in correlation coefficient can be attained by adding
 percent bell (pcentBell) and chamber temperature (TcCham) as independent parameters.</p>
-<a class="reference internal image-reference" href="_images/pcentlossbl_corr_params.png"><img alt="_images/pcentlossbl_corr_params.png" src="_images/pcentlossbl_corr_params.png" style="width: 49%;" /></a>
+<a class="reference internal image-reference" href="_images/pcentlossbl_corr_params.png"><img alt="_images/pcentlossbl_corr_params.png" src="_images/pcentlossbl_corr_params.png" style="width: 49%;" />
+</a>
 <p><cite>Click Image to View Fill Size</cite></p>
 <p>A comparison of <span class="math notranslate nohighlight">\(\eta_{BL}\)</span> as predicted by the <a class="reference external" href="https://ntrs.nasa.gov/search.jsp?R=19770009165">NASA SP 8120 Report</a>
 to <span class="math notranslate nohighlight">\(\eta_{BL}\)</span> predicted by the
@@ -162,7 +162,7 @@ it is based on a more recent understanding of <span class="math notranslate nohi
 </table></section>
 </section>
 <section id="divergence-efficiency">
-<h2>Divergence Efficiency<a class="headerlink" href="#divergence-efficiency" title="Permalink to this heading">¶</a></h2>
+<h2>Divergence Efficiency<a class="headerlink" href="#divergence-efficiency" title="Link to this heading">¶</a></h2>
 <p>The divergence efficiency (<span class="math notranslate nohighlight">\(\large{\eta_{div}}\)</span>) represents the difference in performance between one-dimensional
 and axisymmetric two-dimensional flow.</p>
 <p>The divergence efficiency correlation shown below-left
@@ -207,7 +207,7 @@ In other words, 10% of <span class="math notranslate nohighlight">\((1.0-\large{
 </td>
 </tr>
 </table><section id="eta-div-monte-carlo">
-<h3><span class="math notranslate nohighlight">\(\eta_{div}\)</span> Monte Carlo<a class="headerlink" href="#eta-div-monte-carlo" title="Permalink to this heading">¶</a></h3>
+<h3><span class="math notranslate nohighlight">\(\eta_{div}\)</span> Monte Carlo<a class="headerlink" href="#eta-div-monte-carlo" title="Link to this heading">¶</a></h3>
 <p>The above correlation assumed some nominal operating conditions with a nominal chamber and throat geometry.
 In order to more fully characterize the variation in <span class="math notranslate nohighlight">\(\eta_{div}\)</span> and identify any additional influencing parameters, a
 <a class="reference external" href="https://en.wikipedia.org/wiki/Monte_Carlo_method">Monte Carlo</a> analysis was conducted
@@ -225,7 +225,8 @@ and area ratio (AreaRatio); the same two parameters that appear above in
 downstream radius of curvature (RdwnThroat), throat radius (Rthrt),
 combustion temperature (TcCham), chamber pressure (Pc), molecular weight (MolWt)
 and ratio of specific heats (gamma) as independent parameters.</p>
-<a class="reference internal image-reference" href="_images/pcentlossdiv_corr_params.png"><img alt="_images/pcentlossdiv_corr_params.png" src="_images/pcentlossdiv_corr_params.png" style="width: 49%;" /></a>
+<a class="reference internal image-reference" href="_images/pcentlossdiv_corr_params.png"><img alt="_images/pcentlossdiv_corr_params.png" src="_images/pcentlossdiv_corr_params.png" style="width: 49%;" />
+</a>
 <p><cite>Click Image to View Fill Size</cite></p>
 <p>Below are two charts showing how <span class="math notranslate nohighlight">\(\eta_{div}\)</span> varies as a result of downstream radius of curvature (RdwnThroat)
 and throat radius (Rthrt). As the correlation coefficient indicated, RdwnThroat variation has more impact than Rthrt variation.</p>
@@ -255,14 +256,14 @@ and throat radius (Rthrt). As the correlation coefficient indicated, RdwnThroat 
 </table></section>
 </section>
 <section id="two-phase-efficiency">
-<h2>Two Phase Efficiency<a class="headerlink" href="#two-phase-efficiency" title="Permalink to this heading">¶</a></h2>
+<h2>Two Phase Efficiency<a class="headerlink" href="#two-phase-efficiency" title="Link to this heading">¶</a></h2>
 <p>Two phase flow loss is a result of the thermal and velocity lag between the expanding gas and particles of
 either liquid or solid.</p>
 <p>There is currently no model in <strong>RocketIsp</strong> to predict two phase efficiency, however, <span class="math notranslate nohighlight">\(eta_{TP}\)</span> can
 be input and accounted for if the user has appropriate data available.</p>
 </section>
 <section id="kinetic-efficiency">
-<h2>Kinetic Efficiency<a class="headerlink" href="#kinetic-efficiency" title="Permalink to this heading">¶</a></h2>
+<h2>Kinetic Efficiency<a class="headerlink" href="#kinetic-efficiency" title="Link to this heading">¶</a></h2>
 <p>Kinetic efficiency is a result of finite reaction rates in the nozzle.</p>
 <p>The <a class="reference external" href="https://www.grc.nasa.gov/WWW/CEAWeb/ceaHome.htm">NASA CEA code</a>
 used by <a class="reference external" href="http://rocketcea.readthedocs.org/en/latest/">RocketCEA</a>
@@ -286,9 +287,10 @@ An infinitely large engine has equilibrium chemistry.</p>
 <p>This also means that real rocket engines will typically
 have maximum Isp at a mixture ratio(MR) somewhere between the frozen peak MR and the equilibrium peak MR.
 The figure below shows this kinetics efficiency impact on MR for a small, low pressure N2O4/MMH thruster.</p>
-<a class="reference internal image-reference" href="_images/odekf_N2O4_MMH.png"><img alt="_images/odekf_N2O4_MMH.png" src="_images/odekf_N2O4_MMH.png" style="width: 60%;" /></a>
+<a class="reference internal image-reference" href="_images/odekf_N2O4_MMH.png"><img alt="_images/odekf_N2O4_MMH.png" src="_images/odekf_N2O4_MMH.png" style="width: 60%;" />
+</a>
 <section id="kinetics-groups">
-<span id="ref-to-kinetics-groups"></span><h3>Kinetics Groups<a class="headerlink" href="#kinetics-groups" title="Permalink to this heading">¶</a></h3>
+<span id="ref-to-kinetics-groups"></span><h3>Kinetics Groups<a class="headerlink" href="#kinetics-groups" title="Link to this heading">¶</a></h3>
 <p>Chemical kinetics are usually analyzed based on the element components in the combustion products.
 For example a LOX/LH2 engine is in group <strong>HO</strong> because is only has Hydrogen and Oxygen.
 A LOX/CH4 engine is in group <strong>CHO</strong> for Carbon, Hydrogen and Oxygen.
@@ -377,7 +379,7 @@ and how large throats shift further than small throats.</p>
 </tr>
 </table></section>
 <section id="frackin">
-<span id="ref-to-frackin-def"></span><h3>fracKin<a class="headerlink" href="#frackin" title="Permalink to this heading">¶</a></h3>
+<span id="ref-to-frackin-def"></span><h3>fracKin<a class="headerlink" href="#frackin" title="Link to this heading">¶</a></h3>
 <p>In the AIAA paper <a class="reference external" href="http://docshare01.docshare.tips/files/24936/249361716.pdf">Nozzle Performance Predictions Using the TDK 97 Code</a>
 by Stuart Dunn and Douglas Coats and
 the publication, <a class="reference external" href="https://arc.aiaa.org/doi/book/10.2514/4.866760">Liquid Rocket Thrust Chambers</a>
@@ -395,7 +397,7 @@ within the code it is called <strong>fracKin</strong>. This name is used to avoi
 A value of 0.0 is frozen, 1.0 is equilibrium.</p>
 </section>
 <section id="eta-kin-monte-carlo">
-<h3><span class="math notranslate nohighlight">\(\eta_{kin}\)</span> Monte Carlo<a class="headerlink" href="#eta-kin-monte-carlo" title="Permalink to this heading">¶</a></h3>
+<h3><span class="math notranslate nohighlight">\(\eta_{kin}\)</span> Monte Carlo<a class="headerlink" href="#eta-kin-monte-carlo" title="Link to this heading">¶</a></h3>
 <p>In order to characterize the kinetic efficiency, many thousands of one dimensional kinetic (ODK) analyses were run
 and the results were fitted with a <a class="reference internal" href="mlp_summary.html#ref-to-mlp-summary"><span class="std std-ref">Multi-layer Perceptron regressor</span></a>.</p>
 <p>Each <a class="reference internal" href="#ref-to-kinetics-groups"><span class="std std-ref">major species group</span></a>, created a
@@ -546,10 +548,10 @@ to be used for all propellant combinations that are members of the group.</p>
           </div>
         </div>
       </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
         <div class="sphinxsidebarwrapper">
             <p class="logo"><a href="index.html">
-              <img class="logo" src="_static/generic_logo.svg" alt="Logo"/>
+              <img class="logo" src="_static/generic_logo.svg" alt="Logo of RocketIsp"/>
             </a></p>
   <div>
     <h3><a href="index.html">Table of Contents</a></h3>
@@ -605,7 +607,7 @@ to be used for all propellant combinations that are members of the group.</p>
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
-<div id="searchbox" style="display: none" role="search">
+<search id="searchbox" style="display: none" role="search">
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
@@ -613,13 +615,13 @@ to be used for all propellant combinations that are members of the group.</p>
       <input type="submit" value="Go" />
     </form>
     </div>
-</div>
+</search>
 <script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related" role="navigation" aria-label="related navigation">
+    <div class="related" role="navigation" aria-label="Related">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -634,13 +636,13 @@ to be used for all propellant combinations that are members of the group.</p>
         <li class="right" >
           <a href="efficiencies.html" title="Efficiencies"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">RocketIsp 0.1.11 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="index.html">RocketIsp 0.1.12 documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Nozzle Efficiencies</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; <a href="copyright.html">Copyright</a> 2015, Charlie Taylor.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
+    &#169; <a href="copyright.html">Copyright</a> 2015, Charlie Taylor.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 9.1.0.
     </div>
   </body>
 </html>

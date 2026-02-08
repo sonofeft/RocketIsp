@@ -1,19 +1,18 @@
 
+<!DOCTYPE html>
 
-<!doctype html>
-
-<html lang="en">
+<html lang="en" data-content_root="./">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Models &#8212; RocketIsp 0.1.11 documentation</title>
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="_static/bizstyle.css" />
+    <title>Models &#8212; RocketIsp 0.1.12 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/bizstyle.css?v=5283bb3d" />
     
-    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/doctools.js"></script>
-    <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/documentation_options.js?v=297ad043"></script>
+    <script src="_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="_static/bizstyle.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -25,7 +24,7 @@
     <script src="_static/css3-mediaqueries.js"></script>
     <![endif]-->
   </head><body>
-    <div class="related" role="navigation" aria-label="related navigation">
+    <div class="related" role="navigation" aria-label="Related">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -40,7 +39,7 @@
         <li class="right" >
           <a href="quickstart.html" title="QuickStart"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">RocketIsp 0.1.11 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="index.html">RocketIsp 0.1.12 documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Models</a></li> 
       </ul>
     </div>  
@@ -51,7 +50,7 @@
           <div class="body" role="main">
             
   <section id="models">
-<h1>Models<a class="headerlink" href="#models" title="Permalink to this heading">¶</a></h1>
+<h1>Models<a class="headerlink" href="#models" title="Link to this heading">¶</a></h1>
 <p>In <strong>RocketIsp</strong> there are 5 objects that work together to model a liquid propellant rocket thruster:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">1</span><span class="p">)</span> <span class="n">Geometry</span>       <span class="o">-</span> <span class="n">Holds</span> <span class="nb">all</span> <span class="n">the</span> <span class="n">major</span> <span class="n">thrust</span> <span class="n">chamber</span> <span class="n">geometry</span> <span class="n">values</span>
 <span class="mi">2</span><span class="p">)</span> <span class="n">Efficiencies</span>   <span class="o">-</span> <span class="n">Holds</span> <span class="nb">all</span> <span class="n">of</span> <span class="n">the</span> <span class="n">thrust</span> <span class="n">chamber</span> <span class="n">efficiencies</span>
@@ -66,7 +65,7 @@
 Simply assuming an injector efficiency of 98 or 99 percent is usually representative of a modern injector.</p>
 </div>
 <section id="geometry">
-<h2>Geometry<a class="headerlink" href="#geometry" title="Permalink to this heading">¶</a></h2>
+<h2>Geometry<a class="headerlink" href="#geometry" title="Link to this heading">¶</a></h2>
 <p>The Geometry object holds all the major thrust chamber geometry values.
 The code snippet below shows how to create a Geometry object, and the definition of all the
 parameters.</p>
@@ -76,7 +75,7 @@ parameters.</p>
 <p>Note that many of the parameters are dimensionless, such that if the throat radius (Rthrt) is changed,
 the rest of the geometry will scale appropriately.</p>
 </div>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">rocketisp.geometry</span> <span class="kn">import</span> <span class="n">Geometry</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">rocketisp.geometry</span><span class="w"> </span><span class="kn">import</span> <span class="n">Geometry</span>
 <span class="n">G</span> <span class="o">=</span> <span class="n">Geometry</span><span class="p">(</span> <span class="n">Rthrt</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">CR</span><span class="o">=</span><span class="mf">2.5</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>  <span class="n">pcentBell</span><span class="o">=</span><span class="mi">80</span><span class="p">,</span> <span class="n">LnozInp</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
               <span class="n">RupThroat</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">RdwnThroat</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">RchmConv</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">cham_conv_deg</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span>
               <span class="n">LchmOvrDt</span><span class="o">=</span><span class="mf">3.0</span><span class="p">,</span> <span class="n">LchmMin</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">LchamberInp</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
@@ -99,10 +98,11 @@ the rest of the geometry will scale appropriately.</p>
 <li><p><strong>LchamberInp</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a>) -- in, user input value of chamber length (will override all other entries)</p></li>
 </ul>
 </dd>
-</dl><a class="reference internal image-reference" href="_images/chamber_geometry.jpg" id="ref-to-geom-image"><img alt="_images/chamber_geometry.jpg" id="ref-to-geom-image" src="_images/chamber_geometry.jpg" style="width: 69%;" /></a>
+</dl><a class="reference internal image-reference" href="_images/chamber_geometry.jpg" id="ref-to-geom-image"><img alt="_images/chamber_geometry.jpg" id="ref-to-geom-image" src="_images/chamber_geometry.jpg" style="width: 69%;" />
+</a>
 <p>The Geometry object can be used in a stand-alone manner to generate a thruster inner profile.
 The following script will create the image shown below.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">rocketisp.geometry</span> <span class="kn">import</span> <span class="n">Geometry</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">rocketisp.geometry</span><span class="w"> </span><span class="kn">import</span> <span class="n">Geometry</span>
 
 <span class="c1"># SSME Geometry</span>
 <span class="n">G</span> <span class="o">=</span> <span class="n">Geometry</span><span class="p">(</span><span class="n">Rthrt</span><span class="o">=</span><span class="mf">5.1527</span><span class="p">,</span> <span class="n">CR</span><span class="o">=</span><span class="mf">3.0</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="mf">77.5</span><span class="p">,</span> <span class="n">LnozInp</span><span class="o">=</span><span class="mi">121</span><span class="p">,</span>
@@ -115,7 +115,7 @@ The following script will create the image shown below.</p>
 <img alt="_images/ssme_geom.png" src="_images/ssme_geom.png" />
 </section>
 <section id="efficiencies">
-<h2>Efficiencies<a class="headerlink" href="#efficiencies" title="Permalink to this heading">¶</a></h2>
+<h2>Efficiencies<a class="headerlink" href="#efficiencies" title="Link to this heading">¶</a></h2>
 <p>The various efficiencies that apply to a liquid propellant thruster are discussed at <a class="reference internal" href="jannaf.html#ref-to-jannaf-standard"><span class="std std-ref">JANNAF Standard</span></a>
 and <a class="reference internal" href="efficiencies.html#ref-to-efficiencies"><span class="std std-ref">Efficiencies</span></a>.</p>
 <p>The Efficiencies object collects and coordinates the individual efficiencies.</p>
@@ -130,7 +130,7 @@ it combines the nozzle and chamber efficiencies into an overall Isp efficiency.<
 <p>The most simple usage is shown in the python scripts below.</p>
 <p>If the user would like to set the nozzle and chamber efficiencies to a constant,
 the following script can be employed.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">rocketisp.efficiencies</span> <span class="kn">import</span> <span class="n">Efficiencies</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">rocketisp.efficiencies</span><span class="w"> </span><span class="kn">import</span> <span class="n">Efficiencies</span>
 
 <span class="n">E</span> <span class="o">=</span> <span class="n">Efficiencies</span><span class="p">(</span> <span class="n">ERE</span><span class="o">=</span><span class="mf">0.98</span><span class="p">,</span> <span class="n">Noz</span><span class="o">=</span><span class="mf">0.97</span> <span class="p">)</span>
 <span class="n">E</span><span class="o">.</span><span class="n">summ_print</span><span class="p">()</span>
@@ -145,7 +145,7 @@ the following script can be employed.</p>
 </pre></div>
 </div>
 <p>Or perhaps simply set an overall Isp efficiency.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">rocketisp.efficiencies</span> <span class="kn">import</span> <span class="n">Efficiencies</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">rocketisp.efficiencies</span><span class="w"> </span><span class="kn">import</span> <span class="n">Efficiencies</span>
 
 <span class="n">E</span> <span class="o">=</span> <span class="n">Efficiencies</span><span class="p">(</span> <span class="n">Isp</span><span class="o">=</span><span class="mf">0.95</span> <span class="p">)</span>
 <span class="n">E</span><span class="o">.</span><span class="n">summ_print</span><span class="p">()</span>
@@ -181,7 +181,7 @@ output is typical.</p>
 </div>
 </section>
 <section id="corestream">
-<h2>CoreStream<a class="headerlink" href="#corestream" title="Permalink to this heading">¶</a></h2>
+<h2>CoreStream<a class="headerlink" href="#corestream" title="Link to this heading">¶</a></h2>
 <p>The CoreStream object assumes that all efficiencies have been set, either by the user
 or computed by an efficiency model.  It uses those efficiencies along with the Geometry object
 to calculate overall thrust, Isp and flow rates.</p>
@@ -219,9 +219,9 @@ to calculate overall thrust, Isp and flow rates.</p>
 however, a CoreStream object is much more useful when controlled by a RocketThruster object.</p>
 <p>In this simple, isolated CoreStream approach, the efficiencies of the chamber and nozzle
 are fixed values (ERE=0.98, Noz=0.97).</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">rocketisp.geometry</span> <span class="kn">import</span> <span class="n">Geometry</span>
-<span class="kn">from</span> <span class="nn">rocketisp.efficiencies</span> <span class="kn">import</span> <span class="n">Efficiencies</span>
-<span class="kn">from</span> <span class="nn">rocketisp.stream_tubes</span> <span class="kn">import</span> <span class="n">CoreStream</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">rocketisp.geometry</span><span class="w"> </span><span class="kn">import</span> <span class="n">Geometry</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">rocketisp.efficiencies</span><span class="w"> </span><span class="kn">import</span> <span class="n">Efficiencies</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">rocketisp.stream_tubes</span><span class="w"> </span><span class="kn">import</span> <span class="n">CoreStream</span>
 
 <span class="n">C</span> <span class="o">=</span> <span class="n">CoreStream</span><span class="p">(</span> <span class="n">geomObj</span><span class="o">=</span><span class="n">Geometry</span><span class="p">(</span><span class="n">eps</span><span class="o">=</span><span class="mi">35</span><span class="p">),</span>
                 <span class="n">effObj</span><span class="o">=</span><span class="n">Efficiencies</span><span class="p">(</span><span class="n">ERE</span><span class="o">=</span><span class="mf">0.98</span><span class="p">,</span> <span class="n">Noz</span><span class="o">=</span><span class="mf">0.97</span><span class="p">),</span>
@@ -243,9 +243,9 @@ are fixed values (ERE=0.98, Noz=0.97).</p>
 <strong>RocketIsp</strong> expects the nozzle to separate at any area ratio above 14.5:1.</p>
 </section>
 <section id="barrierstream">
-<h2>BarrierStream<a class="headerlink" href="#barrierstream" title="Permalink to this heading">¶</a></h2>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">BarrierStream</span><span class="p">:</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">coreObj</span><span class="p">,</span> <span class="n">pcentFFC</span><span class="o">=</span><span class="mf">10.0</span><span class="p">,</span> <span class="n">ko</span><span class="o">=</span><span class="mf">0.035</span><span class="p">):</span>
+<h2>BarrierStream<a class="headerlink" href="#barrierstream" title="Link to this heading">¶</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">BarrierStream</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">coreObj</span><span class="p">,</span> <span class="n">pcentFFC</span><span class="o">=</span><span class="mf">10.0</span><span class="p">,</span> <span class="n">ko</span><span class="o">=</span><span class="mf">0.035</span><span class="p">):</span>
 </pre></div>
 </div>
 <p>If fuel film cooling (FFC) has been specified with the <strong>CoreStream</strong> pcentFFC input, then a <strong>BarrierStream</strong>
@@ -265,7 +265,7 @@ Note that <a class="reference external" href="https://ntrs.nasa.gov/citations/19
 recommends using test data to determine the best value.</p>
 </section>
 <section id="rocketthruster">
-<span id="ref-to-rocketthruster"></span><h2>RocketThruster<a class="headerlink" href="#rocketthruster" title="Permalink to this heading">¶</a></h2>
+<span id="ref-to-rocketthruster"></span><h2>RocketThruster<a class="headerlink" href="#rocketthruster" title="Link to this heading">¶</a></h2>
 <p>The RocketIsp object coordinates the Geometry, Efficiencies, CoreStream and Injector objects.</p>
 <p>It does so in order to
 calculate delivered Isp for liquid rocket thrust chambers by the <a class="reference internal" href="jannaf.html#ref-to-jannaf-standard"><span class="std std-ref">simplified JANNAF Standard</span></a> method.</p>
@@ -296,10 +296,10 @@ Note that a <strong>CoreStream</strong> object and, optionally, an <strong>Injec
 a constant 99% for the chamber efficiency.</p>
 <p>Use the method <strong>scale_Rt_to_Thrust</strong> in order to scale the geometry to give 6000 lbf
 of vacuum thrust (i.e. Pamb=0.0).</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">rocketisp.geometry</span> <span class="kn">import</span> <span class="n">Geometry</span>
-<span class="kn">from</span> <span class="nn">rocketisp.efficiencies</span> <span class="kn">import</span> <span class="n">Efficiencies</span>
-<span class="kn">from</span> <span class="nn">rocketisp.stream_tubes</span> <span class="kn">import</span> <span class="n">CoreStream</span>
-<span class="kn">from</span> <span class="nn">rocketisp.rocket_isp</span> <span class="kn">import</span> <span class="n">RocketThruster</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">rocketisp.geometry</span><span class="w"> </span><span class="kn">import</span> <span class="n">Geometry</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">rocketisp.efficiencies</span><span class="w"> </span><span class="kn">import</span> <span class="n">Efficiencies</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">rocketisp.stream_tubes</span><span class="w"> </span><span class="kn">import</span> <span class="n">CoreStream</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">rocketisp.rocket_isp</span><span class="w"> </span><span class="kn">import</span> <span class="n">RocketThruster</span>
 
 <span class="n">C</span> <span class="o">=</span> <span class="n">CoreStream</span><span class="p">(</span> <span class="n">geomObj</span><span class="o">=</span><span class="n">Geometry</span><span class="p">(</span><span class="n">eps</span><span class="o">=</span><span class="mi">35</span><span class="p">),</span>
                 <span class="n">effObj</span><span class="o">=</span><span class="n">Efficiencies</span><span class="p">(</span><span class="n">ERE</span><span class="o">=</span><span class="mf">0.99</span><span class="p">),</span>
@@ -425,7 +425,7 @@ of vacuum thrust (i.e. Pamb=0.0).</p>
 </div>
 </section>
 <section id="injector">
-<span id="ref-to-injector"></span><h2>Injector<a class="headerlink" href="#injector" title="Permalink to this heading">¶</a></h2>
+<span id="ref-to-injector"></span><h2>Injector<a class="headerlink" href="#injector" title="Link to this heading">¶</a></h2>
 <p>The Injector object is more complex than the other 4 main objects (Geometry, Efficiencies, CoreStream and RocketThruster).
 Choices made for the Injector affect feed system pressures and pressure drops, chamber acoustics, combustion stability, size and type of
 injector elements, injection velocities and the combustor efficiencies for vaporization and propellant mixing within an element as well as
@@ -472,10 +472,10 @@ pressure taken from the CoreStream object.</p>
           </div>
         </div>
       </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
         <div class="sphinxsidebarwrapper">
             <p class="logo"><a href="index.html">
-              <img class="logo" src="_static/generic_logo.svg" alt="Logo"/>
+              <img class="logo" src="_static/generic_logo.svg" alt="Logo of RocketIsp"/>
             </a></p>
   <div>
     <h3><a href="index.html">Table of Contents</a></h3>
@@ -522,7 +522,7 @@ pressure taken from the CoreStream object.</p>
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
-<div id="searchbox" style="display: none" role="search">
+<search id="searchbox" style="display: none" role="search">
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
@@ -530,13 +530,13 @@ pressure taken from the CoreStream object.</p>
       <input type="submit" value="Go" />
     </form>
     </div>
-</div>
+</search>
 <script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related" role="navigation" aria-label="related navigation">
+    <div class="related" role="navigation" aria-label="Related">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -551,13 +551,13 @@ pressure taken from the CoreStream object.</p>
         <li class="right" >
           <a href="quickstart.html" title="QuickStart"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">RocketIsp 0.1.11 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="index.html">RocketIsp 0.1.12 documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Models</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; <a href="copyright.html">Copyright</a> 2015, Charlie Taylor.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
+    &#169; <a href="copyright.html">Copyright</a> 2015, Charlie Taylor.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 9.1.0.
     </div>
   </body>
 </html>

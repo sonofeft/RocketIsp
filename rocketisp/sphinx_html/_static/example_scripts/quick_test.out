@@ -1,0 +1,112 @@
+============================== RocketIsp Thruster ==============================
+................................. Geometry .................................
+..................................  Input ..................................
+cham_conv_deg = 30.00 deg  half angle of conical convergent section
+           CR =   2.5      chamber contraction ratio (Ainj / Athroat)
+          eps =    20      nozzle area ratio (Aexit / Athroat)
+  LchamberInp =  None  in  user input value of chamber length (will override all other entries)
+      LchmMin = 1.000  in  minimum chamber length (will override LchmOvrDt)
+                           (2.540 cm, 0.083 ft)
+    LchmOvrDt =     3      ratio of chamber length to throat diameter (Lcham / Dthrt)
+      LnozInp =  None  in  user input nozzle length (will override pcentBell)
+    pcentBell =    80      nozzle percent bell (Lnoz / L_15deg_cone)
+     RchmConv =     1      radius of curvature at start of convergent section (Rconv / Rthrt)
+   RdwnThroat =     1      radius of curvature just downstream of throat (Rdownstream / Rthrt)
+        Rthrt = 1.000  in  throat radius
+                           (2.540 cm, 0.083 ft)
+    RupThroat =   1.5      radius of curvature just upstream of throat (Rupstream / Rthrt)
+............................................................................
+...............................  Output ....................................
+          Ainj =  7.854 in**2  area of injector
+                               (50.671 cm**2)
+            At =  3.142 in**2  throat area
+                               (20.268 cm**2)
+         Dexit =  8.944    in  nozzle exit diameter
+                               (22.718 cm, 0.745 ft)
+          Dinj =  3.162    in  diameter of injector
+                               (8.032 cm, 0.264 ft)
+         Dthrt =  2.000    in  throat diameter
+                               (5.080 cm, 0.167 ft)
+entrance_angle =  31.52   deg  nozzle initial expansion angle
+    exit_angle =   8.84   deg  nozzle exit angle
+    Lcham_conv =  1.676    in  length of convergent section of chamber
+                               (4.258 cm, 0.140 ft)
+     Lcham_cyl =  4.324    in  length of cylindrical section of chamber
+                               (10.982 cm, 0.360 ft)
+          Lnoz = 10.367    in  nozzle length
+                               (26.331 cm, 0.864 ft)
+        Ltotal = 16.367    in  nozzle + chamber length
+                               (41.571 cm, 1.364 ft)
+          Rinj =  1.581    in  radius of injector
+                               (4.016 cm, 0.132 ft)
+         Vcham =   42.9 in**3  approximate chamber volume
+                               (702.6 cm**3)
+............................................................................
+........................ N2O4/MMH Core Stream Tube .........................
+..................................  Input ..................................
+   adjCstarODE =        1       multiplier on NASA CEA code value of cstar ODE (default is 1.0)
+   adjIspIdeal =        1       multiplier on NASA CEA code value of Isp ODE (default is 1.0)
+      CdThroat = 0.990012       Cd of throat (RocketThruster object may override)
+                                ((MLP fit))
+      fuelName =      MMH       name of fuel (e.g. MMH, LH2)
+ignore_noz_sep =        0       flag to force nozzle flow separation to be ignored (USE WITH CAUTION)
+        MRcore =      1.9       mixture ratio of core flow (ox flow rate / fuel flow rate)
+        oxName =     N2O4       name of oxidizer (e.g. N2O4, LOX)
+          Pamb =     0.00 psia  ambient pressure (for example sea level is 14.7 psia)
+                                (0.00 MPa, 0.00 atm, 0.00 bar)
+            Pc =    500.0 psia  chamber pressure
+                                (3.45 MPa, 34.02 atm, 34.47 bar)
+............................................................................
+...............................  Output ....................................
+   CfAmbDel = 1.76084          delivered ambient thrust coefficient
+   CfVacDel = 1.76084          delivered vacuum thrust coefficient
+ CfVacIdeal = 1.82576          ideal vacuum thrust coefficient
+   cstarERE =  5743.3    ft/s  delivered core cstar
+                               (1750.5 m/s)
+   cstarODE =  5743.3    ft/s  core ideal cstar
+                               (1750.5 m/s)
+   FvacCore =  2765.9     lbf  vacuum thrust due to core stream tube
+                               (12303.4 N)
+  FvacTotal =  2765.9     lbf  total vacuum thrust
+                               (12303.4 N)
+   gammaChm = 1.14849          core gas ratio of specific heats (Cp/Cv)
+     IspDel =  317.49     sec  <=== thruster delivered vacuum Isp ===>
+                               (3113.53 N-sec/kg, 3.11 km/sec)
+IspDel_core =  317.49     sec  delivered Isp of core stream tube
+                               (3113.53 N-sec/kg, 3.11 km/sec)
+     IspODE =  325.91     sec  core one dimensional equilibrium Isp
+                               (3196.07 N-sec/kg, 3.20 km/sec)
+     IspODF =  311.72     sec  core frozen Isp
+                               (3056.94 N-sec/kg, 3.06 km/sec)
+     IspODK =  322.47     sec  core one dimensional kinetic Isp
+                               (3162.36 N-sec/kg, 3.16 km/sec)
+ MRthruster =     1.9          total thruster mixture ratio')
+      MWchm =  21.725 g/gmole  core gas molecular weight
+      Pexit =  2.4378    psia  nozzle exit pressure
+                               (0.02 MPa, 0.17 atm, 0.17 bar)
+      TcODE =  5879.0    degR  ideal core gas temperature
+                               (3266.1 degK, 2993.0 degC, 5419.4 degF)
+     wdotFl =   3.004   lbm/s  total fuel flow rate
+                               (1.363 kg/s)
+     wdotOx =   5.708   lbm/s  total oxidizer flow rate
+                               (2.589 kg/s)
+    wdotTot =   8.712   lbm/s  total propellant flow rate (ox+fuel)
+                               (3.952 kg/s)
+............................................................................
+                             Efficiencies                             
+                                Output                                
+Isp = 0.97417    Overall Isp Efficiency
+Noz = 0.97417    Nozzle Efficiency
+ERE = 1.00000    Energy Release Efficiency of Chamber
+..Nozzle..
+Div = 0.99100    (simple fit eps=20, %bell=80) Divergence Efficiency of Nozzle
+Kin = 0.98945    (MLP fit) Kinetic Efficiency of Nozzle
+ BL = 0.99350    (MLP fit) Boundary Layer Efficiency of Nozzle
+                                                                      
+                  Ignored Efficiencies                  
+        TP: Two Phase Efficiency of Nozzle
+        Mix: Inter-Element Mixing Efficiency of Injector
+        Em: Intra-Element Mixing Efficiency of Injector
+        Vap: Vaporization Efficiency of Injector
+        HL: Heat Loss Efficiency of Chamber
+                                                        

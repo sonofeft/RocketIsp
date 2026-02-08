@@ -14,7 +14,7 @@ cd .\docs
 D:\py_versions\Python314_64\Scripts\sphinx-build.exe -b html -d _build/doctrees  . _build/html
 cd ..
 
-xcopy /S .\docs\_build\html .\rocketcea\sphinx_html /y
+xcopy /S .\docs\_build\html .\rocketisp\sphinx_html /y
 
 REM --- Restore PATH before exiting ---
 set "PATH=%ORIG_PATH%"

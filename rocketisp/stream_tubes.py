@@ -67,15 +67,16 @@ class BarrierStream:
     :return: BarrierStream object
     :rtype: BarrierStream
 
-    :ivar MRbarrier: barrier mixture ratio
-    :ivar MRwall: mixture ratio at wall
-    :ivar Twallgas: degR, temperature of gas at wall
+    :ivar MRbarrier: barrier mixture ratio at throat
+    :ivar MRwall: mixture ratio at throat wall
+    :ivar Twallgas: degR, temperature of gas at throat wall (cooler upstream)
     :ivar TcODE_b: degR, average ideal ODE temperature of barrier gas
     :ivar WentrOvWcool: ratio of entrained flow rate to FFC flow rate
     :ivar IspDel_b: sec, delivered vacuum barrier Isp
     :ivar IspODF_b: sec, ideal frozen barrier Isp
     :ivar IspODK_b: sec, vacuum kinetic Isp of barrier
     :ivar fracKin_b: fraction of kinetic completion in barrier
+    :ivar fracEntr: fraction of core flow entrained into barrier
     :ivar IspODE_b:  sec. ideal equilibrium barrier Isp
     :ivar cstarERE_b: ft/s, delivered cstar
     :ivar cstarODE_b: ft/s, ideal equilibrium cstar    
@@ -114,6 +115,7 @@ class BarrierStream:
         
         # an approximation for equation 27 in COMBUSTION EFFECTS ON FILM COOLING, page 20
         fracEntr = 2.0*(LprimeOvRcham*self.ko) - (LprimeOvRcham*self.ko)**2
+        fracEntr = min(fracEntr, 1.0) # don't allow more than 100% entrainment
         
         fracFFC = self.pcentFFC / 100.0
         MReng = self.coreObj.MRcore * (1.0 - fracFFC)
@@ -140,6 +142,8 @@ class BarrierStream:
         wdotOxEntr = wdotOxCoreInj * fracEntr
         
         self.MRbarrier = wdotOxEntr / (wdotFuelEntr + wdotFFC)
+
+        self.fracEntr = fracEntr
 
         #print('self.WentrOvWcool=%g'%self.WentrOvWcool,'    fracEntr=%g'%fracEntr, 
         #      '   MRcore=%g'%self.coreObj.MRcore, '    effnessFC=%g'%self.effnessFC, 
@@ -408,10 +412,15 @@ class CoreStream:
         if name in ['oxName','fuelName']:
             # make CEA object
             self.ceaObj = CEA_Obj(oxName=self.oxName, fuelName=self.fuelName)
-
             
         if re_evaluate:
             self.evaluate()
+
+    def set_new_pcentFFC(self, pcentFFC=10.0):
+
+        # leave ko at initial value
+        self.barrierObj = BarrierStream(self, pcentFFC=pcentFFC, ko=self.barrierObj.ko)
+        self.evaluate()
     
     def calc_cea_perf_params(self):
         """Calc basic Isp values from CEA and calc implied IspODK from current effKin value."""
@@ -519,7 +528,7 @@ class CoreStream:
         
         self.IspDelPulse = self.IspDel* self.effObj('Pulse')
         
-        if self.add_barrier: # if barrier is analysed, assume it is in addition to user input effERE
+        if self.add_barrier: # if barrier is analyzed, assume it is in addition to user input effERE
             effFFC = self.IspDel / self.IspDel_core
             self.effObj.set_value('FFC', effFFC, value_src='barrier calc' )
         
@@ -730,7 +739,10 @@ def dev_tests():
                  pcentFFC=14.0, ko=0.035)
     #core.reset_attr('Pc', 456)
     core.summ_print()
+
+    print( '='*33, 'Testing new pcentFFC', '='*33 )
+    core.set_new_pcentFFC( pcentFFC=10.0 )
+    core.summ_print()
         
 if __name__ == '__main__':
     dev_tests()
-    

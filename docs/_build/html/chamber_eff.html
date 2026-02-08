@@ -1,20 +1,19 @@
 
+<!DOCTYPE html>
 
-<!doctype html>
-
-<html lang="en">
+<html lang="en" data-content_root="./">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Chamber Efficiencies &#8212; RocketIsp 0.1.11 documentation</title>
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="_static/bizstyle.css" />
+    <title>Chamber Efficiencies &#8212; RocketIsp 0.1.12 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/bizstyle.css?v=5283bb3d" />
     
-    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/doctools.js"></script>
-    <script src="_static/sphinx_highlight.js"></script>
-    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="_static/documentation_options.js?v=297ad043"></script>
+    <script src="_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
     <script src="_static/bizstyle.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -26,7 +25,7 @@
     <script src="_static/css3-mediaqueries.js"></script>
     <![endif]-->
   </head><body>
-    <div class="related" role="navigation" aria-label="related navigation">
+    <div class="related" role="navigation" aria-label="Related">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -41,7 +40,7 @@
         <li class="right" >
           <a href="nozzle_eff.html" title="Nozzle Efficiencies"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">RocketIsp 0.1.11 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="index.html">RocketIsp 0.1.12 documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Chamber Efficiencies</a></li> 
       </ul>
     </div>  
@@ -52,9 +51,9 @@
           <div class="body" role="main">
             
   <section id="chamber-efficiencies">
-<h1>Chamber Efficiencies<a class="headerlink" href="#chamber-efficiencies" title="Permalink to this heading">¶</a></h1>
+<h1>Chamber Efficiencies<a class="headerlink" href="#chamber-efficiencies" title="Link to this heading">¶</a></h1>
 <section id="mixing-efficiency">
-<h2>Mixing Efficiency<a class="headerlink" href="#mixing-efficiency" title="Permalink to this heading">¶</a></h2>
+<h2>Mixing Efficiency<a class="headerlink" href="#mixing-efficiency" title="Link to this heading">¶</a></h2>
 <p><strong>RocketIsp</strong> considers two types of mixing efficiency,
 the mixing between adjacent elements (Mixing Angle) and
 the mixing within a given injector element (Rupe <span class="math notranslate nohighlight">\(E_m\)</span>).
@@ -62,7 +61,7 @@ In <strong>RocketIsp</strong> those two types are handled by a mixing angle mode
 <p>Both mixing models require the use of an <a class="reference internal" href="models.html#ref-to-injector"><span class="std std-ref">Injector model</span></a>
 in order to characterize the injector face and the individual elements.</p>
 <section id="mixing-angle">
-<h3>Mixing Angle<a class="headerlink" href="#mixing-angle" title="Permalink to this heading">¶</a></h3>
+<h3>Mixing Angle<a class="headerlink" href="#mixing-angle" title="Link to this heading">¶</a></h3>
 <p>The adjacent element mixing efficiency model is based on the “Mixing Angle”, defined as the
 angle between injector face elements as measured from the throat plane.
 (Note that the angle is measured from edge-to-edge of each element, not center-to-center)</p>
@@ -76,7 +75,8 @@ the mixing efficiency is:</p>
 <p><span class="math notranslate nohighlight">\(\Large{\eta_{mix} = 1 - 0.01 * ( \alpha_{deg} / 2 )^2}\)</span></p>
 <p>The chart below shows a typical inter-element mixing loss, as calculated by the
 “Two Degree Rule” used in <strong>RocketIsp</strong>.</p>
-<a class="reference internal image-reference" href="_images/mixing_eff.png"><img alt="_images/mixing_eff.png" src="_images/mixing_eff.png" style="width: 49%;" /></a>
+<a class="reference internal image-reference" href="_images/mixing_eff.png"><img alt="_images/mixing_eff.png" src="_images/mixing_eff.png" style="width: 49%;" />
+</a>
 <p>Notice that the chart uses “element density”,
 defined as the total number of elements divided by the injector face area:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">elemDens</span> <span class="o">=</span> <span class="n">Nelements</span> <span class="o">/</span> <span class="n">Ainj</span>
@@ -94,7 +94,7 @@ there are manufacturing and combustion stability limits on how high element dens
 </div>
 </section>
 <section id="rupe-e-m">
-<h3>Rupe <span class="math notranslate nohighlight">\(E_m\)</span><a class="headerlink" href="#rupe-e-m" title="Permalink to this heading">¶</a></h3>
+<h3>Rupe <span class="math notranslate nohighlight">\(E_m\)</span><a class="headerlink" href="#rupe-e-m" title="Link to this heading">¶</a></h3>
 <p>In 1953, Rupe published the paper
 <a class="reference external" href="https://apps.dtic.mil/sti/citations/AD0028860">The Liquid-Phase Mixing of a Pair of Impinging Streams</a>
 that measured the effectiveness of mixing in a pair of impinging streams
@@ -113,7 +113,8 @@ discusses possible approaches to using <span class="math notranslate nohighlight
 The chart below, Figure 4 from appendix C, suggests the use of a cumulative mass fraction distribution chart
 as a way to characterize average high and low oxidizer mass fraction (i.e. mixture ratio)
 as a function of <span class="math notranslate nohighlight">\(E_m\)</span>.</p>
-<a class="reference internal image-reference" href="_images/Rupe_Nickerson_Em.jpg"><img alt="_images/Rupe_Nickerson_Em.jpg" src="_images/Rupe_Nickerson_Em.jpg" style="width: 49%;" /></a>
+<a class="reference internal image-reference" href="_images/Rupe_Nickerson_Em.jpg"><img alt="_images/Rupe_Nickerson_Em.jpg" src="_images/Rupe_Nickerson_Em.jpg" style="width: 49%;" />
+</a>
 <p>This idea of an average high and low mixture ratio, each a function of <span class="math notranslate nohighlight">\(E_m\)</span>,
 is used in <strong>RocketIsp</strong> to calculate the Isp efficiency <span class="math notranslate nohighlight">\(\large{\eta_{E_m}}\)</span>.
 The approach is defined in the
@@ -148,7 +149,7 @@ For preliminary design purposes, think of mixing factor, <span class="math notra
 </div>
 </section>
 <section id="e-m-and-mr-opt">
-<span id="ref-to-emmropt"></span><h3><span class="math notranslate nohighlight">\(E_m\)</span> and <span class="math notranslate nohighlight">\(MR_{opt}\)</span><a class="headerlink" href="#e-m-and-mr-opt" title="Permalink to this heading">¶</a></h3>
+<span id="ref-to-emmropt"></span><h3><span class="math notranslate nohighlight">\(E_m\)</span> and <span class="math notranslate nohighlight">\(MR_{opt}\)</span><a class="headerlink" href="#e-m-and-mr-opt" title="Link to this heading">¶</a></h3>
 <p>One consequence of a mixture ratio distribution due to <span class="math notranslate nohighlight">\(E_m\)</span> is that a
 real engine’s optimum mixture ratio
 will be moved away from the steeper side of an Isp vs mixture ratio curve.</p>
@@ -156,11 +157,12 @@ will be moved away from the steeper side of an Isp vs mixture ratio curve.</p>
 is affected by an injector element’s ability
 to mix propellants. A perfect injector will tend to optimize near the ODK optimum,
 real injectors with wider MR distributions will optimize at a more fuel rich mixture ratio.</p>
-<a class="reference internal image-reference" href="_images/effEm_Isp_impact.png"><img alt="_images/effEm_Isp_impact.png" src="_images/effEm_Isp_impact.png" style="width: 49%;" /></a>
+<a class="reference internal image-reference" href="_images/effEm_Isp_impact.png"><img alt="_images/effEm_Isp_impact.png" src="_images/effEm_Isp_impact.png" style="width: 49%;" />
+</a>
 </section>
 </section>
 <section id="vaporization-efficiency">
-<h2>Vaporization Efficiency<a class="headerlink" href="#vaporization-efficiency" title="Permalink to this heading">¶</a></h2>
+<h2>Vaporization Efficiency<a class="headerlink" href="#vaporization-efficiency" title="Link to this heading">¶</a></h2>
 <p>The vaporization efficiency model in <strong>RocketIsp</strong> is based on the report
 <a class="reference external" href="https://www.google.com/books/edition/Propellant_Vaporization_as_a_Design_Crit/Jt4QAQAAIAAJ?hl=en&amp;gbpv=1">Propellant Vaporization as a Design Criterion for Rocket-Engine Combustion Chambers</a>
 by Richard J. Priem and Marcus F. Heidmann.</p>
@@ -189,7 +191,7 @@ to (Isp at core MR).</p>
 </div>
 </section>
 <section id="fuel-film-cooling">
-<h2>Fuel Film Cooling<a class="headerlink" href="#fuel-film-cooling" title="Permalink to this heading">¶</a></h2>
+<h2>Fuel Film Cooling<a class="headerlink" href="#fuel-film-cooling" title="Link to this heading">¶</a></h2>
 <p>Estimating the performance loss due to fuel film cooling (FFC) reduces down to estimating the amount of
 core stream tube combustion gas that is entrained into the barrier stream tube.</p>
 <p>The model for calculating the entrained core gases,
@@ -202,7 +204,7 @@ recommends using test data to determine the best value.</p>
 <img alt="_images/entrained_ffc.jpg" src="_images/entrained_ffc.jpg" />
 </section>
 <section id="pulsing-efficiency">
-<h2>Pulsing Efficiency<a class="headerlink" href="#pulsing-efficiency" title="Permalink to this heading">¶</a></h2>
+<h2>Pulsing Efficiency<a class="headerlink" href="#pulsing-efficiency" title="Link to this heading">¶</a></h2>
 <p>One of the options for the <strong>RocketThruster</strong> is to run the engine in short pulses.
 The two inputs to the thruster that control the pulsing efficiency are: <strong>pulse_sec</strong> and <strong>pulse_quality</strong>
 (<a class="reference internal" href="models.html#ref-to-rocketthruster"><span class="std std-ref">see RocketThruster definitions</span></a>).</p>
@@ -222,10 +224,10 @@ In all cases, the shorter the pulse, the more loss in <span class="math notransl
           </div>
         </div>
       </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
         <div class="sphinxsidebarwrapper">
             <p class="logo"><a href="index.html">
-              <img class="logo" src="_static/generic_logo.svg" alt="Logo"/>
+              <img class="logo" src="_static/generic_logo.svg" alt="Logo of RocketIsp"/>
             </a></p>
   <div>
     <h3><a href="index.html">Table of Contents</a></h3>
@@ -275,7 +277,7 @@ In all cases, the shorter the pulse, the more loss in <span class="math notransl
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
-<div id="searchbox" style="display: none" role="search">
+<search id="searchbox" style="display: none" role="search">
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
@@ -283,13 +285,13 @@ In all cases, the shorter the pulse, the more loss in <span class="math notransl
       <input type="submit" value="Go" />
     </form>
     </div>
-</div>
+</search>
 <script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related" role="navigation" aria-label="related navigation">
+    <div class="related" role="navigation" aria-label="Related">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -304,13 +306,13 @@ In all cases, the shorter the pulse, the more loss in <span class="math notransl
         <li class="right" >
           <a href="nozzle_eff.html" title="Nozzle Efficiencies"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">RocketIsp 0.1.11 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="index.html">RocketIsp 0.1.12 documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Chamber Efficiencies</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; <a href="copyright.html">Copyright</a> 2015, Charlie Taylor.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
+    &#169; <a href="copyright.html">Copyright</a> 2015, Charlie Taylor.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 9.1.0.
     </div>
   </body>
 </html>
