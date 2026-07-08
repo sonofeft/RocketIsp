@@ -124,7 +124,8 @@ class BarrierStream:
         wdotCoreInj = 1.0 # a ref flow rate
         wdotFuelCoreInj = wdotCoreInj / (1.0 + self.coreObj.MRcore)
         wdotOxCoreInj = wdotCoreInj - wdotFuelCoreInj
-        wdotFuelTot = MReng * wdotOxCoreInj
+        # wdotFuelTot = MReng * wdotOxCoreInj <-- error corrected July 8, 2026 per Madhav Sonkusare
+        wdotFuelTot = wdotOxCoreInj / MReng
         
         wdotFFC = fracFFC * wdotFuelTot # relative to ref wdotCoreInj
         wdotEntr = fracEntr * wdotCoreInj
