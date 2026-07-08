@@ -87,6 +87,9 @@ class BarrierStream:
         COMBUSTION EFFECTS ON FILM COOLING, 24 Feb 1977 by Aerojet Liquid Rocket Co.
         
         """
+        if pcentFFC is None:
+            pcentFFC = 0.0
+
         self.coreObj  = coreObj
         self.geomObj  = coreObj.geomObj
         self.ceaObj   = coreObj.ceaObj
@@ -124,8 +127,13 @@ class BarrierStream:
         wdotCoreInj = 1.0 # a ref flow rate
         wdotFuelCoreInj = wdotCoreInj / (1.0 + self.coreObj.MRcore)
         wdotOxCoreInj = wdotCoreInj - wdotFuelCoreInj
-        # wdotFuelTot = MReng * wdotOxCoreInj <-- error corrected July 8, 2026 per Madhav Sonkusare
+        # wdotFuelTot = MReng * wdotOxCoreInj # <-- error corrected July 8, 2026 per Madhav Sonkusare
         wdotFuelTot = wdotOxCoreInj / MReng
+
+        #   result = same as above: wdotFuelTot = wdotOxCoreInj / MReng
+        # wdotFuelBarrier = fracFFC * wdotFuelCoreInj / ( 1.0 - fracFFC)
+        # wdotFuelTot = wdotFuelBarrier + wdotFuelCoreInj
+        
         
         wdotFFC = fracFFC * wdotFuelTot # relative to ref wdotCoreInj
         wdotEntr = fracEntr * wdotCoreInj
@@ -347,6 +355,9 @@ class CoreStream:
                  oxName='N2O4', fuelName='MMH',  MRcore=1.9,
                  Pc=500, CdThroat=0.995, Pamb=0.0, adjCstarODE=1.0, adjIspIdeal=1.0,
                  pcentFFC=0.0, ko=0.035, ignore_noz_sep=False): 
+        
+        if pcentFFC is None:
+            pcentFFC = 0.0
 
         self.geomObj  = geomObj
         self.effObj   = effObj
@@ -605,9 +616,19 @@ class CoreStream:
         else:
             sb = ''
         
-        return M.summ_str(alpha_ordered=alpha_ordered, numbered=numbered, 
+        model_str = M.summ_str(alpha_ordered=alpha_ordered, numbered=numbered, 
                           add_trailer=add_trailer, fillchar=fillchar, 
                           max_banner=max_banner, intro_str=intro_str) + se + sb
+        
+        if self.barrierObj is not None:
+            if self.barrierObj.warningL:
+                sL = [ '\n=================== Barrier Warnings =================' ]
+                sL.extend( self.barrierObj.warningL )
+                model_str += '\n'.join( sL )
+
+        return model_str
+            
+
     
     def get_html_str(self, alpha_ordered=True, numbered=False, intro_str=''):
         M = self.get_model_summ_obj()

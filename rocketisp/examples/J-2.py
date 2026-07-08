@@ -60,8 +60,8 @@ core.reset_attr( 'Pamb', 0, re_evaluate=True)
 
 compare('Cstar ODE', cstarODE, core('cstarODE'))
 print()
-compare('Fuel Flow Rate', wdotFuel, core('wdotFlCore'))
-compare('Ox Flow Rate', wdotOx, core('wdotOxCore'))
+compare('Fuel Flow Rate', wdotFuel, core('wdotFl'))
+compare('Ox Flow Rate', wdotOx, core('wdotOx'))
 
 R.summ_print()
 

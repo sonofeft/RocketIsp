@@ -60,8 +60,8 @@ compare('Cstar ODE', cstarODE, core('cstarODE'))
 compare('Efficiency Cf/Noz', effCfODE, effObj('Noz'))
 
 print()
-compare('Fuel Flow Rate', wdotFuel, core('wdotFlCore'))
-compare('Ox Flow Rate', wdotOx, core('wdotOxCore'))
+compare('Fuel Flow Rate', wdotFuel, core('wdotFl'))
+compare('Ox Flow Rate', wdotOx, core('wdotOx'))
 
 
 

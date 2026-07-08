@@ -84,8 +84,8 @@ IspFrozen = Isp / effCstar / effCfFrozen
 compare('IspODF', IspFrozen, core('IspODF'))
 
 compare('Throat Area', At, geomObj('At'))
-compare('Fuel Flow Rate', wdFuel, core('wdotFlCore'))
-compare('Ox Flow Rate', wdOx, core('wdotOxCore'))
+compare('Fuel Flow Rate', wdFuel, core('wdotFl'))
+compare('Ox Flow Rate', wdOx, core('wdotOx'))
 
 C.summ_print()
 

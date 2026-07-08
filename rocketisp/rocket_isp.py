@@ -448,9 +448,12 @@ class RocketThruster(object):
             ispodfL.append( self.coreObj.IspODF )
             
             ispdel_coreL.append( self.coreObj.IspDel_core )
-            ispdelL.append( self.coreObj.IspDel )
-            ispdel_ambL.append( self.coreObj.IspAmb )
-            mrthrusterL.append( self.coreObj.MRthruster )
+
+            # values at MRthruster/MRengine (If nozzle area ratio is too large, condensible fluids in nozzle)
+            if not self.coreObj.barrierObj.warningL:
+                ispdelL.append( self.coreObj.IspDel )
+                ispdel_ambL.append( self.coreObj.IspAmb )
+                mrthrusterL.append( self.coreObj.MRthruster )
             
         self.coreObj.reset_attr( 'MRcore', MRsave, re_evaluate=True)
         self.calc_all_eff()
@@ -461,8 +464,9 @@ class RocketThruster(object):
         if self.coreObj.barrierObj is not None:
             plt.plot( mrcoreL, ispdel_coreL, ':', label='IspDel_core', color=colorsL[4] )
             plt.plot( [self.coreObj.MRcore], [self.coreObj.IspDel_core], 'D', markersize=8, color=colorsL[4] )
-            
-        plt.plot( mrthrusterL, ispdelL, '--', linewidth=3, label='IspDel vac', color=colorsL[3] )
+        
+        if mrthrusterL:
+            plt.plot( mrthrusterL, ispdelL, '--', linewidth=3, label='IspDel vac', color=colorsL[3] )
 
         if self.coreObj.Pamb > 0.0:
             plt.plot( mrthrusterL, ispdel_ambL, '--', linewidth=1, label='IspAmbient', color=colorsL[5] )
@@ -472,11 +476,11 @@ class RocketThruster(object):
         
         ymin, ymax = ax.get_ylim()
         dy = 0.03 * (ymax - ymin)
-        ax.text(MRdes_pt, self.coreObj.IspDel+dy, 'Des Pt', color=colorsL[3])
+        ax.text(MRdes_pt, self.coreObj.IspDel+dy, 'Thruster Des Pt', color=colorsL[3])
         if self.coreObj.barrierObj is not None:
-            ax.text(self.coreObj.MRcore, self.coreObj.IspDel_core+dy, 'Core', color=colorsL[4])
+            ax.text(self.coreObj.MRcore, self.coreObj.IspDel_core+dy, 'Core Des Pt', color=colorsL[4])
         
-        if self.coreObj.Pamb > 0.0:
+        if self.coreObj.Pamb > 0.0 and ispdel_ambL:
             isp_max = max(ispdel_ambL)
             i = ispdel_ambL.index( isp_max )
             isp = ispdel_ambL[i]
@@ -537,7 +541,8 @@ class RocketThruster(object):
         mrlo, mrhi = mrr.get_mr_range()
         
         mrcoreL  = np.linspace(mrlo, mrhi, Npts) # array of MRcore  (core stream tube mixture ratio)
-        mrthrusterL = []
+        
+        mrcore_good_ffcL = []
         
         MRsave = self.coreObj.MRcore
         
@@ -552,6 +557,9 @@ class RocketThruster(object):
         eff_mixL = [] # 'Mix','Em','Vap'
         eff_emL  = []
         eff_vapL = []
+
+        eff_ffcL = []
+        eff_isp_good_ffcL = []
         
         effObj = self.coreObj.effObj
         
@@ -572,9 +580,18 @@ class RocketThruster(object):
                 eff_mixL.append( effObj['Mix'].value )
                 eff_emL.append(  effObj['Em'].value )
                 eff_vapL.append( effObj['Vap'].value )
+
+            if self.coreObj.barrierObj is not None:
+                if not self.coreObj.barrierObj.warningL:
+
+                    eff_ffcL.append( effObj['FFC'].value )
+                    eff_isp_good_ffcL.append( effObj.effD['Isp'].value )
+                    
+                    mrcore_good_ffcL.append( mr )
+                    
             
             eff_ispL.append( effObj.effD['Isp'].value )
-            mrthrusterL.append( self.coreObj.MRthruster )
+                
             
         self.coreObj.reset_attr( 'MRcore', MRsave, re_evaluate=True)
         self.calc_all_eff()
@@ -584,15 +601,17 @@ class RocketThruster(object):
         if eff_nozL:
             plt.plot( mrcoreL, eff_nozL, linewidth=3, label='effNoz', color=colorsL[1] )
                 
-                
-        plt.plot( mrcoreL, eff_ispL, '-', linewidth=3, label='effIsp', color=colorsL[3] )
+        if mrcore_good_ffcL:
+            plt.plot( mrcore_good_ffcL, eff_isp_good_ffcL, '-', linewidth=3, label='effIsp', color=colorsL[3] )
+        else:
+            plt.plot( mrcoreL, eff_ispL, '-', linewidth=3, label='effIsp', color=colorsL[3] )
         
         MRdes_pt = self.coreObj.MRcore
         plt.plot( [MRdes_pt], [effObj.effD['Isp'].value], 'D', markersize=8, color=colorsL[3] )
         
         ymin, ymax = ax.get_ylim()
         dy = 0.03 * (ymax - ymin)
-        ax.text(MRdes_pt, effObj.effD['Isp'].value+dy, 'Des Pt', color=colorsL[3])
+        ax.text(MRdes_pt, effObj.effD['Isp'].value+dy, 'Core Des Pt', color=colorsL[3])
         
         ax.set_ylim( (ymin-dy, 1.0) )
 
@@ -620,6 +639,12 @@ class RocketThruster(object):
                 #plt.plot( mrcoreL, eff_mixL, '--', label='effMix',  color=colorsL[0] )
                 #plt.plot( mrcoreL,  eff_emL, ':', label='effEm',  color=colorsL[0] )
                 #plt.plot( mrcoreL, eff_vapL, '-.', label='effVap',  color=colorsL[0] )
+
+        if eff_ffcL:
+            ncol += 1
+            plt.plot( mrcore_good_ffcL, eff_ffcL, '--', label='effFFC', color=colorsL[2])
+
+        plt.ylim( bottom=min(eff_ispL) - 0.03)
         
         if show_grid:
             plt.grid()
