@@ -58,7 +58,7 @@ effObj = Efficiencies()
 effObj.set_const('Noz', 0.933177 ) # Huzel based on frozen Isp
 
 core = CoreStream( geomObj, effObj, oxName=oxName, fuelName=fuelName,  MRcore=MR,
-             Pc=Pc, Pamb=14.7, CdThroat=1.0, 
+             Pc=Pc, Pamb=14.7, CdThroat=1.0, pcentFFC=None, 
              adjCstarODE=0.978196, adjIspIdeal=1.0084418978404621)
 
 inj = Injector(core, Tox=None, Tfuel=None, elemEm=0.8, 
@@ -70,7 +70,7 @@ inj = Injector(core, Tox=None, Tfuel=None, elemEm=0.8,
                OxOrfPerEl=1.0, FuelOrfPerEl=1.0, 
                lolFuelElem=True, 
                CdOxOrf=0.75, CdFuelOrf=0.75, dropCorrOx=0.33, dropCorrFuel=0.33,
-               pcentFFC=None, DorfMin=0.008,
+               DorfMin=0.008,
                LfanOvDorfOx=20.0, LfanOvDorfFuel=20.0)
 
 

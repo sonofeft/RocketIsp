@@ -56,5 +56,5 @@ fOut = open(fsave , 'w')
 fOut.write( R.get_html_file_str() )
 fOut.close()
 
-#webbrowser.open( os.path.abspath(fsave) )
+webbrowser.open( os.path.abspath(fsave) )
 

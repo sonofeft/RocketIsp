@@ -47,6 +47,17 @@ subtitle = 'max IspDel=%.1f at MRthruster=%.2f, MRcore=%.2f'%imL[-1]
 title = '%s/%s Area Ratio=%g:1 %%Bell=%g %%FFC=%g\n'%( C.oxName, C.fuelName, C.geomObj.eps, 
         C.geomObj.pcentBell, C.barrierObj.pcentFFC ) + subtitle
 plt.title( title )
+
+# Add labeled arrow
+plt.annotate(
+    '2 Phase\nIn Barrier',         # The label text
+    color='red',                   # Text color
+    xy=(0.82, 320),                # Coordinates where the arrow points (head)
+    xytext=(0.62, 325),          # Coordinates where the text sits (tail)
+    arrowprops=dict(facecolor='red', shrink=0.05) # Arrow styling
+)
+
+
 fig.tight_layout()
 plt.savefig( 'HiPAT_NTO_N2H4_IspDel.png' )
 plt.show()

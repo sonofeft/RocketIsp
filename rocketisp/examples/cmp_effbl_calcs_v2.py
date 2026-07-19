@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 from matplotlib.ticker import StrMethodFormatter
 
 import numpy as np
-from rocketisp.efficiency.calc_All_pcentLossBL import calc_pcentLossBL as calc_pcentLossBL_all
+# from rocketisp.efficiency.calc_All_pcentLossBL import calc_pcentLossBL as calc_pcentLossBL_all
 
 
 from rocketisp.efficiency.calc_full_pcentLossBL import calc_pcentLossBL
@@ -39,14 +39,14 @@ def make_new_chart( pvar='Pc', Pc=500, eps=10, pcentBell=80.0, TcCham=5500.0 ):
     
     if pvar=='Pc':
             
-        for i,Pc in enumerate(rangeD['Pc']):
-            effblL = []
-            for Rthrt in rthrtL:
-                #effblL.append( eff_bl_NASA( Dt=2*Rthrt, Pc=Pc, eps=eps) )
-                pcloss = calc_pcentLossBL_all(ceaObj, Pc=Pc, eps=eps, Rthrt=Rthrt, pcentBell=pcentBell, MR=MR)
-                effblL.append( (100-pcloss)/100.0 )
-                
-            ax.semilogx(rthrtL, effblL,'--', label='MABL Pc=%g'%Pc, linewidth=3, color=colorL[i] )
+        #for i,Pc in enumerate(rangeD['Pc']):
+        #    effblL = []
+        #    for Rthrt in rthrtL:
+        #        #effblL.append( eff_bl_NASA( Dt=2*Rthrt, Pc=Pc, eps=eps) )
+        #        pcloss = calc_pcentLossBL_all(ceaObj, Pc=Pc, eps=eps, Rthrt=Rthrt, pcentBell=pcentBell, MR=MR)
+        #        effblL.append( (100-pcloss)/100.0 )
+        #        
+        #    ax.semilogx(rthrtL, effblL,'--', label='MABL Pc=%g'%Pc, linewidth=3, color=colorL[i] )
 
 
         for i,Pc in enumerate(rangeD['Pc']):
@@ -62,12 +62,12 @@ def make_new_chart( pvar='Pc', Pc=500, eps=10, pcentBell=80.0, TcCham=5500.0 ):
     
     elif pvar=='eps':
             
-        for i,eps in enumerate(rangeD['eps']):
-            effblL = []
-            for Rthrt in rthrtL:
-                pcloss = calc_pcentLossBL_all(ceaObj, Pc=Pc, eps=eps, Rthrt=Rthrt, pcentBell=pcentBell, MR=MR)
-                effblL.append( (100-pcloss)/100.0 )
-            ax.semilogx(rthrtL, effblL,'--', label='MABL eps=%g'%eps, linewidth=3, color=colorL[i] )
+        #for i,eps in enumerate(rangeD['eps']):
+        #    effblL = []
+        #    for Rthrt in rthrtL:
+        #        pcloss = calc_pcentLossBL_all(ceaObj, Pc=Pc, eps=eps, Rthrt=Rthrt, pcentBell=pcentBell, MR=MR)
+        #        effblL.append( (100-pcloss)/100.0 )
+        #    ax.semilogx(rthrtL, effblL,'--', label='MABL eps=%g'%eps, linewidth=3, color=colorL[i] )
 
 
         for i,eps in enumerate(rangeD['eps']):
