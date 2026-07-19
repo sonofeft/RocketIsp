@@ -34,6 +34,13 @@ from rocketisp._version import __version__
 __email__ = "cet@appliedpython.com"
 __status__ = "4 - Beta" # "3 - Alpha", "4 - Beta", "5 - Production/Stable"
 
+# numpy will throw a Warning if align parameter is not boolean (i.e. align=0 throws Warning)
+import warnings
+from numpy.exceptions import VisibleDeprecationWarning
+
+# Suppress this specific NumPy warning
+warnings.filterwarnings("ignore", category=VisibleDeprecationWarning, message=".*align should be passed as Python or NumPy boolean.*")
+
 from math import pi
 from scipy import optimize
 import numpy as np
@@ -491,7 +498,7 @@ class RocketThruster(object):
 
         if show_grid:
             plt.grid()
-        plt.legend(loc='best')
+        plt.legend(loc='best', ncol=2)
         plt.ylabel( 'Isp (sec)' )
         if self.coreObj.add_barrier:
             plt.xlabel( 'Mixture Ratio (Core and Thruster)' )

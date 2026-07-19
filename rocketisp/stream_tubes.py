@@ -181,7 +181,7 @@ class BarrierStream:
         self.IspODF_b *= self.coreObj.adjIspIdeal
         
         if self.IspODF_b < 10.0: # there's an error in frozen low MR CEA, so estimate from core 
-            self.warningL.append( 'WARNING... CEA failed frozen Isp for MR=%g'%self.MRbarrier  )
+            self.warningL.append( 'WARNING... Likely condensed species in CEA frozen Isp for MR=%g'%self.MRbarrier  )
             
             self.IspODF_b = self.IspODE_b * (self.coreObj.IspODF / self.coreObj.IspODE)
             

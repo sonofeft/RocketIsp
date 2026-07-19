@@ -19,6 +19,7 @@ ispodkL  = [] # list of IspODK  (one-dimensional kinetic)
 ispdelL  = [] # list of IspDel  (delivered Isp)
 mrnetL   = [] # list of MRthruster (net mixture ratio of core and barrier)
 mrcoreL  = [] # list of MRcore  (core stream tube mixture ratio)
+mrcore_good_ffcL = [] # list of MRcore where barrier remains all gas phase
 
 mrbarrL = [] # list of MRbarrier
 mrwallL = [] # list of MRwall
@@ -40,22 +41,30 @@ for MRcore in np.linspace( 0.9, 1.9, num=60 ):
     B = C.barrierObj
 
     ispodeL.append( C('IspODE') )
-    ispodkL.append( C('IspODK') )
-    ispdelL.append( C('IspDel') )
-    mrnetL.append( C('MRthruster') )
+    ispodkL.append( C('IspODK') )    
     mrcoreL.append( C('MRcore') )
 
     mrbarrL.append( B('MRbarrier') )
     mrwallL.append( B('MRwall') )
     twallgL.append( B('Twallgas') )
+
     ispodebarrL.append( B('IspODE_b') )
 
-    ispodfbarrL.append( B('IspODF_b') )
-    ispodkbarrL.append( B('IspODK_b') )
-    effnozbarrL.append( B('effNoz_b') )
     efferebarrL.append( B('effERE_b') )
-    effispbarrL.append( B('effIsp_b') )
-    effkinbarrL.append( B('effKin_b') )
+
+    if not B.warningL:
+        mrnetL.append( C('MRthruster') )
+        mrcore_good_ffcL.append( C('MRcore') )
+
+        ispdelL.append( C('IspDel') )
+        ispodfbarrL.append( B('IspODF_b') )
+        ispodkbarrL.append( B('IspODK_b') )
+
+        effnozbarrL.append( B('effNoz_b') )
+        
+        effispbarrL.append( B('effIsp_b') )
+        effkinbarrL.append( B('effKin_b') )
+
 
     
     #print( 'MRcore/MReng=%g/%g'%(MRcore, C('MRthruster')), '   effNoz=%g'%C.effObj('Noz'), '   effDiv=%g'%C.effObj('Div'), '   effBL=%g'%C.effObj('BL') )
@@ -105,10 +114,10 @@ plt.savefig( 'HiPAT_NTO_N2H4_TBarrier.png' )
 
 fig, ax = plt.subplots( figsize=(6,5) )
 
-plt.plot(mrcoreL, effnozbarrL, label='EffNozBarrier', linewidth=3)
+plt.plot(mrcore_good_ffcL, effnozbarrL, label='EffNozBarrier', linewidth=3)
 plt.plot(mrcoreL, efferebarrL, label='EffEREBarrier', linewidth=3)
-plt.plot(mrcoreL, effispbarrL, label='EffIspBarrier', linewidth=3)
-plt.plot(mrcoreL, effkinbarrL, label='EffKinBarrier', linewidth=3)
+plt.plot(mrcore_good_ffcL, effispbarrL, label='EffIspBarrier', linewidth=3)
+plt.plot(mrcore_good_ffcL, effkinbarrL, label='EffKinBarrier', linewidth=3)
 
 plt.legend()
 plt.grid()
@@ -127,8 +136,8 @@ plt.savefig( 'HiPAT_NTO_N2H4_EffBarrier.png' )
 fig, ax = plt.subplots( figsize=(6,5) )
 
 plt.plot(mrcoreL, ispodebarrL, label='IspODEbarr', linewidth=3)
-plt.plot(mrcoreL, ispodkbarrL, label='IspODKbarr', linewidth=3)
-plt.plot(mrcoreL, ispodfbarrL, label='IspODFbarr', linewidth=3)
+plt.plot(mrcore_good_ffcL, ispodkbarrL, label='IspODKbarr', linewidth=3)
+plt.plot(mrcore_good_ffcL, ispodfbarrL, label='IspODFbarr', linewidth=3)
 
 plt.legend()
 plt.grid()
@@ -147,7 +156,7 @@ plt.savefig( 'HiPAT_NTO_N2H4_IspBarrier.png' )
 fig, ax = plt.subplots( figsize=(6,5) )
 
 plt.plot(mrcoreL, mrcoreL, label='MRcore', linewidth=3)
-plt.plot(mrcoreL, mrnetL, label='MRengine', linewidth=3)
+plt.plot(mrcore_good_ffcL, mrnetL, label='MRengine', linewidth=3)
 plt.plot(mrcoreL, mrbarrL, label='MRbarrier', linewidth=3)
 plt.plot(mrcoreL, mrwallL, label='MRgas_at_wall', linewidth=3)
 
