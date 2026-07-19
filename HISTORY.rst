@@ -6,6 +6,12 @@ History
 
 GitHub Log
 ----------
+* July 19, 2026
+    - (by: sonofeft)
+        - version 1.1.13
+        - Fixed bug in barrier MR calculation
+            - (Thanks to: Madhav Sonkusare)
+
 * Jan 18, 2026
     - (by: sonofeft)
         - version 1.1.12 documentation updates
